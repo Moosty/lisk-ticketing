@@ -184,7 +184,7 @@ export const TopBar = (props) => {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder="Search tickets…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
