@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Overview } from "views/Overview";
 import { ModalExample } from "components/ExampleModal";
 import { ExampleDrawer } from "components/ExampleDrawer";
+import { Event } from "views/Event";
 
 export const Routes = (props) => {
 
@@ -13,6 +14,9 @@ export const Routes = (props) => {
       <Switch>
         <Route path="/overview">
           <Overview />
+        </Route>
+        <Route path="/event">
+          <Event />
         </Route>
         <Route path="/drawers">
           <ExampleDrawer />
