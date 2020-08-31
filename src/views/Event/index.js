@@ -1,6 +1,6 @@
 import React from "react";
 import {Header} from "components/Header";
-import {EventHeader, TicketListItem, TicketType} from "components/index";
+import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
 import {TicketList} from "components/TicketList";
 
 export const Event = (props) => {
@@ -20,6 +20,7 @@ export const Event = (props) => {
     <TicketType
       type="Last Release Ticket"
       price="€ 75.26"/>
-
+    <CartBottom
+    totalPrice="€ 185.56"/>
   </div>;
 };
