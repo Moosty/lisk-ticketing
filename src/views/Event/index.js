@@ -1,6 +1,6 @@
 import React from "react";
 import {Header} from "components/Header";
-import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
+import {TicketAccordion, CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
 import {TicketList} from "components/TicketList";
 
 export const Event = (props) => {
@@ -13,13 +13,17 @@ export const Event = (props) => {
     month="jan"/>
     <TicketType
     type="First Release Ticket"
-    price="€ 45.26"/>
+    price="€ 45.26"
+    style={{backgroundColor:"#ECEFF1"}}/>
     <TicketType
       type="Second Release Ticket"
-      price="€ 55.26"/>
+      price="€ 55.26"
+      style={{backgroundColor:"#CFD8DC"}}/>
     <TicketType
       type="Last Release Ticket"
-      price="€ 75.26"/>
+      price="€ 75.26"
+      style={{backgroundColor:"#B0BEC5"}}/>
+      <TicketAccordion />
     <CartBottom
     totalPrice="€ 185.56"/>
   </div>;

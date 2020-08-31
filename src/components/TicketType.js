@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const TicketType = ({type, price}) => {
+export const TicketType = ({type, price, style}) => {
 
   const classes = useStyles();
 
   return (
     <div>
-      <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
+      <div style={style} className="flex flex-row  px-4 justify-between content-center items-center ">
         <div className="flex flex-row ">
 
           <div className="flex flex-col text-sm float-left leading-4 my-2">

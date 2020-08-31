@@ -8,9 +8,10 @@ import { TicketType } from "./TicketType";
 import { CartBottom } from "./CartBottom";
 import { TopDrawer } from "components/TopDrawer";
 import { AccountHeader } from "components/AccountHeader";
+import { TicketAccordion} from "components/TicketAccordion";
 
 export { ExampleComponent,
 Header,
 TopBar,
-TicketListItem, TicketList, EventHeader, TicketType, CartBottom, TopDrawer, AccountHeader,
+TicketListItem, TicketList, EventHeader, TicketType, CartBottom, TopDrawer, AccountHeader, TicketAccordion,
 };
