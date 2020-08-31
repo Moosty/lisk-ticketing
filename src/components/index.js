@@ -6,9 +6,11 @@ import { TicketList } from "./TicketList.js";
 import { EventHeader } from "./EventHeader.js";
 import { TicketType } from "./TicketType";
 import { CartBottom } from "./CartBottom";
+import { TopDrawer } from "components/TopDrawer";
+import { AccountHeader } from "components/AccountHeader";
 
 export { ExampleComponent,
 Header,
 TopBar,
-TicketListItem, TicketList, EventHeader, TicketType, CartBottom,
+TicketListItem, TicketList, EventHeader, TicketType, CartBottom, TopDrawer, AccountHeader,
 };
