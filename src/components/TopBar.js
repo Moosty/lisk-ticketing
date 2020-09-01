@@ -15,6 +15,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {TopDrawer} from "components/TopDrawer";
+import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -167,33 +168,16 @@ export const TopBar = (props) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar className={classes.appbar} position="static">
+      <AppBar className={classes.appbar} position="fixed">
         <Toolbar>
           <TopDrawer />
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search tickets…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+          <IconButton aria-label="show 17 new notifications" color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <ConfirmationNumberIcon />
+          </Badge>
+        </IconButton>
+
+
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">

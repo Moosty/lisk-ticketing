@@ -5,6 +5,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {SwapTicket} from "components/SwapTicket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,10 +31,29 @@ export const TicketAccordion = (props) => {
           <Typography className={classes.heading}><span className="font-bold">52</span> Swap Tickets available</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
+          <div className="w-full">
+          <SwapTicket
+          price="€ 52.36"
+          type="Backstage party tickets"
+          style={{width:"full"}}/>
+            <SwapTicket
+              price="€ 42.36"
+              type="Backstage party tickets"
+              style={{width:"full"}}/>
+            <SwapTicket
+              price="€ 12.36"
+              type="First release ticket"
+              style={{width:"full"}}/>
+            <SwapTicket
+              price="€ 126"
+              type="Backstage party tickets"
+              style={{width:"full"}}/>
+            <SwapTicket
+              price="€ 8.15"
+              type="Backstage party tickets"
+              style={{width:"full"}}/>
+          </div>
+
         </AccordionDetails>
       </Accordion>
 

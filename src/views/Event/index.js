@@ -4,7 +4,7 @@ import {TicketAccordion, CartBottom, EventHeader, TicketListItem, TicketType} fr
 import {TicketList} from "components/TicketList";
 
 export const Event = (props) => {
-  return <div>
+  return <div className="mt-10">
   <EventHeader
     artist="Indian Askin"
     location="Melkweg - Amsterdam"

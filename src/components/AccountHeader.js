@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const AccountHeader = ({title, subtitle, button1, button2, onClick1, onClick2}) => {
+export const AccountHeader = ({name, balance, button1, button2, onClick1, onClick2}) => {
 
   const classes = useStyles();
 
@@ -86,9 +86,9 @@ export const AccountHeader = ({title, subtitle, button1, button2, onClick1, onCl
       <div className="bg-fixed sm:bg-scroll bg-cover"
            style={{backgroundImage: "url(/images/bgTicketing.jpg)", height: "auto"}}>
         <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>
-          <div className=" p-8 text-center md:p-12 lg:p-24 align-middle h-full flex flex-col justify-between">
-            <h1 className="text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">{title}</h1>
-            <span className="text-xl text-center text-white">{subtitle}</span>
+          <div className=" p-8 py-10 text-center md:p-12 lg:p-24 align-middle h-full flex flex-col justify-between">
+            <h1 className="text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">{name}</h1>
+            <span className="text-xl text-center text-white">balance: {balance}</span>
 
           </div>
         </div>

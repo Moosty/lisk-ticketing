@@ -9,9 +9,10 @@ import { CartBottom } from "./CartBottom";
 import { TopDrawer } from "components/TopDrawer";
 import { AccountHeader } from "components/AccountHeader";
 import { TicketAccordion} from "components/TicketAccordion";
+import { SwapTicket } from "components/SwapTicket";
 
 export { ExampleComponent,
 Header,
 TopBar,
-TicketListItem, TicketList, EventHeader, TicketType, CartBottom, TopDrawer, AccountHeader, TicketAccordion,
+TicketListItem, TicketList, EventHeader, TicketType, CartBottom, TopDrawer, AccountHeader, TicketAccordion, SwapTicket,
 };

@@ -14,6 +14,8 @@ import withReducer from "store/withReducer";
 import reducer from "store/reducers";
 import * as Actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles({
   list: {
@@ -39,7 +41,7 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       onKeyDown={() => dispatch(Actions.closeAllDrawers())}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Overview', 'Event', 'Account', 'My tickets'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
@@ -62,7 +64,15 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
     <div>
       {['left'].map((anchor) => (
           <React.Fragment key={anchor}>
-            <Button onClick={() => dispatch(Actions.openDrawer(anchor))}>{anchor}</Button>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => dispatch(Actions.openDrawer(anchor))}
+            >
+              <MenuIcon />
+            </IconButton>
             <Drawer anchor={anchor} open={drawers[anchor].open} onClose={() => dispatch(Actions.closeDrawer(anchor))}>
               {list(anchor)}
             </Drawer>

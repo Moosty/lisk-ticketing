@@ -4,7 +4,7 @@ import {TicketListItem} from "components/index";
 import {TicketList} from "components/TicketList";
 
 export const Overview = (props) => {
-  return <div>
+  return <div className="mt-10">
     <Header
     title="An Honest Ticketing System"
     subtitle="Buy or sell your tickets"
