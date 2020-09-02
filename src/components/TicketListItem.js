@@ -33,9 +33,10 @@ export const TicketListItem = ({day, month, time, artist, location,}) => {
       </div>
      </div>
         <Button
-          variant="contained"
+          variant="outlinedgit ad"
           color="secondary"
-          className={classes.button2}>Buy</Button>
+          size="small"
+          className={classes.button2}>Details</Button>
     </div>
       <Divider />
     </div>

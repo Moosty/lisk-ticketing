@@ -33,25 +33,18 @@ export const TicketAccordion = (props) => {
         <AccordionDetails>
           <div className="w-full">
           <SwapTicket
-          price="€ 52.36"
-          type="Backstage party tickets"
+          price="€ 52.36 / € 55.50"
+          type="First Release Ticket"
           style={{width:"full"}}/>
             <SwapTicket
-              price="€ 42.36"
-              type="Backstage party tickets"
+              price="€ 42.36 / € 52.36"
+              type="Second Release Ticket"
               style={{width:"full"}}/>
             <SwapTicket
-              price="€ 12.36"
-              type="First release ticket"
+              price="€ 12.36 / € 14.36"
+              type="Last Release Ticket"
               style={{width:"full"}}/>
-            <SwapTicket
-              price="€ 126"
-              type="Backstage party tickets"
-              style={{width:"full"}}/>
-            <SwapTicket
-              price="€ 8.15"
-              type="Backstage party tickets"
-              style={{width:"full"}}/>
+
           </div>
 
         </AccordionDetails>

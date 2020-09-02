@@ -29,11 +29,13 @@ export const CartBottom = ({totalPrice}) => {
 
           </div>
         </div>
+
         <div className="flex flex-row content-center items-center">
           <Button
             variant="contained"
+            size="small"
             color="secondary"
-            className={classes.button2}>Order</Button>
+            className={classes.button2}>Checkout</Button>
 
 
         </div>

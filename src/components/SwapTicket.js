@@ -41,11 +41,10 @@ export const SwapTicket = ({type, price, style}) => {
           </div>
         </div>
         <div className="flex flex-row content-center items-center flex content-center align-middle">
-          <Button
-            size="small"
-            variant="outlined"
-            color="secondary"
-            className={classes.button2}>Add</Button>
+          <span className="text-3xl font-bold align-middle content-center" onClick={handleMinus}>-</span>
+          <div className=" mx-2 border-2 rounded h-8 w-8 center  flex content-center"><span value={count}
+                                                                                            className="justify-center m-auto items-baseline content-center">{count}</span></div>
+          <span className="text-3xl font-bold" onClick={() => setCount(count + 1)}>+</span>
 
 
         </div>
