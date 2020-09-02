@@ -5,6 +5,8 @@ import { ModalExample } from "components/ExampleModal";
 import { ExampleDrawer } from "components/ExampleDrawer";
 import { Event } from "views/Event";
 import {Account} from "views/Account";
+import {Checkout} from "views/Checkout";
+import {Organiser} from "views/Organiser";
 
 export const Routes = (props) => {
 
@@ -22,6 +24,12 @@ export const Routes = (props) => {
         <Route path="/account">
           <Account />
         </Route>
+        <Route path="/organiser">
+          <Organiser />
+        </Route>
+        <Route path="/checkout">
+        <Checkout />
+      </Route>
         <Route path="/drawers">
           <ExampleDrawer />
         </Route>
