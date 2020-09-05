@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const TicketListItem = ({day, month, time, artist, location,}) => {
+export const TicketListItem = ({startEvent, day, month, time, artist, location,}) => {
 
   const classes = useStyles();
 
@@ -27,7 +27,7 @@ export const TicketListItem = ({day, month, time, artist, location,}) => {
        <span className={classes.month}>{month}</span>
      </div>
       <div className="flex flex-col text-sm float-left leading-4 my-2">
-        <span>{time}</span>
+        <span>{startEvent.getHours()}:{startEvent.getMinutes()}</span>
         <span className="font-bold">{artist}</span>
         <span className="text-xs">{location}</span>
       </div>
