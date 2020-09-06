@@ -12,11 +12,11 @@ const defaultState = {
     {
       address: "asdffqwerkqjewrflqkwejfL",
       publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
-      assets: {
+      asset: {
         eventData: {
           status: statuses.OPEN_FOR_SALE,
           title: "title",
-          artist: "Indian Askin",
+          artist: "Racoon",
           location: "Caprera Openluchttheater - Bloemendaal",
           startEvent: new Date(),
           endEvent: "end time event",
@@ -30,14 +30,20 @@ const defaultState = {
           types: [
             {
               id: 0,
-              name: "name ticket",
-              price: 30,
+              name: "First Release Ticket",
+              price: 45.26,
               amount: 10,
             },
             {
               id: 1,
-              name: "name ticket2",
-              price: 50,
+              name: "Second Release Ticket",
+              price: 55.26,
+              amount: 20,
+            },
+            {
+              id: 1,
+              name: "Third Release Ticket",
+              price: 75.26,
               amount: 20,
             },
           ],

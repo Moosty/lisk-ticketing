@@ -10,10 +10,10 @@ export const TicketList = withReducer("TicketList", reducer)((props) => {
   return <div>
 
     {events && events.map(event => <TicketListItem key={event.address}
-                                                   startEvent={event.assets.eventData.startEvent}
-                                                   artist={event.assets.eventData.artist}
-                                                   title={event.assets.eventData.title}
-                                                   location={event.assets.eventData.location}
+                                                   startEvent={event.asset.eventData.startEvent}
+                                                   artist={event.asset.eventData.artist}
+                                                   title={event.asset.eventData.title}
+                                                   location={event.asset.eventData.location}
     />)}
 
     {/*<TicketListItem*/}

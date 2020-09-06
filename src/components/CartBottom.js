@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CartBottom = ({totalPrice}) => {
-
   const classes = useStyles();
 
   return (

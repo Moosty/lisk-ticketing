@@ -4,29 +4,45 @@ import {TicketAccordion, CartBottom, EventHeader, TicketListItem, TicketType} fr
 import {TicketList} from "components/TicketList";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
+import {useSelector} from "react-redux";
 
-export const Event = withReducer("Event", reducer)( (props) => {
+export const Event = withReducer("Event", reducer)((props) => {
+  const events = useSelector(({blockchain}) => blockchain.event.events);
+
   return <div className="mt-10">
-  <EventHeader
-    artist="Indian Askin"
-    location="Melkweg - Amsterdam"
-    time="za 20.00"
-    day="02"
-    month="jan"/>
+
+    {events && events.map((event) => <EventHeader
+      key={event.address}
+      artist={event.asset.eventData.artist}
+      location={event.asset.eventData.location}
+      startEvent={event.asset.eventData.startEvent}
+      time="za 20.00"
+      day="02"
+      month="jan"/>)}
+
+    {/*TODO: de achtergrondkleur aanpassen in de map*/}
+    {events && events.map((event) => event.asset.ticketData.types.map((type) =>
+      <TicketType
+        key={type.id}
+        type={type.name}
+        price={type.price}
+        amount={type.amount}
+      />))}
+
     <TicketType
-    type="First Release Ticket"
-    price="€ 45.26"
-    style={{backgroundColor:"#ECEFF1"}}/>
+      type="First Release Ticket"
+      price=" 45.26"
+      style={{backgroundColor: "#ECEFF1"}}/>
     <TicketType
       type="Second Release Ticket"
-      price="€ 55.26"
-      style={{backgroundColor:"#CFD8DC"}}/>
+      price=" 55.26"
+      style={{backgroundColor: "#CFD8DC"}}/>
     <TicketType
       type="Last Release Ticket"
-      price="€ 75.26"
-      style={{backgroundColor:"#B0BEC5"}}/>
-      <TicketAccordion />
+      price=" 75.26"
+      style={{backgroundColor: "#B0BEC5"}}/>
+    <TicketAccordion/>
     <CartBottom
-    totalPrice="€ 185.56"/>
+      totalPrice="€ 185.56"/>
   </div>;
 });

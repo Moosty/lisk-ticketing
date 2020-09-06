@@ -18,7 +18,7 @@ import Divider from "@material-ui/core/Divider";
   }));
 
 
-export const EventHeader = ({day, month, time, artist, location,}) => {
+export const EventHeader = ({ artist, location, startEvent}) => {
 
   const classes = useStyles();
 
@@ -39,11 +39,14 @@ export const EventHeader = ({day, month, time, artist, location,}) => {
       <div className="w-full flex flex-row p-2 justify-between content-center items-center text-white">
         <div className="flex flex-row ">
           <div className="flex flex-col items-center leading-4 m-4 content-center items-center">
-            <span className="text-lg">{day}</span>
-            <span className={classes.month}>{month}</span>
+            {/*TODO leading zero */}
+            <span className="text-lg">{startEvent.getDay()}</span>
+            {/*TODO eerste drie letters van de maand */}
+            <span className={classes.month}>{startEvent.getMonth()}</span>
           </div>
           <div className="flex flex-col text-sm float-left leading-4 my-2">
-            <span>{time}</span>
+            {/*TODO Dag van de week & tijd: leading zero */}
+            <span>{startEvent.getDay()}{' '} {startEvent.getHours()}:{startEvent.getMinutes()}</span>
             <span className="text-xs">{location}</span>
           </div>
         </div>
