@@ -2,8 +2,10 @@ import React from "react";
 import {Header} from "components/Header";
 import {TicketAccordion, CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
 import {TicketList} from "components/TicketList";
+import withReducer from "../../store/withReducer";
+import reducer from "../../store/reducers";
 
-export const Event = (props) => {
+export const Event = withReducer("Event", reducer)( (props) => {
   return <div className="mt-10">
   <EventHeader
     artist="Indian Askin"
@@ -27,4 +29,4 @@ export const Event = (props) => {
     <CartBottom
     totalPrice="€ 185.56"/>
   </div>;
-};
+});

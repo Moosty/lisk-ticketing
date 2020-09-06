@@ -16,12 +16,12 @@ const defaultState = {
         eventData: {
           status: statuses.OPEN_FOR_SALE,
           title: "title",
-          artist: "artist",
-          location: "location",
+          artist: "Indian Askin",
+          location: "Caprera Openluchttheater - Bloemendaal",
           startEvent: new Date(),
           endEvent: "end time event",
           category: "test category",
-          site: "event site",
+          site: "https://lisk.io/apps/",
           image: "event image",
         },
         ticketData: {

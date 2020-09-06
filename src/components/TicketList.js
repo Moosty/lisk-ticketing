@@ -5,11 +5,16 @@ import reducer from "../store/reducers";
 import {useSelector} from "react-redux";
 
 export const TicketList = withReducer("TicketList", reducer)((props) => {
-  const events = useSelector(({ blockchain }) => blockchain.event.events );
+  const events = useSelector(({blockchain}) => blockchain.event.events);
 
   return <div>
 
-    { events && events.map(event => <TicketListItem key={event.address} startEvent={event.assets.eventData.startEvent} /> )}
+    {events && events.map(event => <TicketListItem key={event.address}
+                                                   startEvent={event.assets.eventData.startEvent}
+                                                   artist={event.assets.eventData.artist}
+                                                   title={event.assets.eventData.title}
+                                                   location={event.assets.eventData.location}
+    />)}
 
     {/*<TicketListItem*/}
     {/*  artist="Racoon"*/}
