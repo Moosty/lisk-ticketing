@@ -16,32 +16,32 @@ export const Event = withReducer("Event", reducer)((props) => {
       artist={event.asset.eventData.artist}
       location={event.asset.eventData.location}
       startEvent={event.asset.eventData.startEvent}
-      time="za 20.00"
-      day="02"
-      month="jan"/>)}
+      />)}
 
     {/*TODO: de achtergrondkleur aanpassen in de map*/}
     {events && events.map((event) => event.asset.ticketData.types.map((type) =>
       <TicketType
         key={type.id}
-        type={type.name}
+        label={type.name}
         price={type.price}
         amount={type.amount}
+        eventId = {event.address}
       />))}
 
-    <TicketType
-      type="First Release Ticket"
-      price=" 45.26"
-      style={{backgroundColor: "#ECEFF1"}}/>
-    <TicketType
-      type="Second Release Ticket"
-      price=" 55.26"
-      style={{backgroundColor: "#CFD8DC"}}/>
-    <TicketType
-      type="Last Release Ticket"
-      price=" 75.26"
-      style={{backgroundColor: "#B0BEC5"}}/>
+    {/*<TicketType*/}
+    {/*  type="First Release Ticket"*/}
+    {/*  price=" 45.26"*/}
+    {/*  style={{backgroundColor: "#ECEFF1"}}/>*/}
+    {/*<TicketType*/}
+    {/*  type="Second Release Ticket"*/}
+    {/*  price=" 55.26"*/}
+    {/*  style={{backgroundColor: "#CFD8DC"}}/>*/}
+    {/*<TicketType*/}
+    {/*  type="Last Release Ticket"*/}
+    {/*  price=" 75.26"*/}
+    {/*  style={{backgroundColor: "#B0BEC5"}}/>*/}
     <TicketAccordion/>
+
     <CartBottom
       totalPrice="€ 185.56"/>
   </div>;

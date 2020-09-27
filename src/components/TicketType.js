@@ -2,6 +2,10 @@ import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import {fade, makeStyles} from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
+import {useDispatch, useSelector} from "react-redux";
+import * as Actions from "store/actions";
+import withReducer from "../store/withReducer";
+import reducer from "../store/reducers";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -14,9 +18,12 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const TicketType = ({type, price, style, amount}) => {
+export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key}) => {
+  const dispatch = useDispatch();
   const [count, setCount] = useState(0);
   const classes = useStyles();
+  const item = useSelector(({blockchain}) =>
+    blockchain.basket.items.find(i => i.eventId === eventId && i.ticketType === key));
 
   const handleMinus = () => {
     if (count > 0) {
@@ -31,7 +38,7 @@ export const TicketType = ({type, price, style, amount}) => {
 
           <div className="flex flex-col text-sm float-left leading-4 my-2">
             <div className="flex flex-row">
-              <span className="font-bold">{type}</span> <span className="ml-1 font-light ">({amount})</span>
+              <span className="font-bold">{label}</span> <span className="ml-1 font-light ">({amount})</span>
             </div>
             <span className="text-xs">€ {price}</span>
           </div>
@@ -39,10 +46,10 @@ export const TicketType = ({type, price, style, amount}) => {
         <div className="flex flex-row content-center items-center flex content-center align-middle">
           <span className="text-3xl font-bold align-middle content-center" onClick={handleMinus}>-</span>
           <div className=" mx-2 border-2 rounded h-8 w-8 center  flex content-center">
-            <span value={count}
-                  className="justify-center m-auto items-baseline content-center">{count}</span>
+            <span
+                  className="justify-center m-auto items-baseline content-center">{item && item.quantity}</span>
           </div>
-          <span className="text-3xl font-bold" onClick={() => setCount(count + 1)}>+</span>
+          <span className="text-3xl font-bold" onClick={() => dispatch(Actions.addItem(eventId, key))}>+</span>
 
 
         </div>
@@ -51,4 +58,4 @@ export const TicketType = ({type, price, style, amount}) => {
       <Divider/>
     </div>
   );
-};
+});

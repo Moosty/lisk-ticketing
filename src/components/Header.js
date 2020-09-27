@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import * as Actions from "../store/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -78,6 +80,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const Header = ({title, subtitle, button1, button2, onClick1, onClick2}) => {
+  const dispatch = useDispatch();
+  const {open, type} = useSelector(({modals}) => modals);
 
   const classes = useStyles();
 
@@ -92,9 +96,7 @@ export const Header = ({title, subtitle, button1, button2, onClick1, onClick2}) 
             <div className="mt-10 flex-row justify-center mb-12">
               {button1 && <Button
                 onClick={() => {
-                  if (onClick1) {
-                    onClick1();
-                  }
+                  dispatch(Actions.openModal('DemoModal'))
                 }}
                 variant="contained"
                 color="primary"
