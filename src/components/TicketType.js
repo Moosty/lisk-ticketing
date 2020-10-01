@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key, ticketType}) => {
   const dispatch = useDispatch();
-  const [count, setCount] = useState(0);
   const classes = useStyles();
   const items = useSelector(({blockchain}) => blockchain.basket.items);
   const [item, setItem] = useState(null);
@@ -31,11 +30,6 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
     }
   }, [items]);
 
-  const handleMinus = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  }
 
   return (
     <div>
@@ -50,8 +44,9 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
           </div>
         </div>
         <div className="flex flex-row content-center items-center flex content-center align-middle">
-          <span className="text-3xl font-bold align-middle content-center" onClick={handleMinus}>-</span>
-          <div className=" mx-2 border-2 rounded h-8 w-8 center  flex content-center">
+          <span className="text-3xl font-bold align-middle content-center"
+          onClick={() => dispatch(Actions.removeItem(eventId, ticketType))}>-</span>
+          <div className=" mx-2 border-2 rounded h-8 w-8 center  flex content-center" >
             <span
               className="justify-center m-auto items-baseline content-center">{item && item.quantity}</span>
           </div>
