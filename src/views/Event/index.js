@@ -26,6 +26,7 @@ export const Event = withReducer("Event", reducer)((props) => {
         price={type.price}
         amount={type.amount}
         eventId = {event.address}
+        ticketType={type.id}
       />))}
 
     {/*<TicketType*/}

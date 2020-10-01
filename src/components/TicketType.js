@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import {fade, makeStyles} from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
@@ -18,12 +18,18 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key}) => {
+export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key, ticketType}) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
   const classes = useStyles();
-  const item = useSelector(({blockchain}) =>
-    blockchain.basket.items.find(i => i.eventId === eventId && i.ticketType === key));
+  const items = useSelector(({blockchain}) => blockchain.basket.items);
+  const [item, setItem] = useState(null);
+
+  useEffect(() => {
+    if (items.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
+      setItem(items.find(i => i.eventId === eventId && i.ticketType === ticketType));
+    }
+  }, [items]);
 
   const handleMinus = () => {
     if (count > 0) {
@@ -47,9 +53,9 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
           <span className="text-3xl font-bold align-middle content-center" onClick={handleMinus}>-</span>
           <div className=" mx-2 border-2 rounded h-8 w-8 center  flex content-center">
             <span
-                  className="justify-center m-auto items-baseline content-center">{item && item.quantity}</span>
+              className="justify-center m-auto items-baseline content-center">{item && item.quantity}</span>
           </div>
-          <span className="text-3xl font-bold" onClick={() => dispatch(Actions.addItem(eventId, key))}>+</span>
+          <span className="text-3xl font-bold" onClick={() => dispatch(Actions.addItem(eventId, ticketType))}>+</span>
 
 
         </div>
