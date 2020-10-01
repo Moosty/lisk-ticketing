@@ -7,7 +7,6 @@ import { MoostyModal } from "./components/Moosty";
 import store from './store';
 import { Routes } from "./routes";
 import './styles/main.css';
-import {TopBar} from "components/TopBar";
 
 
 ReactDOM.render(
@@ -17,7 +16,6 @@ ReactDOM.render(
     }}
   >
     <Provider store={store}>
-      <TopBar />
       <Routes/>
       <MoostyModal/>
     </Provider>

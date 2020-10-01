@@ -1,8 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -28,6 +29,9 @@ const useStyles = makeStyles({
 
 export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
   const classes = useStyles();
+  const history = useHistory();
+  console.log("history", history);
+
   const dispatch = useDispatch();
   const drawers = useSelector(({drawers}) => drawers);
 
@@ -40,20 +44,27 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       onClick={() => dispatch(Actions.closeAllDrawers())}
       onKeyDown={() => dispatch(Actions.closeAllDrawers())}
     >
+      {/**/}
       <List>
-        {['Overview', 'Event', 'Account', 'My tickets'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        {[
+          { label:"Overview" , link: "/overview", icon: <InboxIcon /> },
+          { label:"Event" , link: "/event", icon: <InboxIcon /> },
+          { label:"Checkout" , link: "/checkout", icon: <InboxIcon /> },
+        ].map((item) => (
+          <ListItem button onClick={() => history.push(`${item.link}`)} key={item.label} >
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.label} />
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        {[
+          { label:"Organiser" , link: "/organiser", icon: <InboxIcon /> },
+        ].map((item) => (
+          <ListItem button onClick={ () => history.push(`${item.link}`)} key={item.label}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.label} />
           </ListItem>
         ))}
       </List>
