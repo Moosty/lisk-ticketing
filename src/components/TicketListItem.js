@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const TicketListItem = ({startEvent, day, month, time, artist, location,}) => {
-
+  const history = useHistory();
   const classes = useStyles();
 
   return (
@@ -35,6 +36,7 @@ export const TicketListItem = ({startEvent, day, month, time, artist, location,}
       </div>
      </div>
         <Button
+          onClick={() => history.push(`/event`)}
           variant="outlined"
           color="secondary"
           size="small"
