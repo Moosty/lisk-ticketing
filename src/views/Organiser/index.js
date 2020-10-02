@@ -5,13 +5,14 @@ import {TicketList} from "components/TicketList";
 import {AccountHeader} from "components/AccountHeader";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import {OrganiserHeader} from "components/OrganiserHeader";
 
 export const Organiser = (props) => {
     return <div className="mt-10">
-        <AccountHeader
+        <OrganiserHeader
             name="Tivoli"
-            balance ="145 LSK"/>
-
+            balance ="145 LSK"
+            button1 ="Create new event" />
         <TicketList/>
 
         <div className="bottom-0 fixed z-50 bg-black text-white w-full ">

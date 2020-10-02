@@ -7,6 +7,7 @@ import { Event } from "views/Event";
 import {Account} from "views/Account";
 import {Checkout} from "views/Checkout";
 import {Organiser} from "views/Organiser";
+import {LogIn} from "views/LogIn";
 
 export const Routes = (props) => {
 
@@ -15,6 +16,9 @@ export const Routes = (props) => {
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
       <Switch>
+        <Route path="/login">
+          <LogIn />
+        </Route>
         <Route path="/overview">
           <Overview />
         </Route>
