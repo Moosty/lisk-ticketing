@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -15,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CartBottom = ({totalPrice}) => {
-
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
@@ -32,6 +33,7 @@ export const CartBottom = ({totalPrice}) => {
 
         <div className="flex flex-row content-center items-center">
           <Button
+            onClick={() => history.push(`/checkout`)}
             variant="contained"
             size="small"
             color="secondary"

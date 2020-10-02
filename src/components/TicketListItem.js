@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -14,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const TicketListItem = ({day, month, time, artist, location,}) => {
-
+export const TicketListItem = ({startEvent, day, month, time, artist, location,}) => {
+  const history = useHistory();
   const classes = useStyles();
 
   return (
@@ -23,16 +24,22 @@ export const TicketListItem = ({day, month, time, artist, location,}) => {
     <div className="w-full flex flex-row p-2 justify-between content-center items-center">
      <div className="flex flex-row ">
       <div className="flex flex-col items-center leading-4 m-4">
-       <span className="text-lg">{day}</span>
-       <span className={classes.month}>{month}</span>
+       <span className="text-lg">{startEvent.getDate()}</span>
+        {/*TODO de eerste drie letters van de maand*/}
+       <span className={classes.month}>{startEvent.getMonth()}</span>
      </div>
       <div className="flex flex-col text-sm float-left leading-4 my-2">
-        <span>{time}</span>
+        {/*TODO Dag van de week & tijd: leading zero */}
+        <span>{startEvent.getDay()}{' '} {startEvent.getHours()}:{startEvent.getMinutes()}</span>
         <span className="font-bold">{artist}</span>
         <span className="text-xs">{location}</span>
       </div>
      </div>
         <Button
+<<<<<<< HEAD
+=======
+          onClick={() => history.push(`/event`)}
+>>>>>>> c7fe6717d2231dd92e96ef93e0dfb11fc76813e7
           variant="outlined"
           color="secondary"
           size="small"
