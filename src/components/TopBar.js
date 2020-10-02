@@ -142,7 +142,8 @@ export const TopBar = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={()=>
+      {handleMenuClose()}}>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
@@ -150,7 +151,8 @@ export const TopBar = (props) => {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={()=>
+      {handleMenuClose()}}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
@@ -158,7 +160,11 @@ export const TopBar = (props) => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={()=>
+      {handleMenuClose();
+        history.push(`/account`);
+      }
+      }>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -177,13 +183,13 @@ export const TopBar = (props) => {
       <AppBar className={classes.appbar} position="fixed">
         <Toolbar>
           <TopDrawer />
-          <IconButton aria-label="show 17 new notifications" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+          <IconButton onClick={()=> history.push(`/my-tickets`)} aria-label="show 17 new notifications" color="inherit">
+          <Badge  badgeContent={3} color="secondary">
             <ConfirmationNumberIcon />
           </Badge>
         </IconButton>
 
-
+        {/*Menu (behind the three dots)*/}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
@@ -207,6 +213,9 @@ export const TopBar = (props) => {
               <AccountCircle />
             </IconButton>
           </div>
+          {/*END Menu (behind the three dots)*/}
+
+          {/*THREE DOTS*/}
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
@@ -218,6 +227,8 @@ export const TopBar = (props) => {
               <MoreIcon />
             </IconButton>
           </div>
+          {/*END - THREE DOTS*/}
+
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

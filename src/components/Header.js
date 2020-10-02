@@ -96,9 +96,7 @@ export const Header = ({title, subtitle, button1, button2, onClick1, onClick2}) 
             <span className="text-xl text-center text-white">{subtitle}</span>
             <div className="mt-10 flex-row justify-center mb-12">
               {button1 && <Button
-                onClick={() => {
-                  dispatch(Actions.openModal('DemoModal'))
-                }}
+                onClick={onClick1}
                 variant="contained"
                 color="primary"
                 className={classes.button1}
@@ -106,9 +104,7 @@ export const Header = ({title, subtitle, button1, button2, onClick1, onClick2}) 
                 {button1}
               </Button>}
               {button2 && <Button
-                onClick={() => {
-                  history.push("/event");
-                }}
+                onClick={onClick2}
                 variant="contained"
                 color="secondary"
                 className={classes.button2}

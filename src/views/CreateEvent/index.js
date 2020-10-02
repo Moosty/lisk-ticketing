@@ -7,6 +7,55 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import {OrganiserHeader} from "components/OrganiserHeader";
 import { useHistory } from "react-router-dom";
+import {statuses} from "../../store/reducers/blockchain/event.reducer";
+
+// events: [
+//   {
+//     address: "asdffqwerkqjewrflqkwejfL",
+//     publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
+//     asset: {
+//       eventData: {
+//         status: statuses.OPEN_FOR_SALE,
+//         title: "title",
+//         artist: "Racoon",
+//         location: "Caprera Openluchttheater - Bloemendaal",
+//         startEvent: new Date(),
+//         endEvent: "end time event",
+//         category: "test category",
+//         site: "https://lisk.io/apps/",
+//         image: "event image",
+//       },
+//       ticketData: {
+//         startSell: "date start selling",
+//         endSell: "standard event date",
+//         types: [
+//           {
+//             id: 0,
+//             name: "First Release Ticket",
+//             price: 45.26,
+//             amount: 10,
+//             sold: 0,
+//           },
+//           {
+//             id: 1,
+//             name: "Second Release Ticket",
+//             price: 55.26,
+//             amount: 20,
+//             sold: 0,
+//           },
+//           {
+//             id: 2,
+//             name: "Third Release Ticket",
+//             price: 75.26,
+//             amount: 20,
+//             sold: 0,
+//           },
+//         ],
+//       },
+//       resellData: {
+//         resell: true,
+//         maximumResellPercentage: 120,
+
 
 export const CreateEvent = (props) => {
   const history = useHistory();
@@ -24,6 +73,30 @@ export const CreateEvent = (props) => {
         </li>
         <li>
           input velden toevoegen
+        </li>
+        <li className="mt-2">
+          Event Title
+        </li>
+        <li>
+          Locatie
+        </li>
+        <li>
+          Artiest
+        </li>
+        <li>
+          Starttijd
+        </li>
+        <li>
+          Eindtijd
+        </li>
+        <li>
+          Tickets (soort tickets)
+        </li>
+        <li>
+          Resell opties: ja/nee && percentage resell && percentage organiser
+        </li>
+        <li className="mt-10">
+          Status: wanneer begint verkoop?
         </li>
       </ul>
     </div>

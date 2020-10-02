@@ -48,8 +48,8 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       <List>
         {[
           { label:"Overview" , link: "/overview", icon: <InboxIcon /> },
-          { label:"Event" , link: "/event", icon: <InboxIcon /> },
-          { label:"Checkout" , link: "/checkout", icon: <InboxIcon /> },
+          { label:"My Tickets" , link: "/my-tickets", icon: <InboxIcon /> },
+          { label:"Shopping Basket" , link: "/checkout", icon: <InboxIcon /> },
         ].map((item) => (
           <ListItem button onClick={() => history.push(`${item.link}`)} key={item.label} >
             <ListItemIcon>{item.icon}</ListItemIcon>
@@ -61,6 +61,8 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       <List>
         {[
           { label:"Organiser" , link: "/organiser", icon: <InboxIcon /> },
+          { label:"Event" , link: "/event", icon: <InboxIcon /> },
+
         ].map((item) => (
           <ListItem button onClick={ () => history.push(`${item.link}`)} key={item.label}>
             <ListItemIcon>{item.icon}</ListItemIcon>
