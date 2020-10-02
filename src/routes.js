@@ -8,11 +8,9 @@ import {Account} from "views/Account";
 import {Checkout} from "views/Checkout";
 import {Organiser} from "views/Organiser";
 import {CreateEvent} from "views/CreateEvent";
-
 import {LogIn} from "views/LogIn";
-
 import {TopBar} from "components/TopBar";
-import {Provider} from "react-redux";
+import {MyTickets} from "views/MyTickets";
 
 
 export const Routes = (props) => {
@@ -34,6 +32,9 @@ export const Routes = (props) => {
         </Route>
         <Route path="/account">
           <Account />
+        </Route>
+        <Route path="/my-tickets">
+          <MyTickets />
         </Route>
         <Route path="/organiser">
           <Organiser />
