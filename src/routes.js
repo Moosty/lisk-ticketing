@@ -7,8 +7,11 @@ import { Event } from "views/Event";
 import {Account} from "views/Account";
 import {Checkout} from "views/Checkout";
 import {Organiser} from "views/Organiser";
+
+import {InLog} from "views/InLog";
+import {SignUp} from "views/SignUp";
+
 import {CreateEvent} from "views/CreateEvent";
-import {LogIn} from "views/LogIn";
 import {TopBar} from "components/TopBar";
 import {MyTickets} from "views/MyTickets";
 
@@ -22,7 +25,10 @@ export const Routes = (props) => {
             renders the first one that matches the current URL. */}
       <Switch>
         <Route path="/login">
-          <LogIn />
+          <InLog />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
         </Route>
         <Route path="/overview">
           <Overview />
