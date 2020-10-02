@@ -18,9 +18,9 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Lisk Ticketing {new Date().getFullYear()} | POC by The Moosty Team
       </Link>{' '}
-      {new Date().getFullYear()}
+      
       {'.'}
     </Typography>
   );
@@ -28,10 +28,11 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(7),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: 'transparant',
   },
   root: {
     backgroundColor: "white",
@@ -51,24 +52,26 @@ const useStyles = makeStyles((theme) => ({
   h1: {
     color: 'white',
   },
+   field: {
+    backgroundColor: 'white',
+    borderRadius: 5,
+    border: 'none',
+  },
 }));
 
-export const SignUp = (props) => {
+export const SignUpUser = (props) => {
   const classes = useStyles();
 
-  return ( <div className="bg-fixed sm:bg-scroll bg-cover"
-                style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "20vh"}}>
-    <div className="w-full flex-auto h-full" style={{backgroundColor: "rgb(0 0 0 / 92%)"}}>
-      <div className={classes.paper}>
-      <Avatar className={classes.avatar}>
-        <LockOutlinedIcon />
-      </Avatar>
-      <Typography className={classes.h1} component="h1" variant="h5">
-        Sign up
-      </Typography>
-      </div>
+  return ( 
 
-    </div>
+    <div className="bg-fixed sm:bg-scroll bg-cover"
+                style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "100vh"}}>
+    <div className="w-full flex-auto h-full" style={{backgroundColor: "rgb(0 0 0 / 85%)"}}>
+      <div className={classes.paper}>
+            <img src="/images/logo-ticketing.png" alt="logo" width="250" height="300" />
+      <Typography className={classes.h1} component="h1" variant="h5">
+Sign Up      </Typography>
+      </div>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -77,9 +80,23 @@ export const SignUp = (props) => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                className={classes.field}
                   autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
+                  name="Username"
+                  variant="filled"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="Username"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                className={classes.field}
+                  autoComplete="fname"
+                  name="First name"
+                  variant="filled"
                   required
                   fullWidth
                   id="firstName"
@@ -89,29 +106,22 @@ export const SignUp = (props) => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
+                className={classes.field}
                   autoComplete="lname"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
+                  name="Last name"
+                  variant="filled"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="lastname"
+                  label="Last Name"
+                  autoFocus
                 />
               </Grid>
+           
               <Grid item xs={12}>
                 <TextField
-                  variant="outlined"
+                className={classes.field}
+                  variant="filled"
                   required
                   fullWidth
                   name="password"
@@ -121,26 +131,21 @@ export const SignUp = (props) => {
                   autoComplete="current-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
+             
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submit}
             >
-              Sign Up
+              Log In
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                  Are you an organiser? Sign up here!
                 </Link>
               </Grid>
             </Grid>
@@ -150,6 +155,9 @@ export const SignUp = (props) => {
           <Copyright />
         </Box>
       </Container>
+
+    </div>
+      
 
   </div>
 

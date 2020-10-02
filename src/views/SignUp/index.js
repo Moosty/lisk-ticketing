@@ -5,10 +5,17 @@ import {TicketList} from "components/TicketList";
 import {AccountHeader} from "components/AccountHeader";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import {SignUp} from "components/SignUp";
+import {SignUpUser} from "components/SignUpUser";
+import {SignUpOrg} from "components/SignUpOrg";
 
-export const LogIn = (props) => {
+
+export const SignUp = (props) => {
   return <div className="mt-10">
-  <SignUp />
+  <SignUpUser />
+   <SignUpOrg />
+  
   </div>;
+
+
+
 };

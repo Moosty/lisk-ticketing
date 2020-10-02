@@ -8,7 +8,8 @@ import {Account} from "views/Account";
 import {Checkout} from "views/Checkout";
 import {Organiser} from "views/Organiser";
 
-import {LogIn} from "views/LogIn";
+import {InLog} from "views/InLog";
+import {SignUp} from "views/SignUp";
 
 import {TopBar} from "components/TopBar";
 import {Provider} from "react-redux";
@@ -23,7 +24,10 @@ export const Routes = (props) => {
             renders the first one that matches the current URL. */}
       <Switch>
         <Route path="/login">
-          <LogIn />
+          <InLog />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
         </Route>
         <Route path="/overview">
           <Overview />
