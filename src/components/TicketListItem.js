@@ -36,10 +36,9 @@ export const TicketListItem = ({startEvent, day, month, time, artist, location,}
       </div>
      </div>
         <Button
-<<<<<<< HEAD
-=======
+
           onClick={() => history.push(`/event`)}
->>>>>>> c7fe6717d2231dd92e96ef93e0dfb11fc76813e7
+
           variant="outlined"
           color="secondary"
           size="small"
