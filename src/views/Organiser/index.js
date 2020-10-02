@@ -6,13 +6,27 @@ import {AccountHeader} from "components/AccountHeader";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import {OrganiserHeader} from "components/OrganiserHeader";
+import { useHistory } from "react-router-dom";
 
 export const Organiser = (props) => {
+    const history = useHistory();
+
     return <div className="mt-10">
         <OrganiserHeader
             name="Tivoli"
             balance ="145 LSK"
             button1 ="Create new event" />
+
+            <div>
+                <ul>
+                    <li>
+                        Account details (rechtsboven)
+                    </li>
+                    <li>
+                        overview of your events (details page)
+                    </li>
+                </ul>
+                </div>
         <TicketList/>
 
         <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
@@ -28,6 +42,7 @@ export const Organiser = (props) => {
 
                 <div className="flex flex-row content-center items-center">
                     <Button
+                        onClick={() => history.push(`/create-event`)}
                         variant="contained"
                         size="small"
                         color="secondary"

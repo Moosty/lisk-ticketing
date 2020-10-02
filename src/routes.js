@@ -7,6 +7,7 @@ import { Event } from "views/Event";
 import {Account} from "views/Account";
 import {Checkout} from "views/Checkout";
 import {Organiser} from "views/Organiser";
+import {CreateEvent} from "views/CreateEvent";
 
 import {LogIn} from "views/LogIn";
 
@@ -36,6 +37,9 @@ export const Routes = (props) => {
         </Route>
         <Route path="/organiser">
           <Organiser />
+        </Route>
+        <Route path="/create-event">
+          <CreateEvent />
         </Route>
         <Route path="/checkout">
         <Checkout />
