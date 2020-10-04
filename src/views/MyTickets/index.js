@@ -10,8 +10,8 @@ export const MyTickets = (props) => {
    <div>
      <ul>
        <li>Lijst Tickets</li>
-       <li>Ticket X</li>
-       <li>- ticketgegevens</li>
+       <li>Event X (dropdown)</li>
+       <li>- ticketgegevens (1 of meerdere)</li>
        <li>- eventgegevens</li>
        <li>- status event</li>
        <li>- resell opties</li>

@@ -9,7 +9,10 @@ import {useSelector} from "react-redux";
 export const Event = withReducer("Event", reducer)((props) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
 
+
   return <div className="mt-10">
+
+    {/* TODO: Map vervangen voor iets anders dat filtert (find?)*/}
 
     {events && events.map((event) => <EventHeader
       key={event.address}
@@ -19,6 +22,7 @@ export const Event = withReducer("Event", reducer)((props) => {
       />)}
 
     {/*TODO: de achtergrondkleur aanpassen in de map*/}
+
     {events && events.map((event) => event.asset.ticketData.types.map((type) =>
       <TicketType
         key={type.id}
