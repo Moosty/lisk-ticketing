@@ -7,7 +7,21 @@ export const statuses = {
   "CANCELLED": "CANCELLED",
 };
 
+
 const defaultState = {
+  createEvent: {
+    asset: {
+      eventData: {
+        location: "",
+        startEvent: new Date(),
+        title: "",
+        artist: "",
+
+      }
+    }
+      //  vullen met asset data
+    //  nog geen address en pub key
+  },
   events: [
     {
       address: "asdffqwerkqjewrflqkwejfL",
@@ -58,14 +72,14 @@ const defaultState = {
       },
     },
     {
-      address: "xxxffqwerkqjewrflqkwejfL",
-      publicKey: "lsk0000134tgerafgvasdfx9325fgcd",
+      address: "Address",
+      publicKey: "pubKey",
       asset: {
         eventData: {
           status: statuses.OPEN_FOR_SALE,
           title: "title",
-          artist: "Freskhu",
-          location: "Tivoli Vredenburg",
+          artist: "Artist",
+          location: "location",
           startEvent: new Date(),
           endEvent: "end time event",
           category: "test category",
@@ -102,6 +116,8 @@ const defaultState = {
         resellData: {
           resell: true,
           maximumResellPercentage: 120,
+          // in percentage
+          resellOrganiserFee: 1,
         },
       },
     },
@@ -109,12 +125,28 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
+
   switch (action.type) {
-    case Actions.CREATE_EVENT:
 
+    case Actions.UPDATE_CREATE_EVENT:
       return {
-
-      }
+        ...state,
+        createEvent:{
+          ...state.createEvent,
+          ...action.update,
+        },
+        // key & value meegeven
+        // key: title & value: title meegegeven
+      };
+    case Actions.ADD_EVENT:
+      return {
+        ...state,
+        events:[
+          ...state.events,
+          action.addEvent,
+        ],
+        // in de array van events, een event appenden (push?)
+      };
     default:
       return {
         ...state,

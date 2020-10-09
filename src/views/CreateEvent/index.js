@@ -6,67 +6,27 @@ import {AccountHeader} from "components/AccountHeader";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import {OrganiserHeader} from "components/OrganiserHeader";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {statuses} from "../../store/reducers/blockchain/event.reducer";
-
-// events: [
-//   {
-//     address: "asdffqwerkqjewrflqkwejfL",
-//     publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
-//     asset: {
-//       eventData: {
-//         status: statuses.OPEN_FOR_SALE,
-//         title: "title",
-//         artist: "Racoon",
-//         location: "Caprera Openluchttheater - Bloemendaal",
-//         startEvent: new Date(),
-//         endEvent: "end time event",
-//         category: "test category",
-//         site: "https://lisk.io/apps/",
-//         image: "event image",
-//       },
-//       ticketData: {
-//         startSell: "date start selling",
-//         endSell: "standard event date",
-//         types: [
-//           {
-//             id: 0,
-//             name: "First Release Ticket",
-//             price: 45.26,
-//             amount: 10,
-//             sold: 0,
-//           },
-//           {
-//             id: 1,
-//             name: "Second Release Ticket",
-//             price: 55.26,
-//             amount: 20,
-//             sold: 0,
-//           },
-//           {
-//             id: 2,
-//             name: "Third Release Ticket",
-//             price: 75.26,
-//             amount: 20,
-//             sold: 0,
-//           },
-//         ],
-//       },
-//       resellData: {
-//         resell: true,
-//         maximumResellPercentage: 120,
+import TextField from "@material-ui/core/TextField";
+import {useDispatch, useSelector} from "react-redux";
+import withReducer from "../../store/withReducer";
+import reducer from "../../store/reducers";
+import * as Actions from "../../store/actions";
 
 
-export const CreateEvent = (props) => {
+export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const history = useHistory();
+  const form = useSelector(({ blockchain }) => blockchain.event.createEvent);
+  const dispatch = useDispatch();
 
-  return <div className="mt-10">
+  return <div className="mt-10 mb-20">
     <OrganiserHeader
       name="Create Event"
-      balance ="location"
-      button1 ="Create new event" />
+      balance="location"
+      button1="Create new event"/>
 
-    <div>
+    <div className="">
       <ul>
         <li>
           header aanpassen
@@ -99,6 +59,90 @@ export const CreateEvent = (props) => {
           Status: wanneer begint verkoop?
         </li>
       </ul>
+
+      <form
+        className="flex flex-row w-9/10 flex-wrap m-2 "
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="outlined-basic"
+          label="Title"
+          variant="outlined"
+          value={form.title}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent({asset: { eventData: {title: e.target.value}}}));
+            }
+
+          }}
+          helperText={form.title ? `(${form.title.length}/50)` : `(0/50)`}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Artist"
+          variant="outlined"
+          value={form.artist}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent({asset: { eventData: {artist: e.target.value}}}));
+            }
+          }}
+          helperText={form.artist ? `(${form.artist.length}/50)` : `(0/50)`}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Location"
+          variant="outlined"
+          value={form.location}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent({asset: {eventData: {location: e.target.value}}}));
+            }
+          }}
+          helperText={form.location ? `(${form.location.length}/50)` : `(0/50)`}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="address"
+          variant="outlined"
+          value={form.address}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent({address: e.target.value}));
+            }
+          }}
+          helperText={form.address ? `(${form.address.length}/50)` : `(0/50)`}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+
+
+        <TextField
+          id="outlined-basic"
+          label="start event"
+          variant="outlined"
+          value={form.eventData}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent({asset: {eventData: {
+                    startEvent: new Date(),
+                  }}}));
+            }
+          }}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+      </form>
+
     </div>
 
     <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
@@ -109,19 +153,26 @@ export const CreateEvent = (props) => {
             <span className="text-lg mb-2">Event</span>
             <span className="font-bold">...</span>
 
+
           </div>
         </div>
 
         <div className="flex flex-row content-center items-center">
           <Button
-            onClick={() => history.push(`/organiser`)}
+            // multiline gemaakt door toevoeging { } na de =>
+            onClick={() => {
+              console.log({form})
+              history.push(`/organiser`);
+              dispatch(Actions.addEvent({asset: form}));
+            } }
             variant="contained"
             size="small"
             color="secondary"
             className="">Submit Event</Button>
         </div>
       </div>
-      <Divider />
+      <Divider/>
     </div>
-  </div>;
-};
+  </div>
+;
+});
