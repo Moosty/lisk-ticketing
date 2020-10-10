@@ -17,7 +17,7 @@ import * as Actions from "../../store/actions";
 
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const history = useHistory();
-  const form = useSelector(({ blockchain }) => blockchain.event.createEvent);
+  const form = useSelector(({blockchain}) => blockchain.event.createEvent);
   const dispatch = useDispatch();
 
   return <div className="mt-10 mb-20">
@@ -69,14 +69,14 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           id="outlined-basic"
           label="Title"
           variant="outlined"
-          value={form.title}
+          value={form.asset?.eventData?.title}
           onChange={(e) => {
             if (e.target.value.length <= 50) {
-              dispatch(Actions.updateCreateEvent({asset: { eventData: {title: e.target.value}}}));
+              dispatch(Actions.updateCreateEvent('asset.eventData.title', e.target.value));
             }
 
           }}
-          helperText={form.title ? `(${form.title.length}/50)` : `(0/50)`}
+          helperText={form.asset?.eventData?.title ? `(${form.asset.eventData.title.length}/50)` : `(0/50)`}
           fullWidth
           style={{marginBottom: 12}}
         />
@@ -84,13 +84,13 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           id="outlined-basic"
           label="Artist"
           variant="outlined"
-          value={form.artist}
+          value={form.asset?.eventData?.artist}
           onChange={(e) => {
             if (e.target.value.length <= 50) {
-              dispatch(Actions.updateCreateEvent({asset: { eventData: {artist: e.target.value}}}));
+              dispatch(Actions.updateCreateEvent('asset.eventData.artist', e.target.value));
             }
           }}
-          helperText={form.artist ? `(${form.artist.length}/50)` : `(0/50)`}
+          helperText={form.asset?.eventData?.artist ? `(${form.asset.eventData.artist.length}/50)` : `(0/50)`}
           fullWidth
           style={{marginBottom: 12}}
         />
@@ -99,13 +99,13 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           id="outlined-basic"
           label="Location"
           variant="outlined"
-          value={form.location}
+          value={form.asset?.eventData?.location}
           onChange={(e) => {
             if (e.target.value.length <= 50) {
-              dispatch(Actions.updateCreateEvent({asset: {eventData: {location: e.target.value}}}));
+              dispatch(Actions.updateCreateEvent('asset.eventData.location', e.target.value));
             }
           }}
-          helperText={form.location ? `(${form.location.length}/50)` : `(0/50)`}
+          helperText={form.asset?.eventData?.location ? `(${form.asset.eventData.location.length}/50)` : `(0/50)`}
           fullWidth
           style={{marginBottom: 12}}
         />
@@ -117,7 +117,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           value={form.address}
           onChange={(e) => {
             if (e.target.value.length <= 50) {
-              dispatch(Actions.updateCreateEvent({address: e.target.value}));
+              dispatch(Actions.updateCreateEvent('address', e.target.value));
             }
           }}
           helperText={form.address ? `(${form.address.length}/50)` : `(0/50)`}
@@ -130,12 +130,10 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           id="outlined-basic"
           label="start event"
           variant="outlined"
-          value={form.eventData}
+          value={form.asset?.eventData?.startEvent}
           onChange={(e) => {
             if (e.target.value.length <= 50) {
-              dispatch(Actions.updateCreateEvent({asset: {eventData: {
-                    startEvent: new Date(),
-                  }}}));
+              dispatch(Actions.updateCreateEvent('asset.eventData.startEvent', new Date(e.target.value)));
             }
           }}
           fullWidth
@@ -163,8 +161,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
             onClick={() => {
               console.log({form})
               history.push(`/organiser`);
-              dispatch(Actions.addEvent({asset: form}));
-            } }
+              dispatch(Actions.addEvent(form));
+            }}
             variant="contained"
             size="small"
             color="secondary"
@@ -174,5 +172,5 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
       <Divider/>
     </div>
   </div>
-;
+    ;
 });

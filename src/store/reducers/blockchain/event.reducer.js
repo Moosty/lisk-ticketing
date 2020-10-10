@@ -1,4 +1,9 @@
 import * as Actions from "../../actions";
+import _ from 'lodash';
+
+// object
+// key
+// value
 
 export const statuses = {
   "UPCOMING": "UPCOMING",
@@ -12,16 +17,16 @@ const defaultState = {
   createEvent: {
     asset: {
       eventData: {
-        location: "",
+        title: "The Favourites",
+        artist: "Racoon",
+        location: "Caprera Openluchttheater - Bloemendaal",
         startEvent: new Date(),
-        title: "",
-        artist: "",
+      },
 
-      }
-    }
-      //  vullen met asset data
-    //  nog geen address en pub key
-  },
+    },
+    },
+
+
   events: [
     {
       address: "asdffqwerkqjewrflqkwejfL",
@@ -131,10 +136,9 @@ export default (state = defaultState, action) => {
     case Actions.UPDATE_CREATE_EVENT:
       return {
         ...state,
-        createEvent:{
-          ...state.createEvent,
-          ...action.update,
-        },
+        createEvent:
+          _.set(state.createEvent, action.path, action.value),
+
         // key & value meegeven
         // key: title & value: title meegegeven
       };
