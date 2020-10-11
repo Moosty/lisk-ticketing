@@ -15,12 +15,45 @@ export const statuses = {
 
 const defaultState = {
   createEvent: {
+    address: "addafsdqsdffqwerkqjewrflqkwejfL",
+    publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
     asset: {
       eventData: {
         title: "The Favourites",
         artist: "Racoon",
         location: "Caprera Openluchttheater - Bloemendaal",
         startEvent: new Date(),
+        endEvent: "end time event",
+        category: "test category",
+        site: "https://lisk.io/apps/",
+        image: "event image",
+      },
+      ticketData: {
+        startSell: "date start selling",
+        endSell: "standard event date",
+        types: [
+          {
+            id: 0,
+            name: "First Release Ticket",
+            price: 45.26,
+            amount: 10,
+            sold: 0,
+          },
+          {
+            id: 1,
+            name: "Second Release Ticket",
+            price: 55.26,
+            amount: 20,
+            sold: 0,
+          },
+          {
+            id: 2,
+            name: "Third Release Ticket",
+            price: 75.26,
+            amount: 20,
+            sold: 0,
+          },
+        ],
       },
 
     },
@@ -34,7 +67,7 @@ const defaultState = {
       asset: {
         eventData: {
           status: statuses.OPEN_FOR_SALE,
-          title: "title",
+          title: "titletitletitletitletitletitle",
           artist: "Racoon",
           location: "Caprera Openluchttheater - Bloemendaal",
           startEvent: new Date(),
@@ -77,7 +110,7 @@ const defaultState = {
       },
     },
     {
-      address: "Address",
+      address: "89348502934850928345098",
       publicKey: "pubKey",
       asset: {
         eventData: {

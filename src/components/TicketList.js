@@ -18,6 +18,7 @@ export const TicketList = withReducer("TicketList", reducer)((props) => {
 
       return (
       <TicketListItem key={event.address}
+                      eventId={event.address}
                       startEvent={event.asset?.eventData?.startEvent}
                       artist={event.asset?.eventData?.artist}
                       title={event.asset?.eventData?.title}

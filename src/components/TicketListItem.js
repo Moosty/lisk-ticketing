@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -15,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const TicketListItem = ({startEvent, title, day, month, time, artist, location,}) => {
+export const TicketListItem = ({eventId, startEvent, title, day, month, time, artist, location,}) => {
+
   const history = useHistory();
   const classes = useStyles();
 
@@ -38,7 +40,10 @@ export const TicketListItem = ({startEvent, title, day, month, time, artist, loc
      </div>
         <Button
 
-          onClick={() => history.push(`/event`)}
+          onClick={() => {
+            console.log(eventId);
+            history.push(`/events/${eventId}`);
+          }}
 
           variant="outlined"
           color="secondary"

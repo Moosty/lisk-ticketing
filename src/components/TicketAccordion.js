@@ -31,7 +31,7 @@ export const TicketAccordion = (props) => {
           <Typography className={classes.heading}><span className="font-bold">52</span> Swap Tickets available</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <div className="w-full">
+          <div className="w-full mb-20">
           <SwapTicket
           price="€ 52.36 / € 55.50"
           type="First Release Ticket"
