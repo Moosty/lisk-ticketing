@@ -10,7 +10,6 @@ export const Overview = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-
   return <div className="mt-10">
     <Header
     title="An Honest Ticketing System"

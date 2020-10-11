@@ -36,7 +36,7 @@ export const Routes = (props) => {
         <Route path="/events/:address">
           <EventPage />
         </Route>
-        <Route path="/account">
+        <Route path="/account/:address">
           <Account />
         </Route>
         <Route path="/my-tickets">

@@ -152,7 +152,10 @@ export const TopBar = (props) => {
         <p>Messages</p>
       </MenuItem>
       <MenuItem onClick={()=>
-      {handleMenuClose()}}>
+      {handleMenuClose();
+        history.push(`/signup`);
+
+      }}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
@@ -162,7 +165,7 @@ export const TopBar = (props) => {
       </MenuItem>
       <MenuItem onClick={()=>
       {handleMenuClose();
-        history.push(`/account`);
+        history.push(`/account/1234342432dd`);
       }
       }>
         <IconButton
