@@ -25,6 +25,8 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
   const [item, setItem] = useState(null);
 
   useEffect(() => {
+    console.log(item);
+    console.log(items);
     if (items.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
       setItem(items.find(i => i.eventId === eventId && i.ticketType === ticketType));
     }

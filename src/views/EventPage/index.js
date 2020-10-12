@@ -19,7 +19,6 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
 
   return <div className="mt-10">
 
-    {/* TODO TIJDELIJK BEGIN*/}
     <EventHeader
       key={eventX.address}
       artist={eventX.asset.eventData.artist}
@@ -36,7 +35,7 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
         eventId={eventX.address}
         ticketType={type.id}
       />)}
-    {/* TODO TIJDELIJK EIND*/}
+
     <TicketAccordion/>
     <CartBottom
       totalPrice="€ 185.56"/>

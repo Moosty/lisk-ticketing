@@ -3,6 +3,8 @@ import Button from "@material-ui/core/Button";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from 'react-router-dom';
+import * as Actions from "../store/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -16,7 +18,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CartBottom = ({totalPrice}) => {
+  const basket = useSelector(({blockchain}) => blockchain.basket.items);
+
   const classes = useStyles();
+  const dispatch = useDispatch();
   const history = useHistory();
 
   return (
@@ -33,7 +38,10 @@ export const CartBottom = ({totalPrice}) => {
 
         <div className="flex flex-row content-center items-center">
           <Button
-            onClick={() => history.push(`/checkout`)}
+            onClick={() => {
+              history.push(`/checkout`);
+              console.log(basket);
+            } }
             variant="contained"
             size="small"
             color="secondary"
