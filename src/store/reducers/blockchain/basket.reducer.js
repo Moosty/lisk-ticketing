@@ -1,11 +1,14 @@
 import * as Actions from "../../actions";
 import _ from "lodash";
 
+// DE BASKET IS JE WINKELMAND, MET TICKETS, TIJDELIJK OPGESLAGEN
+// - link naar een evenement
+// - ticket & ticket type
+
+// DEZE TICKETS HALEN WE UIT DE EVENT REDUCER
 
 const defaultState = {
-  fillBasket: {
 
-  },
   items: [
     {
       eventId: 'asdffqwerkqjewrflqkwejfL',

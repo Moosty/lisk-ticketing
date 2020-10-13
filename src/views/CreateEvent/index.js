@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import * as Actions from "../../store/actions";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
@@ -59,7 +60,9 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           Status: wanneer begint verkoop?
         </li>
       </ul>
-
+      <div className="flex  ml-2 text-sm leading-4 my-4">
+        <span className="text-lg font-bold">Event Information</span>
+      </div>
       <form
         className="flex flex-row w-9/10 flex-wrap m-2 "
         noValidate
@@ -139,6 +142,79 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           fullWidth
           style={{marginBottom: 12}}
         />
+
+        <div className="flex  ml-2 text-sm leading-4 my-4">
+          <span className="text-lg font-bold">Ticket Information</span>
+        </div>
+
+        <TextField
+          id="outlined-basic"
+          label="startSell"
+          variant="outlined"
+          value={form.asset?.ticketData?.startSell}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent('startSell', e.target.value));
+            }
+          }}
+          helperText={form.startSell ? `(${form.startSell.length}/50)` : `(0/50)`}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+
+
+        <div className="flex  ml-2 text-sm leading-4 my-4">
+          <span className="text-lg font-bold">Resell Information</span>
+        </div>
+
+        <TextField
+          id="outlined-basic"
+          label="can I resell my ticket?"
+          variant="outlined"
+          value={form.asset?.resellData?.allowed}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent('allowed', e.target.value));
+            }
+          }}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+        <TextField
+          id="outlined-basic"
+          label="maximumResellPercentage"
+          variant="outlined"
+          value={form.asset?.resellData?.maximumResellPercentage}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent('maximumResellPercentage', e.target.value));
+            }
+          }}
+          helperText={form.maximumResellPercentage ? `(${form.maximumResellPercentage.length}/50)` : `(0/50)`}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+        <TextField
+        id="outlined-basic"
+        label="resellOrganiserFee"
+        variant="outlined"
+        type="number"
+        value={form.asset?.resellData?.resellOrganiserFee}
+        onChange={(e) => {
+          if (e.target.value.length <= 50) {
+            dispatch(Actions.updateCreateEvent('resellOrganiserFee', {
+              goal: parseInt(e.target.value, 10),
+            }));
+          }
+        }}
+        fullWidth
+        style={{marginBottom: 12}}
+        InputProps={{
+          startAdornment: <InputAdornment position="start">%</InputAdornment>,
+        }}
+        id="outlined-start-adornment"
+        />
+
       </form>
 
     </div>

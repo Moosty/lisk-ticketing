@@ -5,11 +5,15 @@ import _ from 'lodash';
 // key
 // value
 
+// DE EVENT REDUCER BEVAT ALLE DATA VAN EEN EVENT
+
 export const statuses = {
+  "NEW": "NEW",
   "UPCOMING": "UPCOMING",
   "OPEN_FOR_SALE": "OPEN_FOR_SALE",
   "SOLD_OUT": "SOLD_OUT",
   "CANCELLED": "CANCELLED",
+  "DONE": "DONE",
 };
 
 
@@ -55,9 +59,13 @@ const defaultState = {
           },
         ],
       },
-
+      resellData: {
+        allowed: true,
+        maximumResellPercentage: 120,
+        resellOrganiserFee: 1, //in percentage
+      },
     },
-    },
+  },
 
 
   events: [
@@ -104,8 +112,9 @@ const defaultState = {
           ],
         },
         resellData: {
-          resell: true,
+          allowed: true,
           maximumResellPercentage: 120,
+          resellOrganiserFee: 1, //in percentages
         },
       },
     },
@@ -152,10 +161,9 @@ const defaultState = {
           ],
         },
         resellData: {
-          resell: true,
+          allowed: true,
           maximumResellPercentage: 120,
-          // in percentage
-          resellOrganiserFee: 1,
+          resellOrganiserFee: 1,  // in percentages
         },
       },
     },
@@ -178,7 +186,7 @@ export default (state = defaultState, action) => {
     case Actions.ADD_EVENT:
       return {
         ...state,
-        events:[
+        events: [
           ...state.events,
           action.addEvent,
         ],
