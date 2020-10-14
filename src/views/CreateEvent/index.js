@@ -52,12 +52,11 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         <span className="text-lg font-bold">Event Information</span>
       </div>
 
+
       {/*START - MODALS WITH EXPLANATION */}
       <div className="flex  ml-2 text-sm leading-4 my-4 text-red-600 "
-           title="tesdfasdfasdfasdfasdfasdfasdfst"
-           content="teasdfasdfasdfasdfasdfasdfasfst2"
            onClick={() => {
-             dispatch(Actions.openModal('DemoModal'))
+             dispatch(Actions.openModal('eventInfoModal'))
            }}>
        More Info
       </div>
@@ -119,8 +118,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
 
         <TextField
           fullWidth
-          label="Start Date"
-          type="datetime-local"
+          label="Event date"
+          type="date"
           variant="outlined"
 
           // defaultValue="2017-05-24T10:30"
@@ -131,7 +130,28 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           InputLabelProps={{
             shrink: true,
           }}
+          style={{marginBottom: 12}}
+
         />
+
+        <TextField
+          fullWidth
+          label="Start time"
+          type="time"
+          variant="outlined"
+
+          // defaultValue="2017-05-24T10:30"
+          value={form.asset?.eventData?.startEvent}
+          onChange={(e) => {
+            dispatch(Actions.updateCreateEvent('asset.eventData.startEvent', new Date(e.target.value)));
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{marginBottom: 12}}
+
+        />
+
         <TextField
           id="outlined-basic"
           label="duration event"
@@ -162,6 +182,17 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           <span className="text-lg font-bold">Ticket Information</span>
         </div>
 
+
+        {/*START - MODALS WITH EXPLANATION */}
+        <div className="flex  ml-2 text-sm leading-4 my-4 text-red-600 "
+             onClick={() => {
+               dispatch(Actions.openModal('ticketInfoModal'))
+             }}>
+          More Info
+        </div>
+        {/*END - MODALS WITH EXPLANATION */}
+
+
         <div className="flex  ml-2 text-sm leading-4 my-4">
           <span className="text-lg">Ticket Type 1</span>
         </div>
@@ -184,17 +215,36 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         <TextField
           fullWidth
           label="Start Sell"
-          type="datetime-local"
+          type="date"
           variant="outlined"
 
           // defaultValue="2017-05-24T10:30"
-          value={form.asset?.ticketData?.types?.startSell}
+          value={form.asset?.ticketData?.types?.startSellDate}
           onChange={(e) => {
-            dispatch(Actions.updateCreateEvent('startSell', {startSell: e.target.value}));
+            dispatch(Actions.updateCreateEvent('startSell', {startSellDate: e.target.value}));
           }}
           InputLabelProps={{
             shrink: true,
           }}
+          style={{marginBottom: 12}}
+
+        />
+        <TextField
+          fullWidth
+          label="Start Sell"
+          type="time"
+          variant="outlined"
+
+          // defaultValue="2017-05-24T10:30"
+          value={form.asset?.ticketData?.types?.startSellTime}
+          onChange={(e) => {
+            dispatch(Actions.updateCreateEvent('startSell', {startSellTime: e.target.value}));
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{marginBottom: 12}}
+
         />
 
 
@@ -212,7 +262,6 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               }));
             }
           }}
-          helperText={form.price ? `(${form.price.length}/50)` : `(0/50)`}
           fullWidth
           style={{marginBottom: 12}}
           InputProps={{
@@ -234,7 +283,6 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               }));
             }
           }}
-          helperText={form.amount ? `(${form.amount.length}/50)` : `(0/50)`}
           fullWidth
           style={{marginBottom: 12}}
         />
@@ -251,6 +299,16 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         <div className="flex  ml-2 text-sm leading-4 my-4">
           <span className="text-lg font-bold">Resell Information</span>
         </div>
+
+        {/*START - MODALS WITH EXPLANATION */}
+        <div className="flex  ml-2 text-sm leading-4 my-4 text-red-600 "
+             onClick={() => {
+               dispatch(Actions.openModal('resellInfoModal'))
+             }}>
+          More Info
+        </div>
+        {/*END - MODALS WITH EXPLANATION */}
+
 
         <TextField
           id="outlined-select-currency"
@@ -285,7 +343,6 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               }));
             }
           }}
-          helperText={form.maximumResellPercentage ? `(${form.maximumResellPercentage.length}/50)` : `(0/50)`}
           fullWidth
           style={{marginBottom: 12}}
           InputProps={{
@@ -327,7 +384,6 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               dispatch(Actions.updateCreateEvent('address', e.target.value));
             }
           }}
-          helperText={form.address ? `(${form.address.length}/50)` : `(0/50)`}
           fullWidth
           style={{marginBottom: 12}}
         />

@@ -15,10 +15,12 @@ ReactDOM.render(
       context: false
     }}
   >
+
     <Provider store={store}>
       <Routes/>
       <MoostyModal/>
     </Provider>
+
   </AppContext.Provider>,
   document.getElementById('root')
 );

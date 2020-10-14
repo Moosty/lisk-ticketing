@@ -26,7 +26,8 @@ const defaultState = {
         title: "The Favourites",
         artist: "Racoon",
         location: "Caprera Openluchttheater - Bloemendaal",
-        startEvent: new Date(),
+        eventDate: new Date(),
+        eventTime: 900,
         duration: 90,
         category: "test category",
         site: "https://lisk.io/apps/",
@@ -35,7 +36,8 @@ const defaultState = {
       ticketData: {
         types: [
           {
-            startSell: "date start selling",
+            startSellDate: new Date(),
+            startSellTime: 900,
             id: 0,
             name: "First Release Ticket",
             price: 45.26,
@@ -43,7 +45,8 @@ const defaultState = {
             sold: 0,
           },
           {
-            startSell: "date start selling",
+            startSellDate: new Date(),
+            startSellTime: 900,
             id: 1,
             name: "Second Release Ticket",
             price: 55.26,
@@ -51,7 +54,8 @@ const defaultState = {
             sold: 0,
           },
           {
-            startSell: "date start selling",
+            startSellDate: new Date(),
+            startSellTime: 900,
             id: 2,
             name: "Third Release Ticket",
             price: 75.26,
@@ -79,7 +83,8 @@ const defaultState = {
           title: "titletitletitletitletitletitle",
           artist: "Racoon",
           location: "Caprera Openluchttheater - Bloemendaal",
-          startEvent: new Date(),
+          eventDate: new Date(),
+          eventTime: 900,
           duration: 90,
           category: "test category",
           site: "https://lisk.io/apps/",
@@ -88,7 +93,8 @@ const defaultState = {
         ticketData: {
           types: [
             {
-              startSell: "date start selling",
+              startSellDate: new Date(),
+              startSellTime: 900,
               id: 0,
               name: "First Release Ticket",
               price: 45.26,
@@ -96,7 +102,8 @@ const defaultState = {
               sold: 0,
             },
             {
-              startSell: "date start selling",
+              startSellDate: new Date(),
+              startSellTime: 900,
               id: 1,
               name: "Second Release Ticket",
               price: 55.26,
@@ -104,7 +111,8 @@ const defaultState = {
               sold: 0,
             },
             {
-              startSell: "date start selling",
+              startSellDate: new Date(),
+              startSellTime: 900,
               id: 2,
               name: "Third Release Ticket",
               price: 75.26,
@@ -129,7 +137,8 @@ const defaultState = {
           title: "title",
           artist: "Artist",
           location: "location",
-          startEvent: new Date(),
+          eventDate: new Date(),
+          eventTime: 900,
           duration: 90,
           category: "test category",
           site: "https://lisk.io/apps/",
@@ -139,7 +148,8 @@ const defaultState = {
           // Ticket sale starts when the first ticket can be bought
           types: [
             {
-              startSell: "date start selling",
+              startSellDate: new Date(),
+              startSellTime: 900,
               id: 0,
               name: "First Release Ticket",
               price: 45.26,
@@ -147,7 +157,8 @@ const defaultState = {
               sold: 0,
             },
             {
-              startSell: "date start selling",
+              startSellDate: new Date(),
+              startSellTime: 900,
               id: 1,
               name: "Second Release Ticket",
               price: 55.26,
@@ -155,7 +166,8 @@ const defaultState = {
               sold: 0,
             },
             {
-              startSell: "date start selling",
+              startSellDate: new Date(),
+              startSellTime: 900,
               id: 2,
               name: "Third Release Ticket",
               price: 75.26,
