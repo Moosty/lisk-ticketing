@@ -15,6 +15,8 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
   useEffect(() => {
     console.log(events);
     console.log(eventX);
+    console.log(eventX.eventDate);
+    console.log(eventX.eventTime);
   }, [events]);
 
   return <div className="mt-10">
@@ -23,11 +25,13 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
       key={eventX.address}
       artist={eventX.asset.eventData.artist}
       location={eventX.asset.eventData.location}
-      startEvent={eventX.asset.eventData.startEvent}
+      eventDate={eventX.asset.eventData.eventDate}
+      startEvent={eventX.asset.eventData.eventTime}
     />
 
     {eventX.asset.ticketData.types.map((type) =>
       <TicketType
+
         key={type.id}
         label={type.name}
         price={type.price}

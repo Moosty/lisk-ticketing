@@ -27,6 +27,13 @@ const categories = [
   },
 ];
 
+// TODO: header aanpassen
+// TODO: Status Event meegeven
+
+// TODO: textfield module maken?
+// TODO: Tickettype module maken?
+// TODO: modals aanpassen
+
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const history = useHistory();
   const form = useSelector(({blockchain}) => blockchain.event.createEvent);
@@ -39,14 +46,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
       button1="Create new event"/>
 
     <div className="">
-      <ul>
-        <li>
-          header aanpassen
-        </li>
-        <li className="mt-10">
-          Status: wanneer begint verkoop?
-        </li>
-      </ul>
+
 
       <div className="flex  ml-2 text-sm leading-4 my-4">
         <span className="text-lg font-bold">Event Information</span>
@@ -193,6 +193,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         {/*END - MODALS WITH EXPLANATION */}
 
 
+        {/*START TYPE  - TICKET TYPE 1 */}
+
         <div className="flex  ml-2 text-sm leading-4 my-4">
           <span className="text-lg">Ticket Type 1</span>
         </div>
@@ -211,42 +213,6 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           fullWidth
           style={{marginBottom: 12}}
         />
-
-        <TextField
-          fullWidth
-          label="Start Sell"
-          type="date"
-          variant="outlined"
-
-          // defaultValue="2017-05-24T10:30"
-          value={form.asset?.ticketData?.types?.startSellDate}
-          onChange={(e) => {
-            dispatch(Actions.updateCreateEvent('startSell', {startSellDate: e.target.value}));
-          }}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          style={{marginBottom: 12}}
-
-        />
-        <TextField
-          fullWidth
-          label="Start Sell"
-          type="time"
-          variant="outlined"
-
-          // defaultValue="2017-05-24T10:30"
-          value={form.asset?.ticketData?.types?.startSellTime}
-          onChange={(e) => {
-            dispatch(Actions.updateCreateEvent('startSell', {startSellTime: e.target.value}));
-          }}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          style={{marginBottom: 12}}
-
-        />
-
 
 
         <TextField
@@ -287,9 +253,137 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           style={{marginBottom: 12}}
         />
 
+        <TextField
+          fullWidth
+          label="Start Sell"
+          type="date"
+          variant="outlined"
+
+          // defaultValue="2017-05-24T10:30"
+          value={form.asset?.ticketData?.types?.startSellDate}
+          onChange={(e) => {
+            dispatch(Actions.updateCreateEvent('startSell', {startSellDate: e.target.value}));
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{marginBottom: 12}}
+
+        />
+        <TextField
+          fullWidth
+          label="Start Sell"
+          type="time"
+          variant="outlined"
+
+          // defaultValue="2017-05-24T10:30"
+          value={form.asset?.ticketData?.types?.startSellTime}
+          onChange={(e) => {
+            dispatch(Actions.updateCreateEvent('startSell', {startSellTime: e.target.value}));
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{marginBottom: 12}}
+
+        />
+        {/*END TYPE  - TICKET TYPE 1 */}
+
+        {/*START TYPE  - TICKET TYPE  2 */}
+
+        <div className="flex  ml-2 text-sm leading-4 my-4">
+          <span className="text-lg">Ticket Type 2</span>
+        </div>
+
+        <TextField
+          id="outlined-basic"
+          label="type of ticket (name)"
+          variant="outlined"
+          value={form.asset?.ticketData?.types?.name}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent('name', e.target.value));
+            }
+          }}
+          helperText={form.name ? `(${form.name.length}/50)` : `(0/50)`}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
 
 
+        <TextField
+          id="outlined-basic"
+          label="price of tickets"
+          variant="outlined"
+          type="number"
+          value={form.asset?.ticketData?.types?.price}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent('price', {
+                goal: parseInt(e.target.value, 20),
+              }));
+            }
+          }}
+          fullWidth
+          style={{marginBottom: 12}}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }}
+          id="outlined-start-adornment"
+        />
 
+        <TextField
+          id="outlined-basic"
+          label="amount of tickets"
+          variant="outlined"
+          type="number"
+          value={form.asset?.ticketData?.types?.amount}
+          onChange={(e) => {
+            if (e.target.value.length <= 50) {
+              dispatch(Actions.updateCreateEvent('amount', {
+                goal: parseInt(e.target.value, 20),
+              }));
+            }
+          }}
+          fullWidth
+          style={{marginBottom: 12}}
+        />
+
+        <TextField
+          fullWidth
+          label="Start Sell"
+          type="date"
+          variant="outlined"
+
+          // defaultValue="2017-05-24T10:30"
+          value={form.asset?.ticketData?.types?.startSellDate}
+          onChange={(e) => {
+            dispatch(Actions.updateCreateEvent('startSell', {startSellDate: e.target.value}));
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{marginBottom: 12}}
+
+        />
+        <TextField
+          fullWidth
+          label="Start Sell"
+          type="time"
+          variant="outlined"
+
+          // defaultValue="2017-05-24T10:30"
+          value={form.asset?.ticketData?.types?.startSellTime}
+          onChange={(e) => {
+            dispatch(Actions.updateCreateEvent('startSell', {startSellTime: e.target.value}));
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          style={{marginBottom: 12}}
+
+        />
+        {/*END TYPE  - TICKET TYPE  */}
 
 
 

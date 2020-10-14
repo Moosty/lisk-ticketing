@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {TicketListItem} from "components/index";
+import {TicketListItem, TicketType} from "components/index";
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import {useSelector} from "react-redux";
@@ -9,6 +9,8 @@ export const TicketList = withReducer("TicketList", reducer)((props) => {
 
   useEffect(() => {
     console.log(events);
+    console.log(events.asset?.eventData?.eventDate);
+    console.log(events.asset?.eventData?.eventTime);
   }, [events])
 
   return <div>
@@ -19,7 +21,9 @@ export const TicketList = withReducer("TicketList", reducer)((props) => {
       return (
       <TicketListItem key={event.address}
                       eventId={event.address}
-                      startEvent={event.asset?.eventData?.startEvent}
+                      eventDate={event.asset.eventData.eventDate}
+                      startEvent={event.asset.eventData.eventTime}
+
                       artist={event.asset?.eventData?.artist}
                       title={event.asset?.eventData?.title}
                       location={event.asset?.eventData?.location}
