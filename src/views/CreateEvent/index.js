@@ -34,6 +34,11 @@ const categories = [
 // TODO: Tickettype module maken?
 // TODO: modals aanpassen
 
+// let filledArray = [...new Array(10)].map(()=> {'hello':'goodbye'});
+// ticketData: { types: [] }
+//ticketData.types[]
+// map over
+
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const history = useHistory();
   const form = useSelector(({blockchain}) => blockchain.event.createEvent);
@@ -203,7 +208,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           id="outlined-basic"
           label="type of ticket (name)"
           variant="outlined"
-          value={form.asset?.ticketData?.types?.name}
+          value={form.asset.ticketData.types[0].name}
           onChange={(e) => {
             if (e.target.value.length <= 50) {
               dispatch(Actions.updateCreateEvent('name', e.target.value));
@@ -260,7 +265,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           variant="outlined"
 
           // defaultValue="2017-05-24T10:30"
-          value={form.asset?.ticketData?.types?.startSellDate}
+          value={form.asset?.ticketData?.types[0].startSellDate}
           onChange={(e) => {
             dispatch(Actions.updateCreateEvent('startSell', {startSellDate: e.target.value}));
           }}

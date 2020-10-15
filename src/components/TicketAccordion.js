@@ -6,6 +6,10 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {SwapTicket} from "components/SwapTicket";
+import withReducer from "../store/withReducer";
+import reducer from "../store/reducers";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,8 +21,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TicketAccordion = (props) => {
+export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketAddress, quantity, price, name}) => {
+  const {address} = useParams();
+
   const classes = useStyles();
+  const events = useSelector(({blockchain}) => blockchain.event.events);
+  const eventX = events.find(event => event.address === address);
+  const swapTickets = useSelector(({blockchain}) => blockchain.marketplace.items);
+  const swapTicketsX = swapTickets.filter(event => event.eventId === address);
+
+  // ik wil de naam van tickettype 1 van eventX
+  // voor ticketTypeId===X wil ik eventX.asset.ticketData.types.filter(type => type.id === swapTicketsX.ticketTypeId) id=XXX
+  const X = eventX.asset.ticketData.types.map(type => type.id && type.name);
+  // TO DO - uit de eventreducer wil ik de ticketnamen halen.
+  // we willen een key value: ticketnames = [ {0: "first release"}, {1: "second"}, ... ]
+
+  console.log( eventX, swapTickets );
+  console.log( "dit wil ik:", X );
 
   return (
     <div className={classes.root}>
@@ -32,18 +51,18 @@ export const TicketAccordion = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <div className="w-full mb-20">
-          <SwapTicket
-          price="€ 52.36 / € 55.50"
-          type="First Release Ticket"
-          style={{width:"full"}}/>
-            <SwapTicket
-              price="€ 42.36 / € 52.36"
-              type="Second Release Ticket"
-              style={{width:"full"}}/>
-            <SwapTicket
-              price="€ 12.36 / € 14.36"
-              type="Last Release Ticket"
-              style={{width:"full"}}/>
+
+            {swapTicketsX.map((type) =>
+              <SwapTicket
+                key={type.ticketTypeId}
+                price={type.resellerPrice}
+                type={type.name}
+                style={{width:"full"}}/>
+
+            )}
+
+
+
 
           </div>
 
@@ -52,4 +71,4 @@ export const TicketAccordion = (props) => {
 
     </div>
   );
-}
+});

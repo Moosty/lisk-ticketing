@@ -9,15 +9,15 @@ import {useParams} from 'react-router-dom';
 
 export const EventPage = withReducer("EventPage", reducer)((props) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
+  const swapTickets = useSelector(({blockchain}) => blockchain.marketplace.items);
+
   const {address} = useParams();
   const eventX = events.find(event => event.address === address);
+  const swapTicketsX = swapTickets.filter(event => event.eventId === address);
 
   useEffect(() => {
-    console.log(events);
-    console.log(eventX);
-    console.log(eventX.eventDate);
-    console.log(eventX.eventTime);
-  }, [events]);
+  
+  }, [events, swapTickets]);
 
   return <div className="mt-10">
 
@@ -40,7 +40,10 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
         ticketType={type.id}
       />)}
 
-    <TicketAccordion/>
+      <TicketAccordion
+      />
+
+
     <CartBottom
       totalPrice="€ 185.56"/>
   </div>;

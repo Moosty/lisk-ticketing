@@ -6,12 +6,41 @@ const defaultState = {
 
   items: [
     {
-      ticketAddress: "12312341r555ff",
+      ticketAddress: "12312341r555ff111",
       eventId: 'asdffqwerkqjewrflqkwejfL',
-      ticketType: 1,
-      quantity: 2,
+      ticketTypeId: 1,
+      quantity: 1,
       resellerPrice: 125,
     },
+    {
+      ticketAddress: "12312341r555ff222",
+      eventId: 'asdffqwerkqjewrflqkwejfL',
+      ticketTypeId: 2,
+      quantity: 1,
+      resellerPrice: 125,
+    },
+    {
+      ticketAddress: "12312341r555ff23",
+      eventId: 'asdffqwerkqjewrflqkwejfL',
+      ticketTypeId: 3,
+      quantity: 1,
+      resellerPrice: 125,
+    },
+    {
+      ticketAddress: "12312341r555ff23",
+      eventId: 'asdffqwerkddsqjewrflqkwejfL',
+      ticketTypeId: 3,
+      quantity: 1,
+      resellerPrice: 125,
+    },
+    {
+      ticketAddress: "12312341r555ff23",
+      eventId: 'addafsdqsdffqwerkqjewrflqkwejfL',
+      ticketTypeId: 3,
+      quantity: 1,
+      resellerPrice: 125,
+    },
+
 
   ]
 };

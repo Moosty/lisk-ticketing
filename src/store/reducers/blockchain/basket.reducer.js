@@ -21,7 +21,6 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   let item = null;
-  console.log(item);
 
   switch (action.type) {
     case Actions.ADD_ITEM:
@@ -30,7 +29,6 @@ export default (state = defaultState, action) => {
       // zo nee: toevoegen (quantity + 1)
       item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
       if(item){
-        console.log(item)
         item.quantity++;
       } else {
         item = {
@@ -51,10 +49,8 @@ export default (state = defaultState, action) => {
       // zo ja, updaten
       // zo nee: return state
       item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
-      console.log(state.items);
 
       if (item.quantity > 1){
-        console.log(item)
         item.quantity--;
       } else {
         item = {
