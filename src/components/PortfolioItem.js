@@ -35,11 +35,11 @@ export const PortfolioItem = ({eventId, eventDate, eventTime, title, day, month,
       <div className="w-full flex flex-row p-2 justify-between content-center items-center">
         <div className="flex flex-row ">
           <div className="flex flex-col items-center leading-4 m-4">
-            <span className="text-lg">{eventDate.getDate()}</span>
-            <span className={classes.month}>{monthNames[eventDate.getMonth()]}</span>
+            <span className="text-lg">07</span>
+            <span className={classes.month}>OCT</span>
           </div>
           <div className="flex flex-col text-sm float-left leading-4 my-2">
-            <span>{days[eventDate.getDay()]}{' '} {eventDate.getHours()}:{eventDate.getMinutes()}</span>
+            <span>MON 20:00</span>
             <div className="flex flex-row "><span className="font-bold">{artist}{' - '}</span>        <span className="">{title}</span>
             </div>
             <span className="text-xs">{location}</span>
@@ -48,8 +48,7 @@ export const PortfolioItem = ({eventId, eventDate, eventTime, title, day, month,
         <Button
 
           onClick={() => {
-            console.log(eventId);
-            history.push(`/events/${eventId}`);
+            history.push(`/my-tickets/`);
           }}
 
           variant="outlined"
@@ -61,3 +60,5 @@ export const PortfolioItem = ({eventId, eventDate, eventTime, title, day, month,
     </div>
   );
 };
+
+

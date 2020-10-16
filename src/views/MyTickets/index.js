@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import {Header} from "components/Header";
 import {TicketListItem} from "components/TicketListItem";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import {useSelector} from "react-redux";
 import {PortfolioItem} from "components/PortfolioItem";
+import {statuses} from "../../store/reducers/blockchain/event.reducer";
+
+
 
 export const MyTickets = withReducer("mytickets", reducer)( (props) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
@@ -28,35 +31,14 @@ export const MyTickets = withReducer("mytickets", reducer)( (props) => {
      </ul>
    </div>
 
+    
+        <PortfolioItem
+           artist="Racoon"
+           title="Een avond gezelligheid"
+           location="Tivoli Vredenburg"
+        />
 
-    {events && events.map(event => {
-      console.log(events);
-      return (
-        <PortfolioItem key={event.address}
-                       eventId={event.address}
-                       eventDate={event.asset.eventData.eventDate}
-                       startEvent={event.asset.eventData.eventTime}
-
-                       artist={event.asset?.eventData?.artist}
-                       title={event.asset?.eventData?.title}
-                       location={event.asset?.eventData?.location}
-        />)
-    })}
-
-
-    {events && events.map(event => {
-      console.log(events);
-      return (
-        <PortfolioItem key={event.address}
-                       eventId={event.address}
-                       eventDate={event.asset.eventData.eventDate}
-                       startEvent={event.asset.eventData.eventTime}
-
-                       artist={event.asset?.eventData?.artist}
-                       title={event.asset?.eventData?.title}
-                       location={event.asset?.eventData?.location}
-        />)
-    })}
 
   </div>;
 });
+
