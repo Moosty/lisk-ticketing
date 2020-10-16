@@ -1,19 +1,27 @@
 import * as Actions from "../../actions";
+import _ from "lodash";
 
+// DE BASKET IS JE WINKELMAND, MET TICKETS, TIJDELIJK OPGESLAGEN
+// - link naar een evenement
+// - ticket & ticket type
+
+// DEZE TICKETS HALEN WE UIT DE EVENT REDUCER
 
 const defaultState = {
+
   items: [
     {
       eventId: 'asdffqwerkqjewrflqkwejfL',
       ticketType: 1,
       quantity: 2,
-    }
+    },
 
   ]
 };
 
 export default (state = defaultState, action) => {
   let item = null;
+
   switch (action.type) {
     case Actions.ADD_ITEM:
       // checken of item al in state zit
@@ -21,7 +29,6 @@ export default (state = defaultState, action) => {
       // zo nee: toevoegen (quantity + 1)
       item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
       if(item){
-        console.log(item)
         item.quantity++;
       } else {
         item = {
@@ -44,7 +51,6 @@ export default (state = defaultState, action) => {
       item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
 
       if (item.quantity > 1){
-        console.log(item)
         item.quantity--;
       } else {
         item = {
@@ -60,6 +66,15 @@ export default (state = defaultState, action) => {
           item
         ]
       }
+    case Actions.CHECKOUT_BASKET:
+      return {
+        ...state,
+        fillBasket:
+          _.set(state.fillBasket, action.path, action.value),
+
+        // key & value meegeven
+        // key: title & value: title meegegeven
+      };
     default:
       return {
         ...state,

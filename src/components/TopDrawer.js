@@ -61,7 +61,7 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       <List>
         {[
           { label:"Organiser" , link: "/organiser", icon: <InboxIcon /> },
-          { label:"Event" , link: "/event", icon: <InboxIcon /> },
+          { label:"Event" , link: "/events/asdffqwerkqjewrflqkwejfL", icon: <InboxIcon /> },
 
         ].map((item) => (
           <ListItem button onClick={ () => history.push(`${item.link}`)} key={item.label}>

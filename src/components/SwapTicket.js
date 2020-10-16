@@ -37,7 +37,7 @@ export const SwapTicket = ({type, price, style}) => {
           <div className="flex flex-col text-sm float-left leading-4 my-2">
 
             <span className="font-bold">{type}</span>
-            <span className="text-xs">{price}</span>
+            <span className="text-xs">$ {price}</span>
           </div>
         </div>
         <div className="flex flex-row content-center items-center flex content-center align-middle">

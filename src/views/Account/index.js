@@ -1,14 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Header} from "components/Header";
 import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
 import {TicketList} from "components/TicketList";
 import {AccountHeader} from "components/AccountHeader";
+import {useParams} from 'react-router-dom';
+import {useSelector} from "react-redux";
+import withReducer from "../../store/withReducer";
+import reducer from "../../store/reducers";
 
-export const Account = (props) => {
+export const Account = withReducer("account", reducer)((props) => {
+
+  const accounts = useSelector(({blockchain}) => blockchain.account.accounts);
+  const { address } = useParams();
+  const accountX = accounts.find(account => account.address === address );
+
+  useEffect(() => {
+    console.log(accounts);
+    console.log(accountX);
+  }, [accounts]);
+
+
+
   return <div className="mt-10">
     <AccountHeader
-      name="Raphael Cornelis"
-      balance="145 LSK"/>
+      key={accountX.address}
+      name={accountX.asset.username}
+      balance={accountX.balance}
+    />
 
     <div>
 
@@ -24,4 +42,4 @@ export const Account = (props) => {
     <CartBottom
       totalPrice="€ 185.56"/>
   </div>;
-};
+});

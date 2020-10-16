@@ -1,20 +1,21 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import * as Actions from "store/actions";
 import reducer from "store/reducers";
 import withReducer from "store/withReducer";
-import { DemoModal } from "./DemoModal";
+import {DemoModal} from "./DemoModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    minWidth: "50rem",
+    minWidth: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { open, type } = useSelector(({ modals }) => modals);
+  const {open, type} = useSelector(({modals}) => modals);
 
   const getModal = () => {
     switch (type) {
@@ -34,9 +35,26 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
         return <div>Modal A</div>;
       case 'TypeB':
         return <div>Modal B</div>;
-      case 'DemoModal':
-        return <DemoModal/>;
-      default:
+      case 'eventInfoModal':
+        return <DemoModal
+          title="Event"
+          content="Write down the details of the event: name, artist, location" />;
+      case 'ticketInfoModal':
+        return <DemoModal
+          title="Ticket information "
+          content="Design your tickets: different types, different pricing, the amount, the date those tickets become available. After the creation of the event you cannot change the tickets."/>;
+      case 'resellInfoModal':
+        return <DemoModal
+          title="Resell Information"
+          content="After a user buys a ticket they might not be able to come to the event. They can resell their ticket for a specified price. As organiser you will have the option to design this second-hand marketplace:
+           Resell: yes/no --> if no, then people can only resell their tickets to the organiser
+           if yes, they can sell the ticket for a user-specified price
+
+           resell percentage: For how much can I sell my ticket? As organizer you can define how much a user can ask for their ticket (eg. maximum of 120% of the original price). This is programmed into the system. You can even say: only 50% of the price.
+
+           Organiser percentage: If a person resells their ticket, the organiser also can get a percentage. The percentage of the resell-price that will go to the organiser.
+           " />;
+        default:
         return <div>Modal Component not found</div>;
     }
   }

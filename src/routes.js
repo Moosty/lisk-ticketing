@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Overview } from "views/Overview";
 import { ModalExample } from "components/ExampleModal";
 import { ExampleDrawer } from "components/ExampleDrawer";
-import { Event } from "views/Event";
+import { EventPage } from "views/EventPage";
 import {Account} from "views/Account";
 import {Checkout} from "views/Checkout";
 import {Organiser} from "views/Organiser";
@@ -33,10 +33,10 @@ export const Routes = (props) => {
         <Route path="/overview">
           <Overview />
         </Route>
-        <Route path="/event">
-          <Event />
+        <Route path="/events/:address">
+          <EventPage />
         </Route>
-        <Route path="/account">
+        <Route path="/account/:address">
           <Account />
         </Route>
         <Route path="/my-tickets">

@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
-import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -16,17 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
-  "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"
-];
-
-const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
-  "SUN"
-];
-
-
-export const TicketListItem = ({eventId, eventDate, eventTime, title, day, month, time, artist, location,}) => {
-
+export const CheckoutItem = ({startEvent, day, month, time, artist, location,}) => {
   const history = useHistory();
   const classes = useStyles();
 
@@ -35,25 +24,20 @@ export const TicketListItem = ({eventId, eventDate, eventTime, title, day, month
     <div className="w-full flex flex-row p-2 justify-between content-center items-center">
      <div className="flex flex-row ">
       <div className="flex flex-col items-center leading-4 m-4">
-       <span className="text-lg">{eventDate.getDate()}</span>
+       <span className="text-lg">{startEvent.getDate()}</span>
         {/*TODO de eerste drie letters van de maand*/}
-       <span className={classes.month}>{monthNames[eventDate.getMonth()]}</span>
+       <span className={classes.month}>{startEvent.getMonth()}</span>
      </div>
       <div className="flex flex-col text-sm float-left leading-4 my-2">
         {/*TODO Dag van de week & tijd: leading zero */}
-        {/*TODO - eventTime --> koppelen */}
-        <span>{days[eventDate.getDay()]}{' '} {eventDate.getHours()}:{eventDate.getMinutes()}</span>
-        <div className="flex flex-row "><span className="font-bold">{artist}{' - '}</span>        <span className="">{title}</span>
-        </div>
+        <span>{startEvent.getDay()}{' '} {startEvent.getHours()}:{startEvent.getMinutes()}</span>
+        <span className="font-bold">{artist}</span>
         <span className="text-xs">{location}</span>
       </div>
      </div>
         <Button
 
-          onClick={() => {
-            console.log(eventId);
-            history.push(`/events/${eventId}`);
-          }}
+          onClick={() => history.push(`/event`)}
 
           variant="outlined"
           color="secondary"

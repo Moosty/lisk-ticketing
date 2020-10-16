@@ -1,34 +1,21 @@
-import React, {useEffect} from "react";
-import {TicketListItem, TicketType} from "components/index";
+import React from "react";
+import {CheckoutItem} from "components/index";
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import {useSelector} from "react-redux";
+import
 
-export const TicketList = withReducer("TicketList", reducer)((props) => {
+export const CheckoutList = withReducer("CheckoutList", reducer)((props) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
-
-  useEffect(() => {
-    console.log(events);
-    console.log(events.asset?.eventData?.eventDate);
-    console.log(events.asset?.eventData?.eventTime);
-  }, [events])
 
   return <div>
 
-    {events && events.map(event => {
-      console.log(events);
-
-      return (
-      <TicketListItem key={event.address}
-                      eventId={event.address}
-                      eventDate={event.asset.eventData.eventDate}
-                      startEvent={event.asset.eventData.eventTime}
-
-                      artist={event.asset?.eventData?.artist}
-                      title={event.asset?.eventData?.title}
-                      location={event.asset?.eventData?.location}
-      /> )
-    })}
+    {events && events.map(event => <CheckoutItem key={event.address}
+                                                   startEvent={event.asset.eventData.startEvent}
+                                                   artist={event.asset.eventData.artist}
+                                                   title={event.asset.eventData.title}
+                                                   location={event.asset.eventData.location}
+    />)}
 
     {/*<TicketListItem*/}
     {/*  artist="Racoon"*/}
