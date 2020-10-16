@@ -31,13 +31,11 @@ export const MyTickets = withReducer("mytickets", reducer)( (props) => {
      </ul>
    </div>
 
-    
         <PortfolioItem
            artist="Racoon"
            title="Een avond gezelligheid"
            location="Tivoli Vredenburg"
         />
-
 
   </div>;
 });

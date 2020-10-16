@@ -3,7 +3,8 @@ import Button from "@material-ui/core/Button";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import * as Actions from "../store/actions";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -26,6 +27,7 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
 
 
 export const PortfolioItem = ({eventId, eventDate, eventTime, title, day, month, time, artist, location,}) => {
+  const dispatch = useDispatch();
 
   const history = useHistory();
   const classes = useStyles();
@@ -48,13 +50,15 @@ export const PortfolioItem = ({eventId, eventDate, eventTime, title, day, month,
         <Button
 
           onClick={() => {
-            history.push(`/my-tickets/`);
+            dispatch(Actions.openModal('eventInfoModal'))
           }}
 
           variant="outlined"
           color="secondary"
           size="small"
           className={classes.button2}>Details</Button>
+        
+
       </div>
       <Divider />
     </div>
