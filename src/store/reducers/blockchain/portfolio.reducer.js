@@ -11,7 +11,6 @@ const defaultState = {
       ticketType: 1,
       quantity: 2,
     },
-
   ]
 };
 
