@@ -26,7 +26,7 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
 ];
 
 
-export const PortfolioItem = ({eventId, eventDate, eventTime, title, day, month, time, artist, location,}) => {
+export const PortfolioItem = ({eventId, eventDate, eventTime,type, title, day, month, time, artist, location,}) => {
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -47,6 +47,7 @@ export const PortfolioItem = ({eventId, eventDate, eventTime, title, day, month,
             <span className="text-xs">{location}</span>
           </div>
         </div>
+        {type === 'sell' &&
         <Button
 
           onClick={() => {
@@ -56,8 +57,22 @@ export const PortfolioItem = ({eventId, eventDate, eventTime, title, day, month,
           variant="outlined"
           color="secondary"
           size="small"
-          className={classes.button2}>Details</Button>
-        
+          className={classes.button2}>Sell</Button>
+        }
+        {type === 'cancel' &&
+        <Button
+
+          onClick={() => {
+            dispatch(Actions.openModal('eventInfoModal'))
+          }}
+
+          variant="outlined"
+          color="secondary"
+          size="small"
+          className={classes.button2}>cancel</Button>
+        }
+
+
 
       </div>
       <Divider />

@@ -11,10 +11,11 @@ import {DemoModal} from "./DemoModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    minWidth: "50rem",
+    minWidth: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+
   },
   paper: {
     backgroundColor: theme.palette.background.paper,

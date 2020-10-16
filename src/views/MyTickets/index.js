@@ -35,6 +35,7 @@ export const MyTickets = withReducer("mytickets", reducer)( (props) => {
            artist="Racoon"
            title="Een avond gezelligheid"
            location="Tivoli Vredenburg"
+           type="sell"
         />
 
   </div>;

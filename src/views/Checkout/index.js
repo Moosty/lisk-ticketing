@@ -9,6 +9,7 @@ import reducer from "../../store/reducers";
 import Button from "@material-ui/core/Button";
 import * as Actions from "../../store/actions";
 import {useHistory} from "react-router-dom";
+import {PortfolioItem} from "components/PortfolioItem";
 
 export const Checkout = withReducer("checkout", reducer)((props) => {
   const basket = useSelector(({blockchain}) => blockchain.basket.items);
@@ -22,6 +23,12 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
         <li>Totale kosten</li>
         <li>betalen</li>
       </ul>
+      <PortfolioItem
+        artist="Racoon"
+        title="Een avond gezelligheid"
+        location="Tivoli Vredenburg"
+        type="cancel"
+      />
       <Button
         onClick={() => {
           console.log(basket);
