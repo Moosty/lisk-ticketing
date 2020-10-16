@@ -29,6 +29,12 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
         location="Tivoli Vredenburg"
         type="cancel"
       />
+      <PortfolioItem
+        artist="Racoon"
+        title="Een avond gezelligheid"
+        location="Tivoli Vredenburg"
+        type="cancel"
+      />
       <Button
         onClick={() => {
           console.log(basket);
