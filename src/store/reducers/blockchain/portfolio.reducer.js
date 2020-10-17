@@ -8,6 +8,7 @@ const defaultState = {
     {
       ticketAddress: "12312341r555ff",
       eventId: 'asdffqwerkqjewrflqkwejfL',
+      ownerId: '1234342432dd',
       ticketType: 1,
       quantity: 2,
     },
