@@ -27,8 +27,11 @@ export const Routes = (props) => {
         <Route path="/login">
           <InLog />
         </Route>
+        <Route path="/signup/organiser">
+          <SignUp type="organiser" />
+        </Route>
         <Route path="/signup">
-          <SignUp />
+          <SignUp type="user" />
         </Route>
         <Route path="/overview">
           <Overview />
