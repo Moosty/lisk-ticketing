@@ -174,6 +174,7 @@ export default (state = defaultState, action) => {
   switch (action.type) {
 
     case Actions.UPDATE_CREATE_EVENT:
+      console.log(action)
       return {
         ...state,
         createEvent:
