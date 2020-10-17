@@ -1,7 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import {fade, makeStyles} from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
+import withReducer from "../store/withReducer";
+import reducer from "../store/reducers";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -15,7 +18,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const SwapTicket = ({type, price, style}) => {
+export const SwapTicket = withReducer("swapTicket", reducer)(({type, price, style, eventId, ticketId}) => {
+  const events = useSelector(({blockchain}) => blockchain.event.events);
+  const thisEvent = events.find(event => event.address === eventId);
+
+  const ticketData = thisEvent.asset.ticketData.types.find(type => type.id === ticketId );
 
   const [count, setCount] = useState(0);
   const classes = useStyles();
@@ -26,7 +33,9 @@ export const SwapTicket = ({type, price, style}) => {
     }
   }
 
-
+useEffect(()=>{
+  console.log("deze:", ticketData);
+}, [events]);
 
 
   return (
@@ -52,4 +61,4 @@ export const SwapTicket = ({type, price, style}) => {
       <Divider/>
     </div>
   );
-};
+});

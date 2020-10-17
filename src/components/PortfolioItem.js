@@ -32,17 +32,17 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
 
 export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType, eventId, eventDate, eventTime,type, title, day, month, time, artist, location, keyEvent}) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
-  const eventX = events.find(event => event.address === keyEvent);
-  const eventData = eventX.asset.eventData;
+  const thisEvent = events.find(event => event.address === keyEvent);
+  const eventData = thisEvent.asset.eventData;
 
-  const ticketData = eventX.asset.ticketData.types.find(type => type.id === ticketType );
+  const ticketData = thisEvent.asset.ticketData.types.find(type => type.id === ticketType );
 
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
 
   useEffect(() => {
-    console.log(eventX);
+    console.log(thisEvent);
     // console.log(ticketData);
     console.log(ticketType, ticketData);
     }, [events]

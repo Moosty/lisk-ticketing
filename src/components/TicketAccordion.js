@@ -36,8 +36,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
   // TO DO - uit de eventreducer wil ik de ticketnamen halen.
   // we willen een key value: ticketnames = [ {0: "first release"}, {1: "second"}, ... ]
 
-  console.log( eventX, swapTickets );
-  console.log( "dit wil ik:", X );
+  console.log( "Swaptickets", swapTicketsX );
 
   return (
     <div className={classes.root}>
@@ -57,6 +56,8 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
                 key={type.ticketTypeId}
                 price={type.resellerPrice}
                 type={type.name}
+                ticketId={type.ticketTypeId}
+                eventId={type.eventId}
                 style={{width:"full"}}/>
 
             )}
