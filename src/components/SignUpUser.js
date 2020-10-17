@@ -144,7 +144,7 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                     }}
                   />
                 </Grid>
-            {/*TODO TIJDELIJK ADDRESS*/}
+            {/*TODO - VERWIJDEREN WANNEER BLOCKCHAIN GEKOPPELD - TIJDELIJK ADDRESS*/}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     className={classes.field}

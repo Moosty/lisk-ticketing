@@ -27,12 +27,12 @@ const categories = [
   },
 ];
 
-// TODO: header aanpassen
-// TODO: Status Event meegeven
+// TODO: header aanpassen (LATER)
+// TODO: Status Event meegeven (REDUCER?) (ZA 17 - 10)
 
-// TODO: textfield module maken?
-// TODO: Tickettype module maken?
-// TODO: modals aanpassen
+// TODO: textfield module maken? (ZA 17 - 10)
+// TODO: Tickettype module maken? (ZA 17 - 10)
+// TODO: modals aanpassen (LATER)
 
 // let filledArray = [...new Array(10)].map(()=> {'hello':'goodbye'});
 // ticketData: { types: [] }
