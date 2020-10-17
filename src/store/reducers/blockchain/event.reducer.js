@@ -25,7 +25,7 @@ const defaultState = {
       eventData: {
         status: "new",
         title: "The Favourites",
-        artist: "Racoon",
+        artist: "Sef",
         location: "Caprera Openluchttheater - Bloemendaal",
         eventDate: new Date("2018-10-10"),
         eventTime: "23:50",
@@ -63,7 +63,7 @@ const defaultState = {
       asset: {
         eventData: {
           status: statuses.OPEN_FOR_SALE,
-          title: "titletitletitletitletitletitle",
+          title: "Een avond gezelligheid",
           artist: "Racoon",
           location: "Caprera Openluchttheater - Bloemendaal",
           eventDate: new Date("2018-10-10"),
@@ -117,9 +117,9 @@ const defaultState = {
       asset: {
         eventData: {
           status: statuses.OPEN_FOR_SALE,
-          title: "title",
-          artist: "Artist",
-          location: "location",
+          title: "Bonny Soiree",
+          artist: "French Toasty",
+          location: "Park 6",
           eventDate: new Date("2018-10-10"),
           eventTime: "23:50",
           duration: 90,

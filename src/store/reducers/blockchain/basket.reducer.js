@@ -11,11 +11,29 @@ const defaultState = {
 
   items: [
     {
+      basketId: "563cdcs456734563456",
+      ticketAddress: "unknown",
       eventId: 'asdffqwerkqjewrflqkwejfL',
+      ownerId: '1234342432dd',
       ticketType: 1,
       quantity: 2,
     },
-
+    {
+      basketId: "5634567ewe34563456",
+      ticketAddress: "unknown",
+      eventId: 'asdffqwerkqjewrflqkwejfL',
+      ownerId: '1234342432dd',
+      ticketType: 2,
+      quantity: 2,
+    },
+    {
+      basketId: "56345673ds45das63456",
+      ticketAddress: "unknown",
+      eventId: '89348502934850928345098',
+      ownerId: '1234342432dd',
+      ticketType: 2,
+      quantity: 2,
+    },
   ]
 };
 

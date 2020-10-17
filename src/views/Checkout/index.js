@@ -13,28 +13,23 @@ import {PortfolioItem} from "components/PortfolioItem";
 
 export const Checkout = withReducer("checkout", reducer)((props) => {
   const basket = useSelector(({blockchain}) => blockchain.basket.items);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
   return <div className="mt-10">
-    <div>
-      <ul>
-        <li>Tickets in de basket</li>
-        <li>Totale kosten</li>
-        <li>betalen</li>
-      </ul>
-      <PortfolioItem
-        artist="Racoon"
-        title="Een avond gezelligheid"
-        location="Tivoli Vredenburg"
-        type="cancel"
-      />
-      <PortfolioItem
-        artist="Racoon"
-        title="Een avond gezelligheid"
-        location="Tivoli Vredenburg"
-        type="cancel"
-      />
+
+      {basket && basket.map(item => {
+        console.log(basket);
+
+        return ( <PortfolioItem
+          type="sell"
+          key={item.basketId}
+          keyEvent={item.eventId}
+          ticketType={item.ticketType}
+        />)
+      })}
+
       <Button
         onClick={() => {
           console.log(basket);
@@ -45,7 +40,13 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
         size="small"
         color="secondary"
         >Buy Tickets</Button>
-    </div>
+
+      <ul>
+        <li>Totale kosten</li>
+        <li>betalen</li>
+      </ul>
+
+
     <CartBottom
       totalPrice="€ 185.56"/>
   </div>;

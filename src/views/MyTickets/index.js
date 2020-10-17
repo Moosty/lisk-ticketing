@@ -10,8 +10,7 @@ import {statuses} from "../../store/reducers/blockchain/event.reducer";
 
 
 export const MyTickets = withReducer("mytickets", reducer)( (props) => {
-  const events = useSelector(({blockchain}) => blockchain.event.events);
-  const portfolio = useSelector(({blockchain}) => blockchain.portfolio.events);
+  const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
 
   // voor elk EventId uit het portfolio wil je eventData binnenhalen.
 
@@ -20,23 +19,19 @@ export const MyTickets = withReducer("mytickets", reducer)( (props) => {
       title="My Tickets"
       subtitle="keep all your tickets safe"
    />
-   <div>
-     <ul>
-       <li>Lijst Tickets</li>
-       <li>Event X (dropdown)</li>
-       <li>- ticketgegevens (1 of meerdere)</li>
-       <li>- eventgegevens</li>
-       <li>- status event</li>
-       <li>- resell opties</li>
-     </ul>
-   </div>
 
-        <PortfolioItem
-           artist="Racoon"
-           title="Een avond gezelligheid"
-           location="Tivoli Vredenburg"
-           type="sell"
-        />
+
+    {portfolio && portfolio.map(item => {
+      console.log(portfolio);
+
+      return ( <PortfolioItem
+        type="sell"
+        key={item.ticketAddress}
+        keyEvent={item.eventId}
+        ticketType={item.ticketType}
+      />)
+    })}
+
 
   </div>;
 });

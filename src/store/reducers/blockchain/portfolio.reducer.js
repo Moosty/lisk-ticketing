@@ -12,6 +12,20 @@ const defaultState = {
       ticketType: 1,
       quantity: 2,
     },
+    {
+      ticketAddress: "12dfasdf312341r555ff",
+      eventId: 'asdffqwerkqjewrflqkwejfL',
+      ownerId: '1234342432dd',
+      ticketType: 2,
+      quantity: 2,
+    },
+    {
+      ticketAddress: "12dfasdfddf312341r555ff",
+      eventId: '89348502934850928345098',
+      ownerId: '1234342432dd',
+      ticketType: 2,
+      quantity: 2,
+    },
   ]
 };
 
