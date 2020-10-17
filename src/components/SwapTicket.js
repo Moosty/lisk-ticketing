@@ -34,7 +34,7 @@ export const SwapTicket = withReducer("swapTicket", reducer)(({type, price, styl
   }
 
 useEffect(()=>{
-  console.log("deze:", ticketData);
+  console.log("deze:", ticketData, ticketId);
 }, [events]);
 
 
@@ -45,7 +45,7 @@ useEffect(()=>{
 
           <div className="flex flex-col text-sm float-left leading-4 my-2">
 
-            <span className="font-bold">{type}</span>
+            <span className="font-bold">{type}{ticketData.name}</span>
             <span className="text-xs">$ {price}</span>
           </div>
         </div>

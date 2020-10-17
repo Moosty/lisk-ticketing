@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -36,7 +36,12 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
   // TO DO - uit de eventreducer wil ik de ticketnamen halen.
   // we willen een key value: ticketnames = [ {0: "first release"}, {1: "second"}, ... ]
 
-  console.log( "Swaptickets", swapTicketsX );
+  useEffect( () => {
+      console.log( "Swaptickets", swapTicketsX );
+
+    }, [swapTickets]
+
+  );
 
   return (
     <div className={classes.root}>
