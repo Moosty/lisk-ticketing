@@ -16,7 +16,8 @@ const defaultState = {
       eventId: 'asdffqwerkqjewrflqkwejfL',
       ownerId: '1234342432dd',
       ticketType: 1,
-      quantity: 2,
+      quantity: 3,
+      price: 90,
     },
     {
       basketId: "5634567ewe34563456",
@@ -25,6 +26,7 @@ const defaultState = {
       ownerId: '1234342432dd',
       ticketType: 2,
       quantity: 2,
+      price: 45,
     },
     {
       basketId: "56345673ds45das63456",
@@ -33,6 +35,7 @@ const defaultState = {
       ownerId: '1234342432dd',
       ticketType: 2,
       quantity: 2,
+      price: 70,
     },
   ]
 };

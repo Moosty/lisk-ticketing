@@ -64,6 +64,11 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
           title="Do not buy"
           content="Remove from my basket."
         />;
+      case 'buyTicketsModal':
+        return <DemoModal
+          title="Buy"
+          content="look around and buy a ticket"
+        />;
         default:
         return <div>Modal Component not found</div>;
     }

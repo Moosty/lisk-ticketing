@@ -51,7 +51,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}><span className="font-bold">52</span> Swap Tickets available</Typography>
+          <Typography className={classes.heading}><span className="font-bold">{swapTicketsX.length}</span> Swap Tickets available</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <div className="w-full mb-20">

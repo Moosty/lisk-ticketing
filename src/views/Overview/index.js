@@ -16,7 +16,7 @@ export const Overview = (props) => {
     subtitle="Buy or sell your tickets"
     button1="Buy Tickets"
     onClick1={() => {
-      dispatch(Actions.openModal('DemoModal'))
+      dispatch(Actions.openModal('buyTicketsModal'))
     }}
     button2="Sell Tickets"
     onClick2={() => history.push("/my-tickets")}/>

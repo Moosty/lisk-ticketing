@@ -47,7 +47,7 @@ useEffect(()=>{
             <span className="font-bold">{type}{ticketData.name}</span>
            </div>
             <div className="flex flex-row">
-            <span className="text-xs">$ {resellerPrice} - </span>  <span className="text-xs font-light"> {' '}(original {ticketData.price})</span>
+            <span className="text-xs">€ {resellerPrice} - </span>  <span className="text-xs font-light"> {' '}(original € {ticketData.price})</span>
             </div>
 
           </div>
