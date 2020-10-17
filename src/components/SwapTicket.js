@@ -18,10 +18,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const SwapTicket = withReducer("swapTicket", reducer)(({type, price, style, eventId, ticketId}) => {
+export const SwapTicket = withReducer("swapTicket", reducer)(({type, resellerPrice, style, eventId, ticketId}) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const thisEvent = events.find(event => event.address === eventId);
-
   const ticketData = thisEvent.asset.ticketData.types.find(type => type.id === ticketId );
 
   const [count, setCount] = useState(0);
@@ -44,9 +43,13 @@ useEffect(()=>{
         <div className="flex flex-row ">
 
           <div className="flex flex-col text-sm float-left leading-4 my-2">
-
+            <div className="flex flex-row">
             <span className="font-bold">{type}{ticketData.name}</span>
-            <span className="text-xs">$ {price}</span>
+           </div>
+            <div className="flex flex-row">
+            <span className="text-xs">$ {resellerPrice} - </span>  <span className="text-xs font-light"> {' '}(original {ticketData.price})</span>
+            </div>
+
           </div>
         </div>
         <div className="flex flex-row content-center items-center flex content-center align-middle">

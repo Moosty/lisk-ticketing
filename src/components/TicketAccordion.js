@@ -59,7 +59,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
             {swapTicketsX.map((type) =>
               <SwapTicket
                 key={type.ticketTypeId}
-                price={type.resellerPrice}
+                resellerPrice={type.resellerPrice}
                 type={type.name}
                 ticketId={type.ticketTypeId}
                 eventId={type.eventId}
