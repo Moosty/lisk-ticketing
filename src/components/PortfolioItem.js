@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import * as Actions from "../store/actions";
 
+// DIT COMPONENT WORDT GEBRUIKT IN MY-TICKETS & DE BASKET
+
 const useStyles = makeStyles((theme) => ({
   button1: {
     backgroundColor: "yellow",
@@ -51,7 +53,7 @@ export const PortfolioItem = ({eventId, eventDate, eventTime,type, title, day, m
         <Button
 
           onClick={() => {
-            dispatch(Actions.openModal('eventInfoModal'))
+            dispatch(Actions.openModal('sellInfoModal'))
           }}
 
           variant="outlined"
@@ -63,7 +65,7 @@ export const PortfolioItem = ({eventId, eventDate, eventTime,type, title, day, m
         <Button
 
           onClick={() => {
-            dispatch(Actions.openModal('eventInfoModal'))
+            dispatch(Actions.openModal('cancelInfoModal'))
           }}
 
           variant="outlined"
