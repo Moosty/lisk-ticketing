@@ -6,10 +6,11 @@ import {AccountHeader} from "components/AccountHeader";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import {OrganiserHeader} from "components/OrganiserHeader";
-import { useHistory } from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 export const Organiser = (props) => {
     const history = useHistory();
+    const { address } = useParams();
 
     return <div className="mt-10">
         <OrganiserHeader

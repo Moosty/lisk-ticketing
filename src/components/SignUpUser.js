@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -67,9 +67,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
   const classes = useStyles();
-  const form = useSelector(({blockchain}) => blockchain.account.createAccount);
+  const account = useSelector(({blockchain}) => blockchain.account);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const [form, setForm] = useState(account.createAccount);
+
+  useEffect(() => {
+    setForm(account.createAccount);
+    console.log(form);
+  }, [account])
 
   return (
 
@@ -187,7 +194,7 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                 className={classes.submit}
                 onClick={() => {
                   console.log({form});
-                  history.push(`/account/`);
+                  history.push(`/account/1234342432ddddfd`);
                   dispatch(Actions.addAccount(form));
                 }}
               >

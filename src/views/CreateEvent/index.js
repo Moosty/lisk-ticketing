@@ -180,7 +180,6 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           </div>
           <div className="flex flex-row content-center items-center">
             <Button
-              // multiline gemaakt door toevoeging { } na de =>
               onClick={() => {
                 console.log({form})
                 history.push(`/organiser`);

@@ -4,8 +4,17 @@ import _ from 'lodash';
 // VISITOR ACCOUNTS
 
 const defaultState = {
-  createOrganiser: {
-
+  createOrganiser:  {
+    address: "1234342432ddxxxd",
+    publicKey: "lsk1234512f5hgu5hguhu",
+    balance: 350,
+    token: "lsk",
+    asset: {
+      organisation: "Paradiso",
+      firstName: "Admin",
+      lastName: "Admin",
+      password: "",
+    },
   },
 
 
@@ -16,9 +25,9 @@ const defaultState = {
       balance: 145,
       token: "lsk",
       asset: {
-        organisation: "SanMan",
-        firstName: "Sander",
-        lastName: "Mandemaker",
+        organisation: "Tivoli",
+        firstName: "admin",
+        lastName: "admin",
         password: "",
       },
     },

@@ -4,8 +4,17 @@ import _ from 'lodash';
 // VISITOR ACCOUNTS
 
 const defaultState = {
-  createAccount: {
-
+  createAccount:  {
+    address: "1234342432ddddfd",
+    publicKey: "lsk1234512f5hgu5hguhu",
+    balance: 145,
+    token: "lsk",
+    asset: {
+      username: "test",
+      firstName: "test",
+      lastName: "test",
+      password: "",
+    },
   },
 
 
@@ -51,6 +60,7 @@ export default (state = defaultState, action) => {
         // key: title & value: title meegegeven
       };
     case Actions.ADD_ACCOUNT:
+      console.log(state.accounts);
       return {
         ...state,
         accounts:[
@@ -59,6 +69,7 @@ export default (state = defaultState, action) => {
         ],
         // in de array van events, een event appenden (push?)
       };
+
     default:
       return {
         ...state,
