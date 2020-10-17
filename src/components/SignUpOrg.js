@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -61,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignUpOrg = (props) => {
   const classes = useStyles();
+  const history = useHistory();
 
   return ( 
 
@@ -158,8 +160,8 @@ I am an organiser</Typography>
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Are you an organiser? Sign up here!
+                <Link onClick={()=> { history.push('/signup')}} variant="body2">
+                  Are you a user? Sign up here!
                 </Link>
               </Grid>
             </Grid>
