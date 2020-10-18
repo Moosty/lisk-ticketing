@@ -19,18 +19,7 @@ import * as Actions from "../store/actions";
 import {useHistory} from "react-router-dom";
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Lisk Ticketing {new Date().getFullYear()} | POC by The Moosty Team
-      </Link>{' '}
 
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -209,9 +198,7 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
               </Grid>
             </form>
           </div>
-          <Box mt={5}>
-            <Copyright/>
-          </Box>
+
         </Container>
 
       </div>

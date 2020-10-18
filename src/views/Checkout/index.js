@@ -41,7 +41,7 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
         console.log(basket);
 
         return (<PortfolioItem
-          type="sell"
+          type="cancel"
           key={item.basketId}
           keyEvent={item.eventId}
           ticketType={item.ticketType}
