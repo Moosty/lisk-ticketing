@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Header} from "components/Header";
 import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
 import {TicketList} from "components/TicketList";
@@ -7,10 +7,24 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import {OrganiserHeader} from "components/OrganiserHeader";
 import {useHistory, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import withReducer from "../../store/withReducer";
+import reducer from "../../store/reducers";
 
-export const Organiser = (props) => {
+export const Organiser = withReducer("organiser", reducer)((props) => {
     const history = useHistory();
     const { address } = useParams();
+
+    const organiserAccounts = useSelector(({blockchain}) => blockchain.organiser.organiserAccounts);
+    const thisAccount = organiserAccounts.find(account => account.address === address );
+
+    useEffect(() => {
+        console.log("organiser accounts ", organiserAccounts);
+        console.log("dit account (in organiseraccount)", thisAccount);
+    }, [organiserAccounts]);
+
+
+
 
     return <div className="mt-10">
         <OrganiserHeader
@@ -55,4 +69,4 @@ export const Organiser = (props) => {
             <Divider />
         </div>
     </div>;
-};
+});

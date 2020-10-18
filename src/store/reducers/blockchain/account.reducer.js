@@ -11,8 +11,6 @@ const defaultState = {
     token: "lsk",
     asset: {
       username: "test",
-      firstName: "test",
-      lastName: "test",
       password: "",
     },
   },
@@ -26,8 +24,6 @@ const defaultState = {
       token: "lsk",
       asset: {
         username: "SanMan",
-        firstName: "Sander",
-        lastName: "Mandemaker",
         password: "",
       },
     },
@@ -38,8 +34,6 @@ const defaultState = {
       token: "lsk",
       asset: {
         username: "Raph",
-        firstName: "Raph",
-        lastName: "Cornelis",
         password: "",
       },
     },

@@ -12,20 +12,20 @@ export const Account = withReducer("account", reducer)((props) => {
 
   const accounts = useSelector(({blockchain}) => blockchain.account.accounts);
   const { address } = useParams();
-  const accountX = accounts.find(account => account.address === address );
+  const thisAccount = accounts.find(account => account.address === address );
 
   useEffect(() => {
-    console.log(accounts);
-    console.log(accountX);
+    console.log("accounts (in accountpage)", accounts);
+    console.log("dit account (in accountpage)", thisAccount);
   }, [accounts]);
 
 
 
   return <div className="mt-10">
     <AccountHeader
-      key={accountX.address}
-      name={accountX.asset.username}
-      balance={accountX.balance}
+      key={thisAccount.address}
+      name={thisAccount.asset.username}
+      balance={thisAccount.balance}
     />
 
     <div>

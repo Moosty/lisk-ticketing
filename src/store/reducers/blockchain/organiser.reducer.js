@@ -11,8 +11,8 @@ const defaultState = {
     token: "lsk",
     asset: {
       organisation: "Paradiso",
-      firstName: "Admin",
-      lastName: "Admin",
+      firstName: "To",
+      lastName: "de Max",
       password: "",
     },
   },
