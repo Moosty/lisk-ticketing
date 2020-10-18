@@ -54,6 +54,21 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
 
            Organiser percentage: If a person resells their ticket, the organiser also can get a percentage. The percentage of the resell-price that will go to the organiser.
            " />;
+      case 'sellInfoModal':
+        return <DemoModal
+          title="SELL my tickets"
+          content="I want to sell my tickets"
+          />;
+      case 'cancelInfoModal':
+        return <DemoModal
+          title="Do not buy"
+          content="Remove from my basket."
+        />;
+      case 'buyTicketsModal':
+        return <DemoModal
+          title="Buy"
+          content="look around and buy a ticket"
+        />;
         default:
         return <div>Modal Component not found</div>;
     }

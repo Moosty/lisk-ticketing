@@ -7,8 +7,23 @@ const defaultState = {
   items: [
     {
       ticketAddress: "12312341r555ff",
-      eventId: 'asdffqwerkqjewrflqkwejfL',
+      eventId: 'event01',
+      ownerId: 'account01',
       ticketType: 1,
+      quantity: 2,
+    },
+    {
+      ticketAddress: "12dfasdf312341r555ff",
+      eventId: 'event01',
+      ownerId: 'account01',
+      ticketType: 2,
+      quantity: 2,
+    },
+    {
+      ticketAddress: "12dfasdfddf312341r555ff",
+      eventId: 'event02',
+      ownerId: 'account01',
+      ticketType: 2,
       quantity: 2,
     },
   ]

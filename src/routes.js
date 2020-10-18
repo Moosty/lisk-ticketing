@@ -27,8 +27,11 @@ export const Routes = (props) => {
         <Route path="/login">
           <InLog />
         </Route>
+        <Route path="/signup/organiser">
+          <SignUp type="organiser" />
+        </Route>
         <Route path="/signup">
-          <SignUp />
+          <SignUp type="user" />
         </Route>
         <Route path="/overview">
           <Overview />
@@ -42,13 +45,16 @@ export const Routes = (props) => {
         <Route path="/my-tickets">
           <MyTickets />
         </Route>
+        <Route path="/organiser/:address">
+          <Organiser />
+        </Route>
         <Route path="/organiser">
           <Organiser />
         </Route>
         <Route path="/create-event">
           <CreateEvent />
         </Route>
-        <Route path="/checkout">
+        <Route path="/checkout/:ownerId">
         <Checkout />
       </Route>
         <Route path="/drawers">

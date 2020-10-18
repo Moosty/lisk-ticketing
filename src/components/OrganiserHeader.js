@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const OrganiserHeader = ({name, balance, button1, button2, onClick1, onClick2}) => {
+export const OrganiserHeader = ({name, balance, token, button1, button2, onClick1, onClick2}) => {
 
   const classes = useStyles();
 
@@ -88,7 +88,7 @@ export const OrganiserHeader = ({name, balance, button1, button2, onClick1, onCl
         <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>
           <div className=" p-8 text-center md:p-12 lg:p-24 align-middle h-full flex flex-col justify-between">
             <h1 className="text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">{name}</h1>
-            <span className="text-xl text-center text-white">{balance}</span>
+            <div  className="text-xl text-center text-white">{balance} {token}</div>
 
 
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Header} from "components/Header";
 import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
 import {TicketList} from "components/TicketList";
@@ -6,15 +6,33 @@ import {AccountHeader} from "components/AccountHeader";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import {OrganiserHeader} from "components/OrganiserHeader";
-import { useHistory } from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import withReducer from "../../store/withReducer";
+import reducer from "../../store/reducers";
 
-export const Organiser = (props) => {
+export const Organiser = withReducer("organiser", reducer)((props) => {
     const history = useHistory();
+    const { address } = useParams();
+
+    const organiserAccounts = useSelector(({blockchain}) => blockchain.organiser.organiserAccounts);
+    const thisOrganiser = organiserAccounts.find(account => account.address === address );
+    const thisAddress = thisOrganiser.address;
+
+    useEffect(() => {
+        console.log("organiser accounts ", organiserAccounts);
+        console.log("dit account (in organiseraccount)", thisOrganiser);
+        console.log("dit is het address", address, thisAddress);
+    }, [organiserAccounts]);
+
+
+
 
     return <div className="mt-10">
         <OrganiserHeader
-            name="Tivoli"
-            balance ="145 LSK"
+            name={thisOrganiser.asset.organisation}
+            balance={thisOrganiser.balance}
+            token={thisOrganiser.token}
             button1 ="Create new event" />
 
             <div>
@@ -27,7 +45,9 @@ export const Organiser = (props) => {
                     </li>
                 </ul>
                 </div>
-        <TicketList/>
+        <TicketList
+         addressX={thisAddress}
+        />
 
         <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
             <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
@@ -54,4 +74,4 @@ export const Organiser = (props) => {
             <Divider />
         </div>
     </div>;
-};
+});

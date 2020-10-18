@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -36,8 +36,12 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
   // TO DO - uit de eventreducer wil ik de ticketnamen halen.
   // we willen een key value: ticketnames = [ {0: "first release"}, {1: "second"}, ... ]
 
-  console.log( eventX, swapTickets );
-  console.log( "dit wil ik:", X );
+  useEffect( () => {
+      console.log( "Swaptickets", swapTicketsX );
+
+    }, [swapTickets]
+
+  );
 
   return (
     <div className={classes.root}>
@@ -47,7 +51,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}><span className="font-bold">52</span> Swap Tickets available</Typography>
+          <Typography className={classes.heading}><span className="font-bold">{swapTicketsX.length}</span> Swap Tickets available</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <div className="w-full mb-20">
@@ -55,8 +59,10 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
             {swapTicketsX.map((type) =>
               <SwapTicket
                 key={type.ticketTypeId}
-                price={type.resellerPrice}
+                resellerPrice={type.resellerPrice}
                 type={type.name}
+                ticketId={type.ticketTypeId}
+                eventId={type.eventId}
                 style={{width:"full"}}/>
 
             )}

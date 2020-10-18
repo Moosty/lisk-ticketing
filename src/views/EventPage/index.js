@@ -12,7 +12,7 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
   const swapTickets = useSelector(({blockchain}) => blockchain.marketplace.items);
 
   const {address} = useParams();
-  const eventX = events.find(event => event.address === address);
+  const thisEvent = events.find(event => event.address === address);
   const swapTicketsX = swapTickets.filter(event => event.eventId === address);
 
   useEffect(() => {
@@ -22,21 +22,21 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
   return <div className="mt-10">
 
     <EventHeader
-      key={eventX.address}
-      artist={eventX.asset.eventData.artist}
-      location={eventX.asset.eventData.location}
-      eventDate={eventX.asset.eventData.eventDate}
-      startEvent={eventX.asset.eventData.eventTime}
+      key={thisEvent.address}
+      artist={thisEvent.asset.eventData.artist}
+      location={thisEvent.asset.eventData.location}
+      eventDate={thisEvent.asset.eventData.eventDate}
+      startEvent={thisEvent.asset.eventData.eventTime}
     />
 
-    {eventX.asset.ticketData.types.map((type) =>
+    {thisEvent.asset.ticketData.types.map((type) =>
       <TicketType
 
         key={type.id}
         label={type.name}
         price={type.price}
         amount={type.amount}
-        eventId={eventX.address}
+        eventId={thisEvent.address}
         ticketType={type.id}
       />)}
 
