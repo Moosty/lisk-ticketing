@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -8,6 +8,7 @@ import * as Actions from "store/actions";
 import reducer from "store/reducers";
 import withReducer from "store/withReducer";
 import {DemoModal} from "./DemoModal";
+import {SellModal} from "./SellModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -28,6 +29,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const {open, type} = useSelector(({modals}) => modals);
+
 
   const getModal = () => {
     switch (type) {
@@ -55,7 +57,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
            Organiser percentage: If a person resells their ticket, the organiser also can get a percentage. The percentage of the resell-price that will go to the organiser.
            " />;
       case 'sellInfoModal':
-        return <DemoModal
+        return <SellModal
           title="SELL my tickets"
           content="I want to sell my tickets"
           />;
@@ -89,7 +91,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
         }}
       >
         <Fade in={open}>
-          <div className="w-full sm:w-9/12 xl:w-2/4 ">
+          <div className="w-full mx-2 sm:w-9/12 xl:w-2/4 ">
             {getModal()}
           </div>
         </Fade>

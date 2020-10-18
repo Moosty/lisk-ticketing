@@ -39,7 +39,7 @@ export const CartBottom = ({props}) => {
     }, [totalPrice]
   );
   return (
-    <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
+    <div className="bottom-0 fixed z-50 bg-gray-900 text-white w-full ">
       <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
         <div className="flex flex-row ">
 

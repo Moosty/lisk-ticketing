@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import * as Actions from "../store/actions";
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 
 // DIT COMPONENT WORDT GEBRUIKT IN MY-TICKETS & DE BASKET
 
@@ -52,6 +54,10 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
     <div>
       <div className="w-full flex flex-row p-2 justify-between content-center items-center">
         <div className="flex flex-row ">
+
+
+
+
           <div className="flex flex-col items-center leading-4 m-4">
             <span className="text-lg">07</span>
             <span className={classes.month}>OCT</span>
@@ -76,16 +82,16 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
           className={classes.button2}>Sell</Button>
         }
         {type === 'cancel' &&
-        <Button
-
+        <IconButton
           onClick={() => {
             dispatch(Actions.openModal('cancelInfoModal'))
           }}
-
-          variant="outlined"
           color="secondary"
-          size="small"
-          className={classes.button2}>cancel</Button>
+        >
+          <DeleteOutlined color="white" />
+        </IconButton>
+
+
         }
 
 
