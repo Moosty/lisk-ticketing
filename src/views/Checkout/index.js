@@ -23,8 +23,8 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
   const history = useHistory();
 
   useEffect(() => {
-      console.log(basket);
-      console.log(basket.length);
+      console.log("basket", basket);
+      console.log("basket length", basket.length);
       setTotalPrice(basket.reduce(
         (sum, item) => sum + (item.price * item.quantity), 0
       ));

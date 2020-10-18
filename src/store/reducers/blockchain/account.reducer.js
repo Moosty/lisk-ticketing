@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 const defaultState = {
   createAccount:  {
-    address: "1234342432ddddfd",
+    address: "account03",
     publicKey: "lsk1234512f5hgu5hguhu",
     balance: 145,
     token: "lsk",
@@ -18,7 +18,7 @@ const defaultState = {
 
   accounts: [
     {
-      address: "1234342432dd",
+      address: "account01",
       publicKey: "lsk1234512f5hgu5hguhu",
       balance: 145,
       token: "lsk",
@@ -28,7 +28,7 @@ const defaultState = {
       },
     },
     {
-      address: "sadfasdfsdfa",
+      address: "account02",
       publicKey: "lsk1234512f5hgu5hguhu",
       balance: 150,
       token: "lsk",

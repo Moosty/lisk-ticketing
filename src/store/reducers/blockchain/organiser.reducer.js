@@ -5,12 +5,12 @@ import _ from 'lodash';
 
 const defaultState = {
   createOrganiser:  {
-    address: "1234342432ddxxxd",
-    publicKey: "lsk1234512f5hgu5hguhu",
+    address: "organiser03",
+    publicKey: "lsk1234512f5hgu5hguhfggu",
     balance: 350,
     token: "lsk",
     asset: {
-      organisation: "Paradiso",
+      organisation: "Newbies",
       firstName: "To",
       lastName: "de Max",
       password: "",
@@ -20,7 +20,7 @@ const defaultState = {
 
   organiserAccounts: [
     {
-      address: "1234342432dd",
+      address: "organiser01",
       publicKey: "lsk1234512f5hgu5hguhu",
       balance: 145,
       token: "lsk",
@@ -28,6 +28,18 @@ const defaultState = {
         organisation: "Tivoli",
         firstName: "admin",
         lastName: "admin",
+        password: "",
+      },
+    },
+    {
+      address: "organiser02",
+      publicKey: "lsk123451df2f5hgu5hguhu",
+      balance: 350,
+      token: "lsk",
+      asset: {
+        organisation: "Paradiso Amsterdam",
+        firstName: "Henk",
+        lastName: "de Lead",
         password: "",
       },
     },

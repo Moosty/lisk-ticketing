@@ -7,22 +7,22 @@ const defaultState = {
   items: [
     {
       ticketAddress: "12312341r555ff",
-      eventId: 'asdffqwerkqjewrflqkwejfL',
-      ownerId: '1234342432dd',
+      eventId: 'event01',
+      ownerId: 'account01',
       ticketType: 1,
       quantity: 2,
     },
     {
       ticketAddress: "12dfasdf312341r555ff",
-      eventId: 'asdffqwerkqjewrflqkwejfL',
-      ownerId: '1234342432dd',
+      eventId: 'event01',
+      ownerId: 'account01',
       ticketType: 2,
       quantity: 2,
     },
     {
       ticketAddress: "12dfasdfddf312341r555ff",
-      eventId: '89348502934850928345098',
-      ownerId: '1234342432dd',
+      eventId: 'event02',
+      ownerId: 'account01',
       ticketType: 2,
       quantity: 2,
     },

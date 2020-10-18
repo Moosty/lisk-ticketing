@@ -19,11 +19,11 @@ export const statuses = {
 
 const defaultState = {
   createEvent: {
-    address: "addafsdqsdffqwerkqjewrflqkwejfL",
+    address: "event04",
     publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
     asset: {
       eventData: {
-        organisation: "the owner",
+        ownerId: "organiser01",
         status: "new",
         title: "The Favourites",
         artist: "Sef",
@@ -59,11 +59,11 @@ const defaultState = {
 
   events: [
     {
-      address: "asdffqwerkqjewrflqkwejfL",
+      address: "event01",
       publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
       asset: {
         eventData: {
-          organisation: "the owner",
+          ownerId: "organiser01",
           status: statuses.OPEN_FOR_SALE,
           title: "Een avond gezelligheid",
           artist: "Racoon",
@@ -114,14 +114,70 @@ const defaultState = {
       },
     },
     {
-      address: "89348502934850928345098",
+      address: "event02",
       publicKey: "pubKey",
       asset: {
         eventData: {
-          organisation: "the owner",
+          ownerId: "organiser01",
           status: statuses.OPEN_FOR_SALE,
           title: "Bonny Soiree",
           artist: "French Toasty",
+          location: "Park 6",
+          eventDate: new Date("2018-10-10"),
+          eventTime: "23:50",
+          duration: 90,
+          category: "test category",
+          site: "https://lisk.io/apps/",
+          image: "event image",
+        },
+        ticketData: {
+          // Ticket sale starts when the first ticket can be bought
+          types: [
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 0,
+              name: "First Release Ticket",
+              price: 45.26,
+              amount: 10,
+              sold: 0,
+            },
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 1,
+              name: "Second Release Ticket",
+              price: 55.26,
+              amount: 20,
+              sold: 0,
+            },
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 2,
+              name: "Third Release Ticket",
+              price: 75.26,
+              amount: 20,
+              sold: 0,
+            },
+          ],
+        },
+        resellData: {
+          allowed: true,
+          maximumResellPercentage: 120,
+          resellOrganiserFee: 1,  // in percentages
+        },
+      },
+    },
+    {
+      address: "event03",
+      publicKey: "pubKey",
+      asset: {
+        eventData: {
+          ownerId: "organiser02",
+          status: statuses.OPEN_FOR_SALE,
+          title: "De Leven",
+          artist: "Bon Sjef",
           location: "Park 6",
           eventDate: new Date("2018-10-10"),
           eventTime: "23:50",

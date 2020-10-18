@@ -124,7 +124,7 @@ export const SignUp = withReducer("signUp", reducer)((props) => {
               onClick={() => {
                 console.log("form",{form});
                 console.log("accounts:", account);
-                history.push(`/account/1234342432ddddfd`);
+                history.push(`/account/account03`);
                 dispatch(Actions.addAccount(form));
               }}
             >
@@ -133,7 +133,7 @@ export const SignUp = withReducer("signUp", reducer)((props) => {
             <Grid container justify="flex-end">
               <Grid item>
                 <Link onClick={() => {
-                  history.push('/signup/organiser')
+                  history.push('/signup/')
                 }} variant="body2">
                   Are you an organiser? Sign up here!
                 </Link>
@@ -153,7 +153,7 @@ export const SignUp = withReducer("signUp", reducer)((props) => {
               onClick={() => {
                 console.log("formulier", {form2});
                 console.log("organiserAccounts:", organiser);
-                history.push(`/organiser/1234342432ddxxxd`);
+                history.push(`/organiser/organiser03`);
                 dispatch(Actions.addOrganiser(form2));
               }}
             >

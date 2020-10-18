@@ -13,8 +13,8 @@ const defaultState = {
     {
       basketId: "563cdcs456734563456",
       ticketAddress: "unknown",
-      eventId: 'asdffqwerkqjewrflqkwejfL',
-      ownerId: '1234342432dd',
+      eventId: 'event01',
+      ownerId: 'account01',
       ticketType: 1,
       quantity: 3,
       price: 90,
@@ -22,8 +22,8 @@ const defaultState = {
     {
       basketId: "5634567ewe34563456",
       ticketAddress: "unknown",
-      eventId: 'asdffqwerkqjewrflqkwejfL',
-      ownerId: '1234342432dd',
+      eventId: 'event01',
+      ownerId: 'account01',
       ticketType: 2,
       quantity: 2,
       price: 45,
@@ -31,8 +31,8 @@ const defaultState = {
     {
       basketId: "56345673ds45das63456",
       ticketAddress: "unknown",
-      eventId: '89348502934850928345098',
-      ownerId: '1234342432dd',
+      eventId: 'event02',
+      ownerId: 'account01',
       ticketType: 2,
       quantity: 2,
       price: 70,

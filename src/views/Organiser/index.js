@@ -17,10 +17,12 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
 
     const organiserAccounts = useSelector(({blockchain}) => blockchain.organiser.organiserAccounts);
     const thisOrganiser = organiserAccounts.find(account => account.address === address );
+    const thisAddress = thisOrganiser.address;
 
     useEffect(() => {
         console.log("organiser accounts ", organiserAccounts);
         console.log("dit account (in organiseraccount)", thisOrganiser);
+        console.log("dit is het address", address, thisAddress);
     }, [organiserAccounts]);
 
 
@@ -43,7 +45,9 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
                     </li>
                 </ul>
                 </div>
-        <TicketList/>
+        <TicketList
+         addressX={thisAddress}
+        />
 
         <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
             <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
