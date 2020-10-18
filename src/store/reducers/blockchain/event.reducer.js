@@ -23,6 +23,7 @@ const defaultState = {
     publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
     asset: {
       eventData: {
+        organisation: "the owner",
         status: "new",
         title: "The Favourites",
         artist: "Sef",
@@ -62,6 +63,7 @@ const defaultState = {
       publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
       asset: {
         eventData: {
+          organisation: "the owner",
           status: statuses.OPEN_FOR_SALE,
           title: "Een avond gezelligheid",
           artist: "Racoon",
@@ -116,6 +118,7 @@ const defaultState = {
       publicKey: "pubKey",
       asset: {
         eventData: {
+          organisation: "the owner",
           status: statuses.OPEN_FOR_SALE,
           title: "Bonny Soiree",
           artist: "French Toasty",

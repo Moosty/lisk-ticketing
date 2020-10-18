@@ -60,7 +60,7 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       <Divider />
       <List>
         {[
-          { label:"Organiser" , link: "/organiser", icon: <InboxIcon /> },
+          { label:"Organiser" , link: "/organiser/1234342432dd", icon: <InboxIcon /> },
           { label:"Event" , link: "/events/asdffqwerkqjewrflqkwejfL", icon: <InboxIcon /> },
 
         ].map((item) => (

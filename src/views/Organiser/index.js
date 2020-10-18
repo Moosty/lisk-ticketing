@@ -16,11 +16,11 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
     const { address } = useParams();
 
     const organiserAccounts = useSelector(({blockchain}) => blockchain.organiser.organiserAccounts);
-    const thisAccount = organiserAccounts.find(account => account.address === address );
+    const thisOrganiser = organiserAccounts.find(account => account.address === address );
 
     useEffect(() => {
         console.log("organiser accounts ", organiserAccounts);
-        console.log("dit account (in organiseraccount)", thisAccount);
+        console.log("dit account (in organiseraccount)", thisOrganiser);
     }, [organiserAccounts]);
 
 
@@ -28,8 +28,9 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
 
     return <div className="mt-10">
         <OrganiserHeader
-            name="Tivoli"
-            balance ="145 LSK"
+            name={thisOrganiser.asset.organisation}
+            balance={thisOrganiser.balance}
+            token={thisOrganiser.token}
             button1 ="Create new event" />
 
             <div>

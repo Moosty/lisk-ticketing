@@ -182,7 +182,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
             <Button
               onClick={() => {
                 console.log({form})
-                history.push(`/organiser`);
+                history.push(`/organiser/1234342432dd`);
                 dispatch(Actions.addEvent(form));
               }}
               variant="contained"
