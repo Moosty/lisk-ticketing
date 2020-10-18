@@ -3,7 +3,7 @@ import NotificationsRoundedIcon from "@material-ui/icons/NotificationsRounded";
 
 export const DemoModal = (props) => {
 
-  return <div className="text-center items-center bg-white  " >
+  return <div className="text-center items-center bg-gray-900  " >
     <NotificationsRoundedIcon style={{color: '#fff', fontSize: 30}}/>
     <div className="p-4">
       <div className="flex flex-col my-4">
