@@ -133,7 +133,7 @@ export const SignUp = withReducer("signUp", reducer)((props) => {
             <Grid container justify="flex-end">
               <Grid item>
                 <Link onClick={() => {
-                  history.push('/signup/')
+                  history.push('/signup/organiser')
                 }} variant="body2">
                   Are you an organiser? Sign up here!
                 </Link>
