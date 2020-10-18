@@ -38,7 +38,7 @@ export const EventHeader = ({ artist, location, eventDate, eventTime}) => {
 
       </div>
       </div>
-      <div className="bg-black" >
+      <div className="bg-gray-900" >
       <div className=" mx-6" >
         <h1 className="text-4xl font-black text-white">
           {artist}
