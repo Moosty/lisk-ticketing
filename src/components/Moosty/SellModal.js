@@ -5,6 +5,7 @@ import {PortfolioItem} from "components/PortfolioItem";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {TicketListItem} from "components/index";
+import { SliderPrice } from "components/SliderPrice";
 
 export const SellModal = (props) => {
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
@@ -27,32 +28,48 @@ export const SellModal = (props) => {
         </div>
 
 
-
+    <div className="bg-white rounded my-4">
       <PortfolioItem
-            type="sell"
+            type=""
             key={thisItem.ticketAddress}
             keyEvent={thisItem.eventId}
             ticketType={thisItem.ticketType}
           />
+    </div>
 
-        <div className="text-left flex font-normal text-sm text-white">
-          {props.content}
+        <div className="flex flex-col text-left flex font-normal text-sm text-white my-2">
+          <div className="flex flex-row justify-around">
+            <div className="flex flex-col text-center">
+            <div>Ticket bought for:</div>
+              <div className="font-bold text-2xl">
+                € 25.00
+              </div>
+            </div>
+            <div className="flex flex-col text-center">
+              <div>Sell ticket for:</div>
+              <div className="font-bold text-2xl">
+                € 25.00
+              </div>
+            </div>
+          </div>
+
+          <SliderPrice />
         </div>
-        <div className="flex flex-row">
-        <button
-          variant="contained"
+        <div className="flex flex-row justify-around mt-2">
+        <Button
+          variant="outlined"
           size="small"
           color="secondary"
           className="m-4"
           >Cancel
-        </button>
-        <button
+        </Button>
+        <Button
           variant="contained"
           size="small"
           color="secondary"
           className="m-4"
-        >Cancel
-        </button>
+        >Sell ticket
+        </Button>
         </div>
       </div>
     </div>
