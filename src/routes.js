@@ -54,7 +54,7 @@ export const Routes = (props) => {
         <Route path="/create-event">
           <CreateEvent />
         </Route>
-        <Route path="/checkout">
+        <Route path="/checkout/:ownerId">
         <Checkout />
       </Route>
         <Route path="/drawers">

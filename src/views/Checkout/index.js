@@ -8,7 +8,7 @@ import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import Button from "@material-ui/core/Button";
 import * as Actions from "../../store/actions";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {PortfolioItem} from "components/PortfolioItem";
 
 
@@ -16,9 +16,12 @@ import {PortfolioItem} from "components/PortfolioItem";
 // TODO op de voorgrond zetten.
 
 export const Checkout = withReducer("checkout", reducer)((props) => {
+  const { ownerId } = useParams();
   const basket = useSelector(({blockchain}) => blockchain.basket.items);
+  const thisBasket = basket.filter(basket => basket.ownerId === ownerId );
+
   const [totalPrice, setTotalPrice] = useState();
- const amountOfTickets = basket.length;
+ const amountOfTickets = thisBasket.length;
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -37,7 +40,7 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
       <div className=" py-10 md:p-12 lg:p-24  h-full flex flex-col justify-between">
         <h1 className="mx-10 text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Checkout</h1>
 
-      {basket && basket.map(item => {
+      {thisBasket && thisBasket.map(item => {
         console.log(basket);
 
         return (<PortfolioItem
