@@ -7,7 +7,16 @@ import {useHistory} from "react-router-dom";
 import {TicketListItem} from "components/index";
 
 export const SellModal = (props) => {
+  const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
+  const thisItem = portfolio.find(item => item.ticketAddress === "12312341r555ff");
 
+  useEffect(
+    () => {
+      console.log("sellmodal", portfolio);
+      console.log("item", thisItem);
+
+    },
+  );
 
   return <div className="text-center items-center bg-gray-900 p-4 " >
     <NotificationsRoundedIcon style={{color: '#fff', fontSize: 30}}/>
@@ -16,24 +25,16 @@ export const SellModal = (props) => {
         <div className="text-center flex1 text-2xl text-white font-bold uppercase max-w-2xl">
          Sell ticket
         </div>
-        <PortfolioItem
-          type="sell"
-          key="1"
-          keyEvent="asdffqwerkqjewrflqkwejfL"
-          ticketType="type3"
-          eventId="asdffqwerkqjewrflqkwejfL"
-          eventDate="12-12-2020"
-          eventTime="20.00"
-          title="test ticket"
-          day="5"
-          month="8"
-          price="€ 5"
-          time="5am"
-          name="name"
-          artist="Bertus de zanger"
-          location="Utrecht"
 
-        />
+
+
+      <PortfolioItem
+            type="sell"
+            key={thisItem.ticketAddress}
+            keyEvent={thisItem.eventId}
+            ticketType={thisItem.ticketType}
+          />
+
         <div className="text-left flex font-normal text-sm text-white">
           {props.content}
         </div>

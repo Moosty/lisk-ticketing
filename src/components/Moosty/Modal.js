@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -29,6 +29,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const {open, type} = useSelector(({modals}) => modals);
+
 
   const getModal = () => {
     switch (type) {
