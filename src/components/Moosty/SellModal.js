@@ -16,7 +16,24 @@ export const SellModal = (props) => {
         <div className="text-center flex1 text-2xl text-white font-bold uppercase max-w-2xl">
          Sell ticket
         </div>
+        <PortfolioItem
+          type="sell"
+          key="1"
+          keyEvent="asdffqwerkqjewrflqkwejfL"
+          ticketType="type3"
+          eventId="asdffqwerkqjewrflqkwejfL"
+          eventDate="12-12-2020"
+          eventTime="20.00"
+          title="test ticket"
+          day="5"
+          month="8"
+          price="€ 5"
+          time="5am"
+          name="name"
+          artist="Bertus de zanger"
+          location="Utrecht"
 
+        />
         <div className="text-left flex font-normal text-sm text-white">
           {props.content}
         </div>
