@@ -17,13 +17,19 @@ import * as Actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
+import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 const useStyles = makeStyles({
   list: {
     width: 250,
+    height: "100%",
+    color: "white",
+    backgroundColor: "#1a202c",
   },
   fullList: {
     width: 'auto',
+
   },
 });
 
@@ -44,6 +50,23 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       onClick={() => dispatch(Actions.closeAllDrawers())}
       onKeyDown={() => dispatch(Actions.closeAllDrawers())}
     >
+      <div className="flex flex-col ml-4 m">
+       <span className="text-white font-bold text-lg"> Lisk Ticketing</span>
+        <span className="text-sm">User account:</span>
+        <span className="font-bold" style={{color:"#f50057"}}>Raphael Cornelis</span>
+        <div className="flex flex-row mt-2">
+          <div className="flex flex-row mr-4">
+            <MonetizationOnIcon fontSize="small" />
+            <span className="ml-2">154</span>
+          </div>
+          <div className="flex flex-row">
+            <ConfirmationNumberIcon fontSize="small" />
+            <span className="ml-2">3</span></div>
+
+        </div>
+      </div>
+      <Divider />
+
       {/**/}
       <List>
         {[
@@ -52,7 +75,7 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
           { label:"Shopping Basket" , link: "/checkout", icon: <InboxIcon /> },
         ].map((item) => (
           <ListItem button onClick={() => history.push(`${item.link}`)} key={item.label} >
-            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemIcon style={{color:"#f50057"}}>{item.icon}</ListItemIcon>
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
@@ -86,7 +109,7 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
             >
               <MenuIcon />
             </IconButton>
-            <Drawer anchor={anchor} open={drawers[anchor].open} onClose={() => dispatch(Actions.closeDrawer(anchor))}>
+            <Drawer  anchor={anchor} open={drawers[anchor].open} onClose={() => dispatch(Actions.closeDrawer(anchor))}>
               {list(anchor)}
             </Drawer>
           </React.Fragment>

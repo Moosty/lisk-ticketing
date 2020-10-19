@@ -37,8 +37,8 @@ export const SellModal = (props) => {
           />
     </div>
 
-        <div className="flex flex-col text-left flex font-normal text-sm text-white my-2">
-          <div className="flex flex-row justify-around">
+        <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
+          <div className="flex flex-row justify-around rounded my-2 py-2" style={{backgroundColor:"#f50057"}}>
             <div className="flex flex-col text-center">
             <div>Ticket bought for:</div>
               <div className="font-bold text-2xl">

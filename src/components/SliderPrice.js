@@ -95,7 +95,9 @@ export const SliderPrice = (props) => {
     <div className={classes.root}>
 
       <h1
-      className="text-sm mt-4">Set your price</h1>
+      className="text-lg mt-4 font-bold" >Set your price</h1>
+      <div>The organiser set the maximum resell price to <span className="font-bold text-pink-400">120% </span>of the original price.
+      </div>
 
       <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} />
       <div className={classes.margin} />
