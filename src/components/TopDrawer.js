@@ -34,6 +34,13 @@ const useStyles = makeStyles({
 });
 
 export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
+  const accounts = useSelector(({blockchain}) => blockchain.account.accounts);
+  // TODO ACCOUMTS DYNAMISCH MAKEN
+  const thisAccount = accounts.find(account => account.address === "account01" );
+  const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
+ // TODO AMOUNT aanpassen aan user portfolio, nu pakt hij alle items
+  const amountOfTickets = portfolio.length;
+
   const classes = useStyles();
   const history = useHistory();
   console.log("history", history);
@@ -53,15 +60,15 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       <div className="flex flex-col ml-4 m">
        <span className="text-white font-bold text-lg"> Lisk Ticketing</span>
         <span className="text-sm">User account:</span>
-        <span className="font-bold" style={{color:"#f50057"}}>Raphael Cornelis</span>
+        <span className="font-bold" style={{color:"#f50057"}}>{thisAccount.asset.username}</span>
         <div className="flex flex-row mt-2">
           <div className="flex flex-row mr-4">
             <MonetizationOnIcon fontSize="small" />
-            <span className="ml-2">154</span>
+            <span className="ml-2">{thisAccount.balance}</span>
           </div>
           <div className="flex flex-row">
             <ConfirmationNumberIcon fontSize="small" />
-            <span className="ml-2">3</span></div>
+            <span className="ml-2">{amountOfTickets}</span></div>
 
         </div>
       </div>
