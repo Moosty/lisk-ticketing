@@ -129,7 +129,7 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Account</MenuItem>
       <MenuItem onClick={()=>
         {handleMenuClose();
         history.push(`/account`);
@@ -150,17 +150,20 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={()=>
-      {handleMenuClose()}}>
+      {handleMenuClose();
+        history.push(`/signup`);
+      }
+      }>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Signup</p>
       </MenuItem>
       <MenuItem onClick={()=>
       {handleMenuClose();
-        history.push(`/signup`);
+        history.push(`/organiser/organiser01`);
 
       }}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
@@ -168,7 +171,7 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Organiser</p>
       </MenuItem>
       <MenuItem onClick={()=>
       {handleMenuClose();
@@ -183,7 +186,7 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Account</p>
       </MenuItem>
     </Menu>
   );

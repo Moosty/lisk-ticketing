@@ -88,18 +88,18 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
         ))}
       </List>
       <Divider />
-      <List>
-        {[
-          { label:"Organiser" , link: "/organiser/organiser01", icon: <InboxIcon /> },
-          { label:"Event" , link: "/events/event01", icon: <InboxIcon /> },
+      {/*<List>*/}
+      {/*  {[*/}
+      {/*    { label:"Organiser" , link: "/organiser/organiser01", icon: <InboxIcon /> },*/}
+      {/*    { label:"Event" , link: "/events/event01", icon: <InboxIcon /> },*/}
 
-        ].map((item) => (
-          <ListItem button onClick={ () => history.push(`${item.link}`)} key={item.label}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.label} />
-          </ListItem>
-        ))}
-      </List>
+      {/*  ].map((item) => (*/}
+      {/*    <ListItem button onClick={ () => history.push(`${item.link}`)} key={item.label}>*/}
+      {/*      <ListItemIcon>{item.icon}</ListItemIcon>*/}
+      {/*      <ListItemText primary={item.label} />*/}
+      {/*    </ListItem>*/}
+      {/*  ))}*/}
+      {/*</List>*/}
     </div>
   );
 
