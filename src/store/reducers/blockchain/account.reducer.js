@@ -33,7 +33,7 @@ const defaultState = {
       balance: 150,
       token: "lsk",
       asset: {
-        username: "Raph",
+        username: "Raphael Cornelis",
         password: "",
       },
     },

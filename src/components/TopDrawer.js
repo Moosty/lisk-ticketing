@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
   const accounts = useSelector(({blockchain}) => blockchain.account.accounts);
   // TODO ACCOUMTS DYNAMISCH MAKEN
-  const thisAccount = accounts.find(account => account.address === "account01" );
+  const thisAccount = accounts.find(account => account.address === "account02" );
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
  // TODO AMOUNT aanpassen aan user portfolio, nu pakt hij alle items
   const amountOfTickets = portfolio.length;

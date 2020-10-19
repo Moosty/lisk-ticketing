@@ -17,6 +17,9 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {TopDrawer} from "components/TopDrawer";
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import withReducer from "store/withReducer";
+import reducer from "store/reducers";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -85,11 +88,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TopBar = (props) => {
+export const TopBar = withReducer("topbar", reducer)((props) => {
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
+  // TODO AMOUNT aanpassen aan user portfolio, nu pakt hij alle items
+  const amountOfTickets = portfolio.length;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -187,7 +194,7 @@ export const TopBar = (props) => {
         <Toolbar>
           <TopDrawer />
           <IconButton onClick={()=> history.push(`/my-tickets`)} aria-label="show 17 new notifications" color="inherit">
-          <Badge  badgeContent={3} color="secondary">
+          <Badge  badgeContent={amountOfTickets} color="secondary">
             <ConfirmationNumberIcon />
           </Badge>
         </IconButton>
@@ -238,4 +245,4 @@ export const TopBar = (props) => {
       {renderMenu}
     </div>
   );
-}
+});
