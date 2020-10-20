@@ -8,6 +8,7 @@ import {TicketListItem} from "components/index";
 import { SliderPrice } from "components/SliderPrice";
 import * as Actions from "../../store/actions";
 import IconButton from "@material-ui/core/IconButton";
+import TextField from "@material-ui/core/TextField";
 
 export const TicketOptionsModal = (props) => {
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
@@ -47,8 +48,9 @@ export const TicketOptionsModal = (props) => {
 
         { props.type === 'optionsModal' && <div>
         <Button
+          fullWidth= "true"
           variant="contained"
-          size="small"
+          size="Large"
           color="secondary"
           className="m-4"
           onClick={() => {
@@ -56,56 +58,41 @@ export const TicketOptionsModal = (props) => {
           }}
         >Scan ticket
         </Button>
-        </div>}
 
-        { props.type === 'optionsModal' && <div>
+
           <Button
+            fullWidth= "true"
             variant="contained"
             size="small"
             color="secondary"
-            className="m-4"
-            onClick={() => {
-              dispatch(Actions.openModal('sellTicketModal'))
-            }}
-          >Sell ticket
-          </Button>
-        </div>}
-
-        { props.type === 'optionsModal' && <div>
-          <Button
-            variant="contained"
-            size="small"
-            color="secondary"
-            className="m-4"
+            style={{marginTop: "1rem"}}
             onClick={() => {
               dispatch(Actions.openModal('transferTicketModal'))
             }}
           >Transfer ticket
           </Button>
+          <Button
+            fullWidth= "true"
+            variant="outlined"
+            size="small"
+            color="secondary"
+            style={{marginTop: "1rem"}}
+            onClick={() => {
+              dispatch(Actions.openModal('sellTicketModal'))
+            }}
+          >Sell ticket
+          </Button>
+
+
+
+
         </div>}
 
         {/* SCAN TICKET MODAL */}
 
         { props.type === 'scanModal' && <div>
 
-        <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
-          <div className="flex flex-row justify-around rounded my-2 py-2" style={{backgroundColor:"#f50057"}}>
-            <div className="flex flex-col text-center">
-            <div>Ticket bought for:</div>
-              <div className="font-bold text-2xl">
-                € 25.00
-              </div>
-            </div>
-            <div className="flex flex-col text-center">
-              <div>Sell ticket for:</div>
-              <div className="font-bold text-2xl">
-                € 25.00
-              </div>
-            </div>
-          </div>
-
-          <SliderPrice />
-        </div>
+        QR CODE
 
         <div className="flex flex-row justify-around mt-2">
         <Button
@@ -113,15 +100,12 @@ export const TicketOptionsModal = (props) => {
           size="small"
           color="secondary"
           className="m-4"
+          onClick={() => {
+            dispatch(Actions.closeModal())
+          }}
           >Cancel
         </Button>
-        <Button
-          variant="contained"
-          size="small"
-          color="secondary"
-          className="m-4"
-        >Sell ticket
-        </Button>
+
         </div>
         </div>}
 
@@ -155,6 +139,9 @@ export const TicketOptionsModal = (props) => {
             size="small"
             color="secondary"
             className="m-4"
+            onClick={() => {
+              dispatch(Actions.closeModal())
+            }}
           >Cancel
           </Button>
           <Button
@@ -171,22 +158,15 @@ export const TicketOptionsModal = (props) => {
 
         { props.type === 'transferModal' && <div>
         <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
-          <div className="flex flex-row justify-around rounded my-2 py-2" style={{backgroundColor:"#f50057"}}>
-            <div className="flex flex-col text-center">
-              <div>Ticket bought for:</div>
-              <div className="font-bold text-2xl">
-                € 25.00
-              </div>
-            </div>
-            <div className="flex flex-col text-center">
-              <div>Sell ticket for:</div>
-              <div className="font-bold text-2xl">
-                € 25.00
-              </div>
-            </div>
-          </div>
 
-          <SliderPrice />
+          <h1
+            className="text-lg mt-4 font-bold" >Send your ticket to a friend!</h1>
+          <div>Fill in the <span className="font-bold text-pink-400">recipient address </span> and confirm to send this ticket.
+        </div>
+          <TextField style={{marginTop:"1rem", marginBottom:"1rem", borderColor:"white",backgroundColor:"white", borderRadius:"5px"}}
+                     id="outlined-basic" label="Recipient adress" variant="filled" color="secondary" />
+
+
         </div>
 
         <div className="flex flex-row justify-around mt-2">
@@ -195,6 +175,10 @@ export const TicketOptionsModal = (props) => {
             size="small"
             color="secondary"
             className="m-4"
+            onClick={() => {
+              dispatch(Actions.closeModal())
+            }}
+
           >Cancel
           </Button>
           <Button
@@ -202,7 +186,7 @@ export const TicketOptionsModal = (props) => {
             size="small"
             color="secondary"
             className="m-4"
-          >Sell ticket
+          >Transfer ticket
           </Button>
         </div>
         </div> }

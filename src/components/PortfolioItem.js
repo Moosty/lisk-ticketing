@@ -9,6 +9,7 @@ import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 // DIT COMPONENT WORDT GEBRUIKT IN MY-TICKETS & DE BASKET
 
@@ -51,17 +52,25 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
   );
 
   return (
-    <div>
+    <div
+      >
       <div className="w-full flex flex-row p-2 justify-between content-center items-center">
-        <div className="flex flex-row ">
+        <div
+          onClick={() => {
+            dispatch(Actions.openModal('scanTicketModal'))
+          }}
+          className="flex flex-row "  >
 
 
 
 
-          <div className="flex flex-col items-center leading-4 m-4">
+          <div
+
+            className="flex flex-col items-center leading-4 m-4">
             <span className="text-lg">07</span>
             <span className={classes.month}>OCT</span>
-          </div>
+          </div
+           >
           <div className="flex flex-col text-sm float-left leading-4 my-2">
             <span>MON 20:00</span>            <span>${ticketData.price} - {ticketData.name}</span>
             <div className="flex flex-row "><span className="font-bold">{eventData.artist}{' - '}</span>        <span className="">{eventData.title}</span>
@@ -70,7 +79,7 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
           </div>
         </div>
         {type === 'sell' &&
-        <Button
+        <IconButton
 
           onClick={() => {
             dispatch(Actions.openModal('optionsModal'))
@@ -79,7 +88,9 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
           variant="outlined"
           color="secondary"
           size="small"
-          className={classes.button2}>Options</Button>
+          className={classes.button2}>
+          <MoreVertIcon />
+        </IconButton>
         }
         {type === 'cancel' &&
         <IconButton
