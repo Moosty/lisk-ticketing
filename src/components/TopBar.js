@@ -96,7 +96,16 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
 
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
   // TODO AMOUNT aanpassen aan user portfolio, nu pakt hij alle items
-  const amountOfTickets = portfolio.length;
+  const initialTickets = portfolio.lenght;
+  const [amountOfTickets, setAmountOfTickets] = useState(initialTickets);
+
+  useEffect(
+    () => {
+      console.log(initialTickets);
+      console.log("amount of tickets", amountOfTickets)
+      setAmountOfTickets(portfolio.lenght);
+    }, [portfolio],
+  );
 
 
 
