@@ -9,6 +9,7 @@ import reducer from "store/reducers";
 import withReducer from "store/withReducer";
 import {DemoModal} from "./DemoModal";
 import {TicketOptionsModal} from "./TicketOptionsModal";
+import {ConfirmTxModal} from "./ConfirmTxModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -90,6 +91,11 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
         return <DemoModal
           title="Buy"
           content="look around and buy a ticket"
+        />;
+      case 'confirmTxModal':
+        return <ConfirmTxModal
+          title="Confirm action"
+          content="Provide your passphrase to confirm this action"
         />;
         default:
         return <div>Modal Component not found</div>;
