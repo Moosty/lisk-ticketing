@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Header} from "components/Header";
 import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
-import {TicketList} from "components/TicketList";
+import {EventList} from "components/EventList";
 import {AccountHeader} from "components/AccountHeader";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
@@ -45,7 +45,7 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
                     </li>
                 </ul>
                 </div>
-        <TicketList type="organiser"
+        <EventList type="organiser"
          addressX={thisAddress}
         />
 

@@ -11,11 +11,11 @@ import {useParams} from 'react-router-dom';
 import {ticketStatuses} from "../../store/reducers/blockchain/portfolio.reducer";
 
 export const MyTickets = withReducer("mytickets", reducer)((props) => {
-const { organiserId } = useParams();
-const organiser = useSelector(({blockchain}) => blockchain.organiser.organiserAccounts.address === organiserId);
+const { address } = useParams();
+const organiser = useSelector(({blockchain}) => blockchain.organiser.organiserAccounts.address === address);
 
 useEffect( () => {
-  console.log("organiserId params", organiserId);
+  console.log("organiserId params", address);
   console.log("organiser", organiser);
   }, organiser,
 
@@ -28,7 +28,7 @@ return <div className="mt-10">
         title="My Tickets"
         subtitle="keep all your tickets safe"
       />
-      <TabsTickets type="user "/>
+      <TabsTickets type="user"/>
     </div>}
 
     {props.type === 'organiser' && <div>
@@ -36,7 +36,7 @@ return <div className="mt-10">
         title="My Events"
         subtitle="keep all your tickets safe"
       />
-      <TabsTickets />
+      <TabsTickets type="organiser" />
 
     </div>}
 

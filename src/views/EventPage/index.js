@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Header} from "components/Header";
 import {TicketAccordion, Event, CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
-import {TicketList} from "components/TicketList";
+import {TicketList} from "components/EventList";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import {useSelector} from "react-redux";

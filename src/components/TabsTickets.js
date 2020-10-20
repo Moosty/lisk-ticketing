@@ -13,6 +13,7 @@ import reducer from "../store/reducers";
 import {useSelector} from "react-redux";
 import {PortfolioItem} from "components/PortfolioItem";
 import {MyTicketsComponent} from "components/MyTicketsComponent";
+import {EventList} from "components/EventList";
 
 function TabPanel(props) {
   const {children, value, index, ...other} = props;
@@ -73,6 +74,8 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
 
     <div className={classes.root}>
       <AppBar position="static" style={{backgroundColor: "#1a202c", color: "white"}}>
+
+        {props.type === 'user' &&
         <Tabs
           value={value}
           style={{color: "white"}}
@@ -84,7 +87,23 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         >
           <Tab label="my tickets" {...a11yProps(0)} />
           <Tab label="Old tickets" {...a11yProps(1)} />
-        </Tabs>
+        </Tabs>}
+
+        {props.type === 'organiser' &&
+        <Tabs
+          value={value}
+          style={{color: "white"}}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="secondary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="My Events" {...a11yProps(0)} />
+          <Tab label="Old Events" {...a11yProps(1)} />
+        </Tabs>}
+
+
       </AppBar>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -92,10 +111,24 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <MyTicketsComponent type="current" />
+          {props.type === 'user' &&
+          <MyTicketsComponent type="current"/>
+          }
+          {props.type === 'organiser' &&
+          <EventList type="organiser"
+          />          }
+
+
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <MyTicketsComponent type="past" />
+
+          {props.type === 'user' &&
+          <MyTicketsComponent type="past"/>
+          }
+          {props.type === 'organiser' &&
+          <EventList type="organiser"
+          />          }
+
         </TabPanel>
 
       </SwipeableViews>

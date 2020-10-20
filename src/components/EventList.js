@@ -8,7 +8,7 @@ import {useParams} from "react-router-dom";
 // TODO - OVERVIEW PAGINA: alle events
 // TODO - organisatie pagina: gefilterd
 
-export const TicketList = withReducer("TicketList", reducer)((props) => {
+export const EventList = withReducer("TicketList", reducer)((props) => {
   const { address } = useParams();
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const theseEvents = events.filter(event => event.asset.eventData.ownerId === address);

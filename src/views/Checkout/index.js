@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Header} from "components/Header";
 import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
-import {TicketList} from "components/TicketList";
+import {TicketList} from "components/EventList";
 import {AccountHeader} from "components/AccountHeader";
 
 import {useDispatch, useSelector} from "react-redux";

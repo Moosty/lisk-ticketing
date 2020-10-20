@@ -1,7 +1,7 @@
 import React from "react";
 import {Header} from "components/Header";
 import {TicketListItem} from "components/index";
-import {TicketList} from "components/TicketList";
+import {EventList} from "components/EventList";
 import { useHistory } from "react-router-dom";
 import * as Actions from "../../store/actions";
 import {useDispatch} from "react-redux";
@@ -20,6 +20,6 @@ export const Overview = (props) => {
     }}
     button2="Sell Tickets"
     onClick2={() => history.push("/my-tickets")}/>
-    <TicketList type="overview" />
+    <EventList type="overview" />
   </div>;
 };
