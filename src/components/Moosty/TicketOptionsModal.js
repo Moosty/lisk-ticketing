@@ -6,10 +6,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {TicketListItem} from "components/index";
 import { SliderPrice } from "components/SliderPrice";
+import * as Actions from "../../store/actions";
+import IconButton from "@material-ui/core/IconButton";
 
 export const TicketOptionsModal = (props) => {
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
   const thisItem = portfolio.find(item => item.ticketAddress === "12312341r555ff");
+  const dispatch = useDispatch();
 
   useEffect(
     () => {
@@ -26,6 +29,7 @@ export const TicketOptionsModal = (props) => {
 
 
         <div className="text-center flex1 text-2xl text-white font-bold uppercase max-w-2xl">
+          { props.type === 'optionsModal' && 'Options' }
           { props.type === 'scanModal' && 'Scan Ticket' }
           { props.type === 'sellModal' && 'Sell Ticket' }
           { props.type === 'transferModal' && 'Transfer Ticket' }
@@ -40,6 +44,20 @@ export const TicketOptionsModal = (props) => {
             ticketType={thisItem.ticketType}
           />
     </div>
+
+        { props.type === 'optionsModal' && <div>
+        <Button
+          variant="contained"
+          size="small"
+          color="secondary"
+          className="m-4"
+          onClick={() => {
+            dispatch(Actions.openModal('scanTicketModal'))
+          }}
+        >Scan ticket
+        </Button>
+
+        </div>}
 
         {/* SCAN TICKET MODAL */}
 
