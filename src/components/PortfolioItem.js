@@ -79,7 +79,7 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
           variant="outlined"
           color="secondary"
           size="small"
-          className={classes.button2}>Sell</Button>
+          className={classes.button2}>Options</Button>
         }
         {type === 'cancel' &&
         <IconButton

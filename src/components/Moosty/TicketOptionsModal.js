@@ -56,7 +56,32 @@ export const TicketOptionsModal = (props) => {
           }}
         >Scan ticket
         </Button>
+        </div>}
 
+        { props.type === 'optionsModal' && <div>
+          <Button
+            variant="contained"
+            size="small"
+            color="secondary"
+            className="m-4"
+            onClick={() => {
+              dispatch(Actions.openModal('sellTicketModal'))
+            }}
+          >Sell ticket
+          </Button>
+        </div>}
+
+        { props.type === 'optionsModal' && <div>
+          <Button
+            variant="contained"
+            size="small"
+            color="secondary"
+            className="m-4"
+            onClick={() => {
+              dispatch(Actions.openModal('transferTicketModal'))
+            }}
+          >Transfer ticket
+          </Button>
         </div>}
 
         {/* SCAN TICKET MODAL */}

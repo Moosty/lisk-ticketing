@@ -69,6 +69,18 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
           content="I want to sell my tickets"
           type="scanModal"
         />;
+      case 'sellTicketModal':
+        return <TicketOptionsModal
+          title="SELL my tickets"
+          content="I want to sell my tickets"
+          type="sellModal"
+        />;
+      case 'transferTicketModal':
+        return <TicketOptionsModal
+          title="SELL my tickets"
+          content="I want to sell my tickets"
+          type="transferModal"
+        />;
       case 'cancelInfoModal':
         return <DemoModal
           title="Do not buy"
