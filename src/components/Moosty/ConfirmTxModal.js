@@ -25,6 +25,7 @@ export const ConfirmTxModal = (props) => {
 
         <div className="text-center flex1 text-2xl text-white font-bold uppercase max-w-2xl">
           { props.type === 'confirmEvent' && 'Create Event' }
+          { props.type === 'confirmBuyTickets' && 'Buy Tickets' }
 
         </div>
 
@@ -38,7 +39,7 @@ export const ConfirmTxModal = (props) => {
           />
         </div>
 
-        {/*  TRANSFER MODAL */}
+        {/*  CREATE EVENT MODAL */}
 
         { props.type === 'confirmEvent' && <div>
           <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
@@ -75,6 +76,42 @@ export const ConfirmTxModal = (props) => {
           </div>
         </div> }
 
+        {/*  BUY TICKETS MODAL */}
+
+        { props.type === 'confirmBuyTickets' && <div>
+          <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
+
+            <h1
+              className="text-lg mt-4 font-bold" >Confirm this action</h1>
+            <div>Fill in <span className="font-bold text-pink-400">your private key </span> to confirm buying the ticket(s).
+            </div>
+            <TextField style={{marginTop:"1rem", marginBottom:"1rem", borderColor:"white",backgroundColor:"white", borderRadius:"5px"}}
+                       id="outlined-basic" label="Recipient adress" variant="filled" color="secondary" />
+
+
+          </div>
+
+          <div className="flex flex-row justify-around mt-2">
+            <Button
+              variant="outlined"
+              size="small"
+              color="secondary"
+              className="m-4"
+              onClick={() => {
+                dispatch(Actions.closeModal())
+              }}
+
+            >Cancel
+            </Button>
+            <Button
+              variant="contained"
+              size="small"
+              color="secondary"
+              className="m-4"
+            >Confirm Transaction
+            </Button>
+          </div>
+        </div> }
 
       </div>
     </div>
