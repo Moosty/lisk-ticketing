@@ -7,11 +7,14 @@ import {useSelector} from "react-redux";
 import {PortfolioItem} from "components/PortfolioItem";
 import {statuses} from "../../store/reducers/blockchain/event.reducer";
 import {TabsTickets} from "components/TabsTickets";
+import {useParams} from 'react-router-dom';
 
 
 
 export const MyTickets = withReducer("mytickets", reducer)( (props) => {
+  const { account } = useParams();
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
+  const thisPortfolio = portfolio.filter ((portfolio) => portfolio.ownerId === account);
 
   // voor elk EventId uit het portfolio wil je eventData binnenhalen.
 
@@ -22,8 +25,8 @@ export const MyTickets = withReducer("mytickets", reducer)( (props) => {
    />
   <TabsTickets />
 
-    {portfolio && portfolio.map(item => {
-      console.log(portfolio);
+    {thisPortfolio && thisPortfolio.map(item => {
+      console.log(thisPortfolio);
 
       return ( <PortfolioItem
         type="sell"

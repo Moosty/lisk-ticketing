@@ -45,6 +45,9 @@ export const Routes = (props) => {
         <Route path="/account/:address">
           <Account />
         </Route>
+        <Route path="/my-tickets/:account">
+          <MyTickets />
+        </Route>
         <Route path="/my-tickets">
           <MyTickets />
         </Route>

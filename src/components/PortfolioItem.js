@@ -36,7 +36,7 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
 export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType, eventId, eventDate, eventTime,type, title, day, month, time, artist, location, keyEvent}) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const thisEvent = events.find(event => event.address === keyEvent);
-  const eventData = thisEvent.asset.eventData;
+  const thisEventData = thisEvent.asset.eventData;
 
   const ticketData = thisEvent.asset.ticketData.types.find(type => type.id === ticketType );
 
@@ -67,15 +67,15 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
           <div
 
             className="flex flex-col items-center leading-4 m-4">
-            <span className="text-lg">07</span>
-            <span className={classes.month}>OCT</span>
+            <span className="text-lg">{thisEventData.eventDate.getDate()}</span>
+            <span className={classes.month}>{monthNames[thisEventData.eventDate.getMonth()]}</span>
           </div
            >
           <div className="flex flex-col text-sm float-left leading-4 my-2">
-            <span>MON 20:00</span>            <span>${ticketData.price} - {ticketData.name}</span>
-            <div className="flex flex-row "><span className="font-bold">{eventData.artist}{' - '}</span>        <span className="">{eventData.title}</span>
+            <span>{days[thisEventData.eventDate.getDay()]} {thisEventData.eventTime}</span>            <span>${ticketData.price} - {ticketData.name}</span>
+            <div className="flex flex-row "><span className="font-bold">{thisEventData.artist}{' - '}</span>        <span className="">{thisEventData.title}</span>
             </div>
-            <span className="text-xs">{eventData.location}</span>
+            <span className="text-xs">{thisEventData.location}</span>
           </div>
         </div>
         {type === 'sell' &&
