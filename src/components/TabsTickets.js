@@ -43,8 +43,8 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 500,
+    backgroundColor: "theme.palette.background.paper",
+    width: "100%",
   },
 }));
 
@@ -63,12 +63,13 @@ export const TabsTickets = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar position="static" style={{backgroundColor:"#1a202c", color:"white"}}>
         <Tabs
           value={value}
+          style={{color:"white"}}
           onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
+          indicatorColor="secondary"
+          textColor="secondary"
           variant="fullWidth"
           aria-label="full width tabs example"
         >
