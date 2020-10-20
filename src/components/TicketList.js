@@ -33,7 +33,7 @@ export const TicketList = withReducer("TicketList", reducer)((props) => {
       /> )
     })}
 
-    <h1 className="text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-black font-extrabold">All Events</h1>
+    <h1 className="text-xl ml-5 leading-10 sm:text-3xl sm:text-center lg:text-5xl text-black font-extrabold">All Events</h1>
 
 
     {events && events.map(event => {

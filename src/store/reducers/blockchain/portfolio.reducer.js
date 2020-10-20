@@ -33,6 +33,13 @@ const defaultState = {
       ticketType: 2,
       quantity: 2,
     },
+    {
+      ticketAddress: "12dfasdddcsfddf312341r555ff",
+      eventId: 'event02',
+      ownerId: 'account01',
+      ticketType: 2,
+      quantity: 2,
+    },
   ]
 };
 

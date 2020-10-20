@@ -20,7 +20,7 @@ const defaultState = {
       price: 90,
     },
     {
-      basketId: "basket01",
+      basketId: "basket02",
       ticketAddress: "unknown",
       eventId: 'event01',
       ownerId: 'account01',
@@ -29,7 +29,7 @@ const defaultState = {
       price: 45,
     },
     {
-      basketId: "basket01",
+      basketId: "basket03",
       ticketAddress: "unknown",
       eventId: 'event02',
       ownerId: 'account01',
@@ -38,7 +38,7 @@ const defaultState = {
       price: 70,
     },
     {
-      basketId: "basket01",
+      basketId: "basket04",
       ticketAddress: "unknown",
       eventId: 'event02',
       ownerId: 'account02',

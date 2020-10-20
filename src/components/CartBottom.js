@@ -53,7 +53,7 @@ export const CartBottom = ({props}) => {
         <div className="flex flex-row content-center items-center">
           <Button
             onClick={() => {
-              history.push(`/checkout`);
+              history.push(`/checkout/account01`);
               console.log(basket);
             } }
             variant="contained"
