@@ -6,6 +6,7 @@ import reducer from "../../store/reducers";
 import {useSelector} from "react-redux";
 import {PortfolioItem} from "components/PortfolioItem";
 import {statuses} from "../../store/reducers/blockchain/event.reducer";
+import {TabsTickets} from "components/TabsTickets";
 
 
 
@@ -19,7 +20,7 @@ export const MyTickets = withReducer("mytickets", reducer)( (props) => {
       title="My Tickets"
       subtitle="keep all your tickets safe"
    />
-
+  <TabsTickets />
 
     {portfolio && portfolio.map(item => {
       console.log(portfolio);

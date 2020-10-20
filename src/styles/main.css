@@ -156,9 +156,7 @@ img {
  * 1. Change the font styles in all browsers.
  * 2. Remove the margin in Firefox and Safari.
  */
-focus {
-    outline: transparant;
-},
+
 button,
 input,
 optgroup,
@@ -14442,6 +14440,10 @@ video {
 
 .animate-bounce {
   animation: bounce 1s infinite;
+}
+
+:focus {
+  outline: transparant;
 }
 
 @media (min-width: 640px) {
