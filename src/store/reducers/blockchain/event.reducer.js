@@ -24,7 +24,7 @@ const defaultState = {
     asset: {
       eventData: {
         ownerId: "organiser01",
-        status: "new",
+        status: statuses.NEW,
         title: "The Favourites",
         artist: "Sef",
         location: "Caprera Openluchttheater - Bloemendaal",
