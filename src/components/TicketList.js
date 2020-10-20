@@ -20,19 +20,7 @@ export const TicketList = withReducer("TicketList", reducer)((props) => {
   }, [events])
 
   return <div>
-    { props.type === 'organiser' && <div>
-    {theseEvents && theseEvents.map(event => {
-      return (
-      <TicketListItem key={event.address}
-                      eventId={event.address}
-                      eventDate={event.asset.eventData.eventDate}
-                      startEvent={event.asset.eventData.eventTime}
-                      artist={event.asset?.eventData?.artist}
-                      title={event.asset?.eventData?.title}
-                      location={event.asset?.eventData?.location}
-      /> )
-    })}
-    </div>}
+
 
     { props.type === 'overview' && <div>
 
@@ -47,6 +35,22 @@ export const TicketList = withReducer("TicketList", reducer)((props) => {
                         location={event.asset?.eventData?.location}
         /> )
     })}
+    </div>}
+
+{/*// DE EVENEMENTENPAGINA VOOR EEN ORGANISATOR*/}
+
+    { props.type === 'organiser' && <div>
+      {theseEvents && theseEvents.map(event => {
+        return (
+          <TicketListItem key={event.address}
+                          eventId={event.address}
+                          eventDate={event.asset.eventData.eventDate}
+                          startEvent={event.asset.eventData.eventTime}
+                          artist={event.asset?.eventData?.artist}
+                          title={event.asset?.eventData?.title}
+                          location={event.asset?.eventData?.location}
+          /> )
+      })}
     </div>}
 
 
