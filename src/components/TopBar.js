@@ -17,6 +17,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import {TopDrawer} from "components/TopDrawer";
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import withReducer from "store/withReducer";
 import reducer from "store/reducers";
 import {useSelector} from "react-redux";
@@ -212,6 +213,11 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
             <ConfirmationNumberIcon />
           </Badge>
         </IconButton>
+          <IconButton onClick={()=> history.push(`/checkout`)} aria-label="show 17 new notifications" color="inherit">
+            <Badge  badgeContent={amountOfTickets} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
 
         {/*Menu (behind the three dots)*/}
           <div className={classes.grow} />
