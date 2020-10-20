@@ -181,7 +181,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           <div className="flex flex-row content-center items-center">
             <Button
               onClick={() => {
-                dispatch(Actions.openModal('confirmTxModal'));
+                dispatch(Actions.openModal('confirmTxEventModal'));
               }}
               // onClick={() => {
               //   console.log({form})

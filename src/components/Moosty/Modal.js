@@ -92,10 +92,18 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
           title="Buy"
           content="look around and buy a ticket"
         />;
-      case 'confirmTxModal':
+      case 'confirmTxEventModal':
         return <ConfirmTxModal
           title="Confirm action"
           content="Provide your passphrase to confirm this action"
+          type="confirmEvent"
+        />;
+
+      case 'confirmTxBuyTicketsModal':
+        return <ConfirmTxModal
+          title="Confirm action"
+          content="Provide your passphrase to confirm this action"
+          type="confirmBuyTickets"
         />;
         default:
         return <div>Modal Component not found</div>;

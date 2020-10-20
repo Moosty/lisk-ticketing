@@ -70,11 +70,13 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
 
 
       <Button
-        onClick={() => {
-          console.log(basket);
-          history.push('/my-tickets');
-          dispatch(Actions.checkoutBasket(basket));
-        }}
+        // onClick={() => {
+        //   console.log(basket);
+        //   history.push('/my-tickets');
+        //   dispatch(Actions.checkoutBasket(basket));
+        // }}
+        onClick={()=> { dispatch(Actions.openModal('confirmTxBuyTicketsModal'))}}
+
         variant="contained"
         size="small"
         color="secondary"
