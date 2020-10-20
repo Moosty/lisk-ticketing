@@ -181,10 +181,14 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           <div className="flex flex-row content-center items-center">
             <Button
               onClick={() => {
-                console.log({form})
-                history.push(`/organiser/organiser01`);
-                dispatch(Actions.addEvent(form));
+                dispatch(Actions.openModal('confirmTxModal'));
               }}
+              // onClick={() => {
+              //   console.log({form})
+              //   history.push(`/organiser/organiser01`);
+              //   dispatch(Actions.addEvent(form));
+              // }}
+
               variant="contained"
               size="small"
               color="secondary"

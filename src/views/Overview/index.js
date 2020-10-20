@@ -20,6 +20,6 @@ export const Overview = (props) => {
     }}
     button2="Sell Tickets"
     onClick2={() => history.push("/my-tickets")}/>
-    <TicketList/>
+    <TicketList type="overview" />
   </div>;
 };

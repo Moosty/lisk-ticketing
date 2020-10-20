@@ -45,7 +45,7 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
                     </li>
                 </ul>
                 </div>
-        <TicketList
+        <TicketList type="organiser"
          addressX={thisAddress}
         />
 
