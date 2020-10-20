@@ -8,7 +8,7 @@ import * as Actions from "store/actions";
 import reducer from "store/reducers";
 import withReducer from "store/withReducer";
 import {DemoModal} from "./DemoModal";
-import {SellModal} from "./SellModal";
+import {TicketOptionsModal} from "./TicketOptionsModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -56,11 +56,12 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
 
            Organiser percentage: If a person resells their ticket, the organiser also can get a percentage. The percentage of the resell-price that will go to the organiser.
            " />;
-      case 'sellInfoModal':
-        return <SellModal
+
+      case 'ticketOptionsModal':
+        return <TicketOptionsModal
           title="SELL my tickets"
           content="I want to sell my tickets"
-          />;
+        />;
       case 'cancelInfoModal':
         return <DemoModal
           title="Do not buy"

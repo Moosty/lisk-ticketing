@@ -73,7 +73,7 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
         <Button
 
           onClick={() => {
-            dispatch(Actions.openModal('sellInfoModal'))
+            dispatch(Actions.openModal('ticketOptionsModal'))
           }}
 
           variant="outlined"
