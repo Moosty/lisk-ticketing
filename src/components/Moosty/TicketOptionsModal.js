@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import {PortfolioItem} from "components/PortfolioItem";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {TicketListItem} from "components/index";
+import {MyTicket, TicketListItem} from "components/index";
 import { SliderPrice } from "components/SliderPrice";
 import * as Actions from "../../store/actions";
 import IconButton from "@material-ui/core/IconButton";
@@ -14,6 +14,9 @@ export const TicketOptionsModal = (props) => {
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
   const thisItem = portfolio.find(item => item.ticketAddress === "12312341r555ff");
   const dispatch = useDispatch();
+
+  var React = require('react');
+  var QRCode = require('qrcode.react');
 
   useEffect(
     () => {
@@ -37,13 +40,8 @@ export const TicketOptionsModal = (props) => {
         </div>
 
 
-    <div className="bg-white rounded my-4">
-      <PortfolioItem
-            type=""
-            key={thisItem.ticketAddress}
-            keyEvent={thisItem.eventId}
-            ticketType={thisItem.ticketType}
-          />
+    <div className="bg-white rounded my-4 px-2">
+      <MyTicket status="sale" type="large" />
     </div>
 
         { props.type === 'optionsModal' && <div>
@@ -92,7 +90,10 @@ export const TicketOptionsModal = (props) => {
 
         { props.type === 'scanModal' && <div>
 
-        QR CODE
+          <div className="bg-white rounded my-4 p-10 content-center flex justify-center">
+            <QRCode value="http://facebook.github.io/react/" />
+          </div>
+
 
         <div className="flex flex-row justify-around mt-2">
         <Button

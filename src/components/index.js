@@ -16,9 +16,10 @@ import { OrganiserHeader} from "components/OrganiserHeader";
 import { LogIn } from "components/LogIn";
 import { SliderPrice } from "components/SliderPrice";
 import { TabsTickets } from "components/TabsTickets";
+import { MyTicket} from "components/MyTicket";
 
 export { ExampleComponent,
 Header,
 TopBar,
-TicketListItem, TicketList, TabsTickets, SliderPrice, EventHeader, TicketType, CartBottom,SignUpOrg, TopDrawer, AccountHeader, TicketAccordion, SwapTicket, SignUpUser, OrganiserHeader, LogIn,
+TicketListItem, TicketList, MyTicket, TabsTickets, SliderPrice, EventHeader, TicketType, CartBottom,SignUpOrg, TopDrawer, AccountHeader, TicketAccordion, SwapTicket, SignUpUser, OrganiserHeader, LogIn,
 };

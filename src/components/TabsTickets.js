@@ -7,6 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import {MyTicket} from "components/index";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,7 +85,10 @@ export const TabsTickets = (props) => {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          <MyTicket status="active" type="small" />
+          <MyTicket status="sale" type="small" />
+          <MyTicket status="sale" type="small" />
+          <MyTicket status="sale" type="small" />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           Item Two
