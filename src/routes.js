@@ -14,6 +14,7 @@ import {SignUp} from "views/SignUp";
 import {CreateEvent} from "views/CreateEvent";
 import {TopBar} from "components/TopBar";
 import {MyTickets} from "views/MyTickets";
+import {MyEvents} from "views/MyEvents";
 
 
 export const Routes = (props) => {
@@ -51,7 +52,7 @@ export const Routes = (props) => {
           <MyTickets type='user' />
         </Route>
         <Route path="/my-events/:address">
-          <MyTickets type='organiser' />
+          <MyEvents type='organiser' />
         </Route>
         <Route path="/organiser/:address">
           <Organiser />
