@@ -30,7 +30,7 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
       organiser={thisEvent.asset.eventData.ownerId}
       type="organiser"
     />
-    
+
 
 
     <CartBottom

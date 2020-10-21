@@ -80,6 +80,8 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
           { label:"Overview" , link: "/overview", icon: <InboxIcon /> },
           { label:"My Tickets" , link: "/my-tickets", icon: <InboxIcon /> },
           { label:"Shopping Basket" , link: "/checkout", icon: <InboxIcon /> },
+          { label:"Sign in" , link: "/signup", icon: <InboxIcon /> },
+         
         ].map((item) => (
           <ListItem button onClick={() => history.push(`${item.link}`)} key={item.label} >
             <ListItemIcon style={{color:"#f50057"}}>{item.icon}</ListItemIcon>
@@ -88,6 +90,8 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
         ))}
       </List>
       <Divider />
+
+
       {/*<List>*/}
       {/*  {[*/}
       {/*    { label:"Organiser" , link: "/organiser/organiser01", icon: <InboxIcon /> },*/}
