@@ -23,6 +23,7 @@ export const TicketList = withReducer("TicketList", reducer)((props) => {
     { props.type === 'organiser' && <div>
     {theseEvents && theseEvents.map(event => {
       return (
+
       <TicketListItem key={event.address}
                       eventId={event.address}
                       eventDate={event.asset.eventData.eventDate}

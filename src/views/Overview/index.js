@@ -5,6 +5,7 @@ import {TicketList} from "components/TicketList";
 import { useHistory } from "react-router-dom";
 import * as Actions from "../../store/actions";
 import {useDispatch} from "react-redux";
+import {EventItem} from "components/EventItem";
 
 export const Overview = (props) => {
   const history = useHistory();
@@ -12,14 +13,22 @@ export const Overview = (props) => {
 
   return <div className="mt-10">
     <Header
-    title="An Honest Ticketing System"
-    subtitle="Buy or sell your tickets"
+    title="Explore Tickets"
+    subtitle="An Honest Ticketing System"
     button1="Buy Tickets"
     onClick1={() => {
       dispatch(Actions.openModal('buyTicketsModal'))
     }}
     button2="Sell Tickets"
     onClick2={() => history.push("/my-tickets")}/>
+    <div className="p-6">
+    <EventItem
+    status="type3"/>
+    <EventItem
+      status="sale"/>
+    <EventItem
+      status="active"/>
     <TicketList type="overview" />
+    </div>
   </div>;
 };
