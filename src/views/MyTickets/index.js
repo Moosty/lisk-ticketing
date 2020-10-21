@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Header} from "components/Header";
-import {TicketListItem} from "components/TicketListItem";
+import {TicketListItem} from "components/EventListItem";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import {useSelector} from "react-redux";

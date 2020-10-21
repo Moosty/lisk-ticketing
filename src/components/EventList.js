@@ -4,6 +4,7 @@ import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
+import {EventListItem} from "components/EventListItem";
 
 // TODO - OVERVIEW PAGINA: alle events
 // TODO - organisatie pagina: gefilterd
@@ -21,18 +22,18 @@ export const EventList = withReducer("TicketList", reducer)((props) => {
 
   return <div>
 
-
     { props.type === 'overview' && <div>
 
     {events && events.map(event => {
       return (
-        <TicketListItem key={event.address}
+        <EventListItem key={event.address}
                         eventId={event.address}
                         eventDate={event.asset.eventData.eventDate}
                         startEvent={event.asset.eventData.eventTime}
                         artist={event.asset?.eventData?.artist}
                         title={event.asset?.eventData?.title}
                         location={event.asset?.eventData?.location}
+                        type="overview"
         /> )
     })}
     </div>}
@@ -42,13 +43,14 @@ export const EventList = withReducer("TicketList", reducer)((props) => {
     { props.type === 'organiser' && <div>
       {theseEvents && theseEvents.map(event => {
         return (
-          <TicketListItem key={event.address}
+          <EventListItem  key={event.address}
                           eventId={event.address}
                           eventDate={event.asset.eventData.eventDate}
                           startEvent={event.asset.eventData.eventTime}
                           artist={event.asset?.eventData?.artist}
                           title={event.asset?.eventData?.title}
                           location={event.asset?.eventData?.location}
+                          type="organiser"
           /> )
       })}
     </div>}

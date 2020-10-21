@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Header} from "components/Header";
-import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
+import {CartBottom, EventHeader, TabsTickets, TicketListItem, TicketType} from "components/index";
 import {EventList} from "components/EventList";
 import {AccountHeader} from "components/AccountHeader";
 import Button from "@material-ui/core/Button";
@@ -26,29 +26,19 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
     }, [organiserAccounts]);
 
 
-
-
     return <div className="mt-10">
-        <OrganiserHeader
-            name={thisOrganiser.asset.organisation}
-            balance={thisOrganiser.balance}
-            token={thisOrganiser.token}
-            button1 ="Create new event" />
+       <div>
+            <Header
+              title={thisOrganiser.asset.organisation}
+              subtitle="My Events"
+            />
+            <TabsTickets type="organiser" />
 
-            <div>
-                <ul>
-                    <li>
-                        Account details (rechtsboven)
-                    </li>
-                    <li>
-                        overview of your events (details page)
-                    </li>
-                </ul>
-                </div>
-        <EventList type="organiser"
-         addressX={thisAddress}
-        />
+        </div>
 
+
+
+        {/*ONDERSTE BALK*/}
         <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
             <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
                 <div className="flex flex-row ">
