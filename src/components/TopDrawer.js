@@ -80,8 +80,9 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
           { label:"Overview" , link: "/overview", icon: <InboxIcon /> },
           { label:"My Tickets" , link: "/my-tickets", icon: <InboxIcon /> },
           { label:"Shopping Basket" , link: "/checkout", icon: <InboxIcon /> },
+         // TODO sign in veranderen in sign out wanneer je bent ingelogd
           { label:"Sign in" , link: "/signup", icon: <InboxIcon /> },
-         
+
         ].map((item) => (
           <ListItem button onClick={() => history.push(`${item.link}`)} key={item.label} >
             <ListItemIcon style={{color:"#f50057"}}>{item.icon}</ListItemIcon>
