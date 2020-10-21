@@ -30,20 +30,7 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
       organiser={thisEvent.asset.eventData.ownerId}
       type="organiser"
     />
-
-    {/*{thisEvent.asset.ticketData.types.map((type) =>*/}
-    {/*  <TicketType*/}
-
-    {/*    key={type.id}*/}
-    {/*    label={type.name}*/}
-    {/*    price={type.price}*/}
-    {/*    amount={type.amount}*/}
-    {/*    eventId={thisEvent.address}*/}
-    {/*    ticketType={type.id}*/}
-    {/*  />)}*/}
-
-    {/*<TicketAccordion*/}
-    {/*/>*/}
+    
 
 
     <CartBottom
