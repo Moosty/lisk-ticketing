@@ -13,6 +13,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
+import withReducer from "../store/withReducer";
+import reducer from "../store/reducers";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -67,13 +69,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+export const MyTicket = withReducer("myTicket", reducer)(({props, size, type, status, ticketType, keyEvent}) => {
 
-export const MyTicket = ({props, type, status}) => {
+// WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
+  const thisEvent = useSelector(({blockchain}) => blockchain.event.events.find(event => event.address === keyEvent));
+  const thisEventData = thisEvent.asset.eventData;
+
+  // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
+  const ticketData = thisEvent.asset.ticketData.types.find(type => type.id === ticketType );
+
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const classes = useStyles();
+
+  useEffect(() => {
+      console.log("THIS EVENT:", thisEvent);
+      // console.log(ticketData);
+      console.log("TICKETTYPE", ticketType);
+      console.log("TICKETDATA", ticketData);
+
+    }, [thisEvent]
+  );
 
   return (
     <div className=" w-full  ">
        <div className="flex flex-row justify-between">
-         <div className="flex flex-row items-center my-3 ">
+         <div className="flex flex-row items-center my-3 "
+              onClick={() => {
+                dispatch(Actions.openModal('scanTicketModal'))
+              }}>
          <StyledBadge
            overlap="circle"
            anchorOrigin={{
@@ -94,14 +119,14 @@ export const MyTicket = ({props, type, status}) => {
            <div><span className="font-bold text-left block"> Rapper Sjors & Marco Borsato Dance Event 2020</span>
              <span className=""></span>
            </div>
-         {type === 'large' &&
+         {size === 'large' &&
          <span className="font-bold text-xs flex flex-row" style={{color:"#f50057"}}>Second Release Ticket</span>
          }
            <span className="font-light text-xs flex flex-row">Jaarbeurs Utrecht</span>
          </div>
        </div>
 
-         {type === 'small' &&
+         {size === 'small' &&
          <div className="flex items-center flex-row">
 
            <IconButton
@@ -118,7 +143,7 @@ export const MyTicket = ({props, type, status}) => {
            </IconButton>
          </div>
          }
-         {type === 'large' &&
+         {size === 'large' &&
          <div className="flex items-center flex-row w-4/12">
             <div className="flex flex-col text-right text-xs font-bold">
               <span className="text-sm"> € 45.00</span>
@@ -136,4 +161,4 @@ export const MyTicket = ({props, type, status}) => {
       <Divider />
     </div>
   );
-};
+});

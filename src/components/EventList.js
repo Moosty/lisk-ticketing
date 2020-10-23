@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {TicketListItem, TicketType} from "components/index";
+import {EventItem, TicketListItem, TicketType} from "components/index";
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import {useSelector} from "react-redux";
@@ -10,7 +10,7 @@ import {EventListItem} from "components/EventListItem";
 // TODO - organisatie pagina: gefilterd
 
 export const EventList = withReducer("TicketList", reducer)((props) => {
-  const { address } = useParams();
+  const {address} = useParams();
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const theseEvents = events.filter(event => event.asset.eventData.ownerId === address);
 
@@ -20,38 +20,40 @@ export const EventList = withReducer("TicketList", reducer)((props) => {
     console.log("deze events", theseEvents);
   }, [events])
 
-  return <div>
+  return <div className="p-6">
 
-    { props.type === 'overview' && <div>
+    {props.type === 'overview' && <div>
 
-    {events && events.map(event => {
-      return (
-        <EventListItem key={event.address}
-                        eventId={event.address}
-                        eventDate={event.asset.eventData.eventDate}
-                        startEvent={event.asset.eventData.eventTime}
-                        artist={event.asset?.eventData?.artist}
-                        title={event.asset?.eventData?.title}
-                        location={event.asset?.eventData?.location}
-                        type="overview"
-        /> )
-    })}
+      {events && events.map(event => {
+        return (
+          <EventItem key={event.address}
+                     eventId={event.address}
+                     eventDate={event.asset.eventData.eventDate}
+                     startEvent={event.asset.eventData.eventTime}
+                     artist={event.asset?.eventData?.artist}
+                     title={event.asset?.eventData?.title}
+                     location={event.asset?.eventData?.location}
+                     type="overview"
+                     status="active"
+          />)
+      })}
     </div>}
 
-{/*// DE EVENEMENTENPAGINA VOOR EEN ORGANISATOR*/}
+    {/*// DE EVENEMENTENPAGINA VOOR EEN ORGANISATOR*/}
 
-    { props.type === 'organiser' && <div>
+    {props.type === 'organiser' && <div>
       {theseEvents && theseEvents.map(event => {
         return (
-          <EventListItem  key={event.address}
-                          eventId={event.address}
-                          eventDate={event.asset.eventData.eventDate}
-                          startEvent={event.asset.eventData.eventTime}
-                          artist={event.asset?.eventData?.artist}
-                          title={event.asset?.eventData?.title}
-                          location={event.asset?.eventData?.location}
-                          type="organiser"
-          /> )
+          <EventItem key={event.address}
+                     eventId={event.address}
+                     eventDate={event.asset.eventData.eventDate}
+                     startEvent={event.asset.eventData.eventTime}
+                     artist={event.asset?.eventData?.artist}
+                     title={event.asset?.eventData?.title}
+                     location={event.asset?.eventData?.location}
+                     type="overview"
+                     status="active"
+          />)
       })}
     </div>}
 

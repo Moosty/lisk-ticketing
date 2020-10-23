@@ -7,7 +7,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import {MyTicket} from "components/index";
 import {useParams} from 'react-router-dom';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
@@ -111,20 +110,21 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
+        {/*       PANEL 1       */}
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <MyTicket status="active" type="small" />
-          <MyTicket status="sale" type="small" />
-          <MyTicket status="sale" type="small" />
-          <MyTicket status="sale" type="small" />
+
+
+          {/* USER  --> MY TICKETS */}
           {props.type === 'user' &&
           <MyTicketsComponent type="current"/>
           }
+
+          {/*ORGANISER --> MY EVENTS*/}
           {props.type === 'organiser' &&
           <EventList type="organiser"
           />          }
-
-
         </TabPanel>
+        {/*       PANEL 2     */}
         <TabPanel value={value} index={1} dir={theme.direction}>
 
           {props.type === 'user' &&
