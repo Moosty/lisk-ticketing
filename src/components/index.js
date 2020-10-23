@@ -1,8 +1,8 @@
 import { ExampleComponent } from "./ExampleComponent";
 import { Header } from "./Header.js";
 import { TopBar } from "./TopBar.js";
-import { TicketListItem } from "./TicketListItem.js";
-import { TicketList } from "./TicketList.js";
+import { EventListItem } from "./EventListItem.js";
+import { EventList } from "./EventList.js";
 import { EventHeader } from "./EventHeader.js";
 import { TicketType } from "./TicketType";
 import { CartBottom } from "./CartBottom";
@@ -22,5 +22,5 @@ import { EventItem } from "components/EventItem";
 export { ExampleComponent,
 Header,
 TopBar,
-TicketListItem, TicketList, EventItem,  MyTicket, TabsTickets, SliderPrice, EventHeader, TicketType, CartBottom,SignUpOrg, TopDrawer, AccountHeader, TicketAccordion, SwapTicket, SignUpUser, OrganiserHeader, LogIn,
+EventListItem, EventList, EventItem, MyTicket, TabsTickets, SliderPrice, EventHeader, TicketType, CartBottom,SignUpOrg, TopDrawer, AccountHeader, TicketAccordion, SwapTicket, SignUpUser, OrganiserHeader, LogIn,
 };

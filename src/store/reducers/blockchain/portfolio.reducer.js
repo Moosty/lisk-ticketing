@@ -4,6 +4,7 @@ import _ from "lodash";
 export const ticketStatuses = {
   "OWNED": "OWNED",
   "SELLING": "SELLING",
+  "SOLD": "SOLD",
   "PAST_EVENT": "PAST_EVENT",
 };
 
@@ -29,11 +30,11 @@ const defaultState = {
     },
     {
       ticketAddress: "12dfasdfddf312341r555ff",
-      eventId: 'event02',
+      eventId: 'event03',
       ownerId: 'account01',
       ticketType: 2,
       quantity: 2,
-      ticketStatus: ticketStatuses.OWNED,
+      ticketStatus: ticketStatuses.PAST_EVENT,
     },
     {
       ticketAddress: "12dfasdddsfddf312341r555ff",
@@ -49,7 +50,7 @@ const defaultState = {
       ownerId: 'account02',
       ticketType: 2,
       quantity: 2,
-      ticketStatus: ticketStatuses.PAST_EVENT,
+      ticketStatus: ticketStatuses.OWNED,
     },
   ]
 };

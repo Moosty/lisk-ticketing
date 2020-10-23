@@ -14,6 +14,7 @@ import {SignUp} from "views/SignUp";
 import {CreateEvent} from "views/CreateEvent";
 import {TopBar} from "components/TopBar";
 import {MyTickets} from "views/MyTickets";
+import {OrganiserEventDetails} from "views/OrganiserEventDetails";
 
 
 export const Routes = (props) => {
@@ -45,12 +46,18 @@ export const Routes = (props) => {
         <Route path="/account/:address">
           <Account />
         </Route>
+
+
         <Route path="/my-tickets/:account">
-          <MyTickets />
+          <MyTickets type='user' />
         </Route>
-        <Route path="/my-tickets">
-          <MyTickets />
+        <Route path="/my-events/event-details/:address">
+          <OrganiserEventDetails />
         </Route>
+        <Route path="/my-events/:address">
+          <Organiser type='organiser' />
+        </Route>
+
         <Route path="/organiser/:address">
           <Organiser />
         </Route>

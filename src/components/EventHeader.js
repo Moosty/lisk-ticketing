@@ -14,6 +14,14 @@ import Divider from "@material-ui/core/Divider";
       fontWeight: "bold",
       color:"#f50057",
     },
+    organiser: {
+      fontWeight: "bold",
+      color:"#f50057",
+      borderStyle: "solid",
+      border: "1px",
+      padding: "2px",
+      borderRadius: "5px",
+    },
 
   }));
 
@@ -26,7 +34,7 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
   "SUN"
 ];
 
-export const EventHeader = ({ artist, location, eventDate, eventTime}) => {
+export const EventHeader = ({ artist, location, eventDate, eventTime, type, organiser}) => {
 
   const classes = useStyles();
 
@@ -39,10 +47,18 @@ export const EventHeader = ({ artist, location, eventDate, eventTime}) => {
       </div>
       </div>
       <div className="bg-gray-900" >
-      <div className=" mx-6" >
+      <div className=" mx-6 flex flex-row" >
         <h1 className="text-4xl font-black text-white">
           {artist}
         </h1>
+
+        {/*ORGANISER VIEW*/}
+        { type === 'organiser' &&
+        <span className={classes.organiser}>
+          {organiser}
+        </span> }
+
+
       </div>
       <div className="w-full flex flex-row p-2 justify-between content-center items-center text-white">
         <div className="flex flex-row ">

@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {makeStyles, useTheme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import {MyTicket} from "components/index";
+import {useParams} from 'react-router-dom';
+import withReducer from "../store/withReducer";
+import reducer from "../store/reducers";
+import {useSelector} from "react-redux";
+import {PortfolioItem} from "components/PortfolioItem";
+import {MyTicketsComponent} from "components/MyTicketsComponent";
+import {EventList} from "components/EventList";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const {children, value, index, ...other} = props;
 
   return (
     <div
@@ -49,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TabsTickets = (props) => {
+export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
+
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -63,11 +71,15 @@ export const TabsTickets = (props) => {
   };
 
   return (
+
+
     <div className={classes.root}>
-      <AppBar position="static" style={{backgroundColor:"#1a202c", color:"white"}}>
+      <AppBar position="static" style={{backgroundColor: "#1a202c", color: "white"}}>
+
+        {props.type === 'user' &&
         <Tabs
           value={value}
-          style={{color:"white"}}
+          style={{color: "white"}}
           onChange={handleChange}
           indicatorColor="secondary"
           textColor="secondary"
@@ -75,9 +87,24 @@ export const TabsTickets = (props) => {
           aria-label="full width tabs example"
         >
           <Tab label="my tickets" {...a11yProps(0)} />
-          <Tab label="sold tickets" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-        </Tabs>
+          <Tab label="Old tickets" {...a11yProps(1)} />
+        </Tabs>}
+
+        {props.type === 'organiser' &&
+        <Tabs
+          value={value}
+          style={{color: "white"}}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="secondary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="My Events" {...a11yProps(0)} />
+          <Tab label="Old Events" {...a11yProps(1)} />
+        </Tabs>}
+
+
       </AppBar>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -89,14 +116,29 @@ export const TabsTickets = (props) => {
           <MyTicket status="sale" type="small" />
           <MyTicket status="sale" type="small" />
           <MyTicket status="sale" type="small" />
+          {props.type === 'user' &&
+          <MyTicketsComponent type="current"/>
+          }
+          {props.type === 'organiser' &&
+          <EventList type="organiser"
+          />          }
+
+
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+
+          {props.type === 'user' &&
+          <MyTicketsComponent type="past"/>
+          }
+          {props.type === 'organiser' &&
+          <EventList type="organiser"
+          />          }
+
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
-        </TabPanel>
+
       </SwipeableViews>
     </div>
   );
-}
+
+
+});

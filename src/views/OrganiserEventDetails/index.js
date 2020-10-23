@@ -7,7 +7,7 @@ import reducer from "../../store/reducers";
 import {useSelector} from "react-redux";
 import {useParams} from 'react-router-dom';
 
-export const EventPage = withReducer("EventPage", reducer)((props) => {
+export const OrganiserEventDetails = withReducer("organiserEventDetails", reducer)((props) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const swapTickets = useSelector(({blockchain}) => blockchain.marketplace.items);
 
@@ -16,7 +16,7 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
   const swapTicketsX = swapTickets.filter(event => event.eventId === address);
 
   useEffect(() => {
-  
+
   }, [events, swapTickets]);
 
   return <div className="mt-10">
@@ -27,21 +27,10 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
       location={thisEvent.asset.eventData.location}
       eventDate={thisEvent.asset.eventData.eventDate}
       startEvent={thisEvent.asset.eventData.eventTime}
+      organiser={thisEvent.asset.eventData.ownerId}
+      type="organiser"
     />
 
-    {thisEvent.asset.ticketData.types.map((type) =>
-      <TicketType
-
-        key={type.id}
-        label={type.name}
-        price={type.price}
-        amount={type.amount}
-        eventId={thisEvent.address}
-        ticketType={type.id}
-      />)}
-
-      <TicketAccordion
-      />
 
 
     <CartBottom
