@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import {PortfolioItem} from "components/PortfolioItem";
 import {MyTicket} from "components/MyTicket";
 
-export const MyTicketsComponent = withReducer("tabsTickets", reducer)((props) => {
+export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)((props) => {
 
 
   // WE ZOEKEN DE JUISTE PORTFOLIO ITEMS BIJ DIT ACCOUNT
@@ -38,11 +38,6 @@ export const MyTicketsComponent = withReducer("tabsTickets", reducer)((props) =>
           />)
         })}
       </div>}
-
-      {/*<MyTicket status="active" size="small" />*/}
-      {/*<MyTicket status="sale" size="small" />*/}
-      {/*<MyTicket status="sale" size="small" />*/}
-      {/*<MyTicket status="sale" size="small" />*/}
 
       {/*// CURRENT TICKETS*/}
       {props.type === 'current' && <div>

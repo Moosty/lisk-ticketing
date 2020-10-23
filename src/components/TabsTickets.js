@@ -128,7 +128,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         <TabPanel value={value} index={1} dir={theme.direction}>
 
           {props.type === 'user' &&
-          <MyTicketsComponent type="past"/>
+          <MyTicketsComponent type="current"/>
           }
           {props.type === 'organiser' &&
           <EventList type="organiser"

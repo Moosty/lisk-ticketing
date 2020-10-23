@@ -16,6 +16,14 @@ import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 
+const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
+  "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"
+];
+
+const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
+  "SUN"
+];
+
 const StyledBadge = withStyles((theme) => ({
   badge: {
     backgroundColor: 'orange',
@@ -92,13 +100,10 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, type, st
     }, [thisEvent]
   );
 
-  return (
-    <div className=" w-full  ">
+  return (<div className=" w-full  ">
        <div className="flex flex-row justify-between">
          <div className="flex flex-row items-center my-3 "
-              onClick={() => {
-                dispatch(Actions.openModal('scanTicketModal'))
-              }}>
+              >
          <StyledBadge
            overlap="circle"
            anchorOrigin={{
@@ -109,20 +114,20 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, type, st
          >
            <Avatar variant="rounded"  style={{backgroundColor:colors[status]}}>
              <div className="flex flex-col center items-center">
-             <span className="text-xs">5</span>
-               <span className="text-xs">APR</span>
+             <span className="text-xs">{thisEventData.eventDate.getDate()}</span>
+               <span className="text-xs">{monthNames[thisEventData.eventDate.getMonth()]}</span>
              </div>
            </Avatar>
          </StyledBadge>
 
        <div className="flex flex-col text-sm leading-4 mx-2">
-           <div><span className="font-bold text-left block"> Rapper Sjors & Marco Borsato Dance Event 2020</span>
+           <div><span className="font-bold text-left block">{thisEventData.title}</span>
              <span className=""></span>
            </div>
          {size === 'large' &&
          <span className="font-bold text-xs flex flex-row" style={{color:"#f50057"}}>Second Release Ticket</span>
          }
-           <span className="font-light text-xs flex flex-row">Jaarbeurs Utrecht</span>
+           <span className="font-light text-xs flex flex-row">{thisEventData.location}</span>
          </div>
        </div>
 
@@ -138,6 +143,9 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, type, st
            <IconButton
 
              color="secondary"
+             onClick={() => {
+               dispatch(Actions.openModal('scanTicketModal'))
+             }}
            >
              <MoreVertIcon color="white"/>
            </IconButton>
