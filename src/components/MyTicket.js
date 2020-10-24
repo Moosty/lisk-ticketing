@@ -97,7 +97,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, type, st
       console.log("TICKETTYPE", ticketType);
       console.log("TICKETDATA", ticketData);
 
-    }, [thisEvent]
+    }, [thisEvent],
   );
 
   return (<div className=" w-full  ">
