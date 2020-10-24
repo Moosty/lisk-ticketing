@@ -15,6 +15,7 @@ import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
+import {DeleteOutline} from "@material-ui/icons";
 
 const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
   "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"
@@ -77,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const MyTicket = withReducer("myTicket", reducer)(({props, size, type, status, ticketType, keyEvent}) => {
+export const MyTicket = withReducer("myTicket", reducer)(({props, size,checkout, type, status, ticketType, keyEvent}) => {
 
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
   const thisEvent = useSelector(({blockchain}) => blockchain.event.events.find(event => event.address === keyEvent));
@@ -160,6 +161,18 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, type, st
            <div className="">
 
            </div>
+
+         </div>
+         }
+         {checkout === 'true' &&
+         <div className="flex items-center flex-row">
+
+           <IconButton
+
+             color="secondary"
+           >
+             <DeleteOutline color="white"/>
+           </IconButton>
 
          </div>
          }
