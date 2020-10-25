@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import {PortfolioItem} from "components/PortfolioItem";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {TicketListItem} from "components/index";
+import {MyTicket, TicketListItem} from "components/index";
 import { SliderPrice } from "components/SliderPrice";
 import * as Actions from "../../store/actions";
 import IconButton from "@material-ui/core/IconButton";
@@ -30,8 +30,10 @@ export const ConfirmTxModal = (props) => {
         </div>
 
 
-        <div className="bg-white rounded my-4">
-          <PortfolioItem
+        <div className="bg-white rounded my-4 px-2 text-left">
+          <MyTicket
+            status="active"
+            size="large"
             type=""
             key={thisItem.ticketAddress}
             keyEvent={thisItem.eventId}

@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import * as Actions from "../../store/actions";
 import {useHistory, useParams} from "react-router-dom";
 import {PortfolioItem} from "components/PortfolioItem";
+import {MyTicket} from "components/MyTicket";
 
 
 // TODO animatie toevoegen: bij openen van deze pagina van beneden naar boven sliden
@@ -41,18 +42,21 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
 
       <div className=" py-5 md:p-12 lg:p-24  h-full flex flex-col ">
         <h1 className="mx-10 text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Checkout</h1>
-
+        <div className="p-6 pr-2">
       {thisBasket && thisBasket.map(item => {
         console.log(basket);
 
-        return (<PortfolioItem
-          type="cancel"
+        return (<MyTicket
+          size="large"
+          status="active"
+          checkout="true"
           key={item.basketId}
           keyEvent={item.eventId}
           ticketType={item.ticketType}
-        />)
+        />
+        )
       })}
-
+        </div>
       <div className="w-full fixed z-50 p-4 bottom-0 flex flex-row bg-gray-900 justify-between">
         <div className="flex-col mx-4 ">
           <div className="leading-4">
