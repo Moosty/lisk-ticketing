@@ -15,7 +15,7 @@ import {PortfolioItem} from "components/PortfolioItem";
 import {MyTicketsComponent} from "components/MyTicketsComponent";
 import {EventList} from "components/EventList";
 
-function TabPanel(props) {
+function TabsContext(props) {
   const {children, value, index, ...other} = props;
 
   return (
@@ -35,7 +35,7 @@ function TabPanel(props) {
   );
 }
 
-TabPanel.propTypes = {
+TabsContext.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
@@ -111,7 +111,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         onChangeIndex={handleChangeIndex}
       >
         {/*       PANEL 1       */}
-        <TabPanel value={value} index={0} dir={theme.direction}>
+        <TabsContext value={0} index={0} dir={theme.direction}>
 
 
           {/* USER  --> MY TICKETS */}
@@ -123,9 +123,9 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           {props.type === 'organiser' &&
           <EventList type="organiser"
           />          }
-        </TabPanel>
+        </TabsContext>
         {/*       PANEL 2     */}
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabsContext value={1} index={1} dir={theme.direction}>
 
           {props.type === 'user' &&
           <MyTicketsComponent type="current"/>
@@ -134,7 +134,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           <EventList type="organiser"
           />          }
 
-        </TabPanel>
+        </TabsContext>
 
       </SwipeableViews>
     </div>
