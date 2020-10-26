@@ -93,7 +93,6 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         {props.type === 'organiser' &&
         <Tabs
           value={value}
-          style={{color: "white"}}
           onChange={handleChange}
           indicatorColor="secondary"
           textColor="secondary"
