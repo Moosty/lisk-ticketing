@@ -16,7 +16,7 @@ import {MyTicketsComponent} from "components/MyTicketsComponent";
 import {EventList} from "components/EventList";
 import { TabContext } from '@material-ui/lab';
 
-function TabPanel(props) {
+function TabsContext(props) {
   const {children, value, index, ...other} = props;
 
   return (
@@ -36,7 +36,7 @@ function TabPanel(props) {
   );
 }
 
-TabPanel.propTypes = {
+TabsContext.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
@@ -111,6 +111,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         onChangeIndex={handleChangeIndex}
       >
         {/*       PANEL 1       */}
+
         <TabContext value="0" index={0} dir={theme.direction}>
 
 
@@ -123,6 +124,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           {props.type === 'organiser' &&
           <EventList type="organiser"
           />          }
+
         </TabContext>
         {/*       PANEL 2     */}
         <TabContext value="1" index={1} dir={theme.direction}>
