@@ -20,7 +20,7 @@ return <div className="mt-10">
         title="My Tickets"
         subtitle="keep all your tickets safe"
       />
-      <TabsTickets type="user"/>
+      <TabsTickets  type="user"/>
     </div>}
 
 

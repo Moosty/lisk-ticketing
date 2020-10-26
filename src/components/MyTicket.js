@@ -81,7 +81,9 @@ const useStyles = makeStyles((theme) => ({
 export const MyTicket = withReducer("myTicket", reducer)(({props, size,checkout, type, status, ticketType, keyEvent}) => {
 
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
-  const thisEvent = useSelector(({blockchain}) => blockchain.event.events.find(event => event.address === keyEvent));
+  const Events = useSelector(({blockchain}) => blockchain.event.events);
+  const thisEvent = Events.find(event => event.address === keyEvent);
+
   const thisEventData = thisEvent.asset.eventData;
 
   // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
@@ -93,11 +95,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size,checkout,
   const classes = useStyles();
 
   useEffect(() => {
-      console.log("THIS EVENT:", thisEvent);
-      // console.log(ticketData);
-      console.log("TICKETTYPE", ticketType);
-      console.log("TICKETDATA", ticketData);
-
+    console.log("MyTIckets this event", thisEventData);
     }, [thisEvent],
   );
 
@@ -145,6 +143,9 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size,checkout,
 
              color="secondary"
              onClick={() => {
+               console.log("myticket = ", thisEvent);
+               console.log("myticket = ", thisEventData);
+
                dispatch(Actions.openModal('scanTicketModal'))
              }}
            >

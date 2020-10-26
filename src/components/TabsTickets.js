@@ -16,7 +16,7 @@ import {MyTicketsComponent} from "components/MyTicketsComponent";
 import {EventList} from "components/EventList";
 import { TabContext } from '@material-ui/lab';
 
-function TabsContext(props) {
+function TabPanel(props) {
   const {children, value, index, ...other} = props;
 
   return (
@@ -36,7 +36,7 @@ function TabsContext(props) {
   );
 }
 
-TabsContext.propTypes = {
+TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,

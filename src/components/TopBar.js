@@ -102,9 +102,7 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
 
   useEffect(
     () => {
-      console.log(initialTickets);
-      console.log("amount of tickets", amountOfTickets)
-      setAmountOfTickets(portfolio.lenght);
+
     }, [portfolio],
   );
 

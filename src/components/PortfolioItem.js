@@ -41,7 +41,8 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
 
 
   // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
-  const thisEvent = useSelector(({blockchain}) => blockchain.event.events.find(event => event.address === keyEvent));
+  const Events = useSelector(({blockchain}) => blockchain.event.events);
+  const thisEvent = Events.find(event => event.address === keyEvent);
   const thisEventData = thisEvent.asset.eventData;
 
   // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
@@ -53,10 +54,6 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
   const classes = useStyles();
 
   useEffect(() => {
-    console.log("THIS EVENT:", thisEvent);
-    // console.log(ticketData);
-    console.log("TICKETTYPE", ticketType);
-      console.log("TICKETDATA", ticketData);
 
     }, [thisEvent]
   );
@@ -105,6 +102,7 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
         {type === 'cancel' &&
         <IconButton
           onClick={() => {
+            console.log("this event", thisEvent);
             dispatch(Actions.openModal('cancelInfoModal'))
           }}
           color="secondary"

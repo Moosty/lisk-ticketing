@@ -20,13 +20,29 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)((pr
   return (
     <div>
 
+      {/*// ALL MY TICKETS*/}
+      {props.type === 'current' && <div>
+
+        <div >selling</div>
+        {thisPortfolio && thisPortfolio.map(item => {
+
+          return ( <MyTicket
+            type="sell"
+            key={item.ticketAddress}
+            keyEvent={item.eventId}
+            ticketType={item.ticketType}
+            status="active"
+            size="small"
+          />)
+        })}
+      </div>}
+
       {/*// CURRENT TICKETS*/}
       {props.type === 'current' && <div>
 
-        <div>selling</div>
+        <div >selling</div>
         {tickets_SELLING && tickets_SELLING.map(item => {
-          console.log("DIT PORTFOLIO", thisPortfolio);
-          console.log("STATUSES OWNED", tickets_OWNED);
+
 
           return ( <MyTicket
             type="sell"
@@ -44,8 +60,7 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)((pr
 
         <div>selling</div>
       {tickets_SELLING && tickets_SELLING.map(item => {
-        console.log("DIT PORTFOLIO", thisPortfolio);
-        console.log("STATUSES OWNED", tickets_OWNED);
+
 
         return (<PortfolioItem
           type="sell"
@@ -57,9 +72,22 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)((pr
 
       <div>owned</div>
 
+        {tickets_OWNED && tickets_OWNED.map(item => {
+
+
+          return (<MyTicket
+            type="owned"
+            key={item.ticketAddress}
+            keyEvent={item.eventId}
+            ticketType={item.ticketType}
+            status="active"
+            size="small"
+          />)
+        })}
+
+
       {tickets_OWNED && tickets_OWNED.map(item => {
-        console.log("DIT PORTFOLIO", thisPortfolio);
-        console.log("STATUSES OWNED", tickets_OWNED);
+
 
         return (<PortfolioItem
           type="sell"
@@ -79,8 +107,6 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)((pr
 
 
       {tickets_PAST_EVENTS && tickets_PAST_EVENTS.map(item => {
-        console.log("DIT PORTFOLIO", thisPortfolio);
-        console.log("TICKETS PAST EVENTS", tickets_PAST_EVENTS);
 
         return (<PortfolioItem
           type="sell"

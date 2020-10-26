@@ -20,8 +20,6 @@ export const TicketOptionsModal = (props) => {
 
   useEffect(
     () => {
-      console.log("sellmodal", portfolio);
-      console.log("item", thisItem);
 
     },
   );
