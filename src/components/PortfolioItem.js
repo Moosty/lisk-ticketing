@@ -35,9 +35,13 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
 
 export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType, eventId, eventDate, eventTime,type, title, day, month, time, artist, location, keyEvent}) => {
 
+
+  // DIT COMPONENT WORDT VEVANGEN DOOR MyTicket.js
+
+
+
   // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
-  const events = useSelector(({blockchain}) => blockchain.event.events);
-  const thisEvent = events.find(event => event.address === keyEvent);
+  const thisEvent = useSelector(({blockchain}) => blockchain.event.events.find(event => event.address === keyEvent));
   const thisEventData = thisEvent.asset.eventData;
 
   // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
@@ -54,7 +58,7 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
     console.log("TICKETTYPE", ticketType);
       console.log("TICKETDATA", ticketData);
 
-    }, [events]
+    }, [thisEvent]
   );
 
   return (

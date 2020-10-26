@@ -14,6 +14,14 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 
+const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
+  "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"
+];
+
+const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
+  "SUN"
+];
+
 const StyledBadge = withStyles((theme) => ({
   badge: {
     backgroundColor: 'orange',
@@ -68,7 +76,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export const EventItem = ({props, type, status}) => {
+export const EventItem = ({eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status}) => {
+const history = useHistory();
 
   return (
     <div className=" w-full  ">
@@ -84,32 +93,53 @@ export const EventItem = ({props, type, status}) => {
           >
             <Avatar variant="rounded"  style={{backgroundColor:colors[status]}}>
               <div className="flex flex-col center items-center">
-                <span className="text-xs">5</span>
-                <span className="text-xs">APR</span>
+                <span className="text-xs">{eventDate.getDate()}</span>
+                <span className="text-xs">{monthNames[eventDate.getMonth()]}</span>
               </div>
             </Avatar>
           </StyledBadge>
 
           <div className="flex flex-col text-sm leading-4 mx-2">
-            <div><span className="font-medium text-left block"> Rapper Sjors & Marco Borsato Dance Event 2020</span>
+            <div><span className="font-medium text-left block"> {title}</span>
               <span className=""></span>
             </div>
             {type === 'large' &&
             <span className="font-bold text-xs flex flex-row" style={{color:"#f50057"}}>Second Release Ticket</span>
             }
-            <span className="font-light text-xs flex flex-row">Jaarbeurs Utrecht</span>
+            {/*Jaarbeurs Utrecht*/}
+            <span className="font-light text-xs flex flex-row">{location}</span>
           </div>
         </div>
 
 
+
         <div className="flex items-center flex-row">
 
-          <Button
+          { type === 'overview' &&   <Button
+
+            onClick={() => {
+              console.log(eventId);
+              history.push(`/events/${eventId}`);
+            }}
+
             variant="outlined"
             color="secondary"
-            size="small">Details
+            size="small"
+            >Details</Button> }
 
-          </Button>
+
+
+          { type === 'organiser' &&   <Button
+
+            onClick={() => {
+              console.log(eventId);
+              history.push(`/my-events/event-details/${eventId}`);
+            }}
+
+            variant="outlined"
+            color="secondary"
+            size="small"
+            >Details</Button> }
         </div>
 
 

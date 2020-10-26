@@ -65,7 +65,7 @@ const defaultState = {
         eventData: {
           ownerId: "organiser01",
           status: statuses.OPEN_FOR_SALE,
-          title: "Een avond gezelligheid",
+          title: "Rapper Sjors & Marco Borsato Dance Event 2020",
           artist: "Racoon",
           location: "Caprera Openluchttheater - Bloemendaal",
           eventDate: new Date("2018-10-05"),
@@ -120,9 +120,9 @@ const defaultState = {
         eventData: {
           ownerId: "organiser01",
           status: statuses.OPEN_FOR_SALE,
-          title: "Bonny Soiree",
+          title: "Bonny Soiree & De Bojangles with French Toasty",
           artist: "French Toasty",
-          location: "Park 6",
+          location: "Tivoli Vredenburg - Park 6",
           eventDate: new Date("2018-12-08"),
           eventTime: "23:50",
           duration: 90,
@@ -176,9 +176,9 @@ const defaultState = {
         eventData: {
           ownerId: "organiser02",
           status: statuses.OPEN_FOR_SALE,
-          title: "De Leven",
+          title: "Bon Sjef - De Leven van Chef",
           artist: "Bon Sjef",
-          location: "Park 6",
+          location: "Tivoli Outdoors - Park 27",
           eventDate: new Date("2018-01-01"),
           eventTime: "23:50",
           duration: 90,

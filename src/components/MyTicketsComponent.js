@@ -4,8 +4,11 @@ import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import {useSelector} from "react-redux";
 import {PortfolioItem} from "components/PortfolioItem";
+import {MyTicket} from "components/MyTicket";
 
-export const MyTicketsComponent = withReducer("tabsTickets", reducer)((props) => {
+export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)((props) => {
+
+
   // WE ZOEKEN DE JUISTE PORTFOLIO ITEMS BIJ DIT ACCOUNT
   const {account} = useParams();
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
@@ -16,6 +19,25 @@ export const MyTicketsComponent = withReducer("tabsTickets", reducer)((props) =>
 
   return (
     <div>
+
+      {/*// CURRENT TICKETS*/}
+      {props.type === 'current' && <div>
+
+        <div>selling</div>
+        {tickets_SELLING && tickets_SELLING.map(item => {
+          console.log("DIT PORTFOLIO", thisPortfolio);
+          console.log("STATUSES OWNED", tickets_OWNED);
+
+          return ( <MyTicket
+            type="sell"
+            key={item.ticketAddress}
+            keyEvent={item.eventId}
+            ticketType={item.ticketType}
+            status="active"
+            size="small"
+          />)
+        })}
+      </div>}
 
       {/*// CURRENT TICKETS*/}
       {props.type === 'current' && <div>

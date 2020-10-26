@@ -27,6 +27,20 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
 
 export const EventListItem = ({eventId, eventDate, eventTime, title, day, month, time, artist, location, type}) => {
 
+
+
+
+
+
+  // DIT COMPONENT WORDT NIET MEER GEBRUIKT!!!!!
+
+
+
+
+
+
+
+
   // DIT COMPONENT BEVINDT ZICH OP DE VOLGENDE LOCATIES:
     // - OVERVIEW pagina
     // - ORGANISATIE EVENT - evenement pagina

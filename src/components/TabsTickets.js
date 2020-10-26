@@ -7,7 +7,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import {MyTicket} from "components/index";
 import {useParams} from 'react-router-dom';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
@@ -15,6 +14,7 @@ import {useSelector} from "react-redux";
 import {PortfolioItem} from "components/PortfolioItem";
 import {MyTicketsComponent} from "components/MyTicketsComponent";
 import {EventList} from "components/EventList";
+import { TabContext } from '@material-ui/lab';
 
 function TabPanel(props) {
   const {children, value, index, ...other} = props;
@@ -93,7 +93,6 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         {props.type === 'organiser' &&
         <Tabs
           value={value}
-          style={{color: "white"}}
           onChange={handleChange}
           indicatorColor="secondary"
           textColor="secondary"
@@ -111,11 +110,23 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <MyTicket status="active" type="small" />
-          <MyTicket status="sale" type="small" />
-          <MyTicket status="sale" type="small" />
-          <MyTicket status="sale" type="small" />
+        {/*       PANEL 1       */}
+        <TabContext value="0" index={0} dir={theme.direction}>
+
+
+          {/* USER  --> MY TICKETS */}
+          {props.type === 'user' &&
+          <MyTicketsComponent type="current"/>
+          }
+
+          {/*ORGANISER --> MY EVENTS*/}
+          {props.type === 'organiser' &&
+          <EventList type="organiser"
+          />          }
+        </TabContext>
+        {/*       PANEL 2     */}
+        <TabContext value="1" index={1} dir={theme.direction}>
+
           {props.type === 'user' &&
           <MyTicketsComponent type="current"/>
           }
@@ -123,18 +134,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           <EventList type="organiser"
           />          }
 
-
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-
-          {props.type === 'user' &&
-          <MyTicketsComponent type="past"/>
-          }
-          {props.type === 'organiser' &&
-          <EventList type="organiser"
-          />          }
-
-        </TabPanel>
+        </TabContext>
 
       </SwipeableViews>
     </div>
