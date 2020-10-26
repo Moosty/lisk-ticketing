@@ -14,6 +14,7 @@ import {useSelector} from "react-redux";
 import {PortfolioItem} from "components/PortfolioItem";
 import {MyTicketsComponent} from "components/MyTicketsComponent";
 import {EventList} from "components/EventList";
+import { TabContext } from '@material-ui/lab';
 
 function TabPanel(props) {
   const {children, value, index, ...other} = props;
@@ -111,7 +112,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         onChangeIndex={handleChangeIndex}
       >
         {/*       PANEL 1       */}
-        <TabPanel value={value} index={0} dir={theme.direction}>
+        <TabContext value="0" index={0} dir={theme.direction}>
 
 
           {/* USER  --> MY TICKETS */}
@@ -123,9 +124,9 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           {props.type === 'organiser' &&
           <EventList type="organiser"
           />          }
-        </TabPanel>
+        </TabContext>
         {/*       PANEL 2     */}
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabContext value="1" index={1} dir={theme.direction}>
 
           {props.type === 'user' &&
           <MyTicketsComponent type="current"/>
@@ -134,7 +135,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           <EventList type="organiser"
           />          }
 
-        </TabPanel>
+        </TabContext>
 
       </SwipeableViews>
     </div>
