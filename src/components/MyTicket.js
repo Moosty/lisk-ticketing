@@ -84,10 +84,10 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size,checkout,
   const Events = useSelector(({blockchain}) => blockchain.event.events);
   const thisEvent = Events.find(event => event.address === keyEvent);
 
-  const thisEventData = thisEvent.asset.eventData;
+  const thisEventData = thisEvent?.asset?.eventData;
 
   // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
-  const ticketData = thisEvent.asset.ticketData.types.find(type => type.id === ticketType );
+  const ticketData = thisEvent?.asset?.ticketData?.types.find(type => type.id === ticketType );
 
 
   const dispatch = useDispatch();
@@ -113,20 +113,20 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size,checkout,
          >
            <Avatar variant="rounded"  style={{backgroundColor:colors[status]}}>
              <div className="flex flex-col center items-center">
-             <span className="text-xs">{thisEventData.eventDate.getDate()}</span>
-               <span className="text-xs">{monthNames[thisEventData.eventDate.getMonth()]}</span>
+             <span className="text-xs">{thisEventData?.eventDate?.getDate()}</span>
+               <span className="text-xs">{monthNames[thisEventData?.eventDate?.getMonth()]}</span>
              </div>
            </Avatar>
          </StyledBadge>
 
        <div className="flex flex-col text-sm leading-4 mx-2">
-           <div><span className="font-bold text-left block">{thisEventData.title}</span>
+           <div><span className="font-bold text-left block">{thisEventData?.title}</span>
              <span className=""></span>
            </div>
          {size === 'large' &&
          <span className="font-bold text-xs flex flex-row" style={{color:"#f50057"}}>Second Release Ticket</span>
          }
-           <span className="font-light text-xs flex flex-row">{thisEventData.location}</span>
+           <span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>
          </div>
        </div>
 
