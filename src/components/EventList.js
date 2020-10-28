@@ -28,7 +28,7 @@ export const EventList = withReducer("TicketList", reducer)((props) => {
 
   return <div className="p-6">
 
-    {props.type === 'overview' && <div>
+    <div>
       <ul>
         <li onClick={() => setFilter(filter === statuses.UPCOMING ? null : statuses.UPCOMING)}>Upcoming</li>
         <li onClick={() => setFilter(filter === statuses.OPEN_FOR_SALE ? null : statuses.OPEN_FOR_SALE)}>Sale</li>
@@ -47,6 +47,6 @@ export const EventList = withReducer("TicketList", reducer)((props) => {
                      status="active"
           />)
       })}
-    </div>}
+    </div>
   </div>;
 });
