@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import {useParams} from 'react-router-dom';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
-import {useSelector} from "react-redux";
-import {PortfolioItem} from "components/PortfolioItem";
-import {MyTicketsComponent} from "components/MyTicketsComponent";
-import {EventList} from "components/EventList";
+import { MyTicketsComponent } from "components/MyTicketsComponent";
+import { EventList } from "components/EventList";
 import { TabContext } from '@material-ui/lab';
 
 function TabPanel(props) {
@@ -71,11 +68,8 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
   };
 
   return (
-
-
     <div className={classes.root}>
       <AppBar position="static" style={{backgroundColor: "#1a202c", color: "white"}}>
-
         {props.type === 'user' &&
         <Tabs
           value={value}
@@ -89,7 +83,6 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           <Tab label="my tickets" {...a11yProps(0)} />
           <Tab label="Old tickets" {...a11yProps(1)} />
         </Tabs>}
-
         {props.type === 'organiser' &&
         <Tabs
           value={value}
@@ -102,8 +95,6 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           <Tab label="My Events" {...a11yProps(0)} />
           <Tab label="Old Events" {...a11yProps(1)} />
         </Tabs>}
-
-
       </AppBar>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -111,36 +102,18 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         onChangeIndex={handleChangeIndex}
       >
         {/*       PANEL 1       */}
-
         <TabContext value="0" index={0} dir={theme.direction}>
-
-
           {/* USER  --> MY TICKETS */}
-          {props.type === 'user' &&
-          <MyTicketsComponent type="current"/>
-          }
-
+          {props.type === 'user' && <MyTicketsComponent type="current"/>}
           {/*ORGANISER --> MY EVENTS*/}
-          {props.type === 'organiser' &&
-          <EventList type="organiser"
-          />          }
-
+          {props.type === 'organiser' && <EventList type="organiser" search={props.search}/>}
         </TabContext>
         {/*       PANEL 2     */}
         <TabContext value="1" index={1} dir={theme.direction}>
-
-          {props.type === 'user' &&
-          <MyTicketsComponent type="current"/>
-          }
-          {props.type === 'organiser' &&
-          <EventList type="organiser"
-          />          }
-
+          {props.type === 'user' && <MyTicketsComponent type="current"/>}
+          {props.type === 'organiser' && <EventList type="organiser" search={props.search}/>}
         </TabContext>
-
       </SwipeableViews>
     </div>
   );
-
-
 });
