@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Header} from "components/Header";
 import {EventList} from "components/EventList";
 import { useHistory } from "react-router-dom";
@@ -8,9 +8,16 @@ import {useDispatch} from "react-redux";
 export const Overview = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    console.log(search)
+    }, [search]
+  )
 
   return <div className="mt-10">
     <Header
+      search={value => setSearch(value)}
     title="Explore Tickets"
     subtitle="An Honest Ticketing System"
     button1="Buy Tickets"
@@ -20,6 +27,6 @@ export const Overview = (props) => {
     button2="Sell Tickets"
     onClick2={() => history.push("/my-tickets")}/>
 
-    <EventList type="overview" />
+    <EventList type="overview" search={search} />
   </div>;
 };
