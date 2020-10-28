@@ -39,7 +39,7 @@ export const TicketOptionsModal = (props) => {
 
 
     <div className="bg-white rounded my-4 px-2">
-      <MyTicket status="sale" type="large" />
+      <MyTicket status="sale" type="large" keyEvent={props.keyEvent} />
     </div>
 
         { props.type === 'optionsModal' && <div>
@@ -89,7 +89,7 @@ export const TicketOptionsModal = (props) => {
         { props.type === 'scanModal' && <div>
 
           <div className="bg-white rounded my-4 p-10 content-center flex justify-center">
-            <QRCode value="http://facebook.github.io/react/" />
+            <QRCode value={props.keyEvent} />
           </div>
 
 

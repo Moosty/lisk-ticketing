@@ -3,6 +3,7 @@ import * as Actions from '../actions';
 const defaultState = {
   open: false,
   type: null,
+  props: null,
   newsletter: {
     submitted: false,
     shown: null,
@@ -17,12 +18,14 @@ export default (state = defaultState, action) => {
         ...state,
         open: true,
         type: action.modalType,
+        props: action.props,
       }
     case Actions.CLOSE_MODAL:
       return {
         ...state,
         open: false,
         type: null,
+        props: null,
       }
     case Actions.SET_NEWSLETTER_SHOWN:
       return {

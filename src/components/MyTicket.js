@@ -143,7 +143,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, checkout
               // console.log("myticket = ", thisEvent);
               console.log("myticket = ", thisEventData);
 
-              dispatch(Actions.openModal('scanTicketModal'))
+              dispatch(Actions.openModal('scanTicketModal', {keyEvent}))
             }}
           >
             <MoreVertIcon color="white"/>

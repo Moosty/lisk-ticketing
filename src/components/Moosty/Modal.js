@@ -26,11 +26,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
+export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const {open, type} = useSelector(({modals}) => modals);
-
+  const {open, type, props} = useSelector(({modals}) => modals);
 
   const getModal = () => {
     switch (type) {
@@ -63,41 +62,47 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
           title="SELL my tickets"
           content="I want to sell my tickets"
           type="optionsModal"
-
+          {...props}
         />;
       case 'scanTicketModal':
         return <TicketOptionsModal
           title="SELL my tickets"
           content="I want to sell my tickets"
           type="scanModal"
+          {...props}
         />;
       case 'sellTicketModal':
         return <TicketOptionsModal
           title="SELL my tickets"
           content="I want to sell my tickets"
           type="sellModal"
+          {...props}
         />;
       case 'transferTicketModal':
         return <TicketOptionsModal
           title="SELL my tickets"
           content="I want to sell my tickets"
           type="transferModal"
+          {...props}
         />;
       case 'cancelInfoModal':
         return <DemoModal
           title="Do not buy"
           content="Remove from my basket."
+          {...props}
         />;
       case 'buyTicketsModal':
         return <DemoModal
           title="Buy"
           content="look around and buy a ticket"
+          {...props}
         />;
       case 'confirmTxEventModal':
         return <ConfirmTxModal
           title="Confirm action"
           content="Provide your passphrase to confirm this action"
           type="confirmEvent"
+          {...props}
         />;
 
       case 'confirmTxBuyTicketsModal':
@@ -105,6 +110,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)((props) => {
           title="Confirm action"
           content="Provide your passphrase to confirm this action"
           type="confirmBuyTickets"
+          {...props}
         />;
         default:
         return <div>Modal Component not found</div>;
