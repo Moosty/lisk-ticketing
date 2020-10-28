@@ -64,7 +64,7 @@ const defaultState = {
       asset: {
         eventData: {
           ownerId: "organiser01",
-          status: statuses.OPEN_FOR_SALE,
+          status: statuses.UPCOMING,
           title: "Rapper Sjors & Marco Borsato Dance Event 2020",
           artist: "Racoon",
           location: "Caprera Openluchttheater - Bloemendaal",
@@ -175,7 +175,7 @@ const defaultState = {
       asset: {
         eventData: {
           ownerId: "organiser02",
-          status: statuses.OPEN_FOR_SALE,
+          status: statuses.SOLD_OUT,
           title: "Bon Sjef - De Leven van Chef",
           artist: "Bon Sjef",
           location: "Tivoli Outdoors - Park 27",
