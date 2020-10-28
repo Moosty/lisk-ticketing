@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
+import { statuses } from "../store/reducers/blockchain/event.reducer";
 
 const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
   "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"
@@ -52,9 +53,9 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 const colors = {
-  'active': "#00E676",
-  'sale': "#FFEA00",
-  'type3': "#f50057"
+  [statuses.SOLD_OUT]: "#00E676",
+  [statuses.OPEN_FOR_SALE]: "#FFEA00",
+  [statuses.UPCOMING]: "#f50057"
 }
 
 const SmallAvatar = withStyles((theme) => ({
