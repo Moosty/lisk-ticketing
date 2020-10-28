@@ -134,7 +134,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, checkout
 
             color="secondary"
           >
-            <CropFreeTwoToneIcon color="white"/>
+            <CropFreeTwoToneIcon color="secondary"/>
           </IconButton>
           <IconButton
 
@@ -146,7 +146,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, checkout
               dispatch(Actions.openModal('scanTicketModal', {keyEvent}))
             }}
           >
-            <MoreVertIcon color="white"/>
+            <MoreVertIcon color="secondary"/>
           </IconButton>
         </div>
         }
