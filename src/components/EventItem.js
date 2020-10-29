@@ -80,6 +80,8 @@ const useStyles = makeStyles((theme) => ({
 export const EventItem = ({key, eventDetail, eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status}) => {
 const history = useHistory();
 
+// TYPE = USER, OVERVIEW, ORGANISER
+
   return (
     <div className=" w-full  ">
       <div className="flex flex-row justify-between">

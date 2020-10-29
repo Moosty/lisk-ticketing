@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const Header = ({title, subtitle, button1, button2, onClick1, onClick2}) => {
+export const Header = ({title, subtitle, button1, button2, onClick1, onClick2, search}) => {
   const dispatch = useDispatch();
   const {open, type} = useSelector(({modals}) => modals);
   const history = useHistory();
@@ -122,6 +122,7 @@ export const Header = ({title, subtitle, button1, button2, onClick1, onClick2}) 
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
+                onChange={(e) => search(e.target.value)}
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>

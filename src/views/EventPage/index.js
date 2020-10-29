@@ -1,11 +1,9 @@
-import React, {useEffect} from "react";
-import {Header} from "components/Header";
-import {TicketAccordion, Event, CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
-import {TicketList} from "components/EventList";
+import React, { useState } from "react";
+import { CartBottom, EventHeader, TicketAccordion, TicketType } from "components/index";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
-import {useSelector} from "react-redux";
-import {useParams} from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
 
 export const EventPage = withReducer("EventPage", reducer)((props) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);
@@ -14,14 +12,11 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
   const {address} = useParams();
   const thisEvent = events.find(event => event.address === address);
   const swapTicketsX = swapTickets.filter(event => event.eventId === address);
-
-  useEffect(() => {
-  
-  }, [events, swapTickets]);
+  const [search, setSearch] = useState("");
 
   return <div className="mt-10">
-
     <EventHeader
+      search={value => setSearch(value)}
       key={thisEvent.address}
       artist={thisEvent.asset.eventData.artist}
       location={thisEvent.asset.eventData.location}
@@ -30,10 +25,8 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
       title={thisEvent.asset.eventData.title}
       type="event"
     />
-
     {thisEvent.asset.ticketData.types.map((type) =>
       <TicketType
-
         key={type.id}
         label={type.name}
         price={type.price}
@@ -41,12 +34,7 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
         eventId={thisEvent.address}
         ticketType={type.id}
       />)}
-
-      <TicketAccordion
-      />
-
-
-    <CartBottom
-      totalPrice="€ 185.56"/>
+    <TicketAccordion/>
+    <CartBottom totalPrice="€ 185.56"/>
   </div>;
 });

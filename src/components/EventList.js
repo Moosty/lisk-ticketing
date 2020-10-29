@@ -1,37 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { EventItem } from "components/index";
+import React, {useEffect, useState} from "react";
+import _ from 'lodash';
+import {EventItem, Header} from "components/index";
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { statuses } from "../store/reducers/blockchain/event.reducer";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
+import {statuses} from "../store/reducers/blockchain/event.reducer";
 
 // TODO - OVERVIEW PAGINA: alle events
 // TODO - organisatie pagina: gefilterd
 
-export const EventList = withReducer("TicketList", reducer)((props) => {
+const searchByText = (collection, text, fields) => {
+  text = _.toLower(text);
+  return _.filter(collection, object => {
+    for (let field in fields) {
+      if (object.asset.eventData[fields[field]].toLowerCase().indexOf(text) > -1) {
+        return true;
+      }
+    }
+    return false;
+  });
+}
+
+export const EventList = withReducer("TicketList", reducer)(({tab, search, type}) => {
   const {address} = useParams();
   const events = useSelector(({blockchain}) => blockchain.event.events);
-  const [filterdEvents, setFilterdEvents] = useState([])
-  const [filter, setFilter] = useState(null)
+  const [filteredEvents, setFilteredEvents] = useState([])
+
 
   useEffect(() => {
-    console.log("alle events in ticketlist:", events);
-
     const selectedEvents = address ? events.filter(event => event.asset.eventData.ownerId === address) : events;
-    setFilterdEvents(filter ? selectedEvents.filter(event => event.asset.eventData.status === filter) : selectedEvents);
-
-  }, [events, address, filter])
+    const searchedEvents = search ? searchByText(selectedEvents, search, ['artist', 'title']) : selectedEvents;
+    setFilteredEvents(tab ? searchedEvents.filter(event => {
+      if (tab === "eventList02" && event.asset.eventData.status === statuses.SOLD_OUT) {
+        return true;
+      } else if (tab === "eventList01" && (event.asset.eventData.status === statuses.UPCOMING || event.asset.eventData.status === statuses.OPEN_FOR_SALE)) {
+        return true;
+      }
+      return false;
+    }) : searchedEvents);
+  }, [events, address, search, tab])
 
   return <div className="p-6">
-
     <div>
-      <ul>
-        <li onClick={() => setFilter(filter === statuses.UPCOMING ? null : statuses.UPCOMING)}>Upcoming</li>
-        <li onClick={() => setFilter(filter === statuses.OPEN_FOR_SALE ? null : statuses.OPEN_FOR_SALE)}>Sale</li>
-        <li onClick={() => setFilter(filter === statuses.SOLD_OUT ? null : statuses.SOLD_OUT)}>Soldout</li>
-      </ul>
-      {filterdEvents && filterdEvents.map(event => {
+
+      {filteredEvents && filteredEvents.map(event => {
         return (
           <EventItem
             key={event.address}
@@ -41,7 +54,7 @@ export const EventList = withReducer("TicketList", reducer)((props) => {
             artist={event.asset?.eventData?.artist}
             title={event.asset?.eventData?.title}
             location={event.asset?.eventData?.location}
-            type="overview"
+            type={type}
             status={event.asset.eventData.status}
           />)
       })}
