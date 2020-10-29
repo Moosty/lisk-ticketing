@@ -35,7 +35,7 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
   "SUN"
 ];
 
-export const EventHeader = ({ artist, location, eventDate, eventTime, type, organiser}) => {
+export const EventHeader = ({ eventId, key, artist, location, title, eventDate, organiser, eventTime, type, status}) => {
 
   const classes = useStyles();
 
@@ -49,20 +49,50 @@ export const EventHeader = ({ artist, location, eventDate, eventTime, type, orga
       </div>
       <div className="bg-gray-900" >
       <div className=" mx-6 flex flex-row" >
+        {/*EVENT VIEW*/}
+        { type === 'event' &&
         <h1 className="text-4xl font-black text-white">
           {artist}
         </h1>
+        }
 
         {/*ORGANISER VIEW*/}
         { type === 'organiser' &&
-        <span className={classes.organiser}>
-          {organiser}
-        </span> }
+        <EventItem
+          key={key}
+          eventId={eventId}
+          eventDate={eventDate}
+          startEvent={eventTime}
+          artist={artist}
+          title={title}
+          location={location}
+          type="eventDetail"
+          status={status}
+        />
+        }
 
 
       </div>
 
-      <Divider />
+        { type === 'event' &&
+
+        <div className="w-full flex flex-row p-2 justify-between content-center items-center text-white">
+          <div className="flex flex-row ">
+            <div className="flex flex-col items-center leading-4 m-4 content-center items-center">
+              {/*TODO leading zero */}
+              <span className="text-lg">{eventDate.getDay()}</span>
+              {/*TODO eerste drie letters van de maand */}
+              <span className={classes.month}>{monthNames[eventDate.getMonth()]}</span>
+            </div>
+            <div className="flex flex-col text-sm float-left leading-4 my-2">
+              {/*TODO Dag van de week & tijd: leading zero */}
+              <span>{days[eventDate.getDay()]}{' '} {eventDate.getHours()}:{eventDate.getMinutes()}</span>
+              <span className="text-xs">{location}</span>
+            </div>
+          </div>
+        </div>}
+        <Divider />
+
     </div>
 
 </div>

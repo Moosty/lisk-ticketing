@@ -19,18 +19,21 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
   const swapTicketsX = swapTickets.filter(event => event.eventId === address);
 
   useEffect(() => {
-
+console.log("this event", thisEvent);
   }, [events, swapTickets]);
 
   return <div className="mt-10">
 
     <EventHeader
       key={thisEvent.address}
+      eventId={thisEvent.address}
       artist={thisEvent.asset.eventData.artist}
       location={thisEvent.asset.eventData.location}
       eventDate={thisEvent.asset.eventData.eventDate}
       startEvent={thisEvent.asset.eventData.eventTime}
       organiser={thisEvent.asset.eventData.ownerId}
+      title={thisEvent.asset.eventData.title}
+      status={thisEvent.asset.eventData.status}
       type="organiser"
     />
     <div className="flex flex-col w-full p-6  ">
