@@ -8,6 +8,7 @@ export const ticketStatuses = {
   "PAST_EVENT": "PAST_EVENT",
 };
 
+// TODO wat moeten we met QUANTITY? volgens mij is elk ticketaccount uiteindelijk 1 ticket?
 
 const defaultState = {
 
@@ -26,7 +27,7 @@ const defaultState = {
       ownerId: 'account01',
       ticketType: 2,
       quantity: 2,
-      ticketStatus: ticketStatuses.OWNED,
+      ticketStatus: ticketStatuses.SOLD,
     },
     {
       ticketAddress: "12dfasdfddf312341r555ff",

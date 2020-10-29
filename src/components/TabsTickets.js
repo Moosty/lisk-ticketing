@@ -106,13 +106,13 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
         {/*       PANEL 1       */}
         <TabContext value="0" index={0} dir={theme.direction}>
           {/* USER  --> MY TICKETS */}
-          {props.type === 'user' && <MyTicketsComponent type="user"/>}
+          {props.type === 'user' && <MyTicketsComponent type="current" tab="ticketListTab01"/>}
           {/*ORGANISER --> MY EVENTS*/}
           {props.type === 'organiser' && <EventList type="organiser" search={props.search} tab="eventList01"/>}
         </TabContext>
         {/*       PANEL 2     */}
         <TabContext value="1" index={1} dir={theme.direction}>
-          {props.type === 'user' && <MyTicketsComponent type="user"/>}
+          {props.type === 'user' && <MyTicketsComponent type="user" tab="ticketListTab02"/>}
           {props.type === 'organiser' && <EventList type="organiser" search={props.search} tab="eventList02" />}
         </TabContext>
       </SwipeableViews>
