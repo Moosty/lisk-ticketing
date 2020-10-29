@@ -10,6 +10,7 @@ import withReducer from "store/withReducer";
 import {DemoModal} from "./DemoModal";
 import {TicketOptionsModal} from "./TicketOptionsModal";
 import {ConfirmTxModal} from "./ConfirmTxModal";
+import {CancelEventModal} from "./CancelEventModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -58,10 +59,9 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
            " />;
 
       case 'cancelEventModal':
-        return <TicketOptionsModal
-          title="SELL my tickets"
-          content="I want to sell my tickets"
-          type="optionsModal"
+        return <CancelEventModal
+          title="Cancel Event"
+          content="Do you really want to cancel?"
           {...props}
         />;
 

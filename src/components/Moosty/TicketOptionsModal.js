@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import NotificationsRoundedIcon from "@material-ui/icons/NotificationsRounded";
 import Button from "@material-ui/core/Button";
-import {PortfolioItem} from "components/PortfolioItem";
 import {useDispatch, useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
 import {MyTicket, TicketListItem} from "components/index";
 import { SliderPrice } from "components/SliderPrice";
 import * as Actions from "../../store/actions";
-import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 
 export const TicketOptionsModal = (props) => {
