@@ -7,6 +7,7 @@ import {PortfolioItem} from "components/PortfolioItem";
 import {MyTicket} from "components/MyTicket";
 import {statuses} from "../store/reducers/blockchain/event.reducer";
 import {ticketStatuses} from "../store/reducers/blockchain/portfolio.reducer";
+import {EventItem} from "components/EventItem";
 
 export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)(({tab,}) => {
 
@@ -42,11 +43,10 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)(({t
       { filteredTickets && filteredTickets.map(
         (item) =>
           <MyTicket
-              type="sell"
               key={item.ticketAddress}
               keyEvent={item.eventId}
               ticketType={item.ticketType}
-              status="active"
+              status={item.ticketStatus}
               size="small"
             />
       )}

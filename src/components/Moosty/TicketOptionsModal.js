@@ -10,7 +10,7 @@ import * as Actions from "../../store/actions";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 
-export const TicketOptionsModal = (props) => {
+export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
   const thisItem = portfolio.find(item => item.ticketAddress === "12312341r555ff");
   const dispatch = useDispatch();
@@ -31,26 +31,26 @@ export const TicketOptionsModal = (props) => {
 
 
         <div className="text-center flex1 text-2xl text-white font-bold uppercase max-w-2xl">
-          { props.type === 'optionsModal' && 'Options' }
-          { props.type === 'scanModal' && 'Scan Ticket' }
-          { props.type === 'sellModal' && 'Sell Ticket' }
-          { props.type === 'transferModal' && 'Transfer Ticket' }
+          { type === 'optionsModal' && 'Options' }
+          { type === 'scanModal' && 'Scan Ticket' }
+          { type === 'sellModal' && 'Sell Ticket' }
+          { type === 'transferModal' && 'Transfer Ticket' }
         </div>
 
 
     <div className="bg-white rounded my-4 px-2">
-      <MyTicket status="sale" type="large" keyEvent={props.keyEvent} />
+      <MyTicket status={status} size={size}  keyEvent={keyEvent} />
     </div>
 
-        { props.type === 'optionsModal' && <div>
+        { type === 'optionsModal' && <div>
         <Button
           fullWidth= "true"
           variant="contained"
-          size="Large"
+          size="large"
           color="secondary"
           className="m-4"
           onClick={() => {
-            dispatch(Actions.openModal('scanTicketModal'))
+            dispatch(Actions.openModal('scanTicketModal',{keyEvent, size, status}))
           }}
         >Scan ticket
         </Button>
@@ -63,7 +63,7 @@ export const TicketOptionsModal = (props) => {
             color="secondary"
             style={{marginTop: "1rem"}}
             onClick={() => {
-              dispatch(Actions.openModal('transferTicketModal'))
+              dispatch(Actions.openModal('transferTicketModal', {keyEvent, size, status}))
             }}
           >Transfer ticket
           </Button>
@@ -74,7 +74,7 @@ export const TicketOptionsModal = (props) => {
             color="secondary"
             style={{marginTop: "1rem"}}
             onClick={() => {
-              dispatch(Actions.openModal('sellTicketModal'))
+              dispatch(Actions.openModal('sellTicketModal', {keyEvent, size, status}))
             }}
           >Sell ticket
           </Button>
@@ -86,10 +86,10 @@ export const TicketOptionsModal = (props) => {
 
         {/* SCAN TICKET MODAL */}
 
-        { props.type === 'scanModal' && <div>
+        { type === 'scanModal' && <div>
 
           <div className="bg-white rounded my-4 p-10 content-center flex justify-center">
-            <QRCode value={props.keyEvent} />
+            <QRCode value={keyEvent} />
           </div>
 
 
@@ -110,7 +110,7 @@ export const TicketOptionsModal = (props) => {
 
         {/*  SELL MODAL */}
 
-        { props.type === 'sellModal' && <div>
+        { type === 'sellModal' && <div>
 
 
         <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
@@ -155,7 +155,7 @@ export const TicketOptionsModal = (props) => {
 
         {/*  TRANSFER MODAL */}
 
-        { props.type === 'transferModal' && <div>
+        { type === 'transferModal' && <div>
         <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
 
           <h1
@@ -163,7 +163,7 @@ export const TicketOptionsModal = (props) => {
           <div>Fill in the <span className="font-bold text-pink-400">recipient address </span> and confirm to send this ticket.
         </div>
           <TextField style={{marginTop:"1rem", marginBottom:"1rem", borderColor:"white",backgroundColor:"white", borderRadius:"5px"}}
-                     id="outlined-basic" label="Recipient adress" variant="filled" color="secondary" />
+                     id="outlined-basic" label="Recipient address" variant="filled" color="secondary" />
 
 
         </div>

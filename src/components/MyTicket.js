@@ -11,6 +11,7 @@ import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import { DeleteOutline } from "@material-ui/icons";
+import {ticketStatuses} from "../store/reducers/blockchain/portfolio.reducer";
 
 const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
   "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"
@@ -49,10 +50,12 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
+
 const colors = {
-  'active': "#00E676",
-  'sale': "#FFEA00",
-  'type3': ""
+  [ticketStatuses.OWNED]: "#00E676",
+  [ticketStatuses.SELLING]: "#FFEA00",
+  [ticketStatuses.PAST_EVENT]: "#f50057",
+  [ticketStatuses.SOLD]: "#f50057",
 }
 
 const SmallAvatar = withStyles((theme) => ({
@@ -73,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const MyTicket = withReducer("myTicket", reducer)(({props, size, checkout, type, status, ticketType, keyEvent}) => {
+export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, status, ticketType, keyEvent}) => {
 
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
   const Events = useSelector(({blockchain}) => blockchain.event.events);
@@ -93,8 +96,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, checkout
   );
 
   useEffect(() => {
-    console.log("MyTIckets this event", thisEventData);
-  }, [thisEventData])
+  }, []);
 
   return (<div className=" w-full  ">
       <div className="flex flex-row justify-between">
@@ -131,7 +133,10 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, checkout
         <div className="flex items-center flex-row">
 
           <IconButton
+            onClick={() => {
 
+              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status}))
+            }}
             color="secondary"
           >
             <CropFreeTwoToneIcon color="secondary"/>
@@ -140,10 +145,8 @@ export const MyTicket = withReducer("myTicket", reducer)(({props, size, checkout
 
             color="secondary"
             onClick={() => {
-              // console.log("myticket = ", thisEvent);
-              console.log("myticket = ", thisEventData);
 
-              dispatch(Actions.openModal('scanTicketModal', {keyEvent}))
+              dispatch(Actions.openModal('optionsModal', {keyEvent, size, status}))
             }}
           >
             <MoreVertIcon color="secondary"/>
