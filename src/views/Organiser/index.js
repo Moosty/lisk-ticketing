@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Header} from "components/Header";
 import {CartBottom, EventHeader, TabsTickets, TicketListItem, TicketType} from "components/index";
 import {EventList} from "components/EventList";
@@ -18,6 +18,7 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
     const organiserAccounts = useSelector(({blockchain}) => blockchain.organiser.organiserAccounts);
     const thisOrganiser = organiserAccounts.find(account => account.address === address );
     const thisAddress = thisOrganiser.address;
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         console.log("organiser accounts ", organiserAccounts);
@@ -29,10 +30,11 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
     return <div className="mt-10">
        <div>
             <Header
+              search={value => setSearch(value)}
               title={thisOrganiser.asset.organisation}
               subtitle="My Events"
             />
-            <TabsTickets type="organiser" />
+            <TabsTickets type="organiser" search={search} />
 
         </div>
 

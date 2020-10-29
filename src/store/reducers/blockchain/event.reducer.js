@@ -225,6 +225,174 @@ const defaultState = {
         },
       },
     },
+    {
+      address: "event04",
+      publicKey: "pubKey",
+      asset: {
+        eventData: {
+          ownerId: "organiser02",
+          status: statuses.SOLD_OUT,
+          title: "Bon Sjef - Title Event 04",
+          artist: "Bon Sjef",
+          location: "Tivoli Outdoors - Park 27",
+          eventDate: new Date("2018-01-01"),
+          eventTime: "23:50",
+          duration: 90,
+          category: "test category",
+          site: "https://lisk.io/apps/",
+          image: "event image",
+        },
+        ticketData: {
+          // Ticket sale starts when the first ticket can be bought
+          types: [
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 0,
+              name: "First Release Ticket",
+              price: 45.26,
+              amount: 10,
+              sold: 0,
+            },
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 1,
+              name: "Second Release Ticket",
+              price: 55.26,
+              amount: 20,
+              sold: 0,
+            },
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 2,
+              name: "Third Release Ticket",
+              price: 75.26,
+              amount: 20,
+              sold: 0,
+            },
+          ],
+        },
+        resellData: {
+          allowed: true,
+          maximumResellPercentage: 120,
+          resellOrganiserFee: 1,  // in percentages
+        },
+      },
+    },
+    {
+      address: "event05",
+      publicKey: "pubKey",
+      asset: {
+        eventData: {
+          ownerId: "organiser02",
+          status: statuses.OPEN_FOR_SALE,
+          title: "Bon Sjef -  Title Event 05",
+          artist: "Bon Sjef",
+          location: "Tivoli Outdoors - Park 27",
+          eventDate: new Date("2018-01-01"),
+          eventTime: "23:50",
+          duration: 90,
+          category: "test category",
+          site: "https://lisk.io/apps/",
+          image: "event image",
+        },
+        ticketData: {
+          // Ticket sale starts when the first ticket can be bought
+          types: [
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 0,
+              name: "First Release Ticket",
+              price: 45.26,
+              amount: 10,
+              sold: 0,
+            },
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 1,
+              name: "Second Release Ticket",
+              price: 55.26,
+              amount: 20,
+              sold: 0,
+            },
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 2,
+              name: "Third Release Ticket",
+              price: 75.26,
+              amount: 20,
+              sold: 0,
+            },
+          ],
+        },
+        resellData: {
+          allowed: true,
+          maximumResellPercentage: 120,
+          resellOrganiserFee: 1,  // in percentages
+        },
+      },
+    },
+    {
+      address: "event06",
+      publicKey: "pubKey",
+      asset: {
+        eventData: {
+          ownerId: "organiser02",
+          status: statuses.UPCOMING,
+          title: "Bon Sjef -  Title Event 06",
+          artist: "Bon Sjef",
+          location: "Tivoli Outdoors - Park 27",
+          eventDate: new Date("2018-01-01"),
+          eventTime: "23:50",
+          duration: 90,
+          category: "test category",
+          site: "https://lisk.io/apps/",
+          image: "event image",
+        },
+        ticketData: {
+          // Ticket sale starts when the first ticket can be bought
+          types: [
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 0,
+              name: "First Release Ticket",
+              price: 45.26,
+              amount: 10,
+              sold: 0,
+            },
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 1,
+              name: "Second Release Ticket",
+              price: 55.26,
+              amount: 20,
+              sold: 0,
+            },
+            {
+              startSellDate: new Date(),
+              startSellTime: 900,
+              id: 2,
+              name: "Third Release Ticket",
+              price: 75.26,
+              amount: 20,
+              sold: 0,
+            },
+          ],
+        },
+        resellData: {
+          allowed: true,
+          maximumResellPercentage: 120,
+          resellOrganiserFee: 1,  // in percentages
+        },
+      },
+    },
   ]
 };
 
