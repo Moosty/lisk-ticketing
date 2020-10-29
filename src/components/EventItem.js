@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export const EventItem = ({eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status,}) => {
+export const EventItem = ({key, eventDetail, eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status}) => {
 const history = useHistory();
 
 // TYPE = USER, OVERVIEW, ORGANISER
@@ -143,6 +143,8 @@ const history = useHistory();
             color="secondary"
             size="small"
             >Details</Button> }
+
+          { type === 'eventDetail' &&  <div></div>}
         </div>
 
 

@@ -22,6 +22,8 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
       location={thisEvent.asset.eventData.location}
       eventDate={thisEvent.asset.eventData.eventDate}
       startEvent={thisEvent.asset.eventData.eventTime}
+      title={thisEvent.asset.eventData.title}
+      type="event"
     />
     {thisEvent.asset.ticketData.types.map((type) =>
       <TicketType
