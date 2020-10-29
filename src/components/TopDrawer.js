@@ -77,11 +77,12 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       {/**/}
       <List>
         {[
+          // TODO sign in veranderen in sign out wanneer je bent ingelogd
+          { label:"Sign in" , link: "/signup", icon: <InboxIcon /> },
           { label:"Overview" , link: "/overview", icon: <InboxIcon /> },
           { label:"My Tickets" , link: "/my-tickets", icon: <InboxIcon /> },
+          { label:"My Events" , link: "/my-events/organiser01", icon: <InboxIcon /> },
           { label:"Shopping Basket" , link: "/checkout", icon: <InboxIcon /> },
-         // TODO sign in veranderen in sign out wanneer je bent ingelogd
-          { label:"Sign in" , link: "/signup", icon: <InboxIcon /> },
 
         ].map((item) => (
           <ListItem button onClick={() => history.push(`${item.link}`)} key={item.label} >

@@ -25,23 +25,27 @@ const searchByText = (collection, text, fields) => {
 export const EventList = withReducer("TicketList", reducer)((props) => {
   const {address} = useParams();
   const events = useSelector(({blockchain}) => blockchain.event.events);
-  const [filterdEvents, setFilterdEvents] = useState([])
-  const [filter, setFilter] = useState(null)
+  const [filteredEvents, setFilteredEvents] = useState([])
 
   useEffect(() => {
     const selectedEvents = address ? events.filter(event => event.asset.eventData.ownerId === address) : events;
     const searchedEvents = props.search ? searchByText(selectedEvents, props.search, ['artist', 'title']) : selectedEvents;
-    setFilterdEvents(filter ? searchedEvents.filter(event => event.asset.eventData.status === filter) : searchedEvents);
-  }, [events, address, filter, props.search])
+    setFilteredEvents(props.tab ? searchedEvents.filter(event => {
+      console.log(props.tab, searchedEvents);
+      if (props.tab === "eventList02" && event.asset.eventData.status === statuses.SOLD_OUT) {
+        return true;
+      } else if (props.tab === "eventList01" && ( event.asset.eventData.status  === statuses.UPCOMING ||  event.asset.eventData.status === statuses.OPEN_FOR_SALE)) {
+        return true;
+      }
+      return false;
+    }) : searchedEvents);
+  console.log("upcoming:", props.filter);
+    }, [events, address, props.filter, props.search, props.tab])
 
   return <div className="p-6">
     <div>
-      <ul>
-        <li onClick={() => setFilter(filter === statuses.UPCOMING ? null : statuses.UPCOMING)}>Upcoming</li>
-        <li onClick={() => setFilter(filter === statuses.OPEN_FOR_SALE ? null : statuses.OPEN_FOR_SALE)}>Sale</li>
-        <li onClick={() => setFilter(filter === statuses.SOLD_OUT ? null : statuses.SOLD_OUT)}>Soldout</li>
-      </ul>
-      {filterdEvents && filterdEvents.map(event => {
+
+      {filteredEvents && filteredEvents.map(event => {
         return (
           <EventItem
             key={event.address}

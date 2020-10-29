@@ -12,6 +12,7 @@ import reducer from "../store/reducers";
 import { MyTicketsComponent } from "components/MyTicketsComponent";
 import { EventList } from "components/EventList";
 import { TabContext } from '@material-ui/lab';
+import { statuses } from "../store/reducers/blockchain/event.reducer";
 
 function TabPanel(props) {
   const {children, value, index, ...other} = props;
@@ -106,12 +107,12 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           {/* USER  --> MY TICKETS */}
           {props.type === 'user' && <MyTicketsComponent type="current"/>}
           {/*ORGANISER --> MY EVENTS*/}
-          {props.type === 'organiser' && <EventList type="organiser" search={props.search}/>}
+          {props.type === 'organiser' && <EventList type="organiser" search={props.search} tab="eventlist01"/>}
         </TabContext>
         {/*       PANEL 2     */}
         <TabContext value="1" index={1} dir={theme.direction}>
           {props.type === 'user' && <MyTicketsComponent type="current"/>}
-          {props.type === 'organiser' && <EventList type="organiser" search={props.search}/>}
+          {props.type === 'organiser' && <EventList type="organiser" search={props.search} tab="eventList02" />}
         </TabContext>
       </SwipeableViews>
     </div>
