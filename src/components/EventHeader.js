@@ -4,6 +4,7 @@ import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Divider from "@material-ui/core/Divider";
+import {EventItem} from "components/EventItem";
 
 
   const useStyles = makeStyles((theme) => ({
@@ -60,22 +61,7 @@ export const EventHeader = ({ artist, location, eventDate, eventTime, type, orga
 
 
       </div>
-      <div className="w-full flex flex-row p-2 justify-between content-center items-center text-white">
-        <div className="flex flex-row ">
-          <div className="flex flex-col items-center leading-4 m-4 content-center items-center">
-            {/*TODO leading zero */}
-            <span className="text-lg">{eventDate.getDay()}</span>
-            {/*TODO eerste drie letters van de maand */}
-            <span className={classes.month}>{monthNames[eventDate.getMonth()]}</span>
-          </div>
-          <div className="flex flex-col text-sm float-left leading-4 my-2">
-            {/*TODO Dag van de week & tijd: leading zero */}
-            <span>{days[eventDate.getDay()]}{' '} {eventDate.getHours()}:{eventDate.getMinutes()}</span>
-            <span className="text-xs">{location}</span>
-          </div>
-        </div>
 
-      </div>
       <Divider />
     </div>
 
