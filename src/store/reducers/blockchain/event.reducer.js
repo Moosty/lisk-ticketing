@@ -347,7 +347,7 @@ const defaultState = {
           title: "Bon Sjef -  Title Event 06",
           artist: "Bon Sjef",
           location: "Tivoli Outdoors - Park 27",
-          eventDate: new Date("2018-01-01"),
+          eventDate: new Date("2021-01-15"),
           eventTime: "23:50",
           duration: 90,
           category: "test category",

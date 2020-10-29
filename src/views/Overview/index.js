@@ -13,7 +13,7 @@ export const Overview = (props) => {
   return <div className="mt-10">
     <Header
       search={value => setSearch(value)}
-      title="Explore Tickets"
+      title="Explore Events"
       subtitle="An Honest Ticketing System"
       button1="Buy Tickets"
       onClick1={() => {
