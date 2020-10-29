@@ -107,7 +107,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)((props) => {
           {/* USER  --> MY TICKETS */}
           {props.type === 'user' && <MyTicketsComponent type="current"/>}
           {/*ORGANISER --> MY EVENTS*/}
-          {props.type === 'organiser' && <EventList type="organiser" search={props.search} tab="eventlist01"/>}
+          {props.type === 'organiser' && <EventList type="organiser" search={props.search} tab="eventList01"/>}
         </TabContext>
         {/*       PANEL 2     */}
         <TabContext value="1" index={1} dir={theme.direction}>
