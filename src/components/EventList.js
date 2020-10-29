@@ -22,7 +22,7 @@ const searchByText = (collection, text, fields) => {
   });
 }
 
-export const EventList = withReducer("TicketList", reducer)(({tab, search}) => {
+export const EventList = withReducer("TicketList", reducer)(({tab, search, type}) => {
   const {address} = useParams();
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const [filteredEvents, setFilteredEvents] = useState([])
@@ -54,7 +54,7 @@ export const EventList = withReducer("TicketList", reducer)(({tab, search}) => {
             artist={event.asset?.eventData?.artist}
             title={event.asset?.eventData?.title}
             location={event.asset?.eventData?.location}
-            type="overview"
+            type={type}
             status={event.asset.eventData.status}
           />)
       })}

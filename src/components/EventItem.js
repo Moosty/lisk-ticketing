@@ -77,8 +77,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export const EventItem = ({eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status}) => {
+export const EventItem = ({eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status,}) => {
 const history = useHistory();
+
+// TYPE = USER, OVERVIEW, ORGANISER
 
   return (
     <div className=" w-full  ">
