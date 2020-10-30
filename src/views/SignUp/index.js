@@ -124,7 +124,7 @@ export const SignUp = withReducer("signUp", reducer)((props) => {
               onClick={() => {
                 console.log("form",{form});
                 console.log("accounts:", account);
-                history.push(`/account/account03`);
+                history.push(`/overview`);
                 dispatch(Actions.addAccount(form));
               }}
             >
@@ -153,7 +153,7 @@ export const SignUp = withReducer("signUp", reducer)((props) => {
               onClick={() => {
                 console.log("formulier", {form2});
                 console.log("organiserAccounts:", organiser);
-                history.push(`/organiser/organiser03`);
+                history.push(`/overview`);
                 dispatch(Actions.addOrganiser(form2));
               }}
             >

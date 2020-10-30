@@ -21,9 +21,6 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        console.log("organiser accounts ", organiserAccounts);
-        console.log("dit account (in organiseraccount)", thisOrganiser);
-        console.log("dit is het address", address, thisAddress);
     }, [organiserAccounts]);
 
 
@@ -46,9 +43,7 @@ export const Organiser = withReducer("organiser", reducer)((props) => {
                 <div className="flex flex-row ">
 
                     <div className="flex flex-col text-sm float-left leading-4 my-2">
-                        <span className="text-lg mb-2">Organiser</span>
-                        <span className="font-bold">...</span>
-
+                        <span className="text-lg mb-2">{thisOrganiser.asset.organisation}</span>
                     </div>
                 </div>
 

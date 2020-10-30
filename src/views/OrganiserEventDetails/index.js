@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {TicketAccordion, Event, CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
@@ -17,10 +17,18 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
   const {address} = useParams();
   const thisEvent = events.find(event => event.address === address);
   const swapTicketsX = swapTickets.filter(event => event.eventId === address);
+  const [ticketsAmount, setTicketsAmount] = useState();
 
   useEffect(() => {
-console.log("this event", thisEvent);
-  }, [events, swapTickets]);
+    console.log(ticketsAmount);
+
+    console.log("this event", thisEvent);
+  const x = thisEvent.asset.ticketData.types.map((item) => item.amount);
+  console.log(x);
+  setTicketsAmount(thisEvent.asset.ticketData.types.reduce(
+      (sum, item) => sum + (item.amount), 0
+    ));
+  }, [events, swapTickets, thisEvent, ticketsAmount]);
 
   return <div className="mt-10">
 
@@ -47,7 +55,7 @@ console.log("this event", thisEvent);
         <div className="flex flex-col align-middle text-center align-middle items-center py-4 w-3/6">
 
           <span className="font-medium text-xs text-center uppercase">Total</span>
-          <span className="font-bold text-indigo-900"> 23.000</span>
+          <span className="font-bold text-indigo-900"> {ticketsAmount}</span>
 
         </div>
           <div className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">

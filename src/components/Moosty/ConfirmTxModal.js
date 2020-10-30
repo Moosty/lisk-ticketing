@@ -25,7 +25,7 @@ export const ConfirmTxModal = (props) => {
             <div>Fill in the <span className="font-bold text-pink-400">organisation key </span> to confirm the creation of this event.
             </div>
             <TextField style={{marginTop:"1rem", marginBottom:"1rem", borderColor:"white",backgroundColor:"white", borderRadius:"5px"}}
-                       id="outlined-basic" label="Recipient adress" variant="filled" color="secondary" />
+                       id="outlined-basic" label="Organization Passphrase" variant="filled" color="secondary" />
 
 
           </div>
@@ -47,6 +47,9 @@ export const ConfirmTxModal = (props) => {
               size="small"
               color="secondary"
               className="m-4"
+              onClick={() => {
+                dispatch(Actions.closeModal())
+              }}
             >Confirm Transaction
             </Button>
           </div>
@@ -84,12 +87,15 @@ export const ConfirmTxModal = (props) => {
               size="small"
               color="secondary"
               className="m-4"
+              onClick={() => {
+                dispatch(Actions.closeModal())
+              }}
             >Confirm Transaction
             </Button>
           </div>
         </div> }
 
-        {/*  BUY TICKETS MODAL */}
+        {/*  CONFIRM ACTION */}
 
         { props.type === 'confirmAction' && <div>
           <div className="flex flex-col text-left flex font-normal text-sm text-white" >
