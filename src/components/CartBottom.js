@@ -5,6 +5,7 @@ import Divider from "@material-ui/core/Divider";
 import { useHistory } from 'react-router-dom';
 import * as Actions from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -18,7 +19,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CartBottom = ({props}) => {
+  const {address} = useParams();
   const basket = useSelector(({blockchain}) => blockchain.basket.items);
+  const events = useSelector(({blockchain}) => blockchain.event.events);
+  const thisEvent = events.find((event) => event.address === address);
+  const [thisBasket, setThisBasket] = useState();
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -26,18 +31,30 @@ export const CartBottom = ({props}) => {
   const [totalPrice, setTotalPrice] = useState();
 
   useEffect( () => {
-    console.log(basket);
-    console.log(basket.length);
+    // console.log(basket);
+    // console.log(basket.length);
+    console.log("thisbasket", thisBasket);
     setTotalPrice(basket.reduce(
       (sum, item) => sum + (item.price * item.quantity), 0
     ));
-    }, [basket]
+    }, [thisBasket]
   );
 
   useEffect( () => {
-      console.log(JSON.stringify(totalPrice));
+    setThisBasket(Object.assign(basket, events));
+    }, [thisEvent]
+  );
+
+  useEffect( () => {
+      // console.log(JSON.stringify(totalPrice));
     }, [totalPrice]
   );
+
+  useEffect( () => {
+    console.log("thisEvent", thisEvent);
+    }, [thisEvent]
+  );
+
   return (
     <div className="bottom-0 fixed z-50 bg-gray-900 text-white w-full ">
       <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
@@ -54,7 +71,7 @@ export const CartBottom = ({props}) => {
           <Button
             onClick={() => {
               history.push(`/checkout/account01`);
-              console.log(basket);
+              // console.log(basket);
             } }
 
             variant="contained"

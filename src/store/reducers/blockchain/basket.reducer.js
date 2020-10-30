@@ -80,7 +80,7 @@ export default (state = defaultState, action) => {
       // zo nee: return state
       item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
 
-      if (item.quantity > 1){
+      if (item.quantity >= 1){
         item.quantity--;
       } else {
         item = {

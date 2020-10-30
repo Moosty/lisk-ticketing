@@ -37,7 +37,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
   // we willen een key value: ticketnames = [ {0: "first release"}, {1: "second"}, ... ]
 
   useEffect( () => {
-      console.log( "Swaptickets", swapTicketsX );
+      // console.log( "Swaptickets", swapTicketsX );
 
     }, [swapTickets]
 

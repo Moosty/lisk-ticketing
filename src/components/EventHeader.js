@@ -35,7 +35,7 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
   "SUN"
 ];
 
-export const EventHeader = ({ eventId, key, artist, location, title, eventDate, organiser, eventTime, type, status}) => {
+export const EventHeader = ({ eventId, artist, location, title, eventDate, organiser, eventTime, type, status}) => {
 
   const classes = useStyles();
 
@@ -59,7 +59,7 @@ export const EventHeader = ({ eventId, key, artist, location, title, eventDate, 
         {/*ORGANISER VIEW*/}
         { type === 'organiser' &&
         <EventItem
-          key={key}
+          key={eventId}
           eventId={eventId}
           eventDate={eventDate}
           startEvent={eventTime}

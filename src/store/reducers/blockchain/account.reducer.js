@@ -54,7 +54,7 @@ export default (state = defaultState, action) => {
         // key: title & value: title meegegeven
       };
     case Actions.ADD_ACCOUNT:
-      console.log(state.accounts);
+      // console.log(state.accounts);
       return {
         ...state,
         accounts:[

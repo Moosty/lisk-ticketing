@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Button from "@material-ui/core/Button";
-import {fade, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import {useDispatch, useSelector} from "react-redux";
 import * as Actions from "store/actions";
@@ -20,13 +19,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key, ticketType}) => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const items = useSelector(({blockchain}) => blockchain.basket.items);
   const [item, setItem] = useState(null);
 
   useEffect(() => {
-    console.log(item);
-    console.log(items);
+    console.log("item", item);
+    console.log("items", items);
     if (items.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
       setItem(items.find(i => i.eventId === eventId && i.ticketType === ticketType));
     }
