@@ -1,17 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {Header} from "components/Header";
-import {CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
-import {TicketList} from "components/EventList";
-import {AccountHeader} from "components/AccountHeader";
 
 import {useDispatch, useSelector} from "react-redux";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import Button from "@material-ui/core/Button";
-import * as Actions from "../../store/actions";
 import {useHistory, useParams} from "react-router-dom";
-import {PortfolioItem} from "components/PortfolioItem";
 import {MyTicket} from "components/MyTicket";
+import * as Actions from "../../store/actions";
 
 
 // TODO animatie toevoegen: bij openen van deze pagina van beneden naar boven sliden
@@ -44,11 +39,11 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
         <h1 className="mx-10 text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Checkout</h1>
         <div className="p-6 pr-2">
       {thisBasket && thisBasket.map(item => {
-        console.log(basket);
+        console.log("this", basket);
 
         return (<MyTicket
           size="large"
-          status="active"
+          eventId={item.eventId}
           checkout="true"
           key={item.basketId}
           keyEvent={item.eventId}
@@ -74,12 +69,8 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
 
 
       <Button
-        // onClick={() => {
-        //   console.log(basket);
-        //   history.push('/my-tickets');
-        //   dispatch(Actions.checkoutBasket(basket));
-        // }}
-        onClick={()=> { dispatch(Actions.openModal('confirmTxBuyTicketsModal'))}}
+
+        onClick={()=> { dispatch(Actions.openModal('confirmTxModal', null))}}
 
         variant="contained"
         size="small"

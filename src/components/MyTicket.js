@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, status, ticketType, keyEvent}) => {
+export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, status, eventId, ticketType, keyEvent}) => {
 
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
   const Events = useSelector(({blockchain}) => blockchain.event.events);
@@ -86,8 +86,6 @@ export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, stat
   // const ticketData = thisEvent?.asset?.ticketData?.types.find(type => type.id === ticketType );
 
   const dispatch = useDispatch();
-  // const history = useHistory();
-  // const classes = useStyles();
 
   useEffect(() => {
       const thisEvent = Events.find(event => event.address === keyEvent);
@@ -169,7 +167,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, stat
         <div className="flex items-center flex-row">
 
           <IconButton
-
+            onClick={() => dispatch(Actions.openModal('confirmTxModal'))}
             color="secondary"
           >
             <DeleteOutline color="white"/>

@@ -145,6 +145,9 @@ export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
             size="small"
             color="secondary"
             className="m-4"
+            onClick={() => {
+              dispatch(Actions.openModal('confirmTxModal'))
+            }}
           >Sell ticket
           </Button>
         </div>
@@ -182,6 +185,9 @@ export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
             size="small"
             color="secondary"
             className="m-4"
+            onClick={() => {
+              dispatch(Actions.openModal('confirmTxModal'))
+            }}
           >Transfer ticket
           </Button>
         </div>

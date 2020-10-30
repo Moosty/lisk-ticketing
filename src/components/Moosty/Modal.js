@@ -57,7 +57,13 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
 
            Organiser percentage: If a person resells their ticket, the organiser also can get a percentage. The percentage of the resell-price that will go to the organiser.
            " />;
-
+      case 'confirmTxModal':
+        return <ConfirmTxModal
+          title="Confirm action"
+          content="Provide your passphrase to confirm this action"
+          type="confirmAction"
+          {...props}
+        />;
       case 'cancelEventModal':
         return <CancelEventModal
           title="Cancel Event"
@@ -113,13 +119,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
           {...props}
         />;
 
-      case 'confirmTxBuyTicketsModal':
-        return <ConfirmTxModal
-          title="Confirm action"
-          content="Provide your passphrase to confirm this action"
-          type="confirmBuyTickets"
-          {...props}
-        />;
+
         default:
         return <div>Modal Component not found</div>;
     }

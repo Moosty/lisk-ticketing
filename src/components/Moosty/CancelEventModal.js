@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, } from 'react';
 import NotificationsRoundedIcon from "@material-ui/icons/NotificationsRounded";
 import Button from "@material-ui/core/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {MyTicket, TicketListItem} from "components/index";
-import { SliderPrice } from "components/SliderPrice";
+import {MyTicket, } from "components/index";
 import * as Actions from "../../store/actions";
-import TextField from "@material-ui/core/TextField";
 
 export const CancelEventModal = (props) => {
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
