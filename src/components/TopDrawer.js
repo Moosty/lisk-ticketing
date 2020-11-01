@@ -19,6 +19,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles({
   list: {
@@ -57,8 +58,9 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
       onClick={() => dispatch(Actions.closeAllDrawers())}
       onKeyDown={() => dispatch(Actions.closeAllDrawers())}
     >
-      <div className="flex flex-col ml-4 m">
-       <span className="text-white font-bold text-lg"> Lisk Ticketing</span>
+      <div className="flex flex-col ml-4 my-4">
+       <span className="text-white font-bold mb-2 text-xl"> Lisk Ticketing</span>
+        <div className="flex flex-col">
         <span className="text-sm">User account:</span>
         <span className="font-bold" style={{color:"#f50057"}}>{thisAccount.asset.username}</span>
         <div className="flex flex-row mt-2">
@@ -71,21 +73,32 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
             <span className="ml-2">{amountOfTickets}</span></div>
 
         </div>
+        </div>
       </div>
       <Divider />
 
       {/**/}
+      <ListItem
+        style={{backgroundColor:"#E91E63"}}
+        button onClick={() => history.push(`/login`)} key={"login"} >
+        <ListItemIcon style={{color:"#f50057"}}>{<InboxIcon style={{color:"white"}} />}</ListItemIcon>
+        <ListItemText primary={"Sign in"} />
+      </ListItem>
       <List>
         {[
           // TODO sign in veranderen in sign out wanneer je bent ingelogd
-          { label:"Sign in" , link: "/signup", icon: <InboxIcon /> },
+
           { label:"Overview" , link: "/overview", icon: <InboxIcon /> },
           { label:"My Tickets" , link: "/my-tickets", icon: <InboxIcon /> },
           { label:"My Events" , link: "/my-events/organiser01", icon: <InboxIcon /> },
           { label:"Shopping Basket" , link: "/checkout", icon: <InboxIcon /> },
 
-        ].map((item) => (
-          <ListItem button onClick={() => history.push(`${item.link}`)} key={item.label} >
+        ]
+
+          .map((item) => (
+          <ListItem
+
+            button onClick={() => history.push(`${item.link}`)} key={item.label} >
             <ListItemIcon style={{color:"#f50057"}}>{item.icon}</ListItemIcon>
             <ListItemText primary={item.label} />
           </ListItem>
