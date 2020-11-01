@@ -1,28 +1,25 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <span className="text-white text-center" style={{color:"white"}} >
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Lisk Ticketing {new Date().getFullYear()} | POC by The Moosty Team
+
+        Lisk Ticketing {new Date().getFullYear()} <br/> POC by <Link style={{color:"black"}} href="https://moosty.com"> The Moosty Team
       </Link>{' '}
       
       {'.'}
-    </Typography>
+    </span>
   );
 }
 
@@ -63,16 +60,18 @@ export const LogIn = (props) => {
 
   return ( 
 
-    <div className="bg-fixed sm:bg-scroll bg-cover"
+    <div className="bg-fixed sm:bg-scroll bg-cover mt-4 "
                 style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "100vh"}}>
-    <div className="w-full flex-auto h-full" style={{backgroundColor: "rgb(0 0 0 / 85%)"}}>
+    <div className="w-full flex-auto h-full px-6" style={{backgroundColor: "#f50057"}}>
       <div className={classes.paper}>
     
-      <Typography className={classes.h1} component="h1" variant="h5">
-        Log In
-      </Typography>
+      <div className="mt-6 flex flex-col align-middle text-center justify-center items-center">
+        <AccountBoxIcon style={{color:"white", fontSize:"4rem"}} />
+        <h1 className="text-2xl font-bold text-black capitalize mt-4"> Log in </h1>
+        <span className="text-sm font-medium text-white text-center">A fair ticketing system</span>
       </div>
-      <Container component="main" maxWidth="xs">
+      </div>
+      <div className="mx-4">
         <CssBaseline />
         <div className={classes.paper}>
 
@@ -108,6 +107,7 @@ export const LogIn = (props) => {
              
             </Grid>
             <Button
+              style={{backgroundColor:"black"}}
               type="submit"
               fullWidth
               variant="contained"
@@ -118,7 +118,7 @@ export const LogIn = (props) => {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link style={{color:"black"}} href="#" variant="body2">
                   Dont have an account yet? Create one!
                 </Link>
               </Grid>
@@ -128,7 +128,7 @@ export const LogIn = (props) => {
         <Box mt={5}>
           <Copyright />
         </Box>
-      </Container>
+      </div>
 
     </div>
       
