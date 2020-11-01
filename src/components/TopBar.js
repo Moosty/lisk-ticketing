@@ -21,6 +21,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import withReducer from "store/withReducer";
 import reducer from "store/reducers";
 import {useSelector} from "react-redux";
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -159,14 +160,16 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={()=>
+      <MenuItem
+        style={{backgroundColor:"#E91E63", padding:"4rem"}}
+        onClick={()=>
       {handleMenuClose();
         history.push(`/signup`);
       }
       }>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
-            <MailIcon />
+            <AccountBoxIcon />
           </Badge>
         </IconButton>
         <p>Signup</p>
