@@ -42,7 +42,7 @@ export const EventHeader = ({ eventId, key, artist, location, title, eventDate, 
   return (
     <div>
       <div className="bg-fixed sm:bg-scroll bg-contain"
-           style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "20vh"}}>
+           style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "15vh"}}>
         <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>
 
       </div>
@@ -68,6 +68,7 @@ export const EventHeader = ({ eventId, key, artist, location, title, eventDate, 
           location={location}
           type="eventDetail"
           status={status}
+          color="white"
         />
         }
 

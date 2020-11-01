@@ -77,13 +77,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export const EventItem = ({key, eventDetail, eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status}) => {
+export const EventItem = ({key, eventDetail, eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status, color}) => {
 const history = useHistory();
 
 // TYPE = USER, OVERVIEW, ORGANISER
 
   return (
-    <div className=" w-full  ">
+    <div className=" w-full ">
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center my-3 ">
           <StyledBadge
@@ -102,7 +102,7 @@ const history = useHistory();
             </Avatar>
           </StyledBadge>
 
-          <div className="flex flex-col text-sm leading-4 mx-2">
+          <div className="flex flex-col text-sm leading-4 mx-2"  style={{color:color}}>
             <div><span className="font-medium text-left block"> {title}</span>
               <span className=""></span>
             </div>
@@ -144,7 +144,7 @@ const history = useHistory();
             size="small"
             >Details</Button> }
 
-          { type === 'eventDetail' &&  <div></div>}
+          { type === 'eventDetail' &&  <div className="w-full"> </div>}
         </div>
 
 
