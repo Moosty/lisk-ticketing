@@ -39,7 +39,7 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
         <h1 className="mx-10 text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Checkout</h1>
         <div className="p-6 pr-2">
       {thisBasket && thisBasket.map(item => {
-        console.log("this", basket);
+        console.log("this basket", basket);
 
         return (<MyTicket
           size="large"

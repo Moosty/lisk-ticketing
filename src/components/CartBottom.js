@@ -22,8 +22,8 @@ export const CartBottom = ({props}) => {
   const {address} = useParams();
   const basket = useSelector(({blockchain}) => blockchain.basket.items);
   const events = useSelector(({blockchain}) => blockchain.event.events);
-  const thisEvent = events.find((event) => event.address === address);
-  const [thisBasket, setThisBasket] = useState();
+  // const thisEvent = events.find((event) => event.address === address);
+  // const [thisBasket, setThisBasket] = useState();
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -33,17 +33,12 @@ export const CartBottom = ({props}) => {
   useEffect( () => {
     // console.log(basket);
     // console.log(basket.length);
-    console.log("thisbasket", thisBasket);
     setTotalPrice(basket.reduce(
       (sum, item) => sum + (item.price * item.quantity), 0
     ));
-    }, [thisBasket]
+    }, [],
   );
 
-  useEffect( () => {
-    setThisBasket(Object.assign(basket, events));
-    }, [thisEvent]
-  );
 
   useEffect( () => {
       // console.log(JSON.stringify(totalPrice));
@@ -51,8 +46,16 @@ export const CartBottom = ({props}) => {
   );
 
   useEffect( () => {
-    console.log("thisEvent", thisEvent);
-    }, [thisEvent]
+      console.log("basket", basket);
+    console.log("address in params", address);
+
+    }, [events, basket]
+  );
+
+  useEffect( () => {
+      console.log("events", events);
+
+    }, [events, basket]
   );
 
   return (
