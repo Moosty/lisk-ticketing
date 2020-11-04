@@ -26,13 +26,13 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
 
   const classes = useStyles();
   const events = useSelector(({blockchain}) => blockchain.event.events);
-  const eventX = events.find(event => event.address === address);
+  const thisEvent = events.find(event => event.address === address);
   const swapTickets = useSelector(({blockchain}) => blockchain.marketplace.items);
-  const swapTicketsX = swapTickets.filter(event => event.eventId === address);
+  const swapTicketsThisEvent = swapTickets.filter(event => event.eventId === address);
 
   // ik wil de naam van tickettype 1 van eventX
   // voor ticketTypeId===X wil ik eventX.asset.ticketData.types.filter(type => type.id === swapTicketsX.ticketTypeId) id=XXX
-  const X = eventX.asset.ticketData.types.map(type => type.id && type.name);
+  const X = thisEvent.asset.ticketData.types.map(type => type.id && type.name);
   // TO DO - uit de eventreducer wil ik de ticketnamen halen.
   // we willen een key value: ticketnames = [ {0: "first release"}, {1: "second"}, ... ]
 
@@ -51,14 +51,14 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}><span className="font-bold">{swapTicketsX.length}</span> Swap Tickets available</Typography>
+          <Typography className={classes.heading}><span className="font-bold">{swapTicketsThisEvent.length}</span> Swap Tickets available</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <div className="w-full mb-20">
 
-            {swapTicketsX.map((type) =>
+            {swapTicketsThisEvent.map((type) =>
               <SwapTicket
-                key={type.ticketTypeId}
+                key={type.ticketAddress}
                 resellerPrice={type.resellerPrice}
                 type={type.name}
                 ticketId={type.ticketTypeId}

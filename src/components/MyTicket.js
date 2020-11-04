@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import React, {useEffect, useState} from "react";
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import * as Actions from "../store/actions";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import Badge from '@material-ui/core/Badge';
 import IconButton from "@material-ui/core/IconButton";
@@ -10,7 +10,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
-import { DeleteOutline } from "@material-ui/icons";
+import {DeleteOutline} from "@material-ui/icons";
 import {ticketStatuses} from "../store/reducers/blockchain/portfolio.reducer";
 
 const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
@@ -76,11 +76,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, status, eventId, ticketType, keyEvent}) => {
+export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, status, eventId, ticketType, keyEvent}) => {
 
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
-  const Events = useSelector(({blockchain}) => blockchain.event.events);
+  const events = useSelector(({blockchain}) => blockchain.event.events);
   const [thisEventData, setThisEventData] = useState(null);
+  const thisEvent = events.find(event => event.address === keyEvent);
+  const [thisTicketPrice, setThisTicketPrice] = useState(null);
 
   // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
   // const ticketData = thisEvent?.asset?.ticketData?.types.find(type => type.id === ticketType );
@@ -88,13 +90,19 @@ export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, stat
   const dispatch = useDispatch();
 
   useEffect(() => {
-      const thisEvent = Events.find(event => event.address === keyEvent);
+      const thisEvent = events.find(event => event.address === keyEvent);
       setThisEventData(thisEvent?.asset?.eventData);
-    }, [Events],
+      console.log("thisevent", thisEventData);
+      console.log("thisevent", thisEvent);
+
+    }, [events],
   );
 
   useEffect(() => {
-  }, []);
+    console.log("this ticket type", ticketType);
+    setThisTicketPrice(thisEvent.asset.ticketData.types.find(t => t.id === ticketType).price);
+    console.log("this ticket type price", );
+  }, [thisEventData]);
 
   return (<div className=" w-full  ">
       <div className="flex flex-row justify-between">
@@ -154,7 +162,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, stat
         {size === 'large' &&
         <div className="flex items-center flex-row w-4/12">
           <div className="flex flex-col text-right text-xs font-bold">
-            <span className="text-sm"> € 45.00</span>
+            <span className="text-sm"> € {thisTicketPrice}</span>
             <span> SAT 22:00H</span>
           </div>
           <div className="">

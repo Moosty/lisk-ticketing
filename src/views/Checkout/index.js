@@ -14,23 +14,29 @@ import * as Actions from "../../store/actions";
 
 export const Checkout = withReducer("checkout", reducer)((props) => {
   const { ownerId } = useParams();
+  const events = useSelector(({blockchain}) => blockchain.event.events);
   const basket = useSelector(({blockchain}) => blockchain.basket.items);
   const thisBasket = basket.filter(basket => basket.ownerId === ownerId );
 
   const [totalPrice, setTotalPrice] = useState();
- const amountOfTickets = thisBasket.length;
+  // TODO aanpassen aan quantity
+ const [amountOfTickets, setAmountOfTickets] = useState();
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
       console.log("basket", basket);
       console.log("basket length", basket.length);
-      setTotalPrice(basket.reduce(
-        (sum, item) => sum + (item.price * item.quantity), 0
+      setAmountOfTickets(thisBasket.reduce(
+        (sum, item) => sum + (item.quantity), 0
       ));
-    }, [basket]
+    }, [thisBasket]
   );
 
+  useEffect(() => {
+      setTotalPrice(thisBasket.map( b => events.find(e => e.address === b.eventId).asset.ticketData.types.find(t => t.id === b.ticketType).price * b.quantity).reduce((a, b) => a + b));
+    }, [events, totalPrice],
+  );
   return (<div className="mt-10">
 
     <div className="pt-10 bg-gray-900  w-full h-screen text-white">

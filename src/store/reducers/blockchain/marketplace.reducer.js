@@ -27,14 +27,14 @@ const defaultState = {
       resellerPrice: 72,
     },
     {
-      ticketAddress: "12312341r555ff23",
+      ticketAddress: "12312341r555fdff23",
       eventId: 'event02',
       ticketTypeId: 2,
       quantity: 1,
       resellerPrice: 67,
     },
     {
-      ticketAddress: "12312341r555ff23",
+      ticketAddress: "12312341r55vvv5ff23",
       eventId: 'event02',
       ticketTypeId: 1,
       quantity: 1,
