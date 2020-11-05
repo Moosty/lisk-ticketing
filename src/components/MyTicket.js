@@ -97,7 +97,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
       setThisTicketType(thisEvent?.asset?.ticketData?.types?.find(t => t.id === ticketType));
       // console.log("dit type", thisTicketType);
       setReSellPercentage(thisEvent.asset.resellData.maximumResellPercentage);
-    // console.log("thisevent", thisEventData);
+      // console.log("thisevent", thisEventData);
       // console.log("thisevent", thisEvent);
     }, [events, keyEvent, ticketType],
   );
@@ -105,7 +105,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
   useEffect(() => {
 
       // console.log("dit type", thisTicketType);
-    // console.log("deze eventdata", thisEventData);
+      // console.log("deze eventdata", thisEventData);
 
     }, [thisTicketType],
   );
@@ -148,7 +148,14 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
           <IconButton
             onClick={() => {
 
-              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status, ticketType, thisTicketType, reSellPercentage}))
+              dispatch(Actions.openModal('scanTicketModal', {
+                keyEvent,
+                size,
+                status,
+                ticketType,
+                thisTicketType,
+                reSellPercentage
+              }))
             }}
             color="secondary"
           >
@@ -159,7 +166,14 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
             color="secondary"
             onClick={() => {
 
-              dispatch(Actions.openModal('optionsModal', {keyEvent, size, status, ticketType, thisTicketType, reSellPercentage}))
+              dispatch(Actions.openModal('optionsModal', {
+                keyEvent,
+                size,
+                status,
+                ticketType,
+                thisTicketType,
+                reSellPercentage
+              }))
             }}
           >
             <MoreVertIcon color="secondary"/>
@@ -182,7 +196,10 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
         <div className="flex items-center flex-row">
 
           <IconButton
-            onClick={() => dispatch(Actions.openModal('confirmTxModal'))}
+            onClick={() => {
+              dispatch(Actions.removeItem(eventId, ticketType));
+              }
+            }
             color="secondary"
           >
             <DeleteOutline color="white"/>

@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import {useDispatch, } from "react-redux";
 import * as Actions from "../../store/actions";
 import TextField from "@material-ui/core/TextField";
+import IconButton from "@material-ui/core/IconButton";
 
 export const ConfirmTxModal = (props) => {
   const dispatch = useDispatch();
@@ -171,6 +172,7 @@ export const ConfirmTxModal = (props) => {
             </Button>
           </div>
         </div> }
+
 
       </div>
     </div>

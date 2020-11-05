@@ -16,7 +16,6 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
   const { ownerId } = useParams();
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const basket = useSelector(({blockchain}) => blockchain.basket.items);
-  const thisBasket = basket.filter(basket => basket.ownerId === ownerId );
 
   const [totalPrice, setTotalPrice] = useState();
   // TODO aanpassen aan quantity
@@ -25,18 +24,17 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("thisBasket in Checkout", thisBasket);
     console.log("Basket in Checkout", basket);
 
     // console.log("deze baskaat", basket);
-      setAmountOfTickets(thisBasket.reduce(
+      setAmountOfTickets(basket.reduce(
         (sum, item) => sum + (item.quantity), 0
       ));
-    }, [thisBasket]
+    }, [basket]
   );
 
   useEffect(() => {
-      setTotalPrice(thisBasket.map( b => events.find(e => e.address === b.eventId).asset.ticketData.types.find(t => t.id === b.ticketType).price * b.quantity).reduce((a, b) => a + b));
+      setTotalPrice(basket.map( b => events.find(e => e.address === b.eventId).asset.ticketData.types.find(t => t.id === b.ticketType).price * b.quantity).reduce((a, b) => a + b));
     }, [events, totalPrice],
   );
   return (<div className="mt-10">
@@ -46,7 +44,7 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
       <div className=" py-5 md:p-12 lg:p-24  h-full flex flex-col ">
         <h1 className="mx-10 text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Checkout</h1>
         <div className="p-6 pr-2">
-      {thisBasket && thisBasket.map(item => {
+      {basket && basket.map(item => {
         let ticketGroup = [];
         for (let i = 0; i < item.quantity; i++) {
           ticketGroup.push(<MyTicket

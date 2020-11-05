@@ -151,7 +151,7 @@ export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType, th
             onClick={() => {
               dispatch(Actions.openModal('confirmTxModal'))
             }}
-          >Sell ticket
+          >Put on marketplace
           </Button>
         </div>
         </div>}

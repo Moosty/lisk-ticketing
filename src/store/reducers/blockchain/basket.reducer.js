@@ -48,10 +48,10 @@ export default (state = defaultState, action) => {
           quantity: 1,
         }
       }
-      console.log("1a", state.items);
-      console.log("2)  FILTER", state.items.filter( i => i.eventId !== action.eventId && i.ticketType !== action.ticketType )
-      );
-      console.log("3) ITEM NA FILTER", item);
+      // console.log("1a", state.items);
+      // console.log("2)  FILTER", state.items.filter( i => i.eventId !== action.eventId && i.ticketType !== action.ticketType )
+      // );
+      // console.log("3) ITEM NA FILTER", item);
 
       return {
         ...state,

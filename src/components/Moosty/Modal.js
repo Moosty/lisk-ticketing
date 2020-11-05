@@ -63,6 +63,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
           type="confirmAction"
           {...props}
         />;
+
       case 'cancelEventModal':
         return <CancelEventModal
           title="Cancel Event"

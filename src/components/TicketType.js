@@ -47,7 +47,7 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
           </div>
         </div>
         <div className="flex flex-row content-center items-center flex content-center align-middle">
-          <span className="text-3xl font-bold align-middle content-center"
+          <span className="text-3xl font-bold align-middle content-center cursor-pointer"
           onClick={() => {
             // console.log("items bij remove", items);
             dispatch(Actions.removeItem(eventId, ticketType))
@@ -58,7 +58,7 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
             <span
               className="justify-center m-auto items-baseline content-center">{item && item.quantity}</span>
           </div>
-          <span className="text-3xl font-bold" onClick={() => {
+          <span className="text-3xl font-bold cursor-pointer" onClick={() => {
             // console.log("items na ADD", items);
             dispatch(Actions.addItem(eventId, ticketType))
           }}>+</span>
