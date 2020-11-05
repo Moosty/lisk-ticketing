@@ -101,10 +101,12 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
 
   useEffect(
     () => {
-      // console.log("Topbar", basket, portfolio);
+      console.log("Topbar basket", basket);
       // console.log("filteredTickets", filteredTickets);
-      setAmountOfTicketsBasket(basket.length);
       setAmountOfTicketsPortfolio(filteredTickets.length);
+      setAmountOfTicketsBasket(basket.reduce(
+        (sum, item) => sum + (item.quantity), 0
+      ));
     }, [basket, portfolio],
   );
 

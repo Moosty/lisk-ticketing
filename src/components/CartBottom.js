@@ -73,7 +73,7 @@ export const CartBottom = ({props}) => {
         <div className="flex flex-row content-center items-center">
           <Button
             onClick={() => {
-              history.push(`/checkout/account01`);
+              history.push(`/checkout`);
               // console.log(basket);
             } }
 

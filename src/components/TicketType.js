@@ -19,19 +19,19 @@ const useStyles = makeStyles((theme) => ({
 
 export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key, ticketType}) => {
   const dispatch = useDispatch();
-  const items = useSelector(({blockchain}) => blockchain.basket.items);
+  const basketItems = useSelector(({blockchain}) => blockchain.basket.items);
   const [item, setItem] = useState(null);
 
   useEffect(() => {
     // console.log("item", item);
     // console.log("items", items);
-    if (items.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
-      setItem(items.find(i => i.eventId === eventId && i.ticketType === ticketType));
+    if (basketItems.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
+      setItem(basketItems.find(i => i.eventId === eventId && i.ticketType === ticketType));
     }
     // console.log("items start", items);
     // console.log("item in Tickettype", item);
 
-  }, [items, item]);
+  }, [basketItems, item]);
 
 
   return (

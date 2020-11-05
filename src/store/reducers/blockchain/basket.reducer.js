@@ -16,7 +16,7 @@ const defaultState = {
       eventId: 'event01',
       ownerId: 'account01',
       ticketType: 1,
-      quantity: 3,
+      quantity: 1,
     },
     {
       basketId: "basket02",
@@ -24,7 +24,7 @@ const defaultState = {
       eventId: 'event01',
       ownerId: 'account01',
       ticketType: 2,
-      quantity: 2,
+      quantity: 1,
     },
   ]
 };

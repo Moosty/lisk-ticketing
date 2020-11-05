@@ -25,6 +25,9 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
   const history = useHistory();
 
   useEffect(() => {
+    console.log("thisBasket in Checkout", thisBasket);
+    console.log("Basket in Checkout", basket);
+
     // console.log("deze baskaat", basket);
       setAmountOfTickets(thisBasket.reduce(
         (sum, item) => sum + (item.quantity), 0
