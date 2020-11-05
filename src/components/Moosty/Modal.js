@@ -40,22 +40,21 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
         return <div>Modal B</div>;
       case 'eventInfoModal':
         return <DemoModal
-          title="Event"
-          content="Write down the details of the event: name, artist, location" />;
+          title="Event Information"
+          subtitle="Fill in some information"
+          content="title event, location, event date, start time, duration" />;
       case 'ticketInfoModal':
         return <DemoModal
           title="Ticket information "
-          content="Design your tickets: different types, different pricing, the amount, the date those tickets become available. After the creation of the event you cannot change the tickets."/>;
+          subtitle="Design your tickets"
+          content="Ticket types, pricing, amount, ticket release date. "
+          endQuote="After the creation of the event you cannot change the tickets."
+        />;
       case 'resellInfoModal':
         return <DemoModal
           title="Resell Information"
-          content="After a user buys a ticket they might not be able to come to the event. They can resell their ticket for a specified price. As organiser you will have the option to design this second-hand marketplace:
-           Resell: yes/no --> if no, then people can only resell their tickets to the organiser
-           if yes, they can sell the ticket for a user-specified price
-
-           resell percentage: For how much can I sell my ticket? As organizer you can define how much a user can ask for their ticket (eg. maximum of 120% of the original price). This is programmed into the system. You can even say: only 50% of the price.
-
-           Organiser percentage: If a person resells their ticket, the organiser also can get a percentage. The percentage of the resell-price that will go to the organiser.
+          subtitle="Design 2nd hand market"
+          content="Resell YES/NO, the maximum resell percentage? and how much of the resell price goes to the organizer
            " />;
       case 'confirmTxModal':
         return <ConfirmTxModal
@@ -116,6 +115,13 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
           title="Confirm action"
           content="Provide your passphrase to confirm this action"
           type="confirmEvent"
+          {...props}
+        />;
+      case 'confirmTxCancelEventModal':
+        return <ConfirmTxModal
+          title="Confirm action"
+          content="Provide your passphrase to confirm this action"
+          type="confirmCancelEvent"
           {...props}
         />;
 

@@ -48,7 +48,8 @@ export const EventBottom = ({props}) => {
 
           <div className="flex flex-col text-sm float-left leading-4 my-2">
             <Button
-              onClick={()=> dispatch(Actions.openModal('cancelEventModal'))}
+              onClick={()=> dispatch(Actions.openModal('confirmTxCancelEventModal'))}
+
               variant="outlined"
               size="small"
               color="secondary"

@@ -72,7 +72,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
 
   useEffect(() => {
     setFrom(event.createEvent);
-  }, event)
+  }, [event])
 
   const updateField = (path, value) => dispatch(Actions.updateCreateEvent(path, value));
   const updateFieldType = (path, index, value) => dispatch(Actions.updateCreateEvent(`asset.ticketData.types[${index}].${path}`, value));

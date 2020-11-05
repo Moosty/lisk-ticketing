@@ -52,7 +52,7 @@ export const EventHeader = ({ eventId, artist, location, title, eventDate, organ
         {/*EVENT VIEW*/}
         { type === 'event' &&
         <h1 className="text-4xl font-black text-white">
-          {artist}
+          {title}
         </h1>
         }
 
