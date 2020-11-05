@@ -83,6 +83,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
   const [thisEventData, setThisEventData] = useState(null);
   const thisEvent = events.find(event => event.address === keyEvent);
   const [thisTicketPrice, setThisTicketPrice] = useState(null);
+  const [thisTicketName, setThisTicketName] = useState(null);
 
   // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
   // const ticketData = thisEvent?.asset?.ticketData?.types.find(type => type.id === ticketType );
@@ -100,9 +101,14 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
 
   useEffect(() => {
     console.log("this ticket type", ticketType);
-    setThisTicketPrice(thisEvent.asset.ticketData.types.find(t => t.id === ticketType).price);
+    setThisTicketPrice(thisEvent?.asset?.ticketData?.types?.find(t => t.id === ticketType).price);
     console.log("this ticket type price", );
-  }, [thisEventData]);
+  }, [thisTicketPrice]);
+
+  useEffect(() => {
+    setThisTicketName(thisEvent.asset.ticketData.types.find(t => t.id === ticketType).name);
+    console.log("this ticket name", thisTicketName);
+  }, [thisTicketName, thisEvent]);
 
   return (<div className=" w-full  ">
       <div className="flex flex-row justify-between">
@@ -129,7 +135,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
               <span className=""></span>
             </div>
             {size === 'large' &&
-            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>Second Release Ticket</span>
+            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>{thisTicketName}</span>
             }
             <span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>
           </div>
@@ -141,7 +147,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
           <IconButton
             onClick={() => {
 
-              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status}))
+              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status, ticketType}))
             }}
             color="secondary"
           >
@@ -163,7 +169,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
         <div className="flex items-center flex-row w-4/12">
           <div className="flex flex-col text-right text-xs font-bold">
             <span className="text-sm"> € {thisTicketPrice}</span>
-            <span> SAT 22:00H</span>
+            <span> {days[thisEvent.asset.eventData.eventDate.getDay()]} {thisEvent.asset.eventData.eventTime}H</span>
           </div>
           <div className="">
 

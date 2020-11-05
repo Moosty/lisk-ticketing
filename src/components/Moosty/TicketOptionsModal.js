@@ -7,7 +7,7 @@ import { SliderPrice } from "components/SliderPrice";
 import * as Actions from "../../store/actions";
 import TextField from "@material-ui/core/TextField";
 
-export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
+export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType}) => {
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
   const thisItem = portfolio.find(item => item.ticketAddress === "12312341r555ff");
   const dispatch = useDispatch();
@@ -36,7 +36,12 @@ export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
 
 
     <div className="bg-white rounded my-4 px-2">
-      <MyTicket status={status} size={size}  keyEvent={keyEvent} />
+      <MyTicket
+        keyEvent={keyEvent}
+        ticketType={ticketType}
+        status={status}
+        size={size}
+      />
     </div>
 
         { type === 'optionsModal' && <div>
