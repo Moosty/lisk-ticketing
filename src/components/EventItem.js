@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export const EventItem = ({key, eventDetail, eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status, color}) => {
+export const EventItem = ({eventDetail, eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status, color}) => {
 const history = useHistory();
 
 // TYPE = USER, OVERVIEW, ORGANISER

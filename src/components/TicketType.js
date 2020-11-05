@@ -28,8 +28,8 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
     if (items.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
       setItem(items.find(i => i.eventId === eventId && i.ticketType === ticketType));
     }
-    console.log("items start", items);
-    console.log("item in Tickettype", item);
+    // console.log("items start", items);
+    // console.log("item in Tickettype", item);
 
   }, [items, item]);
 
@@ -49,7 +49,7 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
         <div className="flex flex-row content-center items-center flex content-center align-middle">
           <span className="text-3xl font-bold align-middle content-center"
           onClick={() => {
-            console.log("items bij remove", items);
+            // console.log("items bij remove", items);
             dispatch(Actions.removeItem(eventId, ticketType))
           }
           }>-</span>
@@ -59,7 +59,7 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
               className="justify-center m-auto items-baseline content-center">{item && item.quantity}</span>
           </div>
           <span className="text-3xl font-bold" onClick={() => {
-            console.log("items na ADD", items);
+            // console.log("items na ADD", items);
             dispatch(Actions.addItem(eventId, ticketType))
           }}>+</span>
 

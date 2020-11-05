@@ -38,6 +38,7 @@ export default (state = defaultState, action) => {
       // zo ja: updaten
       // zo nee: toevoegen (quantity + 1)
       item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
+      console.log("1) ITEM VOOR AANVULLEN", item);
       if(item){
         item.quantity++;
       } else {
@@ -47,10 +48,15 @@ export default (state = defaultState, action) => {
           quantity: 1,
         }
       }
+      console.log("1a", state.items);
+      console.log("2)  FILTER", state.items.filter( i => i.eventId !== action.eventId && i.ticketType !== action.ticketType )
+      );
+      console.log("3) ITEM NA FILTER", item);
+
       return {
         ...state,
         items: [
-          ...state.items.filter( i => i.eventId !== action.eventId && i.ticketType !== action.ticketType ),
+          ...state.items.filter( i => i.eventId !== action.eventId || (i.eventId === action.eventId && i.ticketType !== action.ticketType)),
           item
         ]
       }
@@ -60,7 +66,7 @@ export default (state = defaultState, action) => {
       // zo nee: return state
       item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
 
-      if (item.quantity >= 1){
+      if (item && item.quantity >= 1){
         item.quantity--;
       } else {
         item = {
@@ -72,7 +78,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         items: [
-          ...state.items.filter( i => i.eventId !== action.eventId && i.ticketType !== action.ticketType),
+          ...state.items.filter( i => i.eventId !== action.eventId || (i.eventId === action.eventId && i.ticketType !== action.ticketType)),
           item
         ]
       }

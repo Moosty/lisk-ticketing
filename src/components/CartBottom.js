@@ -37,14 +37,14 @@ export const CartBottom = ({props}) => {
   );
 
   useEffect( () => {
-    console.log("address in params", address);
-    console.log("basket", basket);
+    // console.log("address in params", address);
+    // console.log("basket", basket);
 
     }, [events, basket]
   );
 
   useEffect( () => {
-      console.log("events", events);
+      // console.log("events", events);
     // PER ITEM IN DE BASKET
     // ZOEKEN WE HET MATCHENDE EVENT
     // KIJKEN WE NAAR DE MATCHENDE TICKETTYPE
@@ -52,9 +52,9 @@ export const CartBottom = ({props}) => {
     // * MAAL HET AANTAL (QUANTITY) IN HET BASKET ITEM
     // EN AL DIE BASKET.ITEMS * PRIJS TELLEN WE OP MET REDUCE
     const basketItemPrice = basket.map(b => events.find(e => e.address === b.eventId).asset.ticketData.types.find(t => t.id === b.ticketType).price * b.quantity);
-    console.log(basketItemPrice);
+    // console.log(basketItemPrice);
     setTotalPrice(basketItemPrice.reduce((a, b) => a + b));
-    console.log(totalPrice);
+    // console.log(totalPrice);
     }, [events, basket, totalPrice]
   );
 
