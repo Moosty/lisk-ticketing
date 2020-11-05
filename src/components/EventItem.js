@@ -1,18 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
-import { fade, makeStyles, withStyles  } from '@material-ui/core/styles';
+import { makeStyles, withStyles  } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from 'react-router-dom';
-import * as Actions from "../store/actions";
-import {useDispatch, useSelector} from "react-redux";
-import Chip from "@material-ui/core/Chip";
-import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import Avatar from "@material-ui/core/Avatar";
 import Badge from '@material-ui/core/Badge';
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
-import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import { statuses } from "../store/reducers/blockchain/event.reducer";
 
 const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
@@ -25,8 +17,8 @@ const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT",
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
-    backgroundColor: 'orange',
-    color: 'orange',
+    backgroundColor: 'green',
+    color: 'green',
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
     '&::after': {
       position: 'absolute',

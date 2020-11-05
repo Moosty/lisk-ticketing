@@ -19,19 +19,19 @@ const useStyles = makeStyles((theme) => ({
 
 export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key, ticketType}) => {
   const dispatch = useDispatch();
-  const items = useSelector(({blockchain}) => blockchain.basket.items);
+  const basketItems = useSelector(({blockchain}) => blockchain.basket.items);
   const [item, setItem] = useState(null);
 
   useEffect(() => {
     // console.log("item", item);
     // console.log("items", items);
-    if (items.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
-      setItem(items.find(i => i.eventId === eventId && i.ticketType === ticketType));
+    if (basketItems.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
+      setItem(basketItems.find(i => i.eventId === eventId && i.ticketType === ticketType));
     }
     // console.log("items start", items);
     // console.log("item in Tickettype", item);
 
-  }, [items, item]);
+  }, [basketItems, item]);
 
 
   return (
@@ -47,7 +47,7 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
           </div>
         </div>
         <div className="flex flex-row content-center items-center flex content-center align-middle">
-          <span className="text-3xl font-bold align-middle content-center"
+          <span className="text-3xl font-bold align-middle content-center cursor-pointer"
           onClick={() => {
             // console.log("items bij remove", items);
             dispatch(Actions.removeItem(eventId, ticketType))
@@ -58,7 +58,7 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
             <span
               className="justify-center m-auto items-baseline content-center">{item && item.quantity}</span>
           </div>
-          <span className="text-3xl font-bold" onClick={() => {
+          <span className="text-3xl font-bold cursor-pointer" onClick={() => {
             // console.log("items na ADD", items);
             dispatch(Actions.addItem(eventId, ticketType))
           }}>+</span>
