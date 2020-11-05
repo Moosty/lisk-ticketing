@@ -16,6 +16,7 @@ import withReducer from "store/withReducer";
 import reducer from "store/reducers";
 import {useSelector} from "react-redux";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import {ticketStatuses} from "../store/reducers/blockchain/portfolio.reducer";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -89,22 +90,22 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const basket = useSelector(({blockchain}) => blockchain.basket.items);
+
+  const basket  = useSelector(({blockchain}) => blockchain.basket.items);
+  const [amountOfTicketsBasket, setAmountOfTicketsBasket] = useState(basket.length);
 
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
-  const amountOfTickets = portfolio.length;
-  // TODO AMOUNT aanpassen aan user portfolio, nu pakt hij alle items
-  // const [amountOfTickets, setAmountOfTickets] = useState(null);
+  const filteredTickets = portfolio.filter((ticket) => ticket.ticketStatus === ticketStatuses.OWNED || ticket.ticketStatus === ticketStatuses.SELLING);
+  // AMOUNT OF 'ACTIVE' TICKETS IN PORTFOLIO
+  const [amountOfTicketsPortfolio, setAmountOfTicketsPortfolio] = useState(filteredTickets.length);
 
   useEffect(
     () => {
-      console.log("Topbar", portfolio);
-      // console.log("amountOFTickets", amountOfTickets);
-      // console.log("basket", basket);
-
-      // setAmountOfTickets(portfolio.lenght);
-      // console.log(amountOfTickets);
-    }, [portfolio, basket]
+      // console.log("Topbar", basket, portfolio);
+      // console.log("filteredTickets", filteredTickets);
+      setAmountOfTicketsBasket(basket.length);
+      setAmountOfTicketsPortfolio(filteredTickets.length);
+    }, [basket, portfolio],
   );
 
 
@@ -211,13 +212,13 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
           <TopDrawer />
           {/*// TODO /account01 verwijderen na DEV fase*/}
           <IconButton onClick={()=> history.push(`/my-tickets/account01`)} aria-label="show 17 new notifications" color="inherit">
-          <Badge  badgeContent={5} color="secondary">
+          <Badge  badgeContent={amountOfTicketsPortfolio} color="secondary">
             <ConfirmationNumberIcon />
           </Badge>
         </IconButton>
           {/*// TODO /account01 verwijderen na DEV fase*/}
           <IconButton onClick={()=> history.push(`/checkout/account01`)} aria-label="show 17 new notifications" color="inherit">
-            <Badge  badgeContent={5} color="secondary">
+            <Badge  badgeContent={amountOfTicketsBasket} color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
