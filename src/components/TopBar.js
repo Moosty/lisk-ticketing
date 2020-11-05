@@ -4,17 +4,11 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import {TopDrawer} from "components/TopDrawer";
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -90,21 +84,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TopBar = withReducer("topbar", reducer)((props) => {
+export const TopBar = withReducer("topBar", reducer)((props) => {
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const basket = useSelector(({blockchain}) => blockchain.basket.items);
 
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
+  const amountOfTickets = portfolio.length;
   // TODO AMOUNT aanpassen aan user portfolio, nu pakt hij alle items
-  const initialTickets = portfolio.lenght;
-  const [amountOfTickets, setAmountOfTickets] = useState(initialTickets);
+  // const [amountOfTickets, setAmountOfTickets] = useState(null);
 
   useEffect(
     () => {
+      console.log("Topbar", portfolio);
+      // console.log("amountOFTickets", amountOfTickets);
+      // console.log("basket", basket);
 
-    }, [portfolio],
+      // setAmountOfTickets(portfolio.lenght);
+      // console.log(amountOfTickets);
+    }, [portfolio, basket]
   );
 
 
@@ -211,56 +211,17 @@ export const TopBar = withReducer("topbar", reducer)((props) => {
           <TopDrawer />
           {/*// TODO /account01 verwijderen na DEV fase*/}
           <IconButton onClick={()=> history.push(`/my-tickets/account01`)} aria-label="show 17 new notifications" color="inherit">
-          <Badge  badgeContent={amountOfTickets} color="secondary">
+          <Badge  badgeContent={5} color="secondary">
             <ConfirmationNumberIcon />
           </Badge>
         </IconButton>
           {/*// TODO /account01 verwijderen na DEV fase*/}
           <IconButton onClick={()=> history.push(`/checkout/account01`)} aria-label="show 17 new notifications" color="inherit">
-            <Badge  badgeContent={amountOfTickets} color="secondary">
+            <Badge  badgeContent={5} color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
 
-        {/*/!*Menu (behind the three dots)*!/*/}
-        {/*  <div className={classes.grow} />*/}
-        {/*  <div className={classes.sectionDesktop}>*/}
-        {/*    <IconButton aria-label="show 4 new mails" color="inherit">*/}
-        {/*      <Badge badgeContent={4} color="secondary">*/}
-        {/*        <MailIcon />*/}
-        {/*      </Badge>*/}
-        {/*    </IconButton>*/}
-        {/*    <IconButton aria-label="show 17 new notifications" color="inherit">*/}
-        {/*      <Badge badgeContent={17} color="secondary">*/}
-        {/*        <NotificationsIcon />*/}
-        {/*      </Badge>*/}
-        {/*    </IconButton>*/}
-        {/*    <IconButton*/}
-        {/*      edge="end"*/}
-        {/*      aria-label="account of current user"*/}
-        {/*      aria-controls={menuId}*/}
-        {/*      aria-haspopup="true"*/}
-        {/*      onClick={handleProfileMenuOpen}*/}
-        {/*      color="inherit"*/}
-        {/*    >*/}
-        {/*      <AccountCircle />*/}
-        {/*    </IconButton>*/}
-        {/*  </div>*/}
-        {/*  /!*END Menu (behind the three dots)*!/*/}
-
-        {/*  /!*THREE DOTS*!/*/}
-        {/*  <div className={classes.sectionMobile}>*/}
-        {/*    <IconButton*/}
-        {/*      aria-label="show more"*/}
-        {/*      aria-controls={mobileMenuId}*/}
-        {/*      aria-haspopup="true"*/}
-        {/*      onClick={handleMobileMenuOpen}*/}
-        {/*      color="inherit"*/}
-        {/*    >*/}
-        {/*      <MoreIcon />*/}
-        {/*    </IconButton>*/}
-        {/*  </div>*/}
-        {/*  /!*END - THREE DOTS*!/*/}
 
         </Toolbar>
       </AppBar>

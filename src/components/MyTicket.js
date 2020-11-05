@@ -92,10 +92,10 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
 
   useEffect(() => {
       const thisEvent = events.find(event => event.address === keyEvent);
-      console.log("dit event in effect", thisEvent);
+      // console.log("dit event in effect", thisEvent);
       setThisEventData(thisEvent?.asset?.eventData);
       setThisTicketType(thisEvent?.asset?.ticketData?.types?.find(t => t.id === ticketType));
-      console.log("dit type", thisTicketType);
+      // console.log("dit type", thisTicketType);
       setReSellPercentage(thisEvent.asset.resellData.maximumResellPercentage);
     // console.log("thisevent", thisEventData);
       // console.log("thisevent", thisEvent);
@@ -104,8 +104,8 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
 
   useEffect(() => {
 
-      console.log("dit type", thisTicketType);
-    console.log("deze eventdata", thisEventData);
+      // console.log("dit type", thisTicketType);
+    // console.log("deze eventdata", thisEventData);
 
     }, [thisTicketType],
   );
