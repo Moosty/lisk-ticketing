@@ -82,9 +82,9 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const [thisEventData, setThisEventData] = useState(null);
   const thisEvent = events.find(event => event.address === keyEvent);
-  const [thisTicketPrice, setThisTicketPrice] = useState(null);
+  const [thisTicketPrice, setThisTicketPrice] = useState();
   const [thisTicketName, setThisTicketName] = useState(null);
-
+  const [reSellPercentage, setReSellPercentage] = useState();
   // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
   // const ticketData = thisEvent?.asset?.ticketData?.types.find(type => type.id === ticketType );
 
@@ -95,6 +95,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
       setThisEventData(thisEvent?.asset?.eventData);
       console.log("thisevent", thisEventData);
       console.log("thisevent", thisEvent);
+      setReSellPercentage(thisEvent.asset.resellData.maximumResellPercentage);
 
     }, [events],
   );
@@ -102,7 +103,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
   useEffect(() => {
     console.log("this ticket type", ticketType);
     setThisTicketPrice(thisEvent?.asset?.ticketData?.types?.find(t => t.id === ticketType).price);
-    console.log("this ticket type price", );
+    console.log("this ticket type price", thisTicketPrice);
   }, [thisTicketPrice]);
 
   useEffect(() => {
@@ -147,7 +148,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
           <IconButton
             onClick={() => {
 
-              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status, ticketType}))
+              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status, ticketType, thisTicketPrice, reSellPercentage}))
             }}
             color="secondary"
           >
@@ -158,7 +159,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
             color="secondary"
             onClick={() => {
 
-              dispatch(Actions.openModal('optionsModal', {keyEvent, size, status}))
+              dispatch(Actions.openModal('optionsModal', {keyEvent, size, status, ticketType, thisTicketPrice, reSellPercentage}))
             }}
           >
             <MoreVertIcon color="secondary"/>

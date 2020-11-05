@@ -2,16 +2,13 @@ import React, {useEffect, useState} from 'react';
 import NotificationsRoundedIcon from "@material-ui/icons/NotificationsRounded";
 import Button from "@material-ui/core/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {MyTicket, TicketListItem} from "components/index";
+import {MyTicket, } from "components/index";
 import { SliderPrice } from "components/SliderPrice";
 import * as Actions from "../../store/actions";
 import TextField from "@material-ui/core/TextField";
 
-export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType}) => {
-  const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
-  const thisItem = portfolio.find(item => item.ticketAddress === "12312341r555ff");
+export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType, thisTicketPrice, reSellPercentage}) => {
   const dispatch = useDispatch();
-
   var React = require('react');
   var QRCode = require('qrcode.react');
 
@@ -120,7 +117,8 @@ export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType}) =
             <div className="flex flex-col text-center">
               <div>Ticket bought for:</div>
               <div className="font-bold text-2xl">
-                € 25.00
+                {/* TODO BIJ EEN NIEUWE TICKET IS DIT OP TE ZOEKEN IN ASSET.TICKETDATA. BIJ EEN TWEEDEHANDS NIET*/}
+                € {thisTicketPrice}
               </div>
             </div>
             <div className="flex flex-col text-center">
@@ -131,7 +129,7 @@ export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType}) =
             </div>
           </div>
 
-          <SliderPrice />
+          <SliderPrice reSellPercentage={reSellPercentage} />
         </div>
 
         <div className="flex flex-row justify-around mt-2">
