@@ -105,6 +105,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
   useEffect(() => {
 
       console.log("dit type", thisTicketType);
+    console.log("deze eventdata", thisEventData);
 
     }, [thisTicketType],
   );
@@ -135,7 +136,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
               <span className=""></span>
             </div>
             {size === 'large' &&
-            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>{thisTicketType}</span>
+            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>{thisTicketType?.name}</span>
             }
             <span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>
           </div>
@@ -168,8 +169,8 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
         {size === 'large' &&
         <div className="flex items-center flex-row w-4/12">
           <div className="flex flex-col text-right text-xs font-bold">
-            <span className="text-sm"> € {thisTicketType}</span>
-            <span> {days[thisEventData?.asset?.eventData?.eventDate.getDay()]} {thisEventData?.asset?.eventData?.eventTime}H</span>
+            <span className="text-sm"> € {thisTicketType?.price}</span>
+            <span> {days[thisEventData?.eventDate.getDay()]} {thisEventData?.eventTime}H</span>
           </div>
           <div className="">
 
