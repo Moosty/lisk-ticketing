@@ -17,7 +17,6 @@ const defaultState = {
       ownerId: 'account01',
       ticketType: 1,
       quantity: 3,
-      price: 90,
     },
     {
       basketId: "basket02",
@@ -26,25 +25,6 @@ const defaultState = {
       ownerId: 'account01',
       ticketType: 2,
       quantity: 2,
-      price: 45,
-    },
-    {
-      basketId: "basket03",
-      ticketAddress: "unknown",
-      eventId: 'event02',
-      ownerId: 'account01',
-      ticketType: 2,
-      quantity: 2,
-      price: 70,
-    },
-    {
-      basketId: "basket04",
-      ticketAddress: "unknown",
-      eventId: 'event02',
-      ownerId: 'account02',
-      ticketType: 2,
-      quantity: 2,
-      price: 70,
     },
   ]
 };
@@ -80,7 +60,7 @@ export default (state = defaultState, action) => {
       // zo nee: return state
       item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
 
-      if (item.quantity > 1){
+      if (item.quantity >= 1){
         item.quantity--;
       } else {
         item = {

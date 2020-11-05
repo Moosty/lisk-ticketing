@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import React, {useEffect, useState} from "react";
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import * as Actions from "../store/actions";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import Badge from '@material-ui/core/Badge';
 import IconButton from "@material-ui/core/IconButton";
@@ -10,7 +10,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
-import { DeleteOutline } from "@material-ui/icons";
+import {DeleteOutline} from "@material-ui/icons";
 import {ticketStatuses} from "../store/reducers/blockchain/portfolio.reducer";
 
 const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
@@ -76,25 +76,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, status, eventId, ticketType, keyEvent}) => {
+export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, status, eventId, ticketType, keyEvent}) => {
 
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
-  const Events = useSelector(({blockchain}) => blockchain.event.events);
+  const events = useSelector(({blockchain}) => blockchain.event.events);
   const [thisEventData, setThisEventData] = useState(null);
-
+  const [thisTicketType, setThisTicketType] = useState();
+  const [thisTicketPrice, setThisTicketPrice] = useState();
+  const [thisTicketName, setThisTicketName] = useState(null);
+  const [reSellPercentage, setReSellPercentage] = useState();
   // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
   // const ticketData = thisEvent?.asset?.ticketData?.types.find(type => type.id === ticketType );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-      const thisEvent = Events.find(event => event.address === keyEvent);
+      const thisEvent = events.find(event => event.address === keyEvent);
+      console.log("dit event in effect", thisEvent);
       setThisEventData(thisEvent?.asset?.eventData);
-    }, [Events],
+      setThisTicketType(thisEvent?.asset?.ticketData?.types?.find(t => t.id === ticketType));
+      console.log("dit type", thisTicketType);
+      setReSellPercentage(thisEvent.asset.resellData.maximumResellPercentage);
+    // console.log("thisevent", thisEventData);
+      // console.log("thisevent", thisEvent);
+    }, [events, keyEvent, ticketType],
   );
 
   useEffect(() => {
-  }, []);
+
+      console.log("dit type", thisTicketType);
+
+    }, [thisTicketType],
+  );
+
 
   return (<div className=" w-full  ">
       <div className="flex flex-row justify-between">
@@ -121,7 +135,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, stat
               <span className=""></span>
             </div>
             {size === 'large' &&
-            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>Second Release Ticket</span>
+            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>{thisTicketType}</span>
             }
             <span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>
           </div>
@@ -133,7 +147,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, stat
           <IconButton
             onClick={() => {
 
-              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status}))
+              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status, ticketType, thisTicketType, reSellPercentage}))
             }}
             color="secondary"
           >
@@ -144,7 +158,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, stat
             color="secondary"
             onClick={() => {
 
-              dispatch(Actions.openModal('optionsModal', {keyEvent, size, status}))
+              dispatch(Actions.openModal('optionsModal', {keyEvent, size, status, ticketType, thisTicketType, reSellPercentage}))
             }}
           >
             <MoreVertIcon color="secondary"/>
@@ -154,8 +168,8 @@ export const MyTicket = withReducer("myTicket", reducer)(({ size, checkout, stat
         {size === 'large' &&
         <div className="flex items-center flex-row w-4/12">
           <div className="flex flex-col text-right text-xs font-bold">
-            <span className="text-sm"> € 45.00</span>
-            <span> SAT 22:00H</span>
+            <span className="text-sm"> € {thisTicketType}</span>
+            <span> {days[thisEventData?.asset?.eventData?.eventDate.getDay()]} {thisEventData?.asset?.eventData?.eventTime}H</span>
           </div>
           <div className="">
 

@@ -122,8 +122,8 @@ export const SignUp = withReducer("signUp", reducer)((props) => {
               color="secondary"
               className={classes.submit}
               onClick={() => {
-                console.log("form",{form});
-                console.log("accounts:", account);
+                // console.log("form",{form});
+                // console.log("accounts:", account);
                 history.push(`/overview`);
                 dispatch(Actions.addAccount(form));
               }}

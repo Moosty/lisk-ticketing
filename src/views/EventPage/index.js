@@ -18,6 +18,7 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
     <EventHeader
       search={value => setSearch(value)}
       key={thisEvent.address}
+      eventId={thisEvent.address}
       artist={thisEvent.asset.eventData.artist}
       location={thisEvent.asset.eventData.location}
       eventDate={thisEvent.asset.eventData.eventDate}
@@ -35,6 +36,6 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
         ticketType={type.id}
       />)}
     <TicketAccordion/>
-    <CartBottom totalPrice="€ 185.56"/>
+    <CartBottom />
   </div>;
 });

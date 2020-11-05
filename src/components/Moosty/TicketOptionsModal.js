@@ -2,22 +2,19 @@ import React, {useEffect, useState} from 'react';
 import NotificationsRoundedIcon from "@material-ui/icons/NotificationsRounded";
 import Button from "@material-ui/core/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {MyTicket, TicketListItem} from "components/index";
+import {MyTicket, } from "components/index";
 import { SliderPrice } from "components/SliderPrice";
 import * as Actions from "../../store/actions";
 import TextField from "@material-ui/core/TextField";
 
-export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
-  const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
-  const thisItem = portfolio.find(item => item.ticketAddress === "12312341r555ff");
+export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType, thisTicketType, reSellPercentage}) => {
   const dispatch = useDispatch();
-
   var React = require('react');
   var QRCode = require('qrcode.react');
 
   useEffect(
     () => {
-
+    console.log("modal this ticket", thisTicketType);
     },
   );
 
@@ -36,7 +33,12 @@ export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
 
 
     <div className="bg-white rounded my-4 px-2">
-      <MyTicket status={status} size={size}  keyEvent={keyEvent} />
+      <MyTicket
+        keyEvent={keyEvent}
+        ticketType={ticketType}
+        status={status}
+        size={size}
+      />
     </div>
 
         { type === 'optionsModal' && <div>
@@ -71,7 +73,7 @@ export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
             color="secondary"
             style={{marginTop: "1rem"}}
             onClick={() => {
-              dispatch(Actions.openModal('sellTicketModal', {keyEvent, size, status}))
+              dispatch(Actions.openModal('sellTicketModal', {keyEvent, size, status, thisTicketType, reSellPercentage}))
             }}
           >Sell ticket
           </Button>
@@ -113,9 +115,10 @@ export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
         <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
           <div className="flex flex-row justify-around rounded my-2 py-2" style={{backgroundColor:"#f50057"}}>
             <div className="flex flex-col text-center">
-              <div>Ticket bought for:</div>
+              <div>Original price:</div>
               <div className="font-bold text-2xl">
-                € 25.00
+                {/* TODO BIJ EEN NIEUWE TICKET IS DIT OP TE ZOEKEN IN ASSET.TICKETDATA. BIJ EEN TWEEDEHANDS NIET*/}
+                € {thisTicketType.price}
               </div>
             </div>
             <div className="flex flex-col text-center">
@@ -126,7 +129,7 @@ export const TicketOptionsModal = ({keyEvent, type, status, size}) => {
             </div>
           </div>
 
-          <SliderPrice />
+          <SliderPrice reSellPercentage={reSellPercentage} />
         </div>
 
         <div className="flex flex-row justify-around mt-2">

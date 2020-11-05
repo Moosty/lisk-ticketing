@@ -34,7 +34,8 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)(({t
           return false;
         }
         ) : selectedTickets);
-    }, [ticketPortfolio, account, tab,],
+      // console.log("FILTERED TICKETS", filteredTickets);
+    }, [ticketPortfolio, account, tab],
   );
 
 

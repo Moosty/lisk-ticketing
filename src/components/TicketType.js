@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Button from "@material-ui/core/Button";
-import {fade, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider";
 import {useDispatch, useSelector} from "react-redux";
 import * as Actions from "store/actions";
@@ -20,17 +19,19 @@ const useStyles = makeStyles((theme) => ({
 
 export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key, ticketType}) => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const items = useSelector(({blockchain}) => blockchain.basket.items);
   const [item, setItem] = useState(null);
 
   useEffect(() => {
-    console.log(item);
-    console.log(items);
+    // console.log("item", item);
+    // console.log("items", items);
     if (items.find(i => i.eventId === eventId && i.ticketType === ticketType)) {
       setItem(items.find(i => i.eventId === eventId && i.ticketType === ticketType));
     }
-  }, [items]);
+    console.log("items start", items);
+    console.log("item in Tickettype", item);
+
+  }, [items, item]);
 
 
   return (
@@ -47,12 +48,20 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
         </div>
         <div className="flex flex-row content-center items-center flex content-center align-middle">
           <span className="text-3xl font-bold align-middle content-center"
-          onClick={() => dispatch(Actions.removeItem(eventId, ticketType))}>-</span>
+          onClick={() => {
+            console.log("items bij remove", items);
+            dispatch(Actions.removeItem(eventId, ticketType))
+          }
+          }>-</span>
           <div className=" mx-2 border-2 rounded h-8 w-8 center  flex content-center" >
+            {/*// TODO AANPASSEN ITEMS & QUANTITY*/}
             <span
               className="justify-center m-auto items-baseline content-center">{item && item.quantity}</span>
           </div>
-          <span className="text-3xl font-bold" onClick={() => dispatch(Actions.addItem(eventId, ticketType))}>+</span>
+          <span className="text-3xl font-bold" onClick={() => {
+            console.log("items na ADD", items);
+            dispatch(Actions.addItem(eventId, ticketType))
+          }}>+</span>
 
 
         </div>
