@@ -7,14 +7,14 @@ import { SliderPrice } from "components/SliderPrice";
 import * as Actions from "../../store/actions";
 import TextField from "@material-ui/core/TextField";
 
-export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType, thisTicketPrice, reSellPercentage}) => {
+export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType, thisTicketType, reSellPercentage}) => {
   const dispatch = useDispatch();
   var React = require('react');
   var QRCode = require('qrcode.react');
 
   useEffect(
     () => {
-
+    console.log("modal this ticket", thisTicketType);
     },
   );
 
@@ -73,7 +73,7 @@ export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType, th
             color="secondary"
             style={{marginTop: "1rem"}}
             onClick={() => {
-              dispatch(Actions.openModal('sellTicketModal', {keyEvent, size, status}))
+              dispatch(Actions.openModal('sellTicketModal', {keyEvent, size, status, thisTicketType, reSellPercentage}))
             }}
           >Sell ticket
           </Button>
@@ -115,10 +115,10 @@ export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType, th
         <div className="flex flex-col text-left flex font-normal text-sm text-white my-2" >
           <div className="flex flex-row justify-around rounded my-2 py-2" style={{backgroundColor:"#f50057"}}>
             <div className="flex flex-col text-center">
-              <div>Ticket bought for:</div>
+              <div>Original price:</div>
               <div className="font-bold text-2xl">
                 {/* TODO BIJ EEN NIEUWE TICKET IS DIT OP TE ZOEKEN IN ASSET.TICKETDATA. BIJ EEN TWEEDEHANDS NIET*/}
-                € {thisTicketPrice}
+                € {thisTicketType.price}
               </div>
             </div>
             <div className="flex flex-col text-center">

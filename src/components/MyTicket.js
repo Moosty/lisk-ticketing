@@ -81,7 +81,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const [thisEventData, setThisEventData] = useState(null);
-  const thisEvent = events.find(event => event.address === keyEvent);
+  const [thisTicketType, setThisTicketType] = useState();
   const [thisTicketPrice, setThisTicketPrice] = useState();
   const [thisTicketName, setThisTicketName] = useState(null);
   const [reSellPercentage, setReSellPercentage] = useState();
@@ -92,24 +92,23 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
 
   useEffect(() => {
       const thisEvent = events.find(event => event.address === keyEvent);
+      console.log("dit event in effect", thisEvent);
       setThisEventData(thisEvent?.asset?.eventData);
-      console.log("thisevent", thisEventData);
-      console.log("thisevent", thisEvent);
+      setThisTicketType(thisEvent?.asset?.ticketData?.types?.find(t => t.id === ticketType));
+      console.log("dit type", thisTicketType);
       setReSellPercentage(thisEvent.asset.resellData.maximumResellPercentage);
-
-    }, [events],
+    // console.log("thisevent", thisEventData);
+      // console.log("thisevent", thisEvent);
+    }, [events, keyEvent, ticketType],
   );
 
   useEffect(() => {
-    console.log("this ticket type", ticketType);
-    setThisTicketPrice(thisEvent?.asset?.ticketData?.types?.find(t => t.id === ticketType).price);
-    console.log("this ticket type price", thisTicketPrice);
-  }, [thisTicketPrice]);
 
-  useEffect(() => {
-    setThisTicketName(thisEvent.asset.ticketData.types.find(t => t.id === ticketType).name);
-    console.log("this ticket name", thisTicketName);
-  }, [thisTicketName, thisEvent]);
+      console.log("dit type", thisTicketType);
+
+    }, [thisTicketType],
+  );
+
 
   return (<div className=" w-full  ">
       <div className="flex flex-row justify-between">
@@ -136,7 +135,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
               <span className=""></span>
             </div>
             {size === 'large' &&
-            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>{thisTicketName}</span>
+            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>{thisTicketType}</span>
             }
             <span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>
           </div>
@@ -148,7 +147,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
           <IconButton
             onClick={() => {
 
-              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status, ticketType, thisTicketPrice, reSellPercentage}))
+              dispatch(Actions.openModal('scanTicketModal', {keyEvent, size, status, ticketType, thisTicketType, reSellPercentage}))
             }}
             color="secondary"
           >
@@ -159,7 +158,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
             color="secondary"
             onClick={() => {
 
-              dispatch(Actions.openModal('optionsModal', {keyEvent, size, status, ticketType, thisTicketPrice, reSellPercentage}))
+              dispatch(Actions.openModal('optionsModal', {keyEvent, size, status, ticketType, thisTicketType, reSellPercentage}))
             }}
           >
             <MoreVertIcon color="secondary"/>
@@ -169,8 +168,8 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
         {size === 'large' &&
         <div className="flex items-center flex-row w-4/12">
           <div className="flex flex-col text-right text-xs font-bold">
-            <span className="text-sm"> € {thisTicketPrice}</span>
-            <span> {days[thisEvent.asset.eventData.eventDate.getDay()]} {thisEvent.asset.eventData.eventTime}H</span>
+            <span className="text-sm"> € {thisTicketType}</span>
+            <span> {days[thisEventData?.asset?.eventData?.eventDate.getDay()]} {thisEventData?.asset?.eventData?.eventTime}H</span>
           </div>
           <div className="">
 
