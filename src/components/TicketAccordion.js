@@ -8,8 +8,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {SwapTicket} from "components/SwapTicket";
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
+import * as Actions from "../store/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketAddress, quantity, price, name}) => {
   const {address} = useParams();
-
+  const dispatch = useDispatch();
   const classes = useStyles();
   const events = useSelector(({blockchain}) => blockchain.event.events);
   const thisEvent = events.find(event => event.address === address);
@@ -54,6 +55,12 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
           <Typography className={classes.heading}><span className="font-bold">{swapTicketsThisEvent.length}</span> Swap Tickets available</Typography>
         </AccordionSummary>
         <AccordionDetails>
+          <div className="flex-row">
+          <div
+            className="w-full mb-2 font-bold cursor-pointer"
+            onClick={ () => dispatch(Actions.openModal('swapTicketInfo'))}>
+            What are swaptickets?
+          </div>
           <div className="w-full mb-20">
 
             {swapTicketsThisEvent.map((type) =>
@@ -70,7 +77,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
 
 
 
-          </div>
+          </div></div>
 
         </AccordionDetails>
       </Accordion>

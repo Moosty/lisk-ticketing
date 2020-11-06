@@ -38,6 +38,11 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
         return <div>Modal A</div>;
       case 'TypeB':
         return <div>Modal B</div>;
+      case 'swapTicketInfo':
+        return <DemoModal
+          title="Swaptickets"
+          subtitle="2nd hand event ticket"
+          content="Buy a ticket from someone who cannot go to the event" />;
       case 'eventInfoModal':
         return <DemoModal
           title="Event Information"
