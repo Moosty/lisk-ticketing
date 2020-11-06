@@ -40,15 +40,16 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)(({t
 
 
   return (
-    <div>
+    <div className="p-4 ">
       { filteredTickets && filteredTickets.map(
-        (item) =>
+        (item,i) =>
           <MyTicket
               key={item.ticketAddress}
               keyEvent={item.eventId}
               ticketType={item.ticketType}
               status={item.ticketStatus}
               size="small"
+              i={i}
             />
       )}
 

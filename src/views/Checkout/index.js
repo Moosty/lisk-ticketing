@@ -39,7 +39,7 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
   );
   return (<div className="mt-10">
 
-    <div className="pt-10 bg-gray-900  w-full h-screen text-white">
+    <div className="pt-10 bg-gray-900 fixed w-full h-screen text-white overflow-y-auto">
 
       <div className=" py-5 md:p-12 lg:p-24  h-full flex flex-col ">
         <h1 className="mx-10 text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Checkout</h1>
@@ -68,7 +68,7 @@ export const Checkout = withReducer("checkout", reducer)((props) => {
           <div className="">
 
             <span className="font-bold">Total Costs </span>
-            <span className="font-bold">€ {totalPrice}</span>
+            <span className="font-bold">€ {Number(totalPrice).toFixed(2)}</span>
           </div>
         </div>
 

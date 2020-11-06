@@ -75,7 +75,7 @@ const history = useHistory();
 // TYPE = USER, OVERVIEW, ORGANISER
 
   return (
-    <div className=" w-full ">
+    <div className=" w-full " onClick={() => history.push(`/events/${eventId}`)}>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center my-3 ">
           <StyledBadge
@@ -110,17 +110,6 @@ const history = useHistory();
 
         <div className="flex items-center flex-row">
 
-          { type === 'overview' &&   <Button
-
-            onClick={() => {
-              console.log(eventId);
-              history.push(`/events/${eventId}`);
-            }}
-
-            variant="outlined"
-            color="secondary"
-            size="small"
-            >Details</Button> }
 
 
 

@@ -18,7 +18,7 @@ export const TicketOptionsModal = ({keyEvent, type, status, size, ticketType, th
     },
   );
 
-  return <div className="text-center items-center bg-gray-900 p-4 " >
+  return <div className="text-center items-center bg-gray-900 p-4 h-full w-full " >
     <NotificationsRoundedIcon style={{color: '#fff', fontSize: 30}}/>
     <div className="p-4">
       <div className="flex flex-col my-4">

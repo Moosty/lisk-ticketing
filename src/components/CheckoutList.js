@@ -3,7 +3,6 @@ import {CheckoutItem} from "components/index";
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import {useSelector} from "react-redux";
-import
 
 export const CheckoutList = withReducer("CheckoutList", reducer)((props) => {
   const events = useSelector(({blockchain}) => blockchain.event.events);

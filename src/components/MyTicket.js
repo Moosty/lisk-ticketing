@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, status, eventId, ticketType, keyEvent}) => {
+export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, status, eventId, ticketType, keyEvent, i}) => {
 
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
   const events = useSelector(({blockchain}) => blockchain.event.events);
@@ -111,7 +111,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
   );
 
 
-  return (<div className=" w-full  ">
+  return (<div className={` w-full ${i === 0 ? "bg-gray-300" : ""}`}>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center my-3 "
         >
@@ -131,7 +131,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
             </Avatar>
           </StyledBadge>
 
-          <div className="flex flex-col text-sm leading-4 mx-2">
+          <div className={`flex flex-col text-sm leading-4 mx-2`}>
             <div><span className="font-bold text-left block">{thisEventData?.title}</span>
               <span className=""></span>
             </div>
@@ -145,12 +145,12 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
         {size === 'small' &&
         <div className="flex items-center flex-row">
 
-          <IconButton
+          {i !== 0 && <IconButton
             onClick={() => {
 
               dispatch(Actions.openModal('scanTicketModal', {
                 keyEvent,
-                size,
+                size: "large",
                 status,
                 ticketType,
                 thisTicketType,
@@ -160,7 +160,8 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
             color="secondary"
           >
             <CropFreeTwoToneIcon color="secondary"/>
-          </IconButton>
+          </IconButton>}
+          {i === 0 && <b className="center">IN SALE</b>}
           <IconButton
 
             color="secondary"
@@ -168,7 +169,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
 
               dispatch(Actions.openModal('optionsModal', {
                 keyEvent,
-                size,
+                size: "large",
                 status,
                 ticketType,
                 thisTicketType,

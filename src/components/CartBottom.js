@@ -65,7 +65,7 @@ export const CartBottom = ({props}) => {
 
           <div className="flex flex-col text-sm float-left leading-4 my-2">
             <span className="text-lg mb-2">Total Amount:</span>
-            <span className="font-bold">€ {totalPrice}</span>
+            <span className="font-bold">€ {Number(totalPrice).toFixed(2)}</span>
 
           </div>
         </div>
