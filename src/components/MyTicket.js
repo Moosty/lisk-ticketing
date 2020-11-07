@@ -76,6 +76,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
 export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, status, eventId, ticketType, keyEvent, i}) => {
 
 // WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
@@ -89,6 +91,11 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
   // const ticketData = thisEvent?.asset?.ticketData?.types.find(type => type.id === ticketType );
 
   const dispatch = useDispatch();
+
+// Outside component
+  const MAX_LENGTH = 25;
+
+
 
   useEffect(() => {
       const thisEvent = events.find(event => event.address === keyEvent);
@@ -132,13 +139,38 @@ export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, statu
           </StyledBadge>
 
           <div className={`flex flex-col text-sm leading-4 mx-2`}>
-            <div><span className="font-bold text-left block">{thisEventData?.title}</span>
+
+
+            {thisEventData?.title.length > MAX_LENGTH ?
+              (
+                <div className="font-bold text-left block">
+                  {`${thisEventData?.title.substring(0, MAX_LENGTH)}...`}
+                </div>
+              ) :
+              <span className="font-bold text-left block">{thisEventData?.title}</span>
+            }
+            <div>
+              {/*<span className="font-bold text-left block">{thisEventData?.title}</span>*/}
+
+
               <span className=""></span>
             </div>
             {size === 'large' &&
             <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>{thisTicketType?.name}</span>
             }
-            <span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>
+
+            {thisEventData?.location.length > MAX_LENGTH ?
+              (
+                <div className="font-light text-xs flex flex-row">
+                  {`${thisEventData?.location.substring(0, MAX_LENGTH)}...`}
+                </div>
+              ) :
+              <span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>
+            }
+
+            {/*<span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>*/}
+
+
           </div>
         </div>
 
