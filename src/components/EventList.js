@@ -39,12 +39,23 @@ export const EventList = withReducer("TicketList", reducer)(({tab, search, type}
       }
       return false;
     }) : searchedEvents);
+
+
   }, [events, address, search, tab])
+
+  useEffect(() => {
+    // TODO HET SORTEER FILTER NIET ALLEEN OP JAAR SORTEREN, MAAR OOK MAAND & DAG & TIJD
+  const sortedList = filteredEvents.sort((a, b) => a.asset.eventData.eventDate.getFullYear() - b.asset.eventData.eventDate.getFullYear());
+    // console.log("sorted  EVENTS IN EVENTLIST", sortedList);
+
+  }, [events, address, search, tab, filteredEvents])
 
   return <div className="p-6">
     <div>
 
       {filteredEvents && filteredEvents.map(event => {
+        // console.log("FILTERED EVENTS IN EVENTLIST", filteredEvents);
+
         return (
           <EventItem
             key={event.address}

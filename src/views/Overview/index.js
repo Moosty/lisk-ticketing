@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Header } from "components/Header";
-import { EventList } from "components/EventList";
-import { useHistory } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Header} from "components/Header";
+import {EventList} from "components/EventList";
+import {useHistory} from "react-router-dom";
 import * as Actions from "../../store/actions";
-import { useDispatch } from "react-redux";
+import {useDispatch} from "react-redux";
+import {TopBar} from "components/TopBar";
 
 export const Overview = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
 
-  return <div className="mt-10">
+  return <div className="">
+    <TopBar/>
     <Header
       search={value => setSearch(value)}
       title="Explore Events"

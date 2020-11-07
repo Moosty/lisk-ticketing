@@ -20,7 +20,6 @@ import {OrganiserEventDetails} from "views/OrganiserEventDetails";
 export const Routes = (props) => {
 
   return (<Router>
-    <TopBar />
     <div>
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -38,6 +37,7 @@ export const Routes = (props) => {
           <Overview />
         </Route>
         <Route path="/events/organiser/:address">
+          <TopBar />
           <EventPage type="organiser" />
         </Route>
         <Route path="/events/:address">
@@ -49,26 +49,31 @@ export const Routes = (props) => {
 
 
         <Route path="/my-tickets/:account">
+          <TopBar />
           <MyTickets type='user' />
         </Route>
         <Route path="/my-events/event-details/:address">
           <OrganiserEventDetails />
         </Route>
         <Route path="/my-events/:address">
+          <TopBar />
           <Organiser type='organiser' />
         </Route>
 
         <Route path="/organiser/:address">
+          <TopBar />
           <Organiser />
         </Route>
         <Route path="/organiser">
+          <TopBar />
           <Organiser />
         </Route>
         <Route path="/create-event">
           <CreateEvent />
         </Route>
         <Route path="/checkout/:ownerId">
-        <Checkout />
+          <TopBar />
+          <Checkout />
       </Route>
         <Route path="/drawers">
           <ExampleDrawer />

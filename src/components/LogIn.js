@@ -9,8 +9,11 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import * as Actions from "../store/actions";
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from "@material-ui/core/IconButton";
+import MenuItem from "@material-ui/core/MenuItem";
 
 function Copyright() {
   return (
@@ -27,7 +30,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(7),
+    // marginTop: theme.spacing(7),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -63,9 +66,15 @@ export const LogIn = (props) => {
 
   return (
 
-    <div className="bg-fixed sm:bg-scroll bg-cover mt-4 "
+    <div className="bg-fixed sm:bg-scroll bg-cover"
          style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "100vh"}}>
       <div className="w-full flex-auto h-full px-6" style={{backgroundColor: "#f50057"}}>
+        <IconButton
+          onClick={()=> history.push(`/overview`)}
+          aria-label="Close"
+          color="inherit">
+          <CloseIcon/>
+        </IconButton>
         <div className={classes.paper}>
 
           <div className="mt-6 flex flex-col align-middle text-center justify-center items-center">
@@ -116,7 +125,7 @@ export const LogIn = (props) => {
                 variant="contained"
                 color="secondary"
                 className={classes.submit}
-                onClick={ () =>
+                onClick={() =>
                   history.push(`/overview`)
                 }
               >
@@ -129,7 +138,7 @@ export const LogIn = (props) => {
                     onClick={() => {
                       history.push('/signup')
                     }}
-                    style={{color: "black"}}  variant="body2">
+                    style={{color: "black"}} variant="body2">
                     Dont have an account yet? Create one!
                   </Link>
                 </Grid>

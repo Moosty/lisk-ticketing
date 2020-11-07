@@ -25,7 +25,7 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)(({t
 
   useEffect(() => {
       const selectedTickets = account ? ticketPortfolio.filter((portfolio) => portfolio.ownerId === account) : "you have no tickets";
-      setFilteredTickets(tab ? selectedTickets.filter( (ticket) => {
+      setFilteredTickets(tab ? selectedTickets.filter((ticket) => {
           if (tab === "ticketListTab02" && ticket.ticketStatus === ticketStatuses.PAST_EVENT || ticket.ticketStatus === ticketStatuses.SOLD) {
             return true;
           } else if (tab === "ticketListTab01" && (ticket.ticketStatus === ticketStatuses.OWNED || ticket.ticketStatus === ticketStatuses.SELLING)) {
@@ -33,25 +33,37 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)(({t
           }
           return false;
         }
-        ) : selectedTickets);
+      ) : selectedTickets);
+
       // console.log("FILTERED TICKETS", filteredTickets);
+      // console.log("PORTFOLIO TICKETS", ticketPortfolio);
+
     }, [ticketPortfolio, account, tab],
   );
 
 
   return (
     <div className="p-4 ">
-      { filteredTickets && filteredTickets.map(
-        (item,i) =>
-          <MyTicket
+      {filteredTickets && filteredTickets
+        .sort((a, b) => {
+
+          if (a.eventId.toLowerCase() < b.eventId.toLowerCase()) return -1;
+          if (a.eventId.toLowerCase() > b.eventId.toLowerCase()) return 1;
+          return 0;
+        })
+        .map(
+          (item, i) => {
+            // console.log("MAP", filteredTickets);
+            return (<MyTicket
               key={item.ticketAddress}
               keyEvent={item.eventId}
               ticketType={item.ticketType}
               status={item.ticketStatus}
               size="small"
               i={i}
-            />
-      )}
+            />)
+          }
+        )}
 
       {/*// ALL MY TICKETS*/}
       {/*{props.type === 'current' && <div>*/}
