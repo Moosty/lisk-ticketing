@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CartBottom, EventHeader, TicketAccordion, TicketType } from "components/index";
+import {CartBottom, EventHeader, TicketAccordion, TicketType, TopBar} from "components/index";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import { useSelector } from "react-redux";
@@ -14,8 +14,10 @@ export const EventPage = withReducer("EventPage", reducer)((props) => {
   const swapTicketsX = swapTickets.filter(event => event.eventId === address);
   const [search, setSearch] = useState("");
 
-  return <div className="mt-10">
+  return <div className="">
+    <TopBar/>
     <EventHeader
+      className="mt-10"
       search={value => setSearch(value)}
       key={thisEvent.address}
       eventId={thisEvent.address}
