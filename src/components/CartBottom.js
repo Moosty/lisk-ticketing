@@ -80,7 +80,7 @@ export const CartBottom = ({props}) => {
             variant="contained"
             size="small"
             color="secondary"
-            className={classes.button2}>Checkout</Button>
+            className={classes.button2}>Go to Checkout</Button>
 
 
         </div>
