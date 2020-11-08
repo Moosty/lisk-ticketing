@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import clsx from 'clsx';
@@ -41,10 +41,11 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
  // TODO AMOUNT aanpassen aan user portfolio, nu pakt hij alle items
   const amountOfTickets = portfolio.length;
+  const [signedInAsOrganiser, setSignedInAsOrganiser] = useState(true);
+  const [signedInAsUser, setSignedInAsUser] = useState(false);
 
   const classes = useStyles();
   const history = useHistory();
-  console.log("history", history);
 
   const dispatch = useDispatch();
   const drawers = useSelector(({drawers}) => drawers);
@@ -82,19 +83,16 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
         style={{backgroundColor:"#E91E63"}}
         button onClick={() => history.push(`/login`)} key={"login"} >
         <ListItemIcon style={{color:"#f50057"}}>{<InboxIcon style={{color:"white"}} />}</ListItemIcon>
-        <ListItemText primary={"Sign in"} />
+        <ListItemText primary={"Sign Out"} />
       </ListItem>
       <List>
-        {[
+        {signedInAsUser && [
           // TODO sign in veranderen in sign out wanneer je bent ingelogd
 
           { label:"Overview" , link: "/overview", icon: <InboxIcon /> },
-          { label:"My Tickets" , link: "/my-tickets", icon: <InboxIcon /> },
-          { label:"My Events" , link: "/my-events/organiser01", icon: <InboxIcon /> },
-          { label:"Shopping Basket" , link: "/checkout", icon: <InboxIcon /> },
-
+          { label:"My Tickets" , link: "/my-tickets/account01", icon: <InboxIcon /> },
+          { label:"Shopping Cart" , link: "/checkout/account01", icon: <InboxIcon /> },
         ]
-
           .map((item) => (
           <ListItem
 
@@ -103,8 +101,43 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)((props) => {
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
+
+        { signedInAsOrganiser === true && [
+          // TODO sign in veranderen in sign out wanneer je bent ingelogd
+
+          { label:"Overview" , link: "/overview", icon: <InboxIcon /> },
+          { label:"My Events" , link: "/my-events/organiser01", icon: <InboxIcon /> },
+        ]
+          .map((item) => (
+            <ListItem
+
+              button onClick={() => history.push(`${item.link}`)} key={item.label} >
+              <ListItemIcon style={{color:"#f50057"}}>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.label} />
+            </ListItem>
+          ))}
       </List>
       <Divider />
+
+      {/*// TODO START - TIJDELIJK IN DRAWER SWITCH VIEW*/}
+      <div className="mt-20 ml-2 flex flex-col items-center self-end">
+      <div
+        className="cursor-pointer flex mt-4"
+        onClick={() => {
+          setSignedInAsOrganiser(true);
+          setSignedInAsUser(false);
+        }}
+      ><span style={{color:"#f50057"}}>Organiser View</span></div>
+      <div
+        className="cursor-pointer flex mt-4"
+        onClick={() => {
+          setSignedInAsUser(true);
+          setSignedInAsOrganiser(false);
+        }}
+        ><span style={{color:"#f50057"}}>User View</span></div>
+      </div>
+      {/*// TODO EINDE - TIJDELIJK IN DRAWER SWITCH VIEW*/}
+
 
 
       {/*<List>*/}

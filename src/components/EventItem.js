@@ -77,7 +77,15 @@ const MAX_LENGTH = 35;
 // TYPE = USER, OVERVIEW, ORGANISER
 
   return (
-    <div className=" w-full " onClick={() => history.push(`/events/${eventId}`)}>
+    <div className=" w-full "
+
+         onClick={() => {
+           type === "organiser" ?
+             history.push(`/my-events/event-details/${eventId}`)
+             :
+             history.push(`/events/${eventId}`)
+         }}
+    >
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center my-3 ">
           <StyledBadge
