@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import _ from 'lodash';
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import { OrganiserHeader } from "components/OrganiserHeader";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {OrganiserHeader} from "components/OrganiserHeader";
+import {useHistory} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import * as Actions from "../../store/actions";
-import { FormField } from "components/FormField";
-
+import {FormField} from "components/FormField";
+import {TopBar} from "components/TopBar";
+import HelpIcon from '@material-ui/icons/Help';
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const categories = [
   {
@@ -66,136 +69,161 @@ const tempFields = [
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const MAX_LENGTH = 15;
   const event = useSelector(({blockchain}) => blockchain.event);
-  const [form, setFrom] = useState(event.createEvent);
+  const [form, setForm] = useState(event.createEvent);
 
   useEffect(() => {
-    setFrom(event.createEvent);
+    setForm(event.createEvent);
+    // console.log(form);
   }, [event])
 
   const updateField = (path, value) => dispatch(Actions.updateCreateEvent(path, value));
   const updateFieldType = (path, index, value) => dispatch(Actions.updateCreateEvent(`asset.ticketData.types[${index}].${path}`, value));
 
   return (
-    <div className="mt-10 mb-20">
-      <OrganiserHeader
-        name="Create Event"
-        balance="location"
-        button1="Create new event"/>
-      <div className="">
-        <div className="flex  ml-2 text-sm leading-4 my-4">
-          <span className="text-lg font-bold">Event Information</span>
-        </div>
-        {/*START - MODALS WITH EXPLANATION */}
-        <div
-          className="flex  ml-2 text-sm leading-4 my-4 text-red-600 "
-          onClick={() => {
-            dispatch(Actions.openModal('eventInfoModal'))
-          }}>
-          More Info
-        </div>
-        {/*END - MODALS WITH EXPLANATION */}
-        <form
-          className="flex flex-row w-9/10 flex-wrap m-2 "
-          noValidate
-          autoComplete="off"
-        >
-          {/*START - FORM EVENTINFO */}
-          {fields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
-          {/*START - FORM TICKET INFO  */}
-          <div className="flex  ml-2 text-sm leading-4 my-4">
-            <span className="text-lg font-bold">Ticket Information</span>
+    <div>
+      <TopBar/>
+
+      <div className="mt-10 mb-20">
+        <OrganiserHeader
+          name="Create Event"
+          balance="location"
+          button1="Create new event"/>
+        <div className="">
+          <div className="flex flex-row align-middle  ml-2 text-sm leading-4 my-4">
+            <span className="text-lg font-bold">Event Information</span>
+            <IconButton
+              onClick={() => {
+                dispatch(Actions.openModal('eventInfoModal'))}}
+              aria-label="Close"
+              color="secondary"
+              className="">
+              <HelpIcon/>
+            </IconButton>
           </div>
           {/*START - MODALS WITH EXPLANATION */}
-          <div className="flex  ml-2 text-sm leading-4 my-4 text-red-600 "
-               onClick={() => {
-                 dispatch(Actions.openModal('ticketInfoModal'))
-               }}>
-            More Info
-          </div>
-          {/*END - MODALS WITH EXPLANATION */}
 
-          {/*START TYPE  - TICKET TYPES */}
-          {form.asset.ticketData && form.asset.ticketData.types.map((ticketType, i) => (
+
+
+          {/*END - MODALS WITH EXPLANATION */}
+          <form
+            className="flex flex-row w-9/10 flex-wrap m-2 "
+            noValidate
+            autoComplete="off"
+          >
+            {/*START - FORM EVENTINFO */}
+            {fields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
+            {/*START - FORM TICKET INFO  */}
+            <div className="flex  ml-2 text-sm leading-4 my-4">
+              <span className="text-lg font-bold">Ticket Information</span>
+              <IconButton
+                onClick={() => {
+                  dispatch(Actions.openModal('ticketInfoModal'))}}
+                aria-label="Close"
+                color="secondary"
+                className="">
+                <HelpIcon/>
+              </IconButton>
+            </div>
+
+
+            {/*START TYPE  - TICKET TYPES */}
+            {form.asset.ticketData && form.asset.ticketData.types.map((ticketType, i) => (
+              <div>
+                <div className="flex  ml-2 text-sm leading-4 my-4">
+                  <span className="text-lg">Ticket Type {i}</span>
+                </div>
+                {ticketTypeFields.map(field => <FormField
+                  key={`${field.path}-field-${i}`}
+                  {...field}
+                  id={i}
+                  ticketType
+                  onChange={updateFieldType}
+                  value={_.get(form, `asset.ticketData.types[${i}].${field.path}`)}/>)}
+              </div>)
+            )}
             <div>
               <div className="flex  ml-2 text-sm leading-4 my-4">
-                <span className="text-lg">Ticket Type {i}</span>
-              </div>
-              {ticketTypeFields.map(field => <FormField
-                key={`${field.path}-field-${i}`}
-                {...field}
-                id={i}
-                ticketType
-                onChange={updateFieldType}
-                value={_.get(form, `asset.ticketData.types[${i}].${field.path}`)}/>)}
-            </div>)
-          )}
-          <div>
-            <div className="flex  ml-2 text-sm leading-4 my-4">
             <span
               className="text-lg">Ticket Type {form.asset?.ticketData && form.asset?.ticketData?.types?.length}</span>
+              </div>
+              {ticketTypeFields.map(field => <FormField
+                key={`${field.path}-field-${form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}`}
+                {...field}
+                id={form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}
+                onChange={updateFieldType}
+                ticketType
+                value={field.path === 'id' ? form.asset?.ticketData?.types ? form.asset?.ticketData?.types.length : 0 : ""}/>)}
             </div>
-            {ticketTypeFields.map(field => <FormField
-              key={`${field.path}-field-${form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}`}
-              {...field}
-              id={form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}
-              onChange={updateFieldType}
-              ticketType
-              value={field.path === 'id' ? form.asset?.ticketData?.types ? form.asset?.ticketData?.types.length : 0 : ""}/>)}
-          </div>
-          {/*END TYPE  - TICKET TYPES  */}
+            {/*END TYPE  - TICKET TYPES  */}
 
-          {/*START - FORM RESELL INFO  */}
-          <div className="flex  ml-2 text-sm leading-4 my-4">
-            <span className="text-lg font-bold">Resell Information</span>
-          </div>
-
-          {/*START - MODALS WITH EXPLANATION */}
-          <div className="flex  ml-2 text-sm leading-4 my-4 text-red-600 "
-               onClick={() => {
-                 dispatch(Actions.openModal('resellInfoModal'))
-               }}>
-            More Info
-          </div>
-          {/*END - MODALS WITH EXPLANATION */}
-
-          {resellFields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
-          <div className="flex  ml-2 text-sm leading-4 my-4">
-            <span className="text-lg font-bold">Temporary</span>
-          </div>
-          {tempFields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
-
-        </form>
-
-      </div>
-
-      <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
-        <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
-          <div className="flex flex-row ">
-            <div className="flex flex-col text-sm float-left leading-4 my-2">
-              <span className="text-lg mb-2">Event</span>
-              <span className="font-bold">...</span>
+            {/*START - FORM RESELL INFO  */}
+            <div className="flex  ml-2 text-sm leading-4 my-4">
+              <span className="text-lg font-bold">Resell Information</span>
+              <IconButton
+                onClick={() => {
+                  dispatch(Actions.openModal('resellInfoModal'))}}
+                aria-label="Close"
+                color="secondary"
+                className="">
+                <HelpIcon/>
+              </IconButton>
             </div>
-          </div>
-          <div className="flex flex-row content-center items-center">
-            <Button
-              onClick={() => {
-                dispatch(Actions.openModal('confirmTxEventModal'));
-              }}
-              // onClick={() => {
-              //   console.log({form})
-              //   history.push(`/organiser/organiser01`);
-              //   dispatch(Actions.addEvent(form));
-              // }}
 
-              variant="contained"
-              size="small"
-              color="secondary"
-              className="">Submit Event</Button>
-          </div>
+
+            {resellFields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
+            <div className="flex  ml-2 text-sm leading-4 my-4">
+              <span className="text-lg font-bold">Temporary</span>
+            </div>
+            {tempFields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
+
+          </form>
+
         </div>
-        <Divider/>
+
+        <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
+          <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
+            <div className="flex flex-row ">
+              <div className="flex flex-col text-sm float-left leading-4 my-2">
+                {/* TODO DIT LIVE LATEN UPDATEN & PUNTJES WERKEND KRIJGEN*/}
+                {form.asset.eventData.title > MAX_LENGTH ?
+                  (
+                    <span className="text-lg mb-2">
+                      {`${form.asset.eventData.title.substring(0, MAX_LENGTH)}...`}
+                    </span>
+                  ) :
+                  <span className="text-lg mb-2">{form.asset.eventData.title}</span>
+                }
+                {form.asset.eventData.location > MAX_LENGTH ?
+                  (
+                    <span className="font-bold">
+                      {`${form.asset.eventData.location.substring(0, MAX_LENGTH)}...`}
+                    </span>
+                  ) :
+                  <span className="font-bold">{form.asset.eventData.location}</span>
+                }
+              </div>
+            </div>
+            <div className="flex flex-row content-center items-center">
+              <Button
+                onClick={() => {
+                  dispatch(Actions.openModal('confirmTxEventModal'));
+                }}
+                // onClick={() => {
+                //   console.log({form})
+                //   history.push(`/organiser/organiser01`);
+                //   dispatch(Actions.addEvent(form));
+                // }}
+
+                variant="contained"
+                size="small"
+                color="secondary"
+                className="">Submit Event</Button>
+            </div>
+          </div>
+          <Divider/>
+        </div>
       </div>
     </div>
   );

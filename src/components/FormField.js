@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from "@material-ui/core/TextField";
 
 export const FormField = ({className, label, type, variant, path, onChange, value, limit, id, ticketType}) => {
-console.log(value, type)
+// console.log(value, type)
   return <TextField
     className={className ? `${className}` : "bg-white rounded" }
     id="outlined-basic"

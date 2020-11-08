@@ -25,7 +25,7 @@ const defaultState = {
       eventData: {
         ownerId: "organiser01",
         status: statuses.NEW,
-        title: "The Favourites",
+        title: "The Favourites of the new era",
         artist: "Sef",
         location: "Caprera Openluchttheater - Bloemendaal",
         eventDate: new Date("2018-06-09"),
@@ -456,7 +456,7 @@ export default (state = defaultState, action) => {
   switch (action.type) {
 
     case Actions.UPDATE_CREATE_EVENT:
-      console.log(action)
+      // console.log(action)
       return {
         ...state,
         createEvent:
