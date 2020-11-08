@@ -55,7 +55,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
           <Typography className={classes.heading}><span className="font-bold">{swapTicketsThisEvent.length}</span> Swap Tickets available</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <div className="flex-row">
+          <div className="flex flex-col w-full">
           <div
             className="w-full mb-2 font-bold cursor-pointer"
             onClick={ () => dispatch(Actions.openModal('swapTicketInfo'))}>
@@ -69,6 +69,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
                 resellerPrice={type.resellerPrice}
                 type={type.name}
                 ticketId={type.ticketTypeId}
+                ticketAddress={type.ticketAddress}
                 eventId={type.eventId}
                 style={{width:"full"}}/>
 

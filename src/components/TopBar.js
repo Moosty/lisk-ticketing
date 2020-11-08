@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { useHistory } from "react-router-dom";
-import { fade, makeStyles } from '@material-ui/core/styles';
+import {useHistory} from "react-router-dom";
+import {fade, makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,6 +17,8 @@ import reducer from "store/reducers";
 import {useSelector} from "react-redux";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import {ticketStatuses} from "../store/reducers/blockchain/portfolio.reducer";
+import Button from "@material-ui/core/Button";
+import * as Actions from "../store/actions";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -90,8 +92,9 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [LoginStatus, setLoginStatus] = useState(true);
 
-  const basket  = useSelector(({blockchain}) => blockchain.basket.items);
+  const basket = useSelector(({blockchain}) => blockchain.basket.items);
   const [amountOfTicketsBasket, setAmountOfTicketsBasket] = useState(basket.length);
 
   const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
@@ -101,7 +104,7 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
 
   useEffect(
     () => {
-      console.log("Topbar basket", basket);
+      // console.log("Topbar basket", basket);
       // console.log("filteredTickets", filteredTickets);
       setAmountOfTicketsPortfolio(filteredTickets.length);
       setAmountOfTicketsBasket(basket.reduce(
@@ -109,7 +112,6 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
       ));
     }, [basket, portfolio],
   );
-
 
 
   const isMenuOpen = Boolean(anchorEl);
@@ -136,18 +138,18 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{vertical: 'top', horizontal: 'right'}}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{vertical: 'top', horizontal: 'right'}}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Account</MenuItem>
-      <MenuItem onClick={()=>
-        {handleMenuClose();
+      <MenuItem onClick={() => {
+        handleMenuClose();
         history.push(`/account`);
-        }
+      }
       }>My account</MenuItem>
     </Menu>
   );
@@ -156,41 +158,41 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{vertical: 'top', horizontal: 'right'}}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{vertical: 'top', horizontal: 'right'}}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem
-        style={{backgroundColor:"#E91E63", padding:"4rem"}}
-        onClick={()=>
-      {handleMenuClose();
-        history.push(`/signup`);
-      }
-      }>
+        style={{backgroundColor: "#E91E63", padding: "4rem"}}
+        onClick={() => {
+          handleMenuClose();
+          history.push(`/signup`);
+        }
+        }>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
-            <AccountBoxIcon />
+            <AccountBoxIcon/>
           </Badge>
         </IconButton>
         <p>Signup</p>
       </MenuItem>
-      <MenuItem onClick={()=>
-      {handleMenuClose();
+      <MenuItem onClick={() => {
+        handleMenuClose();
         history.push(`/organiser/organiser01`);
 
       }}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+            <NotificationsIcon/>
           </Badge>
         </IconButton>
         <p>Organiser</p>
       </MenuItem>
-      <MenuItem onClick={()=>
-      {handleMenuClose();
+      <MenuItem onClick={() => {
+        handleMenuClose();
         history.push(`/account/account01`);
       }
       }>
@@ -200,7 +202,7 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <AccountCircle/>
         </IconButton>
         <p>Account</p>
       </MenuItem>
@@ -208,23 +210,37 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
   );
 
   return (
+
     <div className={classes.grow}>
       <AppBar className={classes.appbar} position="fixed">
         <Toolbar>
-          <TopDrawer />
-          {/*// TODO /account01 verwijderen na DEV fase*/}
-          <IconButton onClick={()=> history.push(`/my-tickets/account01`)} aria-label="show 17 new notifications" color="inherit">
-          <Badge  badgeContent={amountOfTicketsPortfolio} color="secondary">
-            <ConfirmationNumberIcon />
-          </Badge>
-        </IconButton>
-          {/*// TODO /account01 verwijderen na DEV fase*/}
-          <IconButton onClick={()=> history.push(`/checkout/account01`)} aria-label="show 17 new notifications" color="inherit">
-            <Badge  badgeContent={amountOfTicketsBasket} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
+          {/*// TODO ALS NIET INGELOGD, DAN GEEN DRAWER, MAAR BUTTON*/}
+          {LoginStatus === true ? <div className="flex flex-row "><TopDrawer/>
+              {/*// TODO /account01 verwijderen na DEV fase*/}
+              <IconButton onClick={() => history.push(`/my-tickets/account01`)} aria-label="show 17 new notifications"
+                          color="inherit">
+                <Badge badgeContent={amountOfTicketsPortfolio} color="secondary">
+                  <ConfirmationNumberIcon/>
+                </Badge>
+              </IconButton>
+              {/*// TODO /account01 verwijderen na DEV fase*/}
+              <IconButton onClick={() => history.push(`/checkout/account01`)} aria-label="show 17 new notifications"
+                          color="inherit">
+                <Badge badgeContent={amountOfTicketsBasket} color="secondary">
+                  <ShoppingCartIcon/>
+                </Badge>
+              </IconButton></div>
+            : <Button
 
+              onClick={() => {
+                history.push('/login')
+              }}
+              variant="contained"
+              size="small"
+              color="secondary"
+              className="m-20"
+            >LogIn</Button>
+          }
 
         </Toolbar>
       </AppBar>

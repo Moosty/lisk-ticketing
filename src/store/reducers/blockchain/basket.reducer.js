@@ -12,7 +12,7 @@ const defaultState = {
   items: [
     {
       basketId: "basket01",
-      ticketAddress: "unknown",
+      ticketAddress: "12312341r555ff23",
       eventId: 'event01',
       ownerId: 'account01',
       ticketType: 1,
@@ -20,7 +20,7 @@ const defaultState = {
     },
     {
       basketId: "basket02",
-      ticketAddress: "unknown",
+      ticketAddress: "unknown02",
       eventId: 'event01',
       ownerId: 'account01',
       ticketType: 2,

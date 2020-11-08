@@ -71,6 +71,8 @@ const useStyles = makeStyles((theme) => ({
 
 export const EventItem = ({eventDetail, eventId, eventDate, eventTime, title, day, month, time, artist, location, type, status, color}) => {
 const history = useHistory();
+const MAX_LENGTH = 35;
+  const MAX_LENGTH_LOCATION = 40;
 
 // TYPE = USER, OVERVIEW, ORGANISER
 
@@ -95,14 +97,35 @@ const history = useHistory();
           </StyledBadge>
 
           <div className="flex flex-col text-sm leading-4 mx-2"  style={{color:color}}>
-            <div><span className="font-medium text-left block"> {title}</span>
-              <span className=""></span>
-            </div>
+
+            {title.length > MAX_LENGTH ?
+              (
+                <div className="font-medium text-left block">
+                  {`${title.substring(0, MAX_LENGTH)}..`}
+                </div>
+              ) :
+              <span className="font-medium text-left block">{title}</span>
+            }
+
+            {/*<div><span className="font-medium text-left block"> {title}</span>*/}
+            {/*</div>*/}
+
             {type === 'large' &&
             <span className="font-bold text-xs flex flex-row" style={{color:"#f50057"}}>Second Release Ticket</span>
             }
+
+
             {/*Jaarbeurs Utrecht*/}
-            <span className="font-light text-xs flex flex-row">{location}</span>
+            {location.length > MAX_LENGTH_LOCATION ?
+              (
+                <div className="font-light text-xs flex flex-row">
+                  {`${location.substring(0, MAX_LENGTH_LOCATION)}..`}
+                </div>
+              ) :
+              <span className="font-light text-xs flex flex-row">{location}</span>
+            }
+
+            {/*<span className="font-light text-xs flex flex-row">{location}</span>*/}
           </div>
         </div>
 
