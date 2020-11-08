@@ -14442,8 +14442,13 @@ video {
   animation: bounce 1s infinite;
 }
 
+.noscrollbar::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
 :focus {
-  outline: transparant;
+  outline: none!important;
 }
 
 @media (min-width: 640px) {

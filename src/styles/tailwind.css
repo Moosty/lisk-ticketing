@@ -4,7 +4,11 @@
 
 @tailwind utilities;
 
+.noscrollbar::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
 
 :focus {
-    outline: transparant;
+    outline: none!important;
 }

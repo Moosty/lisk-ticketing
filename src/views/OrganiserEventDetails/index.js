@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {TicketAccordion, Event, CartBottom, EventHeader, TicketListItem, TicketType} from "components/index";
+import {TicketAccordion, Event, CartBottom, EventHeader, TopBar, TicketListItem, TicketType} from "components/index";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import {useSelector} from "react-redux";
@@ -23,15 +23,15 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
     console.log(ticketsAmount);
 
     console.log("this event", thisEvent);
-  const x = thisEvent.asset.ticketData.types.map((item) => item.amount);
-  console.log(x);
-  setTicketsAmount(thisEvent.asset.ticketData.types.reduce(
+    const x = thisEvent.asset.ticketData.types.map((item) => item.amount);
+    console.log(x);
+    setTicketsAmount(thisEvent.asset.ticketData.types.reduce(
       (sum, item) => sum + (item.amount), 0
     ));
   }, [events, swapTickets, thisEvent, ticketsAmount]);
 
-  return <div className="mt-10">
-
+  return <div >
+    <TopBar/>
     <EventHeader
       key={thisEvent.address}
       eventId={thisEvent.address}
@@ -43,34 +43,36 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
       title={thisEvent.asset.eventData.title}
       status={thisEvent.asset.eventData.status}
       type="organiser"
+      className="mt-10"
     />
     <div className="flex flex-col w-full p-6  ">
 
 
       <div className="flex flex-row mb-4 justify-between  ">
-      <Card className="w-40   rounded border-gray-300 ">
-       <div className="text-center font-medium text-sm p-2 bg-indigo-900 text-white">Total Tickets</div>
-        <Divider />
-        <div className="flex flex-row">
-        <div className="flex flex-col align-middle text-center align-middle items-center py-4 w-3/6">
+        <Card className="w-40   rounded border-gray-300 ">
+          <div className="text-center font-medium text-sm p-2 bg-indigo-900 text-white">Total Tickets</div>
+          <Divider/>
+          <div className="flex flex-row">
+            <div className="flex flex-col align-middle text-center align-middle items-center py-4 w-3/6">
 
-          <span className="font-medium text-xs text-center uppercase">Total</span>
-          <span className="font-bold text-indigo-900"> {ticketsAmount}</span>
+              <span className="font-medium text-xs text-center uppercase">Total</span>
+              <span className="font-bold text-indigo-900"> {ticketsAmount}</span>
 
-        </div>
-          <div className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">
-            <span className="font-medium text-xs text-center uppercase">Sold</span>
-            <Divider />
+            </div>
+            <div
+              className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">
+              <span className="font-medium text-xs text-center uppercase">Sold</span>
+              <Divider/>
 
 
-            <span className="font-bold text-indigo-900"> 15.000</span>
+              <span className="font-bold text-indigo-900"> 15.000</span>
 
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
         <Card className="w-40   rounded border-gray-300 ">
           <div className="text-center font-medium text-sm p-2 bg-indigo-900 text-white">Total Swap Tickets</div>
-          <Divider />
+          <Divider/>
           <div className="flex flex-row">
             <div className="flex flex-col align-middle text-center align-middle items-center py-4 w-3/6">
 
@@ -78,9 +80,10 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
               <span className="font-bold text-indigo-900"> 26</span>
 
             </div>
-            <div className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">
+            <div
+              className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">
               <span className="font-medium text-xs text-center uppercase">Sold</span>
-              <Divider />
+              <Divider/>
 
 
               <span className="font-bold text-indigo-900"> 5</span>
@@ -92,7 +95,7 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
       </div>
       <Card className="w-full   rounded border-gray-300 mb-4">
         <div className="text-center font-medium text-sm p-2 bg-green-400 text-white">Total Earned</div>
-        <Divider />
+        <Divider/>
         <div className="flex ">
           <div className="flex flex-col align-middle text-center align-middle items-center py-4 w-3/6">
 
@@ -100,9 +103,10 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
             <span className="font-bold text-indigo-900">€ 45.000</span>
 
           </div>
-          <div className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">
+          <div
+            className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">
             <span className="font-medium text-xs text-center uppercase">Swap Tickets</span>
-            <Divider />
+            <Divider/>
 
 
             <span className="font-bold text-indigo-900">€ 2.326</span>
@@ -112,7 +116,7 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
       </Card>
       <Card className="w-full   rounded border-gray-300 ">
         <div className="text-center font-medium text-sm p-2 bg-indigo-900 text-white">Total Scanned Tickets</div>
-        <Divider />
+        <Divider/>
         <div className="flex ">
           <div className="flex flex-col align-middle text-center align-middle items-center py-4 w-3/6">
 
@@ -120,9 +124,10 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
             <span className="font-bold text-indigo-900"> 5.000</span>
 
           </div>
-          <div className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">
+          <div
+            className="flex flex-col align-middle text-center align-middle items-center py-4 border-l-2 border-gray-300 w-3/6">
             <span className="font-medium text-xs text-center uppercase">left</span>
-            <Divider />
+            <Divider/>
 
 
             <span className="font-bold text-indigo-900"> 45</span>
@@ -136,6 +141,6 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
 
 
     <EventBottom
-      />
+    />
   </div>;
 });
