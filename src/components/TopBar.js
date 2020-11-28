@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {useHistory} from "react-router-dom";
-import {fade, makeStyles} from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
+import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,16 +9,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import {TopDrawer} from "components/TopDrawer";
+import { TopDrawer } from "components/TopDrawer";
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import withReducer from "store/withReducer";
 import reducer from "store/reducers";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import {ticketStatuses} from "../store/reducers/blockchain/portfolio.reducer";
+import { ticketStatuses } from "../store/reducers/blockchain/portfolio.reducer";
 import Button from "@material-ui/core/Button";
-import * as Actions from "../store/actions";
+import { useBasket } from "../utils/hooks/basket";
+import { useAccount, useTickets } from "../utils/hooks";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -87,39 +88,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TopBar = withReducer("topBar", reducer)((props) => {
+export const TopBar = withReducer("topBar", reducer)(() => {
   const history = useHistory();
   const classes = useStyles();
+  const {ticketCount} = useBasket();
+  const {myTickets} = useTickets();
+  const {loggedIn} = useAccount();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const [LoginStatus, setLoginStatus] = useState(true);
-
-  const basket = useSelector(({blockchain}) => blockchain.basket.items);
-  const [amountOfTicketsBasket, setAmountOfTicketsBasket] = useState(basket.length);
-
-  const portfolio = useSelector(({blockchain}) => blockchain.portfolio.items);
-  const filteredTickets = portfolio.filter((ticket) => ticket.ticketStatus === ticketStatuses.OWNED || ticket.ticketStatus === ticketStatuses.SELLING);
-  // AMOUNT OF 'ACTIVE' TICKETS IN PORTFOLIO
-  const [amountOfTicketsPortfolio, setAmountOfTicketsPortfolio] = useState(filteredTickets.length);
-
-  useEffect(
-    () => {
-      // console.log("Topbar basket", basket);
-      // console.log("filteredTickets", filteredTickets);
-      setAmountOfTicketsPortfolio(filteredTickets.length);
-      setAmountOfTicketsBasket(basket.reduce(
-        (sum, item) => sum + (item.quantity), 0
-      ));
-    }, [basket, portfolio],
-  );
-
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -128,10 +108,6 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = 'primary-search-account-menu';
@@ -170,8 +146,7 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
         onClick={() => {
           handleMenuClose();
           history.push(`/signup`);
-        }
-        }>
+        }}>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <AccountBoxIcon/>
@@ -181,19 +156,18 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
       </MenuItem>
       <MenuItem onClick={() => {
         handleMenuClose();
-        history.push(`/organiser/organiser01`);
-
+        history.push(`/organizer`);
       }}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon/>
           </Badge>
         </IconButton>
-        <p>Organiser</p>
+        <p>Organizer</p>
       </MenuItem>
       <MenuItem onClick={() => {
         handleMenuClose();
-        history.push(`/account/account01`);
+        history.push(`/account`);
       }
       }>
         <IconButton
@@ -210,28 +184,26 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
   );
 
   return (
-
     <div className={classes.grow}>
       <AppBar className={classes.appbar} position="fixed">
         <Toolbar>
           {/*// TODO ALS NIET INGELOGD, DAN GEEN DRAWER, MAAR BUTTON*/}
-          {LoginStatus === true ? <div className="flex flex-row "><TopDrawer/>
+          {loggedIn ? <div className="flex flex-row "><TopDrawer/>
               {/*// TODO /account01 verwijderen na DEV fase*/}
-              <IconButton onClick={() => history.push(`/my-tickets/account01`)} aria-label="show 17 new notifications"
+              <IconButton onClick={() => history.push(`/my-tickets`)} aria-label="show 17 new notifications"
                           color="inherit">
-                <Badge badgeContent={amountOfTicketsPortfolio} color="secondary">
+                <Badge badgeContent={myTickets?.filter(mt => mt.status === ticketStatuses.OWNED || mt.status === ticketStatuses.MARKET)?.length} color="secondary">
                   <ConfirmationNumberIcon/>
                 </Badge>
               </IconButton>
               {/*// TODO /account01 verwijderen na DEV fase*/}
-              <IconButton onClick={() => history.push(`/checkout/account01`)} aria-label="show 17 new notifications"
+              <IconButton onClick={() => history.push(`/checkout`)} aria-label="show 17 new notifications"
                           color="inherit">
-                <Badge badgeContent={amountOfTicketsBasket} color="secondary">
+                <Badge badgeContent={ticketCount} color="secondary">
                   <ShoppingCartIcon/>
                 </Badge>
               </IconButton></div>
             : <Button
-
               onClick={() => {
                 history.push('/login')
               }}
@@ -241,7 +213,6 @@ export const TopBar = withReducer("topBar", reducer)((props) => {
               className="m-20"
             >LogIn</Button>
           }
-
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

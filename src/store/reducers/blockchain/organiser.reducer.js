@@ -16,8 +16,7 @@ const defaultState = {
       password: "",
     },
   },
-
-
+  organizers: [],
   organiserAccounts: [
     {
       address: "organiser01",
@@ -43,7 +42,6 @@ const defaultState = {
         password: "",
       },
     },
-
   ]
 };
 
@@ -69,6 +67,19 @@ export default (state = defaultState, action) => {
         ],
         // in de array van events, een event appenden (push?)
       };
+    case Actions.ADD_ORGANIZER:
+      return {
+        ...state,
+        organizers: [
+          ...state.organizers,
+          action.organizer,
+        ]
+      }
+    case Actions.LOAD_ORGANIZERS:
+      return {
+        ...state,
+        organizers: action.organizers,
+      }
     default:
       return {
         ...state,

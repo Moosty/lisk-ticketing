@@ -1,9 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,39 +11,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ValueLabelComponent(props) {
-  const { children, open, value } = props;
-
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-      {children}
-    </Tooltip>
-  );
-}
-
-ValueLabelComponent.propTypes = {
-  children: PropTypes.element.isRequired,
-  open: PropTypes.bool.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-const iOSBoxShadow =
-  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
-
-const marks = [
-  {
-    value: 0,
-  },
-  {
-    value: 20,
-  },
-  {
-    value: 37,
-  },
-  {
-    value: 100,
-  },
-];
 const PrettoSlider = withStyles({
   root: {
     color: '#f50057',
@@ -77,33 +41,23 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-function AirbnbThumbComponent(props) {
-  return (
-    <span {...props}>
-      <span className="bar" />
-      <span className="bar" />
-      <span className="bar" />
-    </span>
-  );
-}
 
-
-export const SliderPrice = (props) => {
+export const SliderPrice = ({reSellPercentage, changeSlider}) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-
-      <h1
-      className="text-lg mt-4 font-bold" >Set your price</h1>
-      <div>The organiser set the maximum resell price to <span className="font-bold text-pink-400">{props.reSellPercentage}% </span>of the original price.
-      </div>
-
-      <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} />
+      <h1 className="text-lg mt-4 font-bold" >Set your price</h1>
+      <div>The organiser set the maximum resell price to <span className="font-bold text-pink-400">{reSellPercentage}% </span>of the original price.</div>
+      <PrettoSlider
+        valueLabelDisplay="auto"
+        aria-label="pretto slider"
+        defaultValue={reSellPercentage < 100 ? reSellPercentage : 100}
+        min={10}
+        max={reSellPercentage}
+        onChange={changeSlider}
+      />
       <div className={classes.margin} />
-
-
-
     </div>
   );
 }

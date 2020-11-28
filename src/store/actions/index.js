@@ -5,3 +5,7 @@ export * from './basket.actions';
 export * from './event.actions';
 export * from './account.actions';
 export * from './organiser.actions';
+export * from './transactions.actions';
+export * from './blocks.actions';
+export * from './portfolio.actions';
+export * from './market.actions';

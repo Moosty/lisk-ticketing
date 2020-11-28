@@ -14,22 +14,13 @@ export const Account = withReducer("account", reducer)((props) => {
   const { address } = useParams();
   const thisAccount = accounts.find(account => account.address === address );
 
-  useEffect(() => {
-    console.log("accounts (in accountpage)", accounts);
-    console.log("dit account (in accountpage)", thisAccount);
-  }, [accounts]);
-
-
-
   return <div className="mt-10">
     <AccountHeader
       key={thisAccount.address}
       name={thisAccount.asset.username}
       balance={thisAccount.balance}
     />
-
     <div>
-
       <ul>
         <li>- settings (naam, email) & wijzigen
         </li>
@@ -37,9 +28,7 @@ export const Account = withReducer("account", reducer)((props) => {
         <li>- tickets in de verkoop</li>
         <li>-- geschieenis van je events & tickets</li>
       </ul>
-
     </div>
-    <CartBottom
-      totalPrice="€ 185.56"/>
+    <CartBottom totalPrice="€ 185.56"/>
   </div>;
 });

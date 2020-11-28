@@ -1,64 +1,33 @@
-import React, {useEffect, useState} from "react";
-import {Header} from "components/Header";
-import {CartBottom, EventHeader, TabsTickets, TicketListItem, TicketType} from "components/index";
-import {EventList} from "components/EventList";
-import {AccountHeader} from "components/AccountHeader";
+import React, { useState } from "react";
+import { Header } from "components/Header";
+import { TabsTickets } from "components/index";
 import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import {OrganiserHeader} from "components/OrganiserHeader";
-import {useHistory, useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
-import withReducer from "../../store/withReducer";
-import reducer from "../../store/reducers";
+import { useHistory } from "react-router-dom";
+import { useOrganizer } from "../../utils/hooks";
+import { FooterComponent } from "components/FooterComponent";
 
-export const Organiser = withReducer("organiser", reducer)((props) => {
-    const history = useHistory();
-    const { address } = useParams();
+export const Organizer = () => {
+  const history = useHistory();
+  const {organization} = useOrganizer(true, '/login');
+  const [search, setSearch] = useState("");
 
-    const organiserAccounts = useSelector(({blockchain}) => blockchain.organiser.organiserAccounts);
-    const thisOrganiser = organiserAccounts.find(account => account.address === address );
-    const thisAddress = thisOrganiser.address;
-    const [search, setSearch] = useState("");
-
-    useEffect(() => {
-    }, [organiserAccounts]);
-
-
-    return <div className="mt-10">
-       <div>
-            <Header
-              search={value => setSearch(value)}
-              title={thisOrganiser.asset.organisation}
-              subtitle="My Events"
-            />
-            <TabsTickets type="organiser" search={search} />
-
-        </div>
-
-
-
-        {/*ONDERSTE BALK*/}
-        <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
-            <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
-                <div className="flex flex-row ">
-
-                    <div className="flex flex-col text-sm float-left leading-4 my-2">
-                        <span className="text-lg mb-2">{thisOrganiser.asset.organisation}</span>
-                    </div>
-                </div>
-
-                <div className="flex flex-row content-center items-center">
-                    <Button
-                        onClick={() => history.push(`/create-event`)}
-                        variant="contained"
-                        size="small"
-                        color="secondary"
-                        className="">Create Event</Button>
-
-
-                </div>
-            </div>
-            <Divider />
-        </div>
-    </div>;
-});
+  return <div className="mt-10">
+    <Header
+      search={value => setSearch(value)}
+      title={organization}
+      subtitle="My Events"
+    />
+    <TabsTickets type="organizer" search={search}/>
+    <FooterComponent>
+      <span className="text-lg m-2 text-white">{organization}</span>
+      <Button
+        onClick={() => history.push(`/create-event`)}
+        variant="contained"
+        size="small"
+        color="secondary"
+        className="m-2">
+        Create Event
+      </Button>
+    </FooterComponent>
+  </div>;
+};

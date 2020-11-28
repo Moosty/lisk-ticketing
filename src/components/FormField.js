@@ -1,13 +1,11 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
 
-export const FormField = ({className, label, type, variant, path, onChange, value, limit, id, ticketType}) => {
-// console.log(value, type)
+export const FormField = ({className, label, type, variant, path, onChange, value, limit, id, ticketType, disabled = false}) => {
   return <TextField
-    className={className ? `${className}` : "bg-white rounded" }
+    className={className ? className : "bg-white rounded"}
     id="outlined-basic"
     label={label}
-    // Standaard "outlined" tenzij een "variant" prop is meegegeven
     variant={variant ? `${variant}` : "outlined"}
     value={value}
     onChange={(e) => ticketType ? onChange(path, id, e.target.value) : onChange(path, e.target.value)}
@@ -15,5 +13,11 @@ export const FormField = ({className, label, type, variant, path, onChange, valu
     fullWidth
     type={type}
     style={{marginBottom: 12}}
-  />;
+    disabled={disabled}
+    inputProps={{
+      autocomplete: 'new-password',
+      form: {
+        autocomplete: 'off',
+      },
+    }}  />;
 }

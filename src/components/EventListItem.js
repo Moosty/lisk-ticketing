@@ -72,7 +72,6 @@ export const EventListItem = ({eventId, eventDate, eventTime, title, day, month,
         { type === 'overview' &&   <Button
 
           onClick={() => {
-            console.log(eventId);
             history.push(`/events/${eventId}`);
           }}
 
@@ -86,7 +85,6 @@ export const EventListItem = ({eventId, eventDate, eventTime, title, day, month,
         { type === 'organiser' &&   <Button
 
           onClick={() => {
-            console.log(eventId);
             history.push(`/my-events/event-details/${eventId}`);
           }}
 

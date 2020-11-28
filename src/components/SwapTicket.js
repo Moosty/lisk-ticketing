@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
-import {fade, makeStyles} from '@material-ui/core/styles';
-import Divider from "@material-ui/core/Divider";
+import { makeStyles } from '@material-ui/core/styles';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
-import {useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useBasket, useEvent, useMarket } from "../utils/hooks";
+import { transactions } from "@liskhq/lisk-client";
+import * as Actions from 'store/actions';
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -18,50 +20,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const SwapTicket = withReducer("swapTicket", reducer)(({ticketAddress, type, resellerPrice, style, eventId, ticketId}) => {
-  const events = useSelector(({blockchain}) => blockchain.event.events);
-  const basket = useSelector(({blockchain}) => blockchain.basket.items);
-
-  const thisEvent = events.find(event => event.address === eventId);
-  const ticketData = thisEvent.asset.ticketData.types.find(type => type.id === ticketId);
-  const [ticketInBasket, setTicketInBasket] = useState(false);
-  const [count, setCount] = useState(0);
+export const SwapTicket = withReducer("swapTicket", reducer)(({marketId, style, eventId, typeId, ticketId}) => {
   const classes = useStyles();
-
-  const handleMinus = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  }
+  const dispatch = useDispatch();
+  const {event} = useEvent(eventId);
+  const {marketSelected} = useMarket(event);
+  const { items } = useBasket();
+  const [swapTicket, setSwapTicket] = useState(null);
+  const [ticketInBasket, setTicketInBasket] = useState(false);
 
   useEffect(() => {
-// TODO hier kom ik niet uit
+    setSwapTicket(marketSelected.find(ms => ms.market === marketId));
+  }, [marketId, marketSelected])
 
-    setTicketInBasket(basket.find((b) => b.ticketAddress === ticketAddress) ? ticketInBasket === true : ticketInBasket === false);
-    // console.log("deze:", ticketData, ticketId);
-    // console.log("TICKETADRES:", ticketAddress);
-    // console.log("basket:", basket);
-
-  }, [events, basket]);
-
+  useEffect(() => {
+    setTicketInBasket(!!items.find((b) => b.id === marketId));
+  }, [items, marketId]);
 
   return (
-    <div>
       <div style={style} className="flex flex-row px-4 justify-between content-center items-center w-full ">
-        <div className="flex flex-row ">
-
-          <div className="flex flex-col text-sm float-left leading-4 my-2">
-            <div className="flex flex-row">
-              <span className="font-bold">{type}{ticketData.name}</span>
-            </div>
-            <div className="flex flex-row">
-              <span className="text-xs">€ {resellerPrice} - </span> <span className="text-xs font-light"> {' '}(original € {ticketData.price})</span>
-            </div>
-
+        <div className="flex flex-col text-sm float-left leading-4 my-2">
+          <div className="flex flex-row">
+            <span className="font-bold">{event?.ticketData?.find(td => td.id === typeId)?.name} {event?.name}</span>
+          </div>
+          <div className="flex flex-row">
+            <span className="text-xs">€ {swapTicket?.value && transactions.convertBeddowsToLSK(swapTicket?.value?.toString())} - </span> <span
+            className="text-xs font-light"> {' '}(original € {event?.ticketData?.find(td => td.id === typeId)?.price && transactions.convertBeddowsToLSK(event?.ticketData?.find(td => td.id === typeId)?.price?.toString())})</span>
           </div>
         </div>
         <div className="flex flex-row content-center items-center flex content-center align-middle">
-          {ticketInBasket === true ?
+          {ticketInBasket ?
             <Button
               onClick={() => {
               }}
@@ -71,8 +59,7 @@ export const SwapTicket = withReducer("swapTicket", reducer)(({ticketAddress, ty
               className={classes.button2}>added</Button>
             :
             <Button
-              onClick={() => {
-              }}
+              onClick={() => dispatch(Actions.addItem(eventId, typeId, marketId, swapTicket.value))}
               variant="contained"
               size="small"
               color="secondary"
@@ -80,7 +67,5 @@ export const SwapTicket = withReducer("swapTicket", reducer)(({ticketAddress, ty
           }
         </div>
       </div>
-      <Divider/>
-    </div>
   );
 });

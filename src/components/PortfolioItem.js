@@ -102,7 +102,6 @@ export const PortfolioItem = withReducer("portfolioItem", reducer)(({ticketType,
         {type === 'cancel' &&
         <IconButton
           onClick={() => {
-            console.log("this event", thisEvent);
             dispatch(Actions.openModal('cancelInfoModal'))
           }}
           color="secondary"

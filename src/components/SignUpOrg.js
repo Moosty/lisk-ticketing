@@ -76,7 +76,6 @@ export const SignUpOrg = withReducer("signUpOrg", reducer)((props) => {
 
   useEffect(() => {
     setForm(organiser.createOrganiser);
-    console.log(form);
   }, [organiser])
 
   return (
@@ -176,7 +175,6 @@ export const SignUpOrg = withReducer("signUpOrg", reducer)((props) => {
                 color="secondary"
                 className={classes.submit}
                 onClick={() => {
-                  console.log({form});
                   history.push(`/organiser/1234342432ddxxxd`);
                   dispatch(Actions.addOrganiser(form));
                 }}

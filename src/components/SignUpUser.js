@@ -64,7 +64,6 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
 
   useEffect(() => {
     setForm(account.createAccount);
-    console.log(form);
   }, [account])
 
   return (
@@ -182,7 +181,6 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                 color="secondary"
                 className={classes.submit}
                 onClick={() => {
-                  console.log({form});
                   history.push(`/account/1234342432ddddfd`);
                   dispatch(Actions.addAccount(form));
                 }}
