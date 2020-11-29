@@ -3,14 +3,16 @@
 **Standard API - Node Info**
 - Node Info
 https://api-ticketswap.moosty.com/api/node/info
-
+- Accounts
+https://api-ticketswap.moosty.com/api/accounts/:id
 
 **Extended API - Blockchain Specific Information**
 https://eapi-ticketswap.moosty.com/api
 
 - Organizer information
 `/organizers`
-- Event information
+`/organizer/:id`
+
 - All events 
 `/events/`
 - Event (event id)
@@ -18,6 +20,7 @@ https://eapi-ticketswap.moosty.com/api
 
 - Ticket information
 `/tickets`
+`/ticket/:id`
 
 - Market information
 `/market`
