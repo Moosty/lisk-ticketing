@@ -104,12 +104,10 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)(() => {
         <ListItemIcon style={{color: "#f50057"}}>{<InboxIcon style={{color: "white"}}/>}</ListItemIcon>
         <ListItemText primary={account.token ? "Sign Out" : "Sign In"}/>
       </ListItem>
-      <ListItem button onClick={() => history.push(`/overview`)}>
-        <ListItemIcon style={{color: "#f50057"}}><InboxIcon/></ListItemIcon>
-        <ListItemText primary={"Overview"}/>
-      </ListItem>
+
       <List>
         {signedInAsUser && [
+          {label: "All Events", link: "/overview", icon: <InboxIcon/>},
           {label: "My Tickets", link: "/my-tickets", icon: <InboxIcon/>},
           {label: "Shopping Cart", link: "/checkout", icon: <InboxIcon/>},
         ].map((item) => (
@@ -119,8 +117,7 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)(() => {
           </ListItem>
         ))}
         {signedInAsOrganiser === true && [
-          {label: "My Events", link: "/my-events", icon: <InboxIcon/>},
-          {label: "My Account", link: "/organizer", icon: <InboxIcon/>},
+          {label: "My Events", link: "/organizer", icon: <InboxIcon/>},
         ].map((item) => (
           <ListItem button onClick={() => history.push(`${item.link}`)} key={item.label}>
             <ListItemIcon style={{color: "#f50057"}}>{item.icon}</ListItemIcon>

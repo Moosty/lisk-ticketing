@@ -146,7 +146,7 @@ export const TicketOptionsModal = ({type, size, ticketId}) => {
     }
   }, [type, myTicket, updating]);
 
-  return <div className={`text-center items-center ${type === 'welcomeModal' ? 'bg-green-900' : 'bg-gray-900'} p-4 h-full w-full `}>
+  return <div className={`text-center items-center ${type === 'welcomeModal' ? 'bg-green-300' : 'bg-gray-900'} p-4 h-full w-full `}>
     <NotificationsRoundedIcon style={{color: '#fff', fontSize: 30}}/>
     <div className="p-4">
       <div className="flex flex-col my-4">
