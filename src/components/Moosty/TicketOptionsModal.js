@@ -1,4 +1,4 @@
-/* global BigInt */
+  /* global BigInt */
 import React, { useEffect, useState } from 'react';
 import QRCode from 'qrcode.react';
 import { useHistory } from "react-router-dom";

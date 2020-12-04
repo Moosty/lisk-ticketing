@@ -36,7 +36,7 @@ export const EventHeader = ({eventId, artist, location, title, organizer, eventT
         <div className=" mx-6 flex flex-row">
           {/*EVENT VIEW*/}
           {type === 'event' &&
-          <h1 className="text-4xl font-black text-white">
+          <h1 className="text-2xl font-black text-white">
             {title}
           </h1>}
 

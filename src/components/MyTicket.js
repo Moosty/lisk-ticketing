@@ -72,29 +72,29 @@ export const MyTicket = withReducer("myTicket", reducer)(({
                                                           }) => {
   const dispatch = useDispatch();
   const {event} = useEvent(eventId);
-  const MAX_LENGTH = 25;
+  const MAX_LENGTH = 40;
 
   return (<div className={` w-full ${i === 0 ? "bg-gray-300" : ""}`}>
     <div className="flex flex-row justify-between">
-      <div className="flex flex-row items-center my-3 ">
+      <div className="flex flex-row items-center my-3 w-full ">
         <EventAvatar timestamp={event?.eventData?.date} status={event?.eventData?.status}/>
 
-        <div className={`flex flex-col text-sm leading-4 mx-2`}>
+        <div className={`flex flex-col text-xs leading-4 mx-2 w-full`}>
           {event?.eventData?.title?.length > MAX_LENGTH ?
             (<div className="font-bold text-left block">
               {`${event?.eventData?.title?.substring(0, MAX_LENGTH)}...`}
             </div>) : <span className="font-bold text-left block">{event?.eventData?.title}</span>}
           <div>
             {/*<span className="font-bold text-left block">{thisEventData?.title}</span>*/}
-            <span className="">{event?.eventData?.title}</span>
+
           </div>
           {size === 'large' &&
-          <span className="font-bold text-xs flex flex-row"
+          <span className="font-bold text-xs flex flex-row text-left"
                 style={{color: "#f50057"}}>{event?.ticketData?.find(td => td.id === ticketType)?.name}</span>}
           {event?.eventData?.location.length > MAX_LENGTH ?
-            (<div className="font-light text-xs flex flex-row">
+            (<div className="font-light text-xs flex flex-row text-left">
               {`${event?.eventData?.location.substring(0, MAX_LENGTH)}...`}
-            </div>) : <span className="font-light text-xs flex flex-row">{event?.eventData?.location}</span>}
+            </div>) : <span className="font-light text-xs flex flex-row text-left">{event?.eventData?.location}</span>}
           {/*<span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>*/}
         </div>
       </div>
@@ -110,8 +110,8 @@ export const MyTicket = withReducer("myTicket", reducer)(({
           color="secondary">
           <CropFreeTwoToneIcon color="secondary"/>
         </IconButton>}
-        {status === ticketStatuses.MARKET && <b className="center">IN SALE</b>}
-        {status === ticketStatuses.CANCELED && <b className="center">Canceled</b>}
+        {status === ticketStatuses.MARKET && <span className="font-bold text-center text-xs">IN SALE</span>}
+        {status === ticketStatuses.CANCELED && <span className="font-bold text-center text-xs">Canceled</span>}
         <IconButton
           color="secondary"
           onClick={() => {
