@@ -35,8 +35,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'transparant',
   },
   root: {
-    backgroundColor: "white",
-  },
+    '& .MuiFilledInput-root': {
+
+        borderColor: 'red',
+        backgroundColor: 'white!important',
+      } },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -52,8 +55,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
   field: {
-    backgroundColor: 'white',
     borderRadius: 5,
+    backgroundColor: 'white',
+    border: 'none',
   },
 }));
 
@@ -116,6 +120,7 @@ export const LogIn = withReducer('Login', reducer)(() => {
                   id="firstName"
                   label="Username"
                   autoFocus
+
                   onChange={(e) => setUsername(e.target.value)}
                   value={username}
                   inputProps={{

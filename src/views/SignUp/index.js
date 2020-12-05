@@ -16,6 +16,8 @@ import { createTransaction, Schema } from "../../utils/transactions";
 import { fetchAccountInfo, sendTransactions } from "../../utils/api";
 import { cryptography } from "@liskhq/lisk-client";
 import { useEvent, useTickets } from "../../utils/hooks";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -31,6 +33,11 @@ const useStyles = makeStyles(theme => ({
   h1: {
     padding: '1em',
     color: 'white',
+  },
+  field: {
+    borderRadius: 5,
+    backgroundColor: 'white',
+    border: 'none',
   },
 }));
 
@@ -132,9 +139,13 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
   return (
     <div className="bg-fixed sm:bg-scroll bg-cover"
          style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "100vh"}}>
-      <div className="w-full flex-auto h-full" style={{backgroundColor: "rgb(0 0 0 / 85%)"}}>
-        <div className={classes.paper}>
-          <img src="/images/logo-ticketing.png" alt="logo" width="250" height="300"/>
+      <div className="w-full flex-auto h-full px-6" style={{backgroundColor: "#f50057"}}>
+        <IconButton
+            onClick={() => history.push(`/overview`)}
+            aria-label="Close"
+            color="inherit">
+          <CloseIcon/>
+        </IconButton>        <div className={classes.paper}>
           <Typography className={classes.h1} component="h1" variant="h5">
             Sign Up
           </Typography>
@@ -146,9 +157,10 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
               onChange={updateField}
               value={_.get(form, field.path)}/>)
           }
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             <Button
-              type="submit"
+                style={{backgroundColor: "black", color:"white"}}
+                type="submit"
               fullWidth
               variant="contained"
               color="secondary"
@@ -160,11 +172,11 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
             </Button>
             <Link onClick={() => {
               type === "organizer" ? history.push('/signup') : history.push('/signup/organizer');
-            }} variant="body2">
+            }}  style={{color: "black"}}  variant="body2">
               Are you an {type === "organizer" ? `user` : `organizer`}? Sign up here!
             </Link>
             <br/>
-            <Link onClick={() => history.push('/overview')} variant="body2">
+            <Link onClick={() => history.push('/overview')}   style={{color: "black"}}  variant="body2">
               go back
             </Link>
           </div>
