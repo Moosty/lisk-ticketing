@@ -92,7 +92,7 @@ export const ConfirmTxModal = (props) => {
       <div className="flex flex-col">
         {/* GENERAL TX CONFIRM */}
         {props.type === 'confirmTx' && <div>
-          <div className="flex flex-col text-left flex font-normal text-sm text-white">
+          <div className="flex flex-col text-left flex font-normal text-sm text-white text-center pb-4">
             <h1 className="text-lg mt-4 font-bold">{props.title}</h1>
             <div>{props.subText}</div>
           </div>

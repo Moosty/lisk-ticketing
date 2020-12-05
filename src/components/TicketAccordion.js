@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as Actions from "../store/actions";
 import { useEvent, useMarket } from "utils/hooks";
+import InfoIcon from '@material-ui/icons/Info';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,7 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
           expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1a-content"
           id="panel1a-header"
+          style={{backgroundColor:'#f50057', color:"white", fontSize:"15px"}}
         >
           <Typography className={classes.heading}><span className="font-bold">{marketSelected?.length}</span> Swap
             Tickets available</Typography>
@@ -44,9 +46,9 @@ export const TicketAccordion = withReducer("ticketAccordion", reducer)(({ticketA
         <AccordionDetails>
           <div className="flex flex-col w-full">
             <div
-              className="w-full mb-2 font-bold cursor-pointer"
+              className="w-full text-sm mb-2 font-medium cursor-pointer"
               onClick={() => dispatch(Actions.openModal('swapTicketInfo'))}>
-              What are swaptickets?
+              What are swaptickets? <InfoIcon style={{fontSize:"14px", color:"#f50057"}} />
             </div>
             <div className="w-full mb-20">
               {marketSelected?.map((type) => {

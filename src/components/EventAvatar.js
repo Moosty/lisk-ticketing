@@ -36,11 +36,11 @@ const StyledBadge = withStyles((theme) => ({
 
 const colors = {
   [statuses.DONE]: "#686a6b",
-  [statuses.CANCELLED]: "#8c0404",
-  [statuses.UPCOMING]: "#278c04",
-  [statuses.OPEN_FOR_SALE]: "#278c04",
-  [statuses.SOLD_OUT]: "#c35b0b",
-  [statuses.NEW]: "#278c04",
+  [statuses.CANCELLED]: "#f80c0c",
+  [statuses.UPCOMING]: "#3fe905",
+  [statuses.OPEN_FOR_SALE]: "#3fe905",
+  [statuses.SOLD_OUT]: "#f3b416",
+  [statuses.NEW]: "#3fe905",
 }
 
 export const EventAvatar = ({timestamp, status, badgeColor}) => {

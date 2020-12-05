@@ -89,12 +89,12 @@ export const MyTicket = withReducer("myTicket", reducer)(({
 
           </div>
           {size === 'large' &&
-          <span className="font-bold text-xs flex flex-row text-left"
+          <span className="font-bold text-xs flex flex-row text-left w-full"
                 style={{color: "#f50057"}}>{event?.ticketData?.find(td => td.id === ticketType)?.name}</span>}
           {event?.eventData?.location.length > MAX_LENGTH ?
-            (<div className="font-light text-xs flex flex-row text-left">
+            (<div className="font-light text-xs flex flex-row text-left w-full">
               {`${event?.eventData?.location.substring(0, MAX_LENGTH)}...`}
-            </div>) : <span className="font-light text-xs flex flex-row text-left">{event?.eventData?.location}</span>}
+            </div>) : <span className="font-light text-xs flex flex-row text-left w-full">{event?.eventData?.location}</span>}
           {/*<span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>*/}
         </div>
       </div>
@@ -126,7 +126,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({
       </div>
       }
       {size === 'large' &&
-      <div className="flex items-center flex-row w-4/12">
+      <div className="flex items-center flex-row w-2/12">
         <div className="flex flex-col text-right text-xs font-bold">
           <span
             className="text-sm"> €

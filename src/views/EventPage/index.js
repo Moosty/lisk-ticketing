@@ -26,7 +26,10 @@ export const EventPage = withReducer("EventPage", reducer)(() => {
       startEvent={event.eventData.eventTime}
       title={event.eventData.title}
       type="event"
+      timestamp={event.eventData.date}
+      status={event.eventData.status}
     />}
+    <div className="py-4">
     {event?.ticketData?.map((type) =>
       <TicketType
         key={type.id}
@@ -36,6 +39,7 @@ export const EventPage = withReducer("EventPage", reducer)(() => {
         eventId={event.id}
         ticketType={type.id}
       />)}
+    </div>
     <TicketAccordion/>
     {!isOrganizer && <CartBottom/>}
   </div>;

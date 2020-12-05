@@ -1,6 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { EventItem } from "components/EventItem";
+import moment from "moment";
+import {EventAvatar} from "components/EventAvatar";
+import {statuses} from "../store/reducers/blockchain/event.reducer";
+import EventIcon from '@material-ui/icons/Event';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import RoomIcon from '@material-ui/icons/Room';
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   button1: {
@@ -20,11 +27,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const colors = {
+  [statuses.SOLD_OUT]: "#00E676",
+  [statuses.OPEN_FOR_SALE]: "#FFEA00",
+  [statuses.UPCOMING]: "#f50057",
+  [statuses.CANCELLED]: "#f50057",
+}
+
 const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE", "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"];
 const days = ["MON", "TUE", "WED", "Thursday", "FRI", "SAT", "SUN"];
 
-export const EventHeader = ({eventId, artist, location, title, organizer, eventTimestamp, type, status}) => {
+export const EventHeader = ({timestamp, eventId, artist, location, title, organizer, eventTimestamp, type, status}) => {
   const classes = useStyles();
+  const [date, setDate] = useState(null)
+
+  useEffect(() => {
+    setDate(moment.unix(timestamp));
+  }, [timestamp]);
+
   return (
     <div>
       <div
@@ -36,9 +56,12 @@ export const EventHeader = ({eventId, artist, location, title, organizer, eventT
         <div className=" mx-6 flex flex-row">
           {/*EVENT VIEW*/}
           {type === 'event' &&
-          <h1 className="text-2xl font-black text-white">
+          <h1 className="flex flex-col text-2xl leading-8 font-bold text-white">
             {title}
-          </h1>}
+            {artist}
+
+          </h1>
+          }
 
           {/*ORGANISER VIEW*/}
           {type === 'organiser' &&
@@ -55,19 +78,34 @@ export const EventHeader = ({eventId, artist, location, title, organizer, eventT
           />}
         </div>
         {type === 'event' &&
-        <div className="w-full flex flex-row p-2 justify-between content-center items-center text-white">
-          <div className="flex flex-row ">
-            <div className="flex flex-col items-center leading-4 m-4 content-center items-center">
-              {/*TODO leading zero */}
-              {/*<span className="text-lg">{eventDate.getDay()}</span>*/}
-              {/*TODO eerste drie letters van de maand */}
-              {/*<span className={classes.month}>{monthNames[eventDate.getMonth()]}</span>*/}
+        <div className="w-full flex flex-row  justify-between  items-center text-white">
+          <div className="flex flex-col ">
+
+            <div className="flex flex-col   text-left float-left my-2 ">
+              <Divider
+                  light="true"/>
+              <div className="flex flex-row align-middle items-center mx-6 mb-1">
+                <EventIcon
+                style={{marginRight:"0.5rem", fontSize:"1rem"}}/>
+                <span className="text-xs center font-medium" style={{color:"#f50057"}}>{date?.format("dddd, MMMM Do YYYY")}</span>
+
+              </div>
+              <div className="flex flex-row align-middle items-center mx-6 mb-1">
+                <ScheduleIcon
+                    style={{marginRight:"0.5rem", fontSize:"1rem"}}/>
+                <span className="text-xs font-medium " style={{color:"#f50057"}}>{date?.format("HH:mm a")}</span>
+              </div>
+              <div className="flex flex-row align-middle items-center mx-6 mb-1">
+                <RoomIcon
+                    style={{marginRight:"0.5rem", fontSize:"1rem"}}/>
+                <span className="text-xs font-medium " style={{color:"#f50057"}}>{location}</span>
+              </div>
+
+
+
+
             </div>
-            <div className="flex flex-col text-sm float-left leading-4 my-2">
-              {/*TODO Dag van de week & tijd: leading zero */}
-              {/*<span>{days[eventDate.getDay()]}{' '} {eventDate.getHours()}:{eventDate.getMinutes()}</span>*/}
-              <span className="text-xs">{location}</span>
-            </div>
+
           </div>
         </div>}
       </div>
