@@ -27,6 +27,28 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'transparant',
     paddingTop: '2em',
   },
+  root: {
+    borderRadius: 5,
+    backgroundColor: 'white',
+    border: 'none',
+    '& .MuiFilledInput-root	': {
+
+      border: 'none',
+      borderRadius: 10,
+      fontSize: '0.9rem',
+      fontWeight: '600',
+      backgroundColor: 'white!important',
+    },
+    '& .MuiFilledInput-underline:after ': {
+      border: 'none',
+    },
+    '& .MuiFilledInput-underline:before ' : {
+      border: 'none',
+    },
+    '& .MuiFormLabel-root.Mui-focused ' : {
+      color: '#f50057',
+    }
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -38,24 +60,30 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 5,
     backgroundColor: 'white',
     border: 'none',
+    '& .MuiFilledInput-root	': {
+
+      border: 'none',
+      borderRadius: 10,
+      fontSize: '0.9rem',
+      fontWeight: '600',
+      backgroundColor: 'white!important',
+    },
+    '& .MuiFilledInput-underline:after ': {
+      border: 'none',
+    },
+    '& .MuiFilledInput-underline:before ' : {
+      border: 'none',
+    },
+    '& .MuiFormLabel-root.Mui-focused ' : {
+      color: '#f50057',
+    }
   },
 }));
 
-const fields = {
-  user: [
-    {label: "username", path: "username", type: "text", variant: "filled"},
-    {label: "password", path: "password", type: "password", variant: "filled"},
-    {label: "", path: "address", type: "text", variant: "filled", disabled: true},
-  ],
-  organizer: [
-    {label: "organization", path: "username", type: "text", variant: "filled"},
-    {label: "password", path: "password", type: "password", variant: "filled"},
-    {label: "", path: "address", type: "text", variant: "filled", disabled: true},
-  ]
-};
 
 export const SignUp = withReducer("signUp", reducer)(({type}) => {
   const classes = useStyles();
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -63,6 +91,21 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
   const {loadEvents} = useEvent();
   const {loadTickets} = useTickets();
   const [form, setForm] = useState(createAccount);
+
+
+  const fields = {
+    user: [
+      {label: "username", path: "username", type: "text", variant: "filled", className:classes.field},
+      {label: "password", path: "password", type: "password", variant: "filled", className:classes.field},
+      {label: "", path: "address", type: "text", variant: "filled", disabled: true, className:classes.field},
+    ],
+    organizer: [
+      {label: "organization", path: "username", type: "text", variant: "filled", className:classes.field},
+      {label: "password", path: "password", type: "password", variant: "filled", className:classes.field},
+      {label: "", path: "address", type: "text", variant: "filled", disabled: true, className:classes.field},
+    ]
+  };
+
 
   useEffect(() => {
     const {publicKey} = getAddressAndPublicKeyFromPassphrase(`${createAccount.username} ${createAccount.password} ${createAccount.username}`);

@@ -48,9 +48,26 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
   field: {
-    backgroundColor: 'white',
     borderRadius: 5,
+    backgroundColor: 'white',
     border: 'none',
+    '& .MuiFilledInput-root	': {
+
+      border: 'none',
+      borderRadius: 10,
+      fontSize: '0.9rem',
+      fontWeight: '600',
+      backgroundColor: 'white!important',
+    },
+    '& .MuiFilledInput-underline:after ': {
+      border: 'none',
+    },
+    '& .MuiFilledInput-underline:before ' : {
+      border: 'none',
+    },
+    '& .MuiFormLabel-root.Mui-focused ' : {
+      color: '#f50057',
+    }
   },
 }));
 

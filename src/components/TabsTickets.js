@@ -17,10 +17,14 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "theme.palette.background.paper",
     width: "100%",
   },
+  rootPrimarySelected: {
+    color: 'yellow',
+  },
 }));
 
 export const TabsTickets = withReducer("tabsTickets", reducer)(({type, search}) => {
   const classes = useStyles();
+
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -40,7 +44,7 @@ export const TabsTickets = withReducer("tabsTickets", reducer)(({type, search}) 
           style={{color: "white"}}
           onChange={handleChange}
           indicatorColor="secondary"
-          textColor="secondary"
+          textColor="secondanry"
           variant="fullWidth"
           aria-label="full width tabs example"
         >
