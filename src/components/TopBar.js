@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appbar: {
-    backgroundColor: "#000000",
+    backgroundColor: "#1a202c",
   },
   search: {
     position: 'relative',

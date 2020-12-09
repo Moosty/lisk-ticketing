@@ -202,7 +202,7 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
           }
           <div className="flex flex-col w-full">
             <Button
-                style={{backgroundColor: "black", color:"white"}}
+                style={{backgroundColor: "#1a202c", color:"white"}}
                 type="submit"
               fullWidth
               variant="contained"

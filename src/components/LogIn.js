@@ -114,7 +114,7 @@ export const LogIn = withReducer('Login', reducer)(() => {
         <div className={classes.paper}>
           <div className="mt-6 flex flex-col align-middle text-center justify-center items-center">
             <AccountBoxIcon style={{color: "white", fontSize: "4rem"}}/>
-            <h1 className="text-2xl font-bold text-black capitalize mt-4">Log in</h1>
+            <h1 className="text-2xl font-bold capitalize mt-4" style={{color:"#1a202c"}}>Log in</h1>
             <span className="text-sm font-medium text-white text-center pb-3">A fair ticketing system</span>
             <span className="text-sm font-medium font-bold text-gray-900 text-center pb-3">{error}</span>
           </div>
@@ -166,7 +166,7 @@ export const LogIn = withReducer('Login', reducer)(() => {
               </Grid>
             </Grid>
             <Button
-              style={{backgroundColor: "black"}}
+              style={{backgroundColor: "#1a202c"}}
               type="submit"
               fullWidth
               variant="contained"
@@ -183,7 +183,7 @@ export const LogIn = withReducer('Login', reducer)(() => {
                   onClick={() => {
                     history.push('/signup')
                   }}
-                  style={{color: "black"}} variant="body2">
+                  style={{color: "#1a202c"}} variant="body2">
                   Dont have an account yet? Create one!
                 </Link>
               </Grid>
