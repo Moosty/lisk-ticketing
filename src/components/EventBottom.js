@@ -68,7 +68,7 @@ export const EventBottom = () => {
   }
 
   return (
-    <div className="bottom-0 fixed z-50 bg-gray-900 text-white " style={{maxWidth: '450px', width: '450px'}}>
+    <div className="bottom-0 fixed z-50 bg-gray-900 text-white " style={{maxWidth: '450px', width: '100%'}}>
       <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
         {(event?.eventData?.status !== statuses.CANCELLED && event?.eventData?.status !== statuses.DONE) && <Button
           onClick={() => dispatch(Actions.openModal('confirmTx', {

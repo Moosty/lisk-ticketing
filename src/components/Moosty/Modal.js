@@ -170,7 +170,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
         }}
       >
         <Fade in={open}>
-          <div className="fixed left-0 top-0 bottom-0 flex flex-auto h-full" style={{maxWidth: '450px', width: '450px'}}>
+          <div className="fixed left-0 top-0 bottom-0 flex flex-auto h-full" style={{maxWidth: '450px', width: '100%'}}>
             {getModal()}
           </div>
         </Fade>
