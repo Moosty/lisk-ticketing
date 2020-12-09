@@ -30,7 +30,7 @@ export const MyTicketsComponent = withReducer("myTicketsComponent", reducer)(({t
   }, [myTickets, tab, search]);
 
   return (
-    <div className="p-4 ">
+    <div className="p-4 bg-white">
       {filteredTickets?.sort((a, b) => {
         if (a.eventId.toLowerCase() < b.eventId.toLowerCase()) return -1;
         if (a.eventId.toLowerCase() > b.eventId.toLowerCase()) return 1;

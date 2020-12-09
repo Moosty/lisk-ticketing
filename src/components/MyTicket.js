@@ -74,7 +74,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({
   const {event} = useEvent(eventId);
   const MAX_LENGTH = 40;
 
-  return (<div className={` w-full ${i === 0 ? "bg-gray-300" : ""}`}>
+  return (<div className={` w-full`}>
     <div className="flex flex-row justify-between">
       <div className="flex flex-row items-center my-3 w-full ">
         <EventAvatar timestamp={event?.eventData?.date} status={event?.eventData?.status}/>
