@@ -89,7 +89,7 @@ export const Header = ({title, subtitle, button1, button2, onClick1, onClick2, s
   return (
     <div>
       <div className="bg-fixed sm:bg-scroll bg-cover"
-           style={{backgroundImage: "url(/images/bgTicketing.jpg)", height: "auto"}}>
+           style={{backgroundImage: "url(/images/party3.jpeg)", height: "auto"}}>
         <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>
           <div className=" p-8 text-center align-middle h-full flex flex-col justify-between">
             <h1 className="text-4xl leading-10 text-white font-extrabold">{title}</h1>
