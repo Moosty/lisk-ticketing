@@ -12,7 +12,7 @@ ReactDOM.render(
   <AppContext.Provider value={{context: false}}>
     <Provider store={store}>
       <div className="fixed bottom-0 top-0 left-0 right-0 w-full h-full bg-gray-400 overflow-y-auto">
-      <div className="bg-white bottom-0 top-0" style={{with: '100%', maxWidth: '450px'}}>
+      <div className="absolute bg-white bottom-0 top-0" style={{width: '100%', maxWidth: '450px'}}>
         <Routes/>
         <MoostyModal/>
       </div>
