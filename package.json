@@ -23,6 +23,7 @@
     "moment": "^2.29.1",
     "qrcode.react": "^1.0.0",
     "react": "^16.13.1",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-qr-reader": "^2.2.1",
     "react-redux": "^7.2.1",

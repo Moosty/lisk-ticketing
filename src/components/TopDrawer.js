@@ -16,15 +16,18 @@ import * as Actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import { transactions } from "@liskhq/lisk-client";
 import { useTickets } from "../utils/hooks";
 import { ticketStatuses } from "../store/reducers/blockchain/portfolio.reducer";
+import Tooltip from "@material-ui/core/Tooltip";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 290,
     height: "100%",
     color: "white",
     backgroundColor: "#1a202c",
@@ -91,6 +94,13 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)(() => {
             <div className="flex flex-row">
               <ConfirmationNumberIcon fontSize="small"/>
               <span className="ml-2">{myTickets?.filter(mt => mt.status === ticketStatuses.OWNED || mt.status === ticketStatuses.MARKET)?.length}</span></div>
+            <div className="flex flex-row ml-2">
+              <Tooltip title="Copy address" placement="top" arrow>
+                <CopyToClipboard text={account?.address} >
+                <AccountBalanceWalletIcon fontSize="small"/>
+                </CopyToClipboard>
+              </Tooltip>
+            </div>
           </div>
         </div>}
       </div>
