@@ -40,7 +40,7 @@ export const DemoModal = (props) => {
 
               <h1
                 className="text-lg mt-4 font-bold">{props.subtitle}</h1>
-              <div>Fill in the <span className="font-bold text-pink-400">{props.content} </span>.
+              <div><span className="font-bold text-pink-400">{props.content} </span>.
               </div>
               <div className="mt-4">{props.endQuote}
               </div>
