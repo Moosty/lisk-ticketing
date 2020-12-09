@@ -16,6 +16,9 @@ import { sendTransactions } from "../../utils/api";
 import { useHistory } from "react-router-dom";
 import { API } from "../../utils";
 import { useOrganizer } from "../../utils/hooks";
+import { makeStyles } from "@material-ui/core/styles"
+import TextField from "@material-ui/core/TextField"
+import Divider from "@material-ui/core/Divider"
 
 const categories = [
   {
@@ -27,6 +30,55 @@ const categories = [
     label: "NO",
   },
 ];
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'transparant',
+  },
+  root: {
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: 0,
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  h1: {
+    color: 'white',
+  },
+  field: {
+    borderRadius: 5,
+    backgroundColor: 'white',
+    border: 'none',
+    '& .MuiFilledInput-root	': {
+
+      border: 'none',
+      borderRadius: 10,
+      fontSize: '0.9rem',
+      fontWeight: '600',
+      backgroundColor: 'white!important',
+    },
+
+    '& .MuiFilledInput-underline:after ': {
+      border: 'none',
+    },
+    '& .MuiFilledInput-underline:before ' : {
+      border: 'none',
+    },
+    '& .MuiFormLabel-root.Mui-focused ' : {
+      color: '#f50057',
+    }
+  },
+}));
 
 // TODO: header aanpassen (LATER)
 // TODO: Status Event meegeven (REDUCER?) (ZA 17 - 10)
@@ -156,6 +208,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
       }));
     }
   }
+  const classes = useStyles();
+
   return (
     <div className="mt-10 mb-20">
       <OrganiserHeader
@@ -163,8 +217,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         balance="location"
         button1="Create new event"/>
       <div className="">
-        <div className="flex flex-row align-middle  ml-2 text-sm leading-4 my-4">
-          <span className="text-lg font-bold">Event Information</span>
+        <div className="flex flex-row align-middle justify-center items-center ml-2 text-sm leading-4 my-4">
+          <span className="text-lg font-bold justify-center">Event Information</span>
           <IconButton
             onClick={() => {
               dispatch(Actions.openModal('eventInfoModal'))
@@ -175,6 +229,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
             <HelpIcon/>
           </IconButton>
         </div>
+        <Divider />
         {/*START - MODALS WITH EXPLANATION */}
 
 
@@ -185,10 +240,14 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           autoComplete="off"
         >
           {/*START - FORM EVENTINFO */}
-          {fields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
+          {fields.map(field => <FormField {...field} onChange={updateField}
+                                          variant="filled"
+                                          className={classes.field}
+                                          value={_.get(form, field.path)}
+          />)}
           {/*START - FORM TICKET INFO  */}
-          <div className="flex  ml-2 text-sm leading-4 my-4">
-            <span className="text-lg font-bold">Ticket Information</span>
+          <div className="flex flex-row align-middle justify-center items-center ml-2 text-sm leading-4 my-4">
+            <span className="text-lg font-bold justify-center">Ticket Information</span>
             <IconButton
               onClick={() => {
                 dispatch(Actions.openModal('ticketInfoModal'))
@@ -199,6 +258,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               <HelpIcon/>
             </IconButton>
           </div>
+          <Divider />
+
 
 
           {/*START TYPE  - TICKET TYPES */}
@@ -211,6 +272,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
                 key={`${field.path}-field-${i}`}
                 {...field}
                 id={i}
+                variant="filled"
+                className={classes.field}
                 ticketType
                 onChange={updateFieldType}
                 value={_.get(form, `asset.ticketData.types[${i}].${field.path}`)}/>)}
@@ -226,14 +289,16 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               {...field}
               id={form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}
               onChange={updateFieldType}
+              variant="filled"
+              className={classes.field}
               ticketType
               value={field.path === 'id' ? form.asset?.ticketData?.types.length : 0 }/>)}
           </div>
           {/*END TYPE  - TICKET TYPES  */}
 
           {/*START - FORM RESELL INFO  */}
-          <div className="flex  ml-2 text-sm leading-4 my-4">
-            <span className="text-lg font-bold">Resell Information</span>
+          <div className="flex flex-row align-middle justify-center items-center ml-2 text-sm leading-4 my-4">
+            <span className="text-lg font-bold justify-center">Resell Information</span>
             <IconButton
               onClick={() => {
                 dispatch(Actions.openModal('resellInfoModal'))
@@ -244,13 +309,20 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               <HelpIcon/>
             </IconButton>
           </div>
+          <Divider/>
 
 
-          {resellFields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
+          {resellFields.map(field => <FormField {...field} onChange={updateField}
+                                                variant="filled"
+                                                className={classes.field}
+                                                value={_.get(form, field.path)}/>)}
           <div className="flex  ml-2 text-sm leading-4 my-4">
             <span className="text-lg font-bold">Temporary</span>
           </div>
-          {tempFields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
+          {tempFields.map(field => <FormField {...field} onChange={updateField}
+                                              variant="filled"
+                                              className={classes.field}
+                                              value={_.get(form, field.path)}/>)}
 
         </form>
 
