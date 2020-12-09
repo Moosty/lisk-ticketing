@@ -25,8 +25,8 @@ const defaultState = {
       eventData: {
         title: "The Favourites of the new era",
         location: "Caprera Openluchttheater - Bloemendaal",
-        eventDate: new Date("2018-06-09"),
-        eventTime: "23:50",
+        eventDate: "",
+        eventTime: "",
         duration: 90,
         category: "test category",
         site: "https://lisk.io/apps/",

@@ -92,8 +92,8 @@ const useStyles = makeStyles((theme) => ({
 const fields = [
   {label: "Title", path: "asset.eventData.title", type: "text", limit: 50},
   {label: "Location", path: "asset.eventData.location", type: "text", limit: 50},
-  {label: "Event date", path: "eventDate", type: "date"},
-  {label: "Start Time", path: "eventTime", type: "time"},
+  {label: "Event date", path: "asset.eventData.eventDate", type: "date"},
+  {label: "Start Time", path: "asset.eventData.eventTime", type: "time"},
   {label: "Duration event", path: "asset.eventData.duration", type: "number"},
 ];
 
@@ -136,12 +136,19 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
 
   const onConfirm = async () => {
     const eventData = form.asset.eventData;
+    let dateString = `${eventData.eventDate} ${eventData.eventTime}`,
+      dateTimeParts = dateString.split(' '),
+      timeParts = dateTimeParts[1].split(':'),
+      dateParts = dateTimeParts[0].split('-')
+    const date = new Date(parseInt(dateParts[0]), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2]), parseInt(timeParts[0]), parseInt(timeParts[1]));
+    console.log(dateString, date, dateParts, timeParts)
+
     delete eventData.eventTime;
     delete eventData.eventDate;
     const assets = {
       eventData: {
         ...eventData,
-        date: BigInt(Math.round(new Date().getTime() / 1000)),// todo timestamp
+        date: BigInt(Math.round(date.getTime() / 1000)),
         category: 0,
       },
       ticketData: form.asset.ticketData.types.map((t, i) => {
