@@ -46,7 +46,7 @@ export const EventList = withReducer("TicketList", reducer)(({tab, search, type}
     }) : searchedEvents);
   }, [events, search, tab, type])
 
-  return <div className="p-6">
+  return <div className="p-6 bg-white">
     {filteredEvents.length > 0 && filteredEvents.map(event =>
       <EventItem
         key={`event-${event.id}`}
