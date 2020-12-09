@@ -55,7 +55,7 @@ export const searchByText = (collection, text, fields) => {
   text = _.toLower(text);
   return _.filter(collection, object => {
     for (let field in fields) {
-      if (object.asset.eventData[fields[field]].toLowerCase().indexOf(text) > -1) {
+      if (object.eventData[fields[field]].toLowerCase().indexOf(text) > -1) {
         return true;
       }
     }
