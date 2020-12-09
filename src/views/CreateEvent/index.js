@@ -313,7 +313,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         </form>
       </div>
 
-      <div className="bottom-0 fixed z-50 bg-black text-white " style={{maxWidth: '450px', width: '100%'}}>
+      <div className="bottom-0 fixed z-50 bg-black text-white " style={{maxWidth: '450px', width: '100%', background: "#1a202c"}}>
         <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
           <div className="flex flex-row ">
             <div className="flex flex-col text-sm float-left leading-4 my-2">
