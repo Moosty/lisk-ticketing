@@ -211,7 +211,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         name="Create Event"
         balance="location"
         button1="Create new event"/>
-      <div className="">
+      <div className="pb-20 bg-white">
         <div className="flex flex-row align-middle justify-center items-center ml-2 text-sm leading-4 my-4">
           <span className="text-lg font-bold justify-center">Event Information</span>
           <IconButton
