@@ -31,6 +31,7 @@ export const ConfirmTxModal = (props) => {
         setScanned(data);
       } else {
         setError("This ticket is not for this event");
+        setScanned(null);
       }
     }
   }
