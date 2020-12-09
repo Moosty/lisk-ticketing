@@ -16,8 +16,7 @@ import { OrganiserEventDetails } from "views/OrganiserEventDetails";
 
 export const Routes = () => {
   return (<Router>
-    <div>
-      {/* A <Switch> looks through its children <Route>s and
+    <div>      {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
       <Switch>
         <Route path="/login">
@@ -37,7 +36,7 @@ export const Routes = () => {
           <EventPage type="organiser"/>
         </Route>
         <Route path="/events/:address">
-          <TopBar />
+          <TopBar/>
           <EventPage type="user"/>
         </Route>
         <Route path="/account/:address">

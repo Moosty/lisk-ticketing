@@ -23,7 +23,6 @@ import { useAccount, useOrganizer, useTickets } from "../utils/hooks";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
-    flexGrow: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -186,7 +185,7 @@ export const TopBar = withReducer("topBar", reducer)(() => {
 
   return (
     <div className={classes.grow}>
-      <AppBar className={classes.appbar} position="fixed">
+      <AppBar className={classes.appbar} position="relative">
         <Toolbar>
           {loggedIn ? <div className="flex flex-row "><TopDrawer/>
             {!isOrganizer && <IconButton onClick={() => history.push(`/my-tickets`)} aria-label="show 17 new notifications"

@@ -9,7 +9,7 @@ export const CartBottom = () => {
   const {total} = useBasket();
 
   return (
-    <div className="bottom-0 fixed z-50 bg-gray-900 text-white w-full ">
+    <div className="bottom-0 fixed z-50 bg-gray-900 text-white " style={{maxWidth: '450px', width: '450px'}}>
       <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
         <div className="flex flex-col text-sm float-left leading-4 my-2">
           <span className="text-lg mb-2">Total Amount:</span>

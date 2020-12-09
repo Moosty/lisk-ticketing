@@ -11,7 +11,7 @@ export const Organizer = () => {
   const {organization} = useOrganizer(true, '/login');
   const [search, setSearch] = useState("");
 
-  return <div className="mt-10">
+  return <div>
     <Header
       search={value => setSearch(value)}
       title={organization}

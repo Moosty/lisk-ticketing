@@ -87,7 +87,7 @@ export const Header = ({title, subtitle, button1, button2, onClick1, onClick2, s
   const classes = useStyles();
 
   return (
-    <div style={{marginTop:"56px"}}>
+    <div>
       <div className="bg-fixed sm:bg-scroll bg-cover"
            style={{backgroundImage: "url(/images/bgTicketing.jpg)", height: "auto"}}>
         <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>

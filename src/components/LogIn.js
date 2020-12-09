@@ -123,7 +123,7 @@ export const LogIn = withReducer('Login', reducer)(() => {
           <CssBaseline/>
           <div className={classes.paper}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
                   className={classes.field}
                   name="Username"

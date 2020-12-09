@@ -11,8 +11,12 @@ import './styles/main.css';
 ReactDOM.render(
   <AppContext.Provider value={{context: false}}>
     <Provider store={store}>
-      <Routes/>
-      <MoostyModal/>
+      <div className="fixed bottom-0 top-0 left-0 right-0 w-full h-full bg-gray-100">
+      <div style={{maxWidth: '450px'}}>
+        <Routes/>
+        <MoostyModal/>
+      </div>
+      </div>
     </Provider>
   </AppContext.Provider>,
   document.getElementById('root')

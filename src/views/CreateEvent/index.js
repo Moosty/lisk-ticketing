@@ -199,7 +199,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const classes = useStyles();
 
   return (
-    <div className="mt-10 mb-20">
+    <div className="mb-20">
       <OrganiserHeader
         name="Create Event"
         balance="location"
@@ -306,7 +306,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         </form>
       </div>
 
-      <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
+      <div className="bottom-0 fixed z-50 bg-black text-white " style={{maxWidth: '450px', width: '450px'}}>
         <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
           <div className="flex flex-row ">
             <div className="flex flex-col text-sm float-left leading-4 my-2">

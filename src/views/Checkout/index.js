@@ -104,9 +104,9 @@ export const Checkout = withReducer("checkout", reducer)(() => {
       })
     }
 
-    return (<div className="mt-10">
-      <div className="pt-10 bg-gray-900 fixed w-full h-screen text-white overflow-y-auto">
-        <div className=" py-5 md:p-12 lg:p-24  h-full flex flex-col ">
+    return (<div>
+      <div className="pt-10 bg-gray-900 fixed h-screen text-white overflow-y-auto " style={{maxWidth: '450px', width: '450px'}}>
+        <div className="py-5 h-full flex flex-col ">
           <h1
             className="mx-10 text-4xl leading-10 sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">
             Checkout
@@ -136,7 +136,7 @@ export const Checkout = withReducer("checkout", reducer)(() => {
               }).flat()
             }
           </div>
-          <div className="w-full fixed z-50 p-4 bottom-0 flex flex-row bg-gray-900 justify-between">
+          <div className="fixed left-0 z-50 p-4 bottom-0 flex flex-row bg-gray-900 justify-between" style={{maxWidth: '450px', width: '450px'}}>
             <div className="flex-col mx-4 ">
               <div className="leading-4">
                 <span className="text-xs">You have <span className="font-bold text-pink-400">{ticketCount}</span> tickets in your basket</span>

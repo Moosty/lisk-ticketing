@@ -8,7 +8,7 @@ import { useAccount } from "../../utils/hooks";
 export const MyTickets = withReducer("mytickets", reducer)(() => {
   const [search, setSearch] = useState("");
   const {account, loggedIn} = useAccount(true, "/login")
-  return <div className="mt-10">
+  return <div >
       <Header
         search={value => setSearch(value)}
         title="My Tickets"

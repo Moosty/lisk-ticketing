@@ -87,7 +87,7 @@ export const ConfirmTxModal = (props) => {
     dispatch(Actions.openModal('scanEvent', props));
   }
 
-  return <div className={`text-center items-center ${scanned ? 'bg-green-600' : error ? 'bg-red-600' : 'bg-gray-900'} p-4 h-full`}>
+  return <div className={`text-center items-center ${scanned ? 'bg-green-600' : error ? 'bg-red-600' : 'bg-gray-900'} p-4 h-full`} style={{maxWidth: '450px', width: '450px'}}>
     <NotificationsRoundedIcon style={{color: '#fff', fontSize: 30}}/>
     <div className="p-4">
       <div className="flex flex-col">

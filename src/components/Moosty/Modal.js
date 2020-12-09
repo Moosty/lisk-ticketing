@@ -15,7 +15,6 @@ import { TransactionModal } from "components/Moosty/TransactionModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    minWidth: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -171,7 +170,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
         }}
       >
         <Fade in={open}>
-          <div className="w-full flex-auto h-full sm:w-9/12 xl:w-2/4 ">
+          <div className="fixed left-0 top-0 bottom-0 flex flex-auto h-full" style={{maxWidth: '450px', width: '450px'}}>
             {getModal()}
           </div>
         </Fade>
