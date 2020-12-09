@@ -49,14 +49,14 @@ export const EventHeader = ({timestamp, eventId, artist, location, title, organi
     <div>
       <div
         className="bg-fixed sm:bg-scroll bg-contain"
-        style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "15vh"}}>
+        style={{backgroundImage: "url(/images/party3.jpeg)",backgroundSize: "cover" ,height: "20vh"}}>
         <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}></div>
       </div>
       <div className="bg-gray-900">
         <div className=" mx-6 flex flex-row">
           {/*EVENT VIEW*/}
           {type === 'event' &&
-          <h1 className="flex flex-col text-2xl leading-8 font-bold text-white">
+          <h1 className="flex pt-4 flex-col text-2xl leading-8 font-bold text-white">
             {title}
             {artist}
 
@@ -78,12 +78,11 @@ export const EventHeader = ({timestamp, eventId, artist, location, title, organi
           />}
         </div>
         {type === 'event' &&
-        <div className="w-full flex flex-row  justify-between  items-center text-white">
+        <div className="w-full pb-4 flex flex-row   justify-between  items-center text-white">
           <div className="flex flex-col ">
 
             <div className="flex flex-col   text-left float-left my-2 ">
-              <Divider
-                  light="true"/>
+
               <div className="flex flex-row align-middle items-center mx-6 mb-1">
                 <EventIcon
                 style={{marginRight:"0.5rem", fontSize:"1rem"}}/>
