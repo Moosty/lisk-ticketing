@@ -1,13 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-
-
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -18,9 +14,6 @@ import * as Actions from "../store/actions";
 import {useHistory} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-
-
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -161,7 +154,6 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                     }}
                   />
                 </Grid>
-            {/*TODO - VERWIJDEREN WANNEER BLOCKCHAIN GEKOPPELD - TIJDELIJK ADDRESS*/}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     className={classes.field}
@@ -180,7 +172,6 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                     }}
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     className={classes.field}
@@ -194,7 +185,6 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                     autoComplete="current-password"
                   />
                 </Grid>
-
               </Grid>
               <Button
                 type="submit"
@@ -202,8 +192,9 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                 variant="contained"
                 color="secondary"
                 className={classes.submit}
+                disabled={form.username.length < 3}
                 onClick={() => {
-                  history.push(`/account/1234342432ddddfd`);
+                  history.push(`/overview`);
                   dispatch(Actions.addAccount(form));
                 }}
               >
@@ -218,13 +209,8 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
               </Grid>
             </form>
           </div>
-
         </Container>
-
       </div>
-
-
     </div>
-
   );
 });

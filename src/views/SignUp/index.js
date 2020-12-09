@@ -209,7 +209,7 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
               color="secondary"
               className={classes.submit}
               onClick={() => registerAccount()}
-              disabled={!form.username || !form.password}
+              disabled={form.username?.length < 3 || !form.username || !form.password}
             >
               Sign Up {type === "organizer" && `as organizer`}
             </Button>
