@@ -141,7 +141,7 @@ export const MyTicket = withReducer("myTicket", reducer)(({
       {checkout === 'true' &&
       <div className="flex items-center flex-row">
         <IconButton
-          onClick={() => dispatch(Actions.removeItem(eventId, ticketType))}
+          onClick={() => dispatch(Actions.removeItem(eventId, ticketType, id))}
           color="secondary">
           <DeleteOutline color="white"/>
         </IconButton>

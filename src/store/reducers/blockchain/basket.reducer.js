@@ -51,12 +51,16 @@ export default (state = defaultState, action) => {
       // checkn of item al in state zit
       // zo ja, updaten
       // zo nee: return state
-      item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
-
+      if (action.id) {
+        item = state.items.find(i => i.id === action.id);
+      } else {
+        item = state.items.find(i => i.eventId === action.eventId && i.ticketType === action.ticketType);
+      }
       if (item?.quantity >= 1){
         item.quantity--;
       } else {
         item = {
+          id: action.id,
           eventId: action.eventId,
           ticketType: action.ticketType,
           quantity: 0,

@@ -11,10 +11,11 @@ export const addItem = (eventId, ticketType, id, value) => ({
   value,
 });
 
-export const removeItem = (eventId, ticketType) => ({
+export const removeItem = (eventId, ticketType, id = null) => ({
   type: REMOVE_ITEM,
   eventId,
   ticketType,
+  id
 });
 
 export const checkoutBasket = (path, value) => ({
