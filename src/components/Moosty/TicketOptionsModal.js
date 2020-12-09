@@ -120,7 +120,7 @@ export const TicketOptionsModal = ({type, size, ticketId}) => {
     if (!resellPercentage && event?.resellData?.maximumResellPercentage) {
       setResellPercentage(event?.resellData?.maximumResellPercentage < 100 ? event?.resellData?.maximumResellPercentage : 100);
     } else {
-      setSellPrice(resellPercentage ? BigInt(resellPercentage) * BigInt(myTicket?.value / 100) : 0)
+      setSellPrice(resellPercentage ? (BigInt(resellPercentage) * BigInt(myTicket?.value)) / BigInt(100) : 0)
     }
   }, [event, resellPercentage, myTicket]);
 

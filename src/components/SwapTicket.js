@@ -34,7 +34,7 @@ export const SwapTicket = withReducer("swapTicket", reducer)(({marketId, style, 
   }, [marketId, marketSelected])
 
   useEffect(() => {
-    setTicketInBasket(!!items.find((b) => b.id === marketId));
+    setTicketInBasket(!!items.find((b) => b.id === marketId && b.quantity > 0));
   }, [items, marketId]);
 
   return (
@@ -51,8 +51,7 @@ export const SwapTicket = withReducer("swapTicket", reducer)(({marketId, style, 
         <div className="flex flex-row content-center items-center flex content-center align-middle">
           {ticketInBasket ?
             <Button
-              onClick={() => {
-              }}
+              onClick={() => dispatch(Actions.removeItem(eventId, typeId, marketId))}
               variant="contained"
               size="small"
               color="primary"
