@@ -19,7 +19,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { ticketStatuses } from "../store/reducers/blockchain/portfolio.reducer";
 import Button from "@material-ui/core/Button";
 import { useBasket } from "../utils/hooks/basket";
-import { useAccount, useTickets } from "../utils/hooks";
+import { useAccount, useOrganizer, useTickets } from "../utils/hooks";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -94,6 +94,7 @@ export const TopBar = withReducer("topBar", reducer)(() => {
   const {ticketCount} = useBasket();
   const {myTickets} = useTickets();
   const {loggedIn} = useAccount();
+  const {isOrganizer} = useOrganizer();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -187,22 +188,19 @@ export const TopBar = withReducer("topBar", reducer)(() => {
     <div className={classes.grow}>
       <AppBar className={classes.appbar} position="fixed">
         <Toolbar>
-          {/*// TODO ALS NIET INGELOGD, DAN GEEN DRAWER, MAAR BUTTON*/}
           {loggedIn ? <div className="flex flex-row "><TopDrawer/>
-              {/*// TODO /account01 verwijderen na DEV fase*/}
-              <IconButton onClick={() => history.push(`/my-tickets`)} aria-label="show 17 new notifications"
+            {!isOrganizer && <IconButton onClick={() => history.push(`/my-tickets`)} aria-label="show 17 new notifications"
                           color="inherit">
                 <Badge badgeContent={myTickets?.filter(mt => mt.status === ticketStatuses.OWNED || mt.status === ticketStatuses.MARKET)?.length} color="secondary">
                   <ConfirmationNumberIcon/>
                 </Badge>
-              </IconButton>
-              {/*// TODO /account01 verwijderen na DEV fase*/}
-              <IconButton onClick={() => history.push(`/checkout`)} aria-label="show 17 new notifications"
+              </IconButton>}
+            {!isOrganizer && <IconButton onClick={() => history.push(`/checkout`)} aria-label="show 17 new notifications"
                           color="inherit">
                 <Badge badgeContent={ticketCount} color="secondary">
                   <ShoppingCartIcon/>
                 </Badge>
-              </IconButton></div>
+              </IconButton>}</div>
             : <Button
               onClick={() => {
                 history.push('/login')

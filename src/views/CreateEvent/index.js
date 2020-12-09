@@ -95,17 +95,11 @@ const fields = [
   {label: "Event date", path: "eventDate", type: "date"},
   {label: "Start Time", path: "eventTime", type: "time"},
   {label: "Duration event", path: "asset.eventData.duration", type: "number"},
-  {label: "Category", path: "asset.eventData.category", type: "text"},
-  {label: "Site", path: "asset.eventData.site", type: "text"},
-  {label: "Image", path: "asset.eventData.image", type: "text"},
 ];
 
 const ticketTypeFields = [
-  {label: "ID", path: "id", type: "number", disabled: true},
   {label: "Name", path: "name", type: "text"},
-  {label: "Start date selling", path: "startSellDate", type: "date"},
-  {label: "Start time selling", path: "startSellTime", type: "time"},
-  {label: "Price", path: "price", type: "text"},
+  {label: "Price", path: "price", type: "number"},
   {label: "Amount available", path: "amount", type: "number"},
 ];
 
