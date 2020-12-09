@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key, ticketType}) => {
+export const TicketType = withReducer("TicketType", reducer)(({label, price, style, amount, eventId, key, ticketType, sold}) => {
   const dispatch = useDispatch();
   const {isOrganizer} = useOrganizer();
   const basketItems = useSelector(({blockchain}) => blockchain.basket.items);
@@ -35,7 +35,9 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
       <div className="flex flex-row ">
         <div className="flex flex-col text-sm float-left leading-4 my-2">
           <div className="flex flex-row">
-            <span className="font-bold">{label}</span> <span className="ml-1 font-light ">({amount})</span>
+            <span className="font-bold">{label}</span> <span className="ml-1 font-light ">({
+              item?.quantity ? amount - sold - item?.quantity === 0 ? 'Sold out' : amount - sold - item?.quantity : amount - sold === 0 ? 'Sold out' : amount - sold
+          })</span>
           </div>
           <span className="text-xs">€ {transactions.convertBeddowsToLSK(price.toString())}</span>
         </div>
@@ -45,11 +47,15 @@ export const TicketType = withReducer("TicketType", reducer)(({label, price, sty
             className="text-3xl font-bold align-middle content-center cursor-pointer"
             onClick={() => dispatch(Actions.removeItem(eventId, ticketType))}>-</span>
         <div className=" mx-2 border-2 rounded h-8 w-8 center  flex content-center">
-          <span className="justify-center m-auto items-baseline content-center">{item?.quantity}</span>
+          <span className="justify-center m-auto items-baseline content-center">{item?.quantity ? item.quantity : 0}</span>
         </div>
         <span
           className="text-3xl font-bold cursor-pointer"
-          onClick={() => dispatch(Actions.addItem(eventId, ticketType))}>+</span>
+          onClick={() => {
+            if ((item?.quantity && amount - sold - item?.quantity > 0) || (!item?.quantity && amount - sold > 0)) {
+              dispatch(Actions.addItem(eventId, ticketType))
+            }
+          }}>+</span>
       </div>}
     </div>);
 });

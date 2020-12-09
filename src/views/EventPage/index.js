@@ -36,6 +36,7 @@ export const EventPage = withReducer("EventPage", reducer)(() => {
         label={type.name}
         price={type.price}
         amount={type.amount}
+        sold={type.sold}
         eventId={event.id}
         ticketType={type.id}
       />)}
