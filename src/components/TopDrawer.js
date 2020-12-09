@@ -89,7 +89,7 @@ export const TopDrawer = withReducer('ExampleDrawer', reducer)(() => {
             <div className="flex flex-row mr-4">
               <MonetizationOnIcon fontSize="small"/>
               <span
-                className="ml-2">{account?.token?.balance && transactions.convertBeddowsToLSK(account?.token?.balance)}</span>
+                className="ml-2">{account?.token?.balance && Number(transactions.convertBeddowsToLSK(account?.token?.balance)).toFixed(2)}</span>
             </div>
             <div className="flex flex-row">
               <ConfirmationNumberIcon fontSize="small"/>

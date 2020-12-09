@@ -13,7 +13,7 @@ export const CartBottom = () => {
       <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
         <div className="flex flex-col text-sm float-left leading-4 my-2">
           <span className="text-lg mb-2">Total Amount:</span>
-          <span className="font-bold">€ {total ? transactions.convertBeddowsToLSK(total.toString()) : '0.00'}</span>
+          <span className="font-bold">€ {total ? Number(transactions.convertBeddowsToLSK(total.toString())).toFixed(2) : '0.00'}</span>
         </div>
         <Button
           onClick={() => history.push(`/checkout`)}
