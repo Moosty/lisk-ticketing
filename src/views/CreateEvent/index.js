@@ -17,7 +17,6 @@ import { useHistory } from "react-router-dom";
 import { API } from "../../utils";
 import { useOrganizer } from "../../utils/hooks";
 import { makeStyles } from "@material-ui/core/styles"
-import TextField from "@material-ui/core/TextField"
 import Divider from "@material-ui/core/Divider"
 
 const categories = [
@@ -39,8 +38,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: 'transparant',
   },
-  root: {
-  },
+  root: {},
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -71,10 +69,10 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiFilledInput-underline:after ': {
       border: 'none',
     },
-    '& .MuiFilledInput-underline:before ' : {
+    '& .MuiFilledInput-underline:before ': {
       border: 'none',
     },
-    '& .MuiFormLabel-root.Mui-focused ' : {
+    '& .MuiFormLabel-root.Mui-focused ': {
       color: '#f50057',
     }
   },
@@ -117,10 +115,6 @@ const resellFields = [
   {label: "Resell fee percentage", path: "asset.resellData.resellOrganiserFee", type: "number"},
 ];
 
-const tempFields = [
-  {label: "Address", path: "address", type: "text"},
-];
-
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -157,7 +151,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
         category: 0,
       },
       ticketData: form.asset.ticketData.types.map((t, i) => {
-       // "startSellTimestamp", "id", "name", "price", "amount"
+        // "startSellTimestamp", "id", "name", "price", "amount"
         return {
           startSellTimestamp: BigInt(Math.round(new Date().getTime() / 1000)), // todo timestamp
           id: i,
@@ -177,7 +171,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
       assetId: 0,
       fee: '0.01',
       assets: {
-       ...assets,
+        ...assets,
       },
       passphrase: account.passphrase,
       schema: Schema.createEventSchema,
@@ -229,7 +223,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
             <HelpIcon/>
           </IconButton>
         </div>
-        <Divider />
+        <Divider/>
         {/*START - MODALS WITH EXPLANATION */}
 
 
@@ -258,8 +252,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               <HelpIcon/>
             </IconButton>
           </div>
-          <Divider />
-
+          <Divider/>
 
 
           {/*START TYPE  - TICKET TYPES */}
@@ -292,7 +285,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               variant="filled"
               className={classes.field}
               ticketType
-              value={field.path === 'id' ? form.asset?.ticketData?.types.length : 0 }/>)}
+              value={field.path === 'id' ? form.asset?.ticketData?.types.length : 0}/>)}
           </div>
           {/*END TYPE  - TICKET TYPES  */}
 
@@ -316,16 +309,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
                                                 variant="filled"
                                                 className={classes.field}
                                                 value={_.get(form, field.path)}/>)}
-          <div className="flex  ml-2 text-sm leading-4 my-4">
-            <span className="text-lg font-bold">Temporary</span>
-          </div>
-          {tempFields.map(field => <FormField {...field} onChange={updateField}
-                                              variant="filled"
-                                              className={classes.field}
-                                              value={_.get(form, field.path)}/>)}
-
         </form>
-
       </div>
 
       <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
