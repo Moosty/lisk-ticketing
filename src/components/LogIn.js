@@ -22,7 +22,7 @@ function Copyright() {
   return (
     <span className="text-white text-center" style={{color: "white"}}>
       Copyright © Lisk Ticketing {new Date().getFullYear()} <br/> PoC by
-      <Link style={{color: "black"}} href="https://moosty.com"> The Moosty Team</Link>.
+      <Link style={{color: "black"}} href="https://moosty.com"  target="_blank" rel="noopener noreferrer"> The Moosty Team</Link>.
     </span>
   );
 }
