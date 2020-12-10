@@ -79,8 +79,8 @@ export const LogIn = withReducer('Login', reducer)(() => {
   const history = useHistory();
   const dispatch = useDispatch();
   const {updateChain} = useChain();
-  const [username, setUsername] = useState("corbifex-org");
-  const [password, setPassword] = useState("corbifex");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const login = async () => {
