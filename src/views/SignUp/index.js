@@ -116,6 +116,14 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
     setForm({...createAccount, address: getBase32AddressFromPublicKey(publicKey, "lsk")});
   }, [createAccount])
 
+  const changeError = (key, error) => {
+    if (error) {
+      setErrors([...errors?.filter(e => e !== key), key]);
+    } else {
+      setErrors(errors?.filter(e => e !== key));
+    }
+  }
+
   const updateField = (path, value) => dispatch(Actions.updateCreateAccount(path, value));
 
   const registrationConfirmed = async () => {
@@ -191,7 +199,8 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
             aria-label="Close"
             color="inherit">
           <CloseIcon/>
-        </IconButton>        <div className={classes.paper}>
+        </IconButton>
+        <div className={classes.paper}>
           <Typography className={classes.h1} component="h1" variant="h5">
             Sign Up
           </Typography>
@@ -201,7 +210,7 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
             <FormField
               {...field}
               errors={errors}
-              changeError={setErrors}
+              changeError={(key, error) => changeError(key, error)}
               onChange={updateField}
               value={_.get(form, field.path)}/>)
           }

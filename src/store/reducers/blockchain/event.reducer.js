@@ -33,7 +33,15 @@ const defaultState = {
         image: "image",
       },
       ticketData: {
-        types: [],
+        types: [
+          {
+            id: 0,
+            name: "First release",
+            price: 10.50,
+            amount: 10,
+            sold: 0,
+          },
+        ],
       },
       resellData: {
         allowed: true,

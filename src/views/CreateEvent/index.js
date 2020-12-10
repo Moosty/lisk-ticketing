@@ -112,6 +112,7 @@ const resellFields = [
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const classes = useStyles();
 
   const organizer = useOrganizer(true, '/login');
 
@@ -119,7 +120,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const {account} = useSelector(({blockchain}) => blockchain.account);
   const event = useSelector(({blockchain}) => blockchain.event);
   const [form, setForm] = useState(event.createEvent);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(fields.map(f => f.path));
 
   useEffect(() => {
     setForm(event.createEvent);
@@ -206,8 +207,13 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
       }));
     }
   }
-  const classes = useStyles();
-
+  const changeError = (key, error) => {
+    if (error) {
+      setErrors([...errors?.filter(e => e !== key), key]);
+    } else {
+      setErrors(errors?.filter(e => e !== key));
+    }
+  }
   return (
     <div className="mb-20">
       <OrganiserHeader
@@ -240,7 +246,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           {/*START - FORM EVENTINFO */}
           {fields.map(field => <FormField {...field} onChange={updateField}
                                           variant="filled"
-                                          changeError={setErrors}
+                                          changeError={(key, error) => changeError(key, error)}
                                           errors={errors}
                                           className={classes.field}
                                           value={_.get(form, field.path)}
@@ -273,7 +279,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
                 id={i}
                 variant="filled"
                 className={classes.field}
-                changeError={setErrors}
+                changeError={(key, error) => changeError(key, error)}
                 errors={errors}
 
                 ticketType
@@ -291,7 +297,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               {...field}
               id={form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}
               onChange={updateFieldType}
-              changeError={setErrors}
+              changeError={(key, error) => changeError(key, error)}
               errors={errors}
 
               variant="filled"
@@ -318,7 +324,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
 
 
           {resellFields.map(field => <FormField {...field} onChange={updateField}
-                                                changeError={setErrors}
+                                                changeError={(key, error) => changeError(key, error)}
                                                 errors={errors}
                                                 variant="filled"
                                                 className={classes.field}
