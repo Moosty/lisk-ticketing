@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: "theme.palette.background.paper",
     width: "100%",
+    paddingBottom: '30px'
   },
   rootPrimarySelected: {
     color: 'yellow',
