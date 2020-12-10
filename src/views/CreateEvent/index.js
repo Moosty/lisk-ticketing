@@ -357,6 +357,7 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               variant="contained"
               size="small"
               color="secondary"
+              disabled={errors?.length > 0}
               className="">Submit Event</Button>
           </div>
         </div>

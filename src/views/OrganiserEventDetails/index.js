@@ -42,7 +42,7 @@ export const OrganiserEventDetails = withReducer("organiserEventDetails", reduce
       type="organiser"
       className="mt-10"
     />}
-    <div className="flex flex-col w-full p-6  ">
+    <div className="flex flex-col w-full p-6 pb-20">
       <div className="flex flex-row mb-4 justify-between  ">
         <Card className="w-40   rounded border-gray-300 ">
           <div className="text-center font-medium text-sm p-2 bg-indigo-900 text-white">Total Tickets</div>

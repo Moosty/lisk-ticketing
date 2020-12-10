@@ -91,21 +91,24 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
   const {loadEvents} = useEvent();
   const {loadTickets} = useTickets();
   const [form, setForm] = useState(createAccount);
-
+  const [errors, setErrors] = useState([])
 
   const fields = {
     user: [
-      {label: "username", path: "username", type: "text", variant: "filled", className:classes.field},
-      {label: "password", path: "password", type: "password", variant: "filled", className:classes.field},
+      {label: "username", path: "username", type: "text", variant: "filled", min: 3, limit: 20, className:classes.field},
+      {label: "password", path: "password", type: "password", variant: "filled", min: 3, className:classes.field},
       {label: "", path: "address", type: "text", variant: "filled", disabled: true, className:classes.field},
     ],
     organizer: [
-      {label: "organization", path: "username", type: "text", variant: "filled", className:classes.field},
-      {label: "password", path: "password", type: "password", variant: "filled", className:classes.field},
+      {label: "organization", path: "username", type: "text", variant: "filled", min: 3, limit: 20, className:classes.field},
+      {label: "password", path: "password", type: "password", variant: "filled", min: 3, className: classes.field},
       {label: "", path: "address", type: "text", variant: "filled", disabled: true, className:classes.field},
     ]
   };
 
+  useEffect(() => {
+    console.log(errors)
+  },[errors])
 
   useEffect(() => {
     const {publicKey} = getAddressAndPublicKeyFromPassphrase(`${createAccount.username} ${createAccount.password} ${createAccount.username}`);
@@ -197,6 +200,8 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
           {type && fields[type].map(field =>
             <FormField
               {...field}
+              errors={errors}
+              changeError={setErrors}
               onChange={updateField}
               value={_.get(form, field.path)}/>)
           }
@@ -209,7 +214,7 @@ export const SignUp = withReducer("signUp", reducer)(({type}) => {
               color="secondary"
               className={classes.submit}
               onClick={() => registerAccount()}
-              disabled={form.username?.length < 3 || !form.username || !form.password}
+              disabled={errors?.length > 0}
             >
               Sign Up {type === "organizer" && `as organizer`}
             </Button>

@@ -15,15 +15,19 @@ export const FormField = ({className, label, type, variant, path, onChange, chan
 
   useEffect(() => {
     if (type === 'text') {
-      if (min && value?.length < min) {
+      if (min && value?.length < min && value?.length > 0) {
         setError(`${label} requires an minimum length of ${min}`);
-        changeError([...errors, id])
+        changeError([...errors, path])
       } else if (limit && value?.length > limit) {
         setError(`${label} is to long it should be max ${limit} characters long`);
-        changeError([...errors, id])
+        changeError([...errors, path])
+      } else if (value?.length === 0) {
+        console.log(123123, [...errors, path])
+        setError(null);
+        changeError([...errors, path])
       } else {
         setError(null);
-        changeError(errors?.filter(e => e !== id))
+        changeError(errors?.filter(e => e !== path))
       }
     } else if (type === 'number') {
       const integerOnly = /^\d+$/;
@@ -31,30 +35,30 @@ export const FormField = ({className, label, type, variant, path, onChange, chan
       if (numberType) {
         if (numberType === "float" && !isFloat.test(value)) {
           setError(`${label} only allows numbers and a comma`);
-          changeError([...errors, id])
+          changeError([...errors, path])
         } else if (numberType === "integer" && !integerOnly.test(value)) {
           setError(`${label} requires to be an integer`);
-          changeError([...errors, id])
+          changeError([...errors, path])
         } else {
           setError(null);
-          changeError(errors?.filter(e => e !== id))
+          changeError(errors?.filter(e => e !== path))
         }
       }
     } else if (type === "date") {
       if (value?.length === 0) {
         setError("This field is required");
-        changeError([...errors, id])
+        changeError([...errors, path])
       } else {
         setError(null);
-        changeError(errors?.filter(e => e !== id))
+        changeError(errors?.filter(e => e !== path))
       }
     } else if (type === "time") {
       if (value?.length === 0) {
         setError("This field is required");
-        changeError([...errors, id])
+        changeError([...errors, path])
       } else {
         setError(null);
-        changeError(errors?.filter(e => e !== id))
+        changeError(errors?.filter(e => e !== path))
       }
     } else if (type === "checkbox") {
 
