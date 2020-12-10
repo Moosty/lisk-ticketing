@@ -1,7 +1,30 @@
 ## Moosty Notes
-1. git clone https://github.com/Moosty/moosty-template.git ./new-project
-2. `.git` folder verwijderen   (mac: rm -rf ./.git )
-3. empty repo toevoegen met `git init`
+
+**Standard API - Node Info**
+- Node Info
+https://api-ticketswap.moosty.com/api/node/info
+- Accounts (all kinds)
+https://api-ticketswap.moosty.com/api/accounts/:id
+
+**Extended API - Blockchain Specific Information**
+https://eapi-ticketswap.moosty.com/api
+
+- Organizer information 
+`/organizers`
+`/organizer/:id`
+
+- All events 
+`/events/`
+- Event (event id)
+`/event/:id`
+
+- Ticket information (use ticket id)
+`/tickets`
+`/ticket/:id`
+
+- Market information
+`/market`
+`/market/:id` (ticket id)
 
 ------------
 
