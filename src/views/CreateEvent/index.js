@@ -90,23 +90,23 @@ const useStyles = makeStyles((theme) => ({
 //ticketData.types[]
 // map over
 const fields = [
-  {label: "Title", path: "asset.eventData.title", type: "text", limit: 50},
-  {label: "Location", path: "asset.eventData.location", type: "text", limit: 50},
+  {label: "Title", path: "asset.eventData.title", type: "text", limit: 50, min: 10},
+  {label: "Location", path: "asset.eventData.location", type: "text", limit: 50, min: 3},
   {label: "Event date", path: "asset.eventData.eventDate", type: "date"},
   {label: "Start Time", path: "asset.eventData.eventTime", type: "time"},
-  {label: "Duration event", path: "asset.eventData.duration", type: "number"},
+  {label: "Duration event", path: "asset.eventData.duration", type: "number", numberType: "integer"},
 ];
 
 const ticketTypeFields = [
-  {label: "Name", path: "name", type: "text"},
-  {label: "Price", path: "price", type: "number"},
-  {label: "Amount available", path: "amount", type: "number"},
+  {label: "Name", path: "name", type: "text", min: 5, limit: 50},
+  {label: "Price", path: "price", type: "number", numberType: 'float'},
+  {label: "Amount available", path: "amount", type: "number", numberType: "integer"},
 ];
 
 const resellFields = [
   {label: "Can buyers resell your tickets", path: "asset.resellData.allowed", type: "checkbox"},
-  {label: "Max resell percentage", path: "asset.resellData.maximumResellPercentage", type: "number"},
-  {label: "Resell fee percentage", path: "asset.resellData.resellOrganiserFee", type: "number"},
+  {label: "Max resell percentage", path: "asset.resellData.maximumResellPercentage", type: "number", numberType: "integer"},
+  {label: "Resell fee percentage", path: "asset.resellData.resellOrganiserFee", type: "number", numberType: "integer"},
 ];
 
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
@@ -119,10 +119,13 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
   const {account} = useSelector(({blockchain}) => blockchain.account);
   const event = useSelector(({blockchain}) => blockchain.event);
   const [form, setForm] = useState(event.createEvent);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     setForm(event.createEvent);
   }, [event]);
+
+
 
   const updateField = (path, value) => dispatch(Actions.updateCreateEvent(path, value));
   const updateFieldType = (path, index, value) => dispatch(Actions.updateCreateEvent(`asset.ticketData.types[${index}].${path}`, value));
@@ -141,20 +144,20 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
       timeParts = dateTimeParts[1].split(':'),
       dateParts = dateTimeParts[0].split('-')
     const date = new Date(parseInt(dateParts[0]), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2]), parseInt(timeParts[0]), parseInt(timeParts[1]));
-    console.log(dateString, date, dateParts, timeParts)
 
     delete eventData.eventTime;
     delete eventData.eventDate;
     const assets = {
       eventData: {
         ...eventData,
+        duration: parseInt(eventData.duration),
         date: BigInt(Math.round(date.getTime() / 1000)),
         category: 0,
       },
       ticketData: form.asset.ticketData.types.map((t, i) => {
         // "startSellTimestamp", "id", "name", "price", "amount"
         return {
-          startSellTimestamp: BigInt(Math.round(new Date().getTime() / 1000)), // todo timestamp
+          startSellTimestamp: BigInt(Math.round(new Date().getTime() / 1000)),
           id: i,
           name: t.name,
           price: BigInt(transactions.convertLSKToBeddows(t.price.toString())),
@@ -237,6 +240,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
           {/*START - FORM EVENTINFO */}
           {fields.map(field => <FormField {...field} onChange={updateField}
                                           variant="filled"
+                                          changeError={setErrors}
+                                          errors={errors}
                                           className={classes.field}
                                           value={_.get(form, field.path)}
           />)}
@@ -268,6 +273,9 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
                 id={i}
                 variant="filled"
                 className={classes.field}
+                changeError={setErrors}
+                errors={errors}
+
                 ticketType
                 onChange={updateFieldType}
                 value={_.get(form, `asset.ticketData.types[${i}].${field.path}`)}/>)}
@@ -283,6 +291,9 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
               {...field}
               id={form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}
               onChange={updateFieldType}
+              changeError={setErrors}
+              errors={errors}
+
               variant="filled"
               className={classes.field}
               ticketType
@@ -307,6 +318,8 @@ export const CreateEvent = withReducer("createEvent", reducer)((props) => {
 
 
           {resellFields.map(field => <FormField {...field} onChange={updateField}
+                                                changeError={setErrors}
+                                                errors={errors}
                                                 variant="filled"
                                                 className={classes.field}
                                                 value={_.get(form, field.path)}/>)}

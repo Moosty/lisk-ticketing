@@ -23,31 +23,21 @@ const defaultState = {
     publicKey: "lsk1234134tgerafgvasdfx9325fgcd",
     asset: {
       eventData: {
-        title: "The Favourites of the new era",
-        location: "Caprera Openluchttheater - Bloemendaal",
+        title: "",
+        location: "",
         eventDate: "",
         eventTime: "",
-        duration: 90,
-        category: "test category",
+        duration: "",
+        category: "test",
         site: "https://lisk.io/apps/",
-        image: "event image",
+        image: "image",
       },
       ticketData: {
-        types: [
-          {
-            startSellDate: new Date(),
-            startSellTime: 900,
-            id: 0,
-            name: "First Release Ticket",
-            price: 45.26,
-            amount: 10,
-            sold: 0,
-          },
-        ],
+        types: [],
       },
       resellData: {
         allowed: true,
-        maximumResellPercentage: 120,
+        maximumResellPercentage: 90,
         resellOrganiserFee: 1, //in percentage
       },
     },
