@@ -25,7 +25,7 @@ export const Organizer = () => {
         variant="contained"
         size="small"
         color="secondary"
-        className="m-2">
+        className="m-2 mr-4">
         Create Event
       </Button>
     </FooterComponent>
