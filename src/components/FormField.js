@@ -23,12 +23,9 @@ export const FormField = ({className, label, type, variant, path, onChange, chan
           setError(`${label} is to long it should be max ${limit} characters long`);
           changeError(path, true)
         } else if (value?.length === 0) {
-          console.log("set", errors, value, min, limit, path)
-
           setError(null);
           changeError(path, true)
         } else {
-          console.log("unset", errors, value, min, limit, path)
           setError(null);
           changeError(path, false)
         }
