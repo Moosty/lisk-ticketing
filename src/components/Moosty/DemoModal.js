@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import * as Actions from "../../store/actions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import Link from "@material-ui/core/Link";
 
 export const DemoModal = (props) => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export const DemoModal = (props) => {
 
               <h1
                 className="text-lg mt-4 font-bold">{props.subtitle}</h1>
-              <div>Fill in the <span className="font-bold text-pink-400">{props.content} </span>.
+              <div><span className="font-bold text-pink-400">{props.content} </span>.
               </div>
               <div className="mt-4">{props.endQuote}
               </div>
@@ -50,7 +51,9 @@ export const DemoModal = (props) => {
             <div className="flex flex-col text-left flex font-normal text-sm text-white my-8">
               <h1
                 className="text-sm mt-4 font-bold">Moosty Blockchain Apps</h1>
-              <div className="font-normal text-sm" >Innovate together with Moosty, the lisk community & local businesses. Get in touch here.
+              <div className="font-normal text-sm" >Innovate together with Moosty, the lisk community & local businesses.
+                <Link className="text-pink-400" color="inherit" href="https://moosty.com"  target="_blank" rel="noopener noreferrer"> Get in touch here.</Link>
+
               </div>
 
             </div>

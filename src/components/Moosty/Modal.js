@@ -11,10 +11,10 @@ import {DemoModal} from "./DemoModal";
 import {TicketOptionsModal} from "./TicketOptionsModal";
 import {ConfirmTxModal} from "./ConfirmTxModal";
 import {CancelEventModal} from "./CancelEventModal";
+import { TransactionModal } from "components/Moosty/TransactionModal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    minWidth: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -43,6 +43,8 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
           title="Swaptickets"
           subtitle="2nd hand event ticket"
           content="Buy a ticket from someone who cannot go to the event" />;
+      case 'transactionModal':
+        return <TransactionModal {...props} />
       case 'eventInfoModal':
         return <DemoModal
           title="Event Information"
@@ -68,7 +70,17 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
           type="confirmAction"
           {...props}
         />;
-
+      case 'scanEvent':
+        return <ConfirmTxModal
+          type="scanEvent"
+          {...props}
+        />;
+      case 'confirmTx':
+        return <ConfirmTxModal
+          title="Confirm action"
+          type="confirmTx"
+          {...props}
+        />;
       case 'cancelEventModal':
         return <CancelEventModal
           title="Cancel Event"
@@ -83,21 +95,27 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
           type="optionsModal"
           {...props}
         />;
-      case 'scanTicketModal':
+      case 'scanModal':
         return <TicketOptionsModal
           title="SELL my tickets"
           content="I want to sell my tickets"
           type="scanModal"
           {...props}
         />;
-      case 'sellTicketModal':
+      case 'welcomeModal':
+        return <TicketOptionsModal
+          title="Enjoy the event!"
+          type="welcomeModal"
+          {...props}
+        />;
+      case 'sellModal':
         return <TicketOptionsModal
           title="SELL my tickets"
           content="I want to sell my tickets"
           type="sellModal"
           {...props}
         />;
-      case 'transferTicketModal':
+      case 'transferModal':
         return <TicketOptionsModal
           title="SELL my tickets"
           content="I want to sell my tickets"
@@ -152,7 +170,7 @@ export const MoostyModal = withReducer("MoostyModal", reducer)(() => {
         }}
       >
         <Fade in={open}>
-          <div className="w-full flex-auto h-full sm:w-9/12 xl:w-2/4 ">
+          <div className="fixed left-0 top-0 bottom-0 flex flex-auto h-full" style={{maxWidth: '450px', width: '100%'}}>
             {getModal()}
           </div>
         </Fade>

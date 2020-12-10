@@ -8,25 +8,7 @@ import _ from "lodash";
 // DEZE TICKETS HALEN WE UIT DE EVENT REDUCER
 
 const defaultState = {
-
-  items: [
-    {
-      basketId: "basket01",
-      ticketAddress: "12312341r555ff23",
-      eventId: 'event01',
-      ownerId: 'account01',
-      ticketType: 1,
-      quantity: 1,
-    },
-    {
-      basketId: "basket02",
-      ticketAddress: "unknown02",
-      eventId: 'event01',
-      ownerId: 'account01',
-      ticketType: 2,
-      quantity: 1,
-    },
-  ]
+  items: [],
 };
 
 export default (state = defaultState, action) => {
@@ -37,26 +19,31 @@ export default (state = defaultState, action) => {
       // checken of item al in state zit
       // zo ja: updaten
       // zo nee: toevoegen (quantity + 1)
-      item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
-      console.log("1) ITEM VOOR AANVULLEN", item);
-      if(item){
-        item.quantity++;
-      } else {
+      if (action.id) {
         item = {
+          id: action.id,
           eventId: action.eventId,
           ticketType: action.ticketType,
+          value: action.value,
           quantity: 1,
         }
+      } else {
+        item = state.items.find(i => i.eventId === action.eventId && i.ticketType === action.ticketType);
+        if (item) {
+          item.quantity++;
+        } else {
+          item = {
+            eventId: action.eventId,
+            ticketType: action.ticketType,
+            quantity: 1,
+          }
+        }
       }
-      // console.log("1a", state.items);
-      // console.log("2)  FILTER", state.items.filter( i => i.eventId !== action.eventId && i.ticketType !== action.ticketType )
-      // );
-      // console.log("3) ITEM NA FILTER", item);
 
       return {
         ...state,
         items: [
-          ...state.items.filter( i => i.eventId !== action.eventId || (i.eventId === action.eventId && i.ticketType !== action.ticketType)),
+          ...state.items.filter( i => action.id || (i.eventId !== action.eventId || (i.eventId === action.eventId && i.ticketType !== action.ticketType))),
           item
         ]
       }
@@ -64,12 +51,16 @@ export default (state = defaultState, action) => {
       // checkn of item al in state zit
       // zo ja, updaten
       // zo nee: return state
-      item = state.items.find( i => i.eventId === action.eventId && i.ticketType === action.ticketType );
-
-      if (item && item.quantity >= 1){
+      if (action.id) {
+        item = state.items.find(i => i.id === action.id);
+      } else {
+        item = state.items.find(i => i.eventId === action.eventId && i.ticketType === action.ticketType);
+      }
+      if (item?.quantity >= 1){
         item.quantity--;
       } else {
         item = {
+          id: action.id,
           eventId: action.eventId,
           ticketType: action.ticketType,
           quantity: 0,
@@ -82,15 +73,10 @@ export default (state = defaultState, action) => {
           item
         ]
       }
-    case Actions.CHECKOUT_BASKET:
+    case Actions.EMPTY_BASKET:
       return {
-        ...state,
-        fillBasket:
-          _.set(state.fillBasket, action.path, action.value),
-
-        // key & value meegeven
-        // key: title & value: title meegegeven
-      };
+        items: [],
+      }
     default:
       return {
         ...state,

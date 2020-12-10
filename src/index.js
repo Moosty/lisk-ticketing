@@ -3,29 +3,23 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import AppContext from './appContext';
 import * as serviceWorker from './serviceWorker';
-import { MoostyModal } from "./components/Moosty";
+import { MoostyModal } from "components/Moosty";
 import store from './store';
 import { Routes } from "./routes";
 import './styles/main.css';
 
-
 ReactDOM.render(
-  <AppContext.Provider
-    value={{
-      context: false
-    }}
-  >
-
+  <AppContext.Provider value={{context: false}}>
     <Provider store={store}>
-      <Routes/>
-      <MoostyModal/>
+      <div className="fixed bottom-0 top-0 left-0 right-0 w-full h-full bg-gray-400 overflow-y-auto shadow-2xl">
+      <div className="absolute bg-white bottom-0 top-0" style={{width: '100%', maxWidth: '450px'}}>
+        <Routes/>
+        <MoostyModal/>
+      </div>
+      </div>
     </Provider>
-
   </AppContext.Provider>,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

@@ -1,21 +1,11 @@
 import * as Actions from "../../actions";
-import _ from 'lodash';
-
-// VISITOR ACCOUNTS
 
 const defaultState = {
-  createAccount:  {
-    address: "account03",
-    publicKey: "lsk1234512f5hgu5hguhu",
-    balance: 145,
-    token: "lsk",
-    asset: {
-      username: "test",
-      password: "",
-    },
+  createAccount: {
+    username: "",
+    password: "",
   },
-
-
+  account: {},
   accounts: [
     {
       address: "account01",
@@ -43,27 +33,32 @@ const defaultState = {
 export default (state = defaultState, action) => {
 
   switch (action.type) {
-
     case Actions.UPDATE_CREATE_ACCOUNT:
       return {
         ...state,
-        createAccount:
-          _.set(state.createAccount, action.path, action.value),
-
-        // key & value meegeven
-        // key: title & value: title meegegeven
+        createAccount: {
+          ...state.createAccount,
+          [action.path]: action.value
+        }
       };
-    case Actions.ADD_ACCOUNT:
-      // console.log(state.accounts);
+    case Actions.SET_ACCOUNT:
       return {
         ...state,
-        accounts:[
+        account: action.account,
+      }
+    case Actions.SIGNOUT:
+      return {
+        ...state,
+        account: {},
+      }
+    case Actions.ADD_ACCOUNT:
+      return {
+        ...state,
+        accounts: [
           ...state.accounts,
           action.addAccount,
         ],
-        // in de array van events, een event appenden (push?)
       };
-
     default:
       return {
         ...state,

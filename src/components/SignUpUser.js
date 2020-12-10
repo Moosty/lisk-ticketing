@@ -1,14 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -17,13 +12,11 @@ import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import * as Actions from "../store/actions";
 import {useHistory} from "react-router-dom";
-
-
-
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(7),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -48,9 +41,26 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
   field: {
-    backgroundColor: 'white',
     borderRadius: 5,
+    backgroundColor: 'white',
     border: 'none',
+    '& .MuiFilledInput-root	': {
+
+      border: 'none',
+      borderRadius: 10,
+      fontSize: '0.9rem',
+      fontWeight: '600',
+      backgroundColor: 'white!important',
+    },
+    '& .MuiFilledInput-underline:after ': {
+      border: 'none',
+    },
+    '& .MuiFilledInput-underline:before ' : {
+      border: 'none',
+    },
+    '& .MuiFormLabel-root.Mui-focused ' : {
+      color: '#f50057',
+    }
   },
 }));
 
@@ -64,16 +74,20 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
 
   useEffect(() => {
     setForm(account.createAccount);
-    console.log(form);
   }, [account])
 
   return (
 
     <div className="bg-fixed sm:bg-scroll bg-cover"
          style={{backgroundImage: "url(/images/bgEvent.jpeg)", height: "100vh"}}>
-      <div className="w-full flex-auto h-full" style={{backgroundColor: "rgb(0 0 0 / 85%)"}}>
+      <div className="w-full flex-auto h-full px-6" style={{backgroundColor: "#f50057"}}>
+        <IconButton
+            onClick={() => history.push(`/overview`)}
+            aria-label="Close"
+            color="inherit">
+          <CloseIcon/>
+        </IconButton>
         <div className={classes.paper}>
-          <img src="/images/logo-ticketing.png" alt="logo" width="250" height="300"/>
           <Typography className={classes.h1} component="h1" variant="h5">
             Sign Up </Typography>
         </div>
@@ -140,7 +154,6 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                     }}
                   />
                 </Grid>
-            {/*TODO - VERWIJDEREN WANNEER BLOCKCHAIN GEKOPPELD - TIJDELIJK ADDRESS*/}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     className={classes.field}
@@ -159,7 +172,6 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                     }}
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     className={classes.field}
@@ -173,7 +185,6 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                     autoComplete="current-password"
                   />
                 </Grid>
-
               </Grid>
               <Button
                 type="submit"
@@ -181,9 +192,9 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
                 variant="contained"
                 color="secondary"
                 className={classes.submit}
+                disabled={form.username.length < 3}
                 onClick={() => {
-                  console.log({form});
-                  history.push(`/account/1234342432ddddfd`);
+                  history.push(`/overview`);
                   dispatch(Actions.addAccount(form));
                 }}
               >
@@ -198,13 +209,8 @@ export const SignUpUser = withReducer("signUpUser", reducer)((props) => {
               </Grid>
             </form>
           </div>
-
         </Container>
-
       </div>
-
-
     </div>
-
   );
 });

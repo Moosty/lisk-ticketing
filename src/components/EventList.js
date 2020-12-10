@@ -1,74 +1,63 @@
-import React, {useEffect, useState} from "react";
-import _ from 'lodash';
-import {EventItem, Header} from "components/index";
+import React, { useEffect, useState } from "react";
+import { EventItem } from "components/index";
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
-import {useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
-import {statuses} from "../store/reducers/blockchain/event.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { statuses } from "../store/reducers/blockchain/event.reducer";
+import { EventSkeleton } from "components/EventSkeleton";
+import * as Actions from "store/actions";
+import { searchByText, API } from "../utils";
 
-// TODO - OVERVIEW PAGINA: alle events
-// TODO - organisatie pagina: gefilterd
 
-const searchByText = (collection, text, fields) => {
-  text = _.toLower(text);
-  return _.filter(collection, object => {
-    for (let field in fields) {
-      if (object.asset.eventData[fields[field]].toLowerCase().indexOf(text) > -1) {
-        return true;
-      }
-    }
-    return false;
-  });
-}
 
 export const EventList = withReducer("TicketList", reducer)(({tab, search, type}) => {
-  const {address} = useParams();
-  const events = useSelector(({blockchain}) => blockchain.event.events);
-  const [filteredEvents, setFilteredEvents] = useState([])
-
+  const dispatch = useDispatch();
+  const {account} = useSelector(({blockchain}) => blockchain.account);
+  const {events} = useSelector(({blockchain}) => blockchain.event);
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   useEffect(() => {
-    const selectedEvents = address ? events.filter(event => event.asset.eventData.ownerId === address) : events;
-    const searchedEvents = search ? searchByText(selectedEvents, search, ['artist', 'title']) : selectedEvents;
+    const loadEvents = async () => {
+      const events = await API.fetchAllEvents();
+      events.map(e => {
+        dispatch(Actions.addEvent(e));
+      });
+    }
+    if (events && events.length === 0) {
+      loadEvents();
+    }
+  }, [events]);
+
+  useEffect(() => {
+    let selectedEvents = events;
+    if (type === "organizer") {
+      selectedEvents = events.filter(e => e.organizationId === account.organizer.organization);
+    } else if (type === "overview") {
+        selectedEvents = events.filter(e => e.eventData.status < 3);
+    }
+    const searchedEvents = search ? searchByText(selectedEvents, search, ['title']) : selectedEvents;
     setFilteredEvents(tab ? searchedEvents.filter(event => {
-      if (tab === "eventList02" && event.asset.eventData.status === statuses.SOLD_OUT) {
+      if (tab === "eventList02" && event.eventData.status >= 3) {
         return true;
-      } else if (tab === "eventList01" && (event.asset.eventData.status === statuses.UPCOMING || event.asset.eventData.status === statuses.OPEN_FOR_SALE)) {
+      } else if (tab === "eventList01" && (event.eventData.status === statuses.NEW || event.eventData.status === statuses.UPCOMING || event.eventData.status === statuses.OPEN_FOR_SALE)) {
         return true;
       }
       return false;
     }) : searchedEvents);
+  }, [events, search, tab, type])
 
-
-  }, [events, address, search, tab])
-
-  useEffect(() => {
-    // TODO HET SORTEER FILTER NIET ALLEEN OP JAAR SORTEREN, MAAR OOK MAAND & DAG & TIJD
-  const sortedList = filteredEvents.sort((a, b) => a.asset.eventData.eventDate.getFullYear() - b.asset.eventData.eventDate.getFullYear());
-    // console.log("sorted  EVENTS IN EVENTLIST", sortedList);
-
-  }, [events, address, search, tab, filteredEvents])
-
-  return <div className="p-6">
-    <div>
-
-      {filteredEvents && filteredEvents.map(event => {
-        // console.log("FILTERED EVENTS IN EVENTLIST", filteredEvents);
-
-        return (
-          <EventItem
-            key={event.address}
-            eventId={event.address}
-            eventDate={event.asset.eventData.eventDate}
-            startEvent={event.asset.eventData.eventTime}
-            artist={event.asset?.eventData?.artist}
-            title={event.asset?.eventData?.title}
-            location={event.asset?.eventData?.location}
-            type={type}
-            status={event.asset.eventData.status}
-          />)
-      })}
-    </div>
+  return <div className="p-6 bg-white">
+    {filteredEvents.length > 0 && filteredEvents.map(event =>
+      <EventItem
+        key={`event-${event.id}`}
+        eventId={event.id}
+        eventTimestamp={event.eventData.date}
+        artist={event.eventData?.artist}
+        title={event.eventData?.title}
+        location={event.eventData?.location}
+        type={type}
+        status={event.eventData.status}
+      />)}
+    {filteredEvents.length === 0 && [0, 0, 0, 0].map(() => <EventSkeleton/>)}
   </div>;
 });

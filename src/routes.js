@@ -4,82 +4,79 @@ import { Overview } from "views/Overview";
 import { ModalExample } from "components/ExampleModal";
 import { ExampleDrawer } from "components/ExampleDrawer";
 import { EventPage } from "views/EventPage";
-import {Account} from "views/Account";
-import {Checkout} from "views/Checkout";
-import {Organiser} from "views/Organiser";
+import { Account } from "views/Account";
+import { Checkout } from "views/Checkout";
+import { Organizer } from "views/Organiser";
+import { InLog } from "views/InLog";
+import { SignUp } from "views/SignUp";
+import { CreateEvent } from "views/CreateEvent";
+import { TopBar } from "components/TopBar";
+import { MyTickets } from "views/MyTickets";
+import { OrganiserEventDetails } from "views/OrganiserEventDetails";
 
-import {InLog} from "views/InLog";
-import {SignUp} from "views/SignUp";
-
-import {CreateEvent} from "views/CreateEvent";
-import {TopBar} from "components/TopBar";
-import {MyTickets} from "views/MyTickets";
-import {OrganiserEventDetails} from "views/OrganiserEventDetails";
-
-
-export const Routes = (props) => {
-
+export const Routes = () => {
   return (<Router>
-    <div>
-      {/* A <Switch> looks through its children <Route>s and
+    <div>      {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
       <Switch>
         <Route path="/login">
-          <InLog />
+          <InLog/>
         </Route>
-        <Route path="/signup/organiser">
-          <SignUp type="organiser" />
+        <Route path="/signup/organizer">
+          <SignUp type="organizer"/>
         </Route>
         <Route path="/signup">
-          <SignUp type="user" />
+          <SignUp type="user"/>
         </Route>
         <Route path="/overview">
-          <Overview />
+          <Overview/>
         </Route>
         <Route path="/events/organiser/:address">
-          <TopBar />
-          <EventPage type="organiser" />
+          <TopBar/>
+          <EventPage type="organiser"/>
         </Route>
         <Route path="/events/:address">
-          <EventPage type="user" />
+          <TopBar/>
+          <EventPage type="user"/>
         </Route>
         <Route path="/account/:address">
-          <Account />
+          <Account/>
         </Route>
-
-
-        <Route path="/my-tickets/:account">
-          <TopBar />
-          <MyTickets type='user' />
+        <Route path="/my-tickets">
+          <TopBar/>
+          <MyTickets type='user'/>
         </Route>
-        <Route path="/my-events/event-details/:address">
-          <OrganiserEventDetails />
+        <Route path="/event-details/:id">
+          <OrganiserEventDetails/>
         </Route>
         <Route path="/my-events/:address">
-          <TopBar />
-          <Organiser type='organiser' />
+          <TopBar/>
+          <Organizer type='organiser'/>
         </Route>
-
         <Route path="/organiser/:address">
-          <TopBar />
-          <Organiser />
+          <TopBar/>
+          <Organizer/>
         </Route>
-        <Route path="/organiser">
-          <TopBar />
-          <Organiser />
+        <Route path="/organizer">
+          <TopBar/>
+          <Organizer/>
         </Route>
         <Route path="/create-event">
-          <CreateEvent />
+          <TopBar/>
+          <CreateEvent/>
         </Route>
-        <Route path="/checkout/:ownerId">
-          <TopBar />
-          <Checkout />
-      </Route>
+        <Route path="/checkout">
+          <TopBar/>
+          <Checkout/>
+        </Route>
         <Route path="/drawers">
-          <ExampleDrawer />
+          <ExampleDrawer/>
         </Route>
         <Route path="/modals">
-          <ModalExample />
+          <ModalExample/>
+        </Route>
+        <Route path="/">
+          <Overview/>
         </Route>
       </Switch>
     </div>

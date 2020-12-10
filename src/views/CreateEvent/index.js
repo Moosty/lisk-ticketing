@@ -1,18 +1,23 @@
-import React, {useEffect, useState} from "react";
+/* global BigInt */
+import React, { useEffect, useState } from "react";
 import _ from 'lodash';
 import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import {OrganiserHeader} from "components/OrganiserHeader";
-import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { OrganiserHeader } from "components/OrganiserHeader";
+import { useDispatch, useSelector } from "react-redux";
 import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import * as Actions from "../../store/actions";
-import {FormField} from "components/FormField";
-import {TopBar} from "components/TopBar";
+import { FormField } from "components/FormField";
 import HelpIcon from '@material-ui/icons/Help';
 import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
+import { createTransaction, Schema } from "../../utils/transactions";
+import { transactions } from "@liskhq/lisk-client";
+import { sendTransactions } from "../../utils/api";
+import { useHistory } from "react-router-dom";
+import { API } from "../../utils";
+import { useOrganizer } from "../../utils/hooks";
+import { makeStyles } from "@material-ui/core/styles"
+import Divider from "@material-ui/core/Divider"
 
 const categories = [
   {
@@ -24,6 +29,54 @@ const categories = [
     label: "NO",
   },
 ];
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'transparant',
+  },
+  root: {},
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: 0,
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  h1: {
+    color: 'white',
+  },
+  field: {
+    borderRadius: 5,
+    backgroundColor: 'white',
+    border: 'none',
+    '& .MuiFilledInput-root	': {
+
+      border: 'none',
+      borderRadius: 10,
+      fontSize: '0.9rem',
+      fontWeight: '600',
+      backgroundColor: 'white!important',
+    },
+
+    '& .MuiFilledInput-underline:after ': {
+      border: 'none',
+    },
+    '& .MuiFilledInput-underline:before ': {
+      border: 'none',
+    },
+    '& .MuiFormLabel-root.Mui-focused ': {
+      color: '#f50057',
+    }
+  },
+}));
 
 // TODO: header aanpassen (LATER)
 // TODO: Status Event meegeven (REDUCER?) (ZA 17 - 10)
@@ -37,192 +90,282 @@ const categories = [
 //ticketData.types[]
 // map over
 const fields = [
-  {label: "Title", path: "asset.eventData.title", type: "text", limit: 50},
-  {label: "Artist", path: "asset.eventData.artist", type: "text", limit: 50},
-  {label: "Location", path: "asset.eventData.location", type: "text", limit: 50},
-  {label: "Event date", path: "asset.eventData.date", type: "date"},
+  {label: "Title", path: "asset.eventData.title", type: "text", limit: 50, min: 10},
+  {label: "Location", path: "asset.eventData.location", type: "text", limit: 50, min: 3},
+  {label: "Event date", path: "asset.eventData.eventDate", type: "date"},
   {label: "Start Time", path: "asset.eventData.eventTime", type: "time"},
-  {label: "Duration event", path: "asset.eventData.duration", type: "number"},
-  {label: "Category", path: "asset.eventData.category", type: "text"},
-  {label: "Site", path: "asset.eventData.site", type: "text"},
-  {label: "Image", path: "asset.eventData.image", type: "text"},
+  {label: "Duration event", path: "asset.eventData.duration", type: "number", numberType: "integer"},
 ];
 
 const ticketTypeFields = [
-  {label: "ID", path: "id", type: "number", disabled: true},
-  {label: "Start date selling", path: "startSellDate", type: "date"},
-  {label: "Start time selling", path: "startSellTime", type: "time"},
-  {label: "Price", path: "price", type: "text"},
-  {label: "Amount available", path: "amount", type: "number"},
+  {label: "Name", path: "name", type: "text", min: 5, limit: 50},
+  {label: "Price", path: "price", type: "number", numberType: 'float'},
+  {label: "Amount available", path: "amount", type: "number", numberType: "integer"},
 ];
 
 const resellFields = [
   {label: "Can buyers resell your tickets", path: "asset.resellData.allowed", type: "checkbox"},
-  {label: "Max resell percentage", path: "asset.resellData.maximumResellPercentage", type: "number"},
-  {label: "Resell fee percentage", path: "asset.resellData.resellOrganiserFee", type: "number"},
-];
-
-const tempFields = [
-  {label: "Address", path: "address", type: "text"},
+  {label: "Max resell percentage", path: "asset.resellData.maximumResellPercentage", type: "number", numberType: "integer"},
+  {label: "Resell fee percentage", path: "asset.resellData.resellOrganiserFee", type: "number", numberType: "integer"},
 ];
 
 export const CreateEvent = withReducer("createEvent", reducer)((props) => {
-  const history = useHistory();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const classes = useStyles();
+
+  const organizer = useOrganizer(true, '/login');
+
   const MAX_LENGTH = 15;
+  const {account} = useSelector(({blockchain}) => blockchain.account);
   const event = useSelector(({blockchain}) => blockchain.event);
   const [form, setForm] = useState(event.createEvent);
+  const [errors, setErrors] = useState(fields.map(f => f.path));
 
   useEffect(() => {
     setForm(event.createEvent);
-    // console.log(form);
-  }, [event])
+  }, [event]);
+
+
 
   const updateField = (path, value) => dispatch(Actions.updateCreateEvent(path, value));
   const updateFieldType = (path, index, value) => dispatch(Actions.updateCreateEvent(`asset.ticketData.types[${index}].${path}`, value));
+  const eventConfirmed = async () => {
+    const events = await API.fetchAllEvents();
+    if (events) {
+      events.map(e => dispatch(Actions.addEvent(e)));
+    }
+    history.push(`/organizer`);
+  }
 
+  const onConfirm = async () => {
+    const eventData = form.asset.eventData;
+    let dateString = `${eventData.eventDate} ${eventData.eventTime}`,
+      dateTimeParts = dateString.split(' '),
+      timeParts = dateTimeParts[1].split(':'),
+      dateParts = dateTimeParts[0].split('-')
+    const date = new Date(parseInt(dateParts[0]), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2]), parseInt(timeParts[0]), parseInt(timeParts[1]));
+
+    delete eventData.eventTime;
+    delete eventData.eventDate;
+    const assets = {
+      eventData: {
+        ...eventData,
+        duration: parseInt(eventData.duration),
+        date: BigInt(Math.round(date.getTime() / 1000)),
+        category: 0,
+      },
+      ticketData: form.asset.ticketData.types.map((t, i) => {
+        // "startSellTimestamp", "id", "name", "price", "amount"
+        return {
+          startSellTimestamp: BigInt(Math.round(new Date().getTime() / 1000)),
+          id: i,
+          name: t.name,
+          price: BigInt(transactions.convertLSKToBeddows(t.price.toString())),
+          amount: Number(t.amount),
+        }
+      }),
+      resellData: {
+        allowed: !!form.asset.resellData.allowed,
+        maximumResellPercentage: Number(form.asset.resellData.maximumResellPercentage),
+        resellOrganiserFee: Number(form.asset.resellData.resellOrganiserFee),
+      }
+    }
+    const transaction = await createTransaction({
+      moduleId: 1100,
+      assetId: 0,
+      fee: '0.01',
+      assets: {
+        ...assets,
+      },
+      passphrase: account.passphrase,
+      schema: Schema.createEventSchema,
+    });
+
+    dispatch(Actions.openModal('transactionModal', {
+      id: transaction?.id,
+      success: false,
+      loading: true,
+      onConfirmation: eventConfirmed
+    }));
+    const result = await sendTransactions(transaction?.tx);
+
+    if (result.errors) {
+      dispatch(Actions.openModal('transactionModal', {
+        id: transaction?.id,
+        success: false,
+        loading: false,
+        error: result.errors,
+        onConfirmation: eventConfirmed
+      }));
+    } else {
+      dispatch(Actions.openModal('transactionModal', {
+        id: transaction?.id,
+        success: false,
+        loading: true,
+        onConfirmation: eventConfirmed
+      }));
+    }
+  }
+  const changeError = (key, error) => {
+    if (error) {
+      setErrors([...errors?.filter(e => e !== key), key]);
+    } else {
+      setErrors(errors?.filter(e => e !== key));
+    }
+  }
   return (
-    <div>
-      <TopBar/>
+    <div className="mb-20">
+      <OrganiserHeader
+        name="Create Event"
+        balance="location"
+        button1="Create new event"/>
+      <div className="pb-20 bg-white">
+        <div className="flex flex-row align-middle justify-center items-center ml-2 text-sm leading-4 my-4">
+          <span className="text-lg font-bold justify-center">Event Information</span>
+          <IconButton
+            onClick={() => {
+              dispatch(Actions.openModal('eventInfoModal'))
+            }}
+            aria-label="Close"
+            color="secondary"
+            className="">
+            <HelpIcon/>
+          </IconButton>
+        </div>
+        <Divider/>
+        {/*START - MODALS WITH EXPLANATION */}
 
-      <div className="mt-10 mb-20">
-        <OrganiserHeader
-          name="Create Event"
-          balance="location"
-          button1="Create new event"/>
-        <div className="">
-          <div className="flex flex-row align-middle  ml-2 text-sm leading-4 my-4">
-            <span className="text-lg font-bold">Event Information</span>
+
+        {/*END - MODALS WITH EXPLANATION */}
+        <form
+          className="flex flex-row w-9/10 flex-wrap m-2 "
+          noValidate
+          autoComplete="off"
+        >
+          {/*START - FORM EVENTINFO */}
+          {fields.map(field => <FormField {...field} onChange={updateField}
+                                          variant="filled"
+                                          changeError={(key, error) => changeError(key, error)}
+                                          errors={errors}
+                                          className={classes.field}
+                                          value={_.get(form, field.path)}
+          />)}
+          {/*START - FORM TICKET INFO  */}
+          <div className="flex flex-row align-middle justify-center items-center ml-2 text-sm leading-4 my-4">
+            <span className="text-lg font-bold justify-center">Ticket Information</span>
             <IconButton
               onClick={() => {
-                dispatch(Actions.openModal('eventInfoModal'))}}
+                dispatch(Actions.openModal('ticketInfoModal'))
+              }}
               aria-label="Close"
               color="secondary"
               className="">
               <HelpIcon/>
             </IconButton>
           </div>
-          {/*START - MODALS WITH EXPLANATION */}
+          <Divider/>
 
 
-
-          {/*END - MODALS WITH EXPLANATION */}
-          <form
-            className="flex flex-row w-9/10 flex-wrap m-2 "
-            noValidate
-            autoComplete="off"
-          >
-            {/*START - FORM EVENTINFO */}
-            {fields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
-            {/*START - FORM TICKET INFO  */}
-            <div className="flex  ml-2 text-sm leading-4 my-4">
-              <span className="text-lg font-bold">Ticket Information</span>
-              <IconButton
-                onClick={() => {
-                  dispatch(Actions.openModal('ticketInfoModal'))}}
-                aria-label="Close"
-                color="secondary"
-                className="">
-                <HelpIcon/>
-              </IconButton>
-            </div>
-
-
-            {/*START TYPE  - TICKET TYPES */}
-            {form.asset.ticketData && form.asset.ticketData.types.map((ticketType, i) => (
-              <div>
-                <div className="flex  ml-2 text-sm leading-4 my-4">
-                  <span className="text-lg">Ticket Type {i}</span>
-                </div>
-                {ticketTypeFields.map(field => <FormField
-                  key={`${field.path}-field-${i}`}
-                  {...field}
-                  id={i}
-                  ticketType
-                  onChange={updateFieldType}
-                  value={_.get(form, `asset.ticketData.types[${i}].${field.path}`)}/>)}
-              </div>)
-            )}
+          {/*START TYPE  - TICKET TYPES */}
+          {form.asset.ticketData && form.asset.ticketData.types.map((ticketType, i) => (
             <div>
               <div className="flex  ml-2 text-sm leading-4 my-4">
-            <span
-              className="text-lg">Ticket Type {form.asset?.ticketData && form.asset?.ticketData?.types?.length}</span>
+                <span className="text-lg">Ticket Type {i}</span>
               </div>
               {ticketTypeFields.map(field => <FormField
-                key={`${field.path}-field-${form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}`}
+                key={`${field.path}-field-${i}`}
                 {...field}
-                id={form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}
-                onChange={updateFieldType}
+                id={i}
+                variant="filled"
+                className={classes.field}
+                changeError={(key, error) => changeError(key, error)}
+                errors={errors}
+
                 ticketType
-                value={field.path === 'id' ? form.asset?.ticketData?.types ? form.asset?.ticketData?.types.length : 0 : ""}/>)}
-            </div>
-            {/*END TYPE  - TICKET TYPES  */}
-
-            {/*START - FORM RESELL INFO  */}
+                onChange={updateFieldType}
+                value={_.get(form, `asset.ticketData.types[${i}].${field.path}`)}/>)}
+            </div>)
+          )}
+          <div>
             <div className="flex  ml-2 text-sm leading-4 my-4">
-              <span className="text-lg font-bold">Resell Information</span>
-              <IconButton
-                onClick={() => {
-                  dispatch(Actions.openModal('resellInfoModal'))}}
-                aria-label="Close"
-                color="secondary"
-                className="">
-                <HelpIcon/>
-              </IconButton>
+            <span
+              className="text-lg">Ticket Type {form.asset?.ticketData && form.asset?.ticketData?.types?.length}</span>
             </div>
+            {ticketTypeFields.map(field => <FormField
+              key={`${field.path}-field-${form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}`}
+              {...field}
+              id={form.asset?.ticketData?.types ? form.asset?.ticketData?.types?.length : 0}
+              onChange={updateFieldType}
+              changeError={(key, error) => changeError(key, error)}
+              errors={errors}
 
+              variant="filled"
+              className={classes.field}
+              ticketType
+              value={field.path === 'id' ? form.asset?.ticketData?.types.length : 0}/>)}
+          </div>
+          {/*END TYPE  - TICKET TYPES  */}
 
-            {resellFields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
-            <div className="flex  ml-2 text-sm leading-4 my-4">
-              <span className="text-lg font-bold">Temporary</span>
-            </div>
-            {tempFields.map(field => <FormField {...field} onChange={updateField} value={_.get(form, field.path)}/>)}
-
-          </form>
-
-        </div>
-
-        <div className="bottom-0 fixed z-50 bg-black text-white w-full ">
-          <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
-            <div className="flex flex-row ">
-              <div className="flex flex-col text-sm float-left leading-4 my-2">
-                {/* TODO DIT LIVE LATEN UPDATEN & PUNTJES WERKEND KRIJGEN*/}
-                {form.asset.eventData.title > MAX_LENGTH ?
-                  (
-                    <span className="text-lg mb-2">
-                      {`${form.asset.eventData.title.substring(0, MAX_LENGTH)}...`}
-                    </span>
-                  ) :
-                  <span className="text-lg mb-2">{form.asset.eventData.title}</span>
-                }
-                {form.asset.eventData.location > MAX_LENGTH ?
-                  (
-                    <span className="font-bold">
-                      {`${form.asset.eventData.location.substring(0, MAX_LENGTH)}...`}
-                    </span>
-                  ) :
-                  <span className="font-bold">{form.asset.eventData.location}</span>
-                }
-              </div>
-            </div>
-            <div className="flex flex-row content-center items-center">
-              <Button
-                onClick={() => {
-                  dispatch(Actions.openModal('confirmTxEventModal'));
-                }}
-                // onClick={() => {
-                //   console.log({form})
-                //   history.push(`/organiser/organiser01`);
-                //   dispatch(Actions.addEvent(form));
-                // }}
-
-                variant="contained"
-                size="small"
-                color="secondary"
-                className="">Submit Event</Button>
-            </div>
+          {/*START - FORM RESELL INFO  */}
+          <div className="flex flex-row align-middle justify-center items-center ml-2 text-sm leading-4 my-4">
+            <span className="text-lg font-bold justify-center">Resell Information</span>
+            <IconButton
+              onClick={() => {
+                dispatch(Actions.openModal('resellInfoModal'))
+              }}
+              aria-label="Close"
+              color="secondary"
+              className="">
+              <HelpIcon/>
+            </IconButton>
           </div>
           <Divider/>
+
+
+          {resellFields.map(field => <FormField {...field} onChange={updateField}
+                                                changeError={(key, error) => changeError(key, error)}
+                                                errors={errors}
+                                                variant="filled"
+                                                className={classes.field}
+                                                value={_.get(form, field.path)}/>)}
+        </form>
+      </div>
+
+      <div className="bottom-0 fixed z-50 bg-black text-white " style={{maxWidth: '450px', width: '100%', background: "#1a202c"}}>
+        <div className="flex flex-row p-2 justify-between content-center items-center mx-4">
+          <div className="flex flex-row ">
+            <div className="flex flex-col text-sm float-left leading-4 my-2">
+              {/* TODO DIT LIVE LATEN UPDATEN & PUNTJES WERKEND KRIJGEN*/}
+              {form.asset.eventData.title > MAX_LENGTH ?
+                (
+                  <span className="text-lg mb-2">
+                      {`${form.asset.eventData.title.substring(0, MAX_LENGTH)}...`}
+                    </span>
+                ) :
+                <span className="text-lg mb-2">{form.asset.eventData.title}</span>
+              }
+              {form.asset.eventData.location > MAX_LENGTH ?
+                (
+                  <span className="font-bold">
+                      {`${form.asset.eventData.location.substring(0, MAX_LENGTH)}...`}
+                    </span>
+                ) :
+                <span className="font-bold">{form.asset.eventData.location}</span>
+              }
+            </div>
+          </div>
+          <div className="flex flex-row content-center items-center">
+            <Button
+              onClick={() => {
+                dispatch(Actions.openModal('confirmTxEventModal', {confirm: onConfirm}));
+              }}
+              variant="contained"
+              size="small"
+              color="secondary"
+              disabled={errors?.length > 0}
+              className="">Submit Event</Button>
+          </div>
         </div>
       </div>
     </div>

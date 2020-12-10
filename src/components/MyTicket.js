@@ -1,17 +1,18 @@
-import React, {useEffect, useState} from "react";
-import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Divider from "@material-ui/core/Divider";
+import React from "react";
+import { withStyles } from '@material-ui/core/styles';
 import * as Actions from "../store/actions";
-import {useDispatch, useSelector} from "react-redux";
-import Avatar from "@material-ui/core/Avatar";
+import { useDispatch } from "react-redux";
 import Badge from '@material-ui/core/Badge';
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CropFreeTwoToneIcon from '@material-ui/icons/CropFreeTwoTone';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
-import {DeleteOutline} from "@material-ui/icons";
-import {ticketStatuses} from "../store/reducers/blockchain/portfolio.reducer";
+import { DeleteOutline } from "@material-ui/icons";
+import { ticketStatuses } from "../store/reducers/blockchain/portfolio.reducer";
+import { useEvent } from "../utils/hooks/event";
+import { transactions } from "@liskhq/lisk-client";
+import { EventAvatar } from "components/EventAvatar";
 
 const monthNames = ["JAN", "FEB", "MRT", "APR", "MAY", "JUNE",
   "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"
@@ -50,7 +51,6 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-
 const colors = {
   [ticketStatuses.OWNED]: "#00E676",
   [ticketStatuses.SELLING]: "#FFEA00",
@@ -58,192 +58,94 @@ const colors = {
   [ticketStatuses.SOLD]: "#f50057",
 }
 
-const SmallAvatar = withStyles((theme) => ({
-  root: {
-    width: 22,
-    height: 22,
-    border: `2px solid ${theme.palette.background.paper}`,
-  },
-}))(Avatar);
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
-
-
-
-
-export const MyTicket = withReducer("myTicket", reducer)(({size, checkout, status, eventId, ticketType, keyEvent, i}) => {
-
-// WE ZOEKEN DE EVENTDATA BIJ DE JUISTE TICKET
-  const events = useSelector(({blockchain}) => blockchain.event.events);
-  const [thisEventData, setThisEventData] = useState(null);
-  const [thisTicketType, setThisTicketType] = useState();
-  const [thisTicketPrice, setThisTicketPrice] = useState();
-  const [thisTicketName, setThisTicketName] = useState(null);
-  const [reSellPercentage, setReSellPercentage] = useState();
-  // WE ZOEKEN HET JUISTE TICKET TYPE VOOR DE GEGEVENS
-  // const ticketData = thisEvent?.asset?.ticketData?.types.find(type => type.id === ticketType );
-
+export const MyTicket = withReducer("myTicket", reducer)(({
+                                                            size,
+                                                            checkout,
+                                                            status,
+                                                            eventId,
+                                                            ticketType,
+                                                            keyEvent,
+                                                            id,
+                                                            marketId,
+                                                            value,
+                                                            i
+                                                          }) => {
   const dispatch = useDispatch();
+  const {event} = useEvent(eventId);
+  const MAX_LENGTH = 40;
 
-// Outside component
-  const MAX_LENGTH = 25;
+  return (<div className={` w-full`}>
+    <div className="flex flex-row justify-between">
+      <div className="flex flex-row items-center my-3 w-full ">
+        <EventAvatar timestamp={event?.eventData?.date} status={event?.eventData?.status}/>
 
-
-
-  useEffect(() => {
-      const thisEvent = events.find(event => event.address === keyEvent);
-      // console.log("dit event in effect", thisEvent);
-      setThisEventData(thisEvent?.asset?.eventData);
-      setThisTicketType(thisEvent?.asset?.ticketData?.types?.find(t => t.id === ticketType));
-      // console.log("dit type", thisTicketType);
-      setReSellPercentage(thisEvent.asset.resellData.maximumResellPercentage);
-      // console.log("thisevent", thisEventData);
-      // console.log("thisevent", thisEvent);
-    }, [events, keyEvent, ticketType],
-  );
-
-  useEffect(() => {
-
-      // console.log("dit type", thisTicketType);
-      // console.log("deze eventdata", thisEventData);
-
-    }, [thisTicketType],
-  );
-
-
-  return (<div className={` w-full ${i === 0 ? "bg-gray-300" : ""}`}>
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-row items-center my-3 "
-        >
-          <StyledBadge
-            overlap="circle"
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            variant="dot"
-          >
-            <Avatar variant="rounded" style={{backgroundColor: colors[status]}}>
-              <div className="flex flex-col center items-center">
-                <span className="text-xs">{thisEventData?.eventDate?.getDate()}</span>
-                <span className="text-xs">{monthNames[thisEventData?.eventDate?.getMonth()]}</span>
-              </div>
-            </Avatar>
-          </StyledBadge>
-
-          <div className={`flex flex-col text-sm leading-4 mx-2`}>
-
-
-            {thisEventData?.title.length > MAX_LENGTH ?
-              (
-                <div className="font-bold text-left block">
-                  {`${thisEventData?.title.substring(0, MAX_LENGTH)}...`}
-                </div>
-              ) :
-              <span className="font-bold text-left block">{thisEventData?.title}</span>
-            }
-            <div>
-              {/*<span className="font-bold text-left block">{thisEventData?.title}</span>*/}
-
-
-              <span className=""></span>
-            </div>
-            {size === 'large' &&
-            <span className="font-bold text-xs flex flex-row" style={{color: "#f50057"}}>{thisTicketType?.name}</span>
-            }
-
-            {thisEventData?.location.length > MAX_LENGTH ?
-              (
-                <div className="font-light text-xs flex flex-row">
-                  {`${thisEventData?.location.substring(0, MAX_LENGTH)}...`}
-                </div>
-              ) :
-              <span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>
-            }
-
-            {/*<span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>*/}
-
+        <div className={`flex flex-col text-xs leading-4 mx-2 w-full`}>
+          {event?.eventData?.title?.length > MAX_LENGTH ?
+            (<div className="font-bold text-left block">
+              {`${event?.eventData?.title?.substring(0, MAX_LENGTH)}...`}
+            </div>) : <span className="font-bold text-left block">{event?.eventData?.title}</span>}
+          <div>
+            {/*<span className="font-bold text-left block">{thisEventData?.title}</span>*/}
 
           </div>
+          {size === 'large' &&
+          <span className="font-bold text-xs flex flex-row text-left w-full"
+                style={{color: "#f50057"}}>{event?.ticketData?.find(td => td.id === ticketType)?.name}</span>}
+          {event?.eventData?.location.length > MAX_LENGTH ?
+            (<div className="font-light text-xs flex flex-row text-left w-full">
+              {`${event?.eventData?.location.substring(0, MAX_LENGTH)}...`}
+            </div>) : <span className="font-light text-xs flex flex-row text-left w-full">{event?.eventData?.location}</span>}
+          {/*<span className="font-light text-xs flex flex-row">{thisEventData?.location}</span>*/}
         </div>
-
-        {size === 'small' &&
-        <div className="flex items-center flex-row">
-
-          {i !== 0 && <IconButton
-            onClick={() => {
-
-              dispatch(Actions.openModal('scanTicketModal', {
-                keyEvent,
-                size: "large",
-                status,
-                ticketType,
-                thisTicketType,
-                reSellPercentage
-              }))
-            }}
-            color="secondary"
-          >
-            <CropFreeTwoToneIcon color="secondary"/>
-          </IconButton>}
-          {i === 0 && <b className="center">IN SALE</b>}
-          <IconButton
-
-            color="secondary"
-            onClick={() => {
-
-              dispatch(Actions.openModal('optionsModal', {
-                keyEvent,
-                size: "large",
-                status,
-                ticketType,
-                thisTicketType,
-                reSellPercentage
-              }))
-            }}
-          >
-            <MoreVertIcon color="secondary"/>
-          </IconButton>
-        </div>
-        }
-        {size === 'large' &&
-        <div className="flex items-center flex-row w-4/12">
-          <div className="flex flex-col text-right text-xs font-bold">
-            <span className="text-sm"> € {thisTicketType?.price}</span>
-            <span> {days[thisEventData?.eventDate.getDay()]} {thisEventData?.eventTime}H</span>
-          </div>
-          <div className="">
-
-          </div>
-
-        </div>
-        }
-        {checkout === 'true' &&
-        <div className="flex items-center flex-row">
-
-          <IconButton
-            onClick={() => {
-              dispatch(Actions.removeItem(eventId, ticketType));
-              }
-            }
-            color="secondary"
-          >
-            <DeleteOutline color="white"/>
-          </IconButton>
-
-        </div>
-        }
       </div>
 
-
-      <Divider/>
+      {size === 'small' && <div className="flex items-center flex-row">
+        {status === ticketStatuses.OWNED && <IconButton
+          onClick={() => {
+            dispatch(Actions.openModal('scanModal', {
+              size: "large",
+              ticketId: id
+            }))
+          }}
+          color="secondary">
+          <CropFreeTwoToneIcon color="secondary"/>
+        </IconButton>}
+        {status === ticketStatuses.MARKET && <span className="font-bold text-center text-xs">IN SALE</span>}
+        {status === ticketStatuses.CANCELED && <span className="font-bold text-center text-xs">Canceled</span>}
+        <IconButton
+          color="secondary"
+          onClick={() => {
+            dispatch(Actions.openModal('optionsModal', {
+              size: "large",
+              ticketId: id
+            }))
+          }}
+        >
+          <MoreVertIcon color="secondary"/>
+        </IconButton>
+      </div>
+      }
+      {size === 'large' &&
+      <div className="flex items-center flex-row w-2/12">
+        <div className="flex flex-col text-right text-xs font-bold">
+          <span
+            className="text-sm"> €
+            {!marketId && event?.ticketData?.find(td => td.id === ticketType)?.price ?
+              transactions.convertBeddowsToLSK(event?.ticketData?.find(td => td.id === ticketType)?.price.toString()) :
+              ''}
+            {marketId && value && transactions.convertBeddowsToLSK(value.toString())}
+          </span>
+          {/*<span> {days[event?.eventData?.eventDate.getDay()]} {thisEventData?.eventTime}H</span>*/}
+        </div>
+      </div>}
+      {checkout === 'true' &&
+      <div className="flex items-center flex-row">
+        <IconButton
+          onClick={() => dispatch(Actions.removeItem(eventId, ticketType, id))}
+          color="secondary">
+          <DeleteOutline color="white"/>
+        </IconButton>
+      </div>}
     </div>
-  );
+  </div>);
 });
